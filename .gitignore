@@ -1,0 +1,8 @@
+.idea/*
+build/*
+wavetable_generator/target/*
+
+.vscode/settings.json
+notes.md
+.DS_Store
+synth.drawio

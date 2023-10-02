@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "name": "Mac",
+            "includePath": [
+                "${workspaceFolder}/**"
+                "${workspaceFolder}/src/FreeRTOS/portable/GCC/ARM_CM4F"
+            ],
+            "defines": [
+                "STM32F429xx"
+            ],
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "macos-clang-arm64",
+            "compilerPath": "/opt/homebrew/bin/arm-none-eabi-g++"
+        }
+    ],
+    "version": 4
+}
