@@ -28,8 +28,8 @@
 #include "LEDs.hpp"
 #include "mixer.hpp"
 
-#define SVCall_IRQ_NBR                                                                                                 \
-    (IRQn_Type) - 5 /* SVCall_IRQ_NBR added as SV_Call handler name is not the same for CM0 and for all other CMx */
+/* SVCall_IRQ_NBR added as SV_Call handler name is not the same for CM0 and for all other CMx */
+#define SVCall_IRQ_NBR (IRQn_Type) - 5
 
 void SystemClock_Config(void);
 void PeriphCommonClock_Config(void);
@@ -93,23 +93,22 @@ void SystemClock_Config(void)
     /** Initializes the RCC Oscillators according to the specified parameters
      * in the RCC_OscInitTypeDef structure.
      */
-    RCC_OscInitTypeDef RCC_OscInitStruct =
-    {
+    RCC_OscInitTypeDef RCC_OscInitStruct = {
         .OscillatorType = RCC_OSCILLATORTYPE_HSE,
         .HSEState = RCC_HSE_ON,
         .LSEState = 0U,
-        .HSIState   = 0U,
+        .HSIState = 0U,
         .HSICalibrationValue = 0U,
         .LSIState = 0U,
         .PLL =
-        {
-            .PLLState = RCC_PLL_ON,
-            .PLLSource = RCC_PLLSOURCE_HSE,
-            .PLLM = 4,
-            .PLLN = 168,
-            .PLLP = RCC_PLLP_DIV2,
-            .PLLQ = 7,
-        },
+            {
+                .PLLState = RCC_PLL_ON,
+                .PLLSource = RCC_PLLSOURCE_HSE,
+                .PLLM = 4,
+                .PLLN = 168,
+                .PLLP = RCC_PLLP_DIV2,
+                .PLLQ = 7,
+            },
     };
 
     if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
@@ -126,8 +125,7 @@ void SystemClock_Config(void)
 
     /** Initializes the CPU, AHB and APB buses clocks
      */
-    RCC_ClkInitTypeDef RCC_ClkInitStruct =
-    {
+    RCC_ClkInitTypeDef RCC_ClkInitStruct = {
         .ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2,
         .SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK,
         .AHBCLKDivider = RCC_SYSCLK_DIV1,
@@ -149,20 +147,20 @@ void PeriphCommonClock_Config(void)
 {
     /** Initializes the peripherals clock
      */
-    RCC_PeriphCLKInitTypeDef PeriphClkInitStruct =
-    {
+    RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {
         .PeriphClockSelection = RCC_PERIPHCLK_I2S,
         .PLLI2S =
-        {
-            .PLLI2SN = 50,
-            .PLLI2SR = 2,
-            .PLLI2SQ = 0U,
-        },
-        .PLLSAI = {
-            .PLLSAIN = 0U,
-            .PLLSAIQ = 0U,
-            .PLLSAIR = 0U,
-        },
+            {
+                .PLLI2SN = 50,
+                .PLLI2SR = 2,
+                .PLLI2SQ = 0U,
+            },
+        .PLLSAI =
+            {
+                .PLLSAIN = 0U,
+                .PLLSAIQ = 0U,
+                .PLLSAIR = 0U,
+            },
         .PLLI2SDivQ = 0U,
         .PLLSAIDivQ = 0U,
         .PLLSAIDivR = 0U,
