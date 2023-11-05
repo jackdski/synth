@@ -72,9 +72,15 @@ set(FORMATTER                       ${CMAKE_PROJECT_NAME}_FORMATTER)
 set(sources_SRCS
     ${PROJ_PATH}/main.cpp
     ${PROJ_PATH}/devices/LEDs.cpp
+    ${PROJ_PATH}/devices/knob.cpp
     ${PROJ_PATH}/devices/sgtl5000.cpp
+    ${PROJ_PATH}/devices/ssd1306.cpp
+    ${PROJ_PATH}/drv/drv_ADC.cpp
+    ${PROJ_PATH}/audio/adsr.cpp
+    ${PROJ_PATH}/audio/audio.cpp
     ${PROJ_PATH}/audio/mixer.cpp
     ${PROJ_PATH}/utils/util_rollingBuffer.cpp
+    ${PROJ_PATH}/utils/cpu_utils.c
     ${PROJ_PATH}/startup_stm32f429xx.s
     ${STM32_PATH}/Core/Src/gpio.c
     ${STM32_PATH}/Core/Src/dma2d.c
@@ -145,9 +151,10 @@ set(sources_SRCS
 #
 set(include_path_DIRS
     ${PROJ_PATH}/
-    ${PROJ_PATH}/audio
-    ${PROJ_PATH}/wavetables
+    ${PROJ_PATH}/audio/
+    ${PROJ_PATH}/wavetables/
     ${PROJ_PATH}/devices/
+    ${PROJ_PATH}/drv/
     ${PROJ_PATH}/utils/
     ${STM32_PATH}/
     ${STM32_PATH}/Core/Inc

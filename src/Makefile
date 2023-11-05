@@ -369,6 +369,30 @@ FreeRTOS/timers.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/synth.dir/build.make CMakeFiles/synth.dir/FreeRTOS/timers.c.s
 .PHONY : FreeRTOS/timers.c.s
 
+audio/audio.obj: audio/audio.cpp.obj
+.PHONY : audio/audio.obj
+
+# target to build an object file
+audio/audio.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/synth.dir/build.make CMakeFiles/synth.dir/audio/audio.cpp.obj
+.PHONY : audio/audio.cpp.obj
+
+audio/audio.i: audio/audio.cpp.i
+.PHONY : audio/audio.i
+
+# target to preprocess a source file
+audio/audio.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/synth.dir/build.make CMakeFiles/synth.dir/audio/audio.cpp.i
+.PHONY : audio/audio.cpp.i
+
+audio/audio.s: audio/audio.cpp.s
+.PHONY : audio/audio.s
+
+# target to generate assembly for a file
+audio/audio.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/synth.dir/build.make CMakeFiles/synth.dir/audio/audio.cpp.s
+.PHONY : audio/audio.cpp.s
+
 audio/mixer.obj: audio/mixer.cpp.obj
 .PHONY : audio/mixer.obj
 
@@ -416,6 +440,30 @@ devices/LEDs.s: devices/LEDs.cpp.s
 devices/LEDs.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/synth.dir/build.make CMakeFiles/synth.dir/devices/LEDs.cpp.s
 .PHONY : devices/LEDs.cpp.s
+
+devices/knob.obj: devices/knob.cpp.obj
+.PHONY : devices/knob.obj
+
+# target to build an object file
+devices/knob.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/synth.dir/build.make CMakeFiles/synth.dir/devices/knob.cpp.obj
+.PHONY : devices/knob.cpp.obj
+
+devices/knob.i: devices/knob.cpp.i
+.PHONY : devices/knob.i
+
+# target to preprocess a source file
+devices/knob.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/synth.dir/build.make CMakeFiles/synth.dir/devices/knob.cpp.i
+.PHONY : devices/knob.cpp.i
+
+devices/knob.s: devices/knob.cpp.s
+.PHONY : devices/knob.s
+
+# target to generate assembly for a file
+devices/knob.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/synth.dir/build.make CMakeFiles/synth.dir/devices/knob.cpp.s
+.PHONY : devices/knob.cpp.s
 
 devices/sgtl5000.obj: devices/sgtl5000.cpp.obj
 .PHONY : devices/sgtl5000.obj
@@ -1721,6 +1769,30 @@ stm32/USB_DEVICE/Target/usbd_conf.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/synth.dir/build.make CMakeFiles/synth.dir/stm32/USB_DEVICE/Target/usbd_conf.c.s
 .PHONY : stm32/USB_DEVICE/Target/usbd_conf.c.s
 
+utils/cpu_utils.obj: utils/cpu_utils.c.obj
+.PHONY : utils/cpu_utils.obj
+
+# target to build an object file
+utils/cpu_utils.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/synth.dir/build.make CMakeFiles/synth.dir/utils/cpu_utils.c.obj
+.PHONY : utils/cpu_utils.c.obj
+
+utils/cpu_utils.i: utils/cpu_utils.c.i
+.PHONY : utils/cpu_utils.i
+
+# target to preprocess a source file
+utils/cpu_utils.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/synth.dir/build.make CMakeFiles/synth.dir/utils/cpu_utils.c.i
+.PHONY : utils/cpu_utils.c.i
+
+utils/cpu_utils.s: utils/cpu_utils.c.s
+.PHONY : utils/cpu_utils.s
+
+# target to generate assembly for a file
+utils/cpu_utils.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/synth.dir/build.make CMakeFiles/synth.dir/utils/cpu_utils.c.s
+.PHONY : utils/cpu_utils.c.s
+
 utils/util_rollingBuffer.obj: utils/util_rollingBuffer.cpp.obj
 .PHONY : utils/util_rollingBuffer.obj
 
@@ -1784,12 +1856,18 @@ help:
 	@echo "... FreeRTOS/timers.obj"
 	@echo "... FreeRTOS/timers.i"
 	@echo "... FreeRTOS/timers.s"
+	@echo "... audio/audio.obj"
+	@echo "... audio/audio.i"
+	@echo "... audio/audio.s"
 	@echo "... audio/mixer.obj"
 	@echo "... audio/mixer.i"
 	@echo "... audio/mixer.s"
 	@echo "... devices/LEDs.obj"
 	@echo "... devices/LEDs.i"
 	@echo "... devices/LEDs.s"
+	@echo "... devices/knob.obj"
+	@echo "... devices/knob.i"
+	@echo "... devices/knob.s"
 	@echo "... devices/sgtl5000.obj"
 	@echo "... devices/sgtl5000.i"
 	@echo "... devices/sgtl5000.s"
@@ -1953,6 +2031,9 @@ help:
 	@echo "... stm32/USB_DEVICE/Target/usbd_conf.obj"
 	@echo "... stm32/USB_DEVICE/Target/usbd_conf.i"
 	@echo "... stm32/USB_DEVICE/Target/usbd_conf.s"
+	@echo "... utils/cpu_utils.obj"
+	@echo "... utils/cpu_utils.i"
+	@echo "... utils/cpu_utils.s"
 	@echo "... utils/util_rollingBuffer.obj"
 	@echo "... utils/util_rollingBuffer.i"
 	@echo "... utils/util_rollingBuffer.s"

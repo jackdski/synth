@@ -5,6 +5,8 @@
 #include "stm32f4xx_hal.h"
 #include <stdint.h>
 
+namespace Devices
+{
 #define SGTL5000_ADDRESS                             0b0001010U
 
 #define SGTL5000_CHIP_ID_REG                         0x0000U
@@ -209,17 +211,17 @@ typedef enum
 class SGTL5000
 {
 public:
-    SGTL5000(I2C_HandleTypeDef *i2cDriver) : i2cDriver(i2cDriver)
+    SGTL5000(I2C_HandleTypeDef *i2c) : i2c(i2c)
     {
     }
 
-    bool init(void);
+    I2C_HandleTypeDef *i2c;
+
+    bool init(I2C_HandleTypeDef *i2c);
     bool writeI2C(const uint8_t reg, const uint16_t txData);
     bool readI2C(const uint8_t reg, uint16_t *rxData);
 
 private:
-    I2C_HandleTypeDef *i2cDriver;
-
     SGTL5000_rateMode_E rateMode;
     SGTL5000_sysFs_E sysFs;
     SGTL5000_mclkFreq_E mclkFreq;
@@ -235,5 +237,7 @@ private:
     uint16_t chipIdRegister;
     uint16_t digPowerRegister;
 };
+
+}
 
 #endif /* SGTL5000_H_ */

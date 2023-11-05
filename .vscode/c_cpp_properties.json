@@ -3,8 +3,10 @@
         {
             "name": "Mac",
             "includePath": [
-                "${workspaceFolder}/**"
-                "${workspaceFolder}/src/FreeRTOS/portable/GCC/ARM_CM4F"
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/src/FreeRTOS/portable/GCC/ARM_CM4F",
+                "${workspaceFolder}/src/stm32",
+                "${workspaceFolder}/src/stm32/Drivers/CMSIS/DSP/**"
             ],
             "defines": [
                 "STM32F429xx"

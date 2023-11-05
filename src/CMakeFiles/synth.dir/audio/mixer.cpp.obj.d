@@ -59,6 +59,7 @@ CMakeFiles/synth.dir/audio/mixer.cpp.obj: \
  /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h \
  /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h \
  /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2s_ex.h \
+ /Users/jack/Documents/embedded/synth/src/devices/sgtl5000.hpp \
  /Users/jack/Documents/embedded/synth/src/FreeRTOS/include/FreeRTOS.h \
  /Users/jack/Documents/embedded/synth/src/FreeRTOSConfig.h \
  /Users/jack/Documents/embedded/synth/src/FreeRTOS/include/projdefs.h \
@@ -67,4 +68,7 @@ CMakeFiles/synth.dir/audio/mixer.cpp.obj: \
  /Users/jack/Documents/embedded/synth/src/FreeRTOS/portable/GCC/ARM_CM4F/portmacro.h \
  /Users/jack/Documents/embedded/synth/src/FreeRTOS/include/mpu_wrappers.h \
  /Users/jack/Documents/embedded/synth/src/FreeRTOS/include/task.h \
- /Users/jack/Documents/embedded/synth/src/FreeRTOS/include/list.h
+ /Users/jack/Documents/embedded/synth/src/FreeRTOS/include/list.h \
+ /Users/jack/Documents/embedded/synth/src/stm32/Core/Inc/main.h \
+ /Users/jack/Documents/embedded/synth/src/stm32/Core/Inc/i2c.h \
+ /Users/jack/Documents/embedded/synth/src/stm32/Core/Inc/main.h

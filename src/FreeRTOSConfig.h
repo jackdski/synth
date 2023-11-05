@@ -17,8 +17,8 @@
 // #define configSUPPORT_DYNAMIC_ALLOCATION        0
 
 #define configUSE_PREEMPTION			        1
-#define configUSE_IDLE_HOOK			            0
-#define configUSE_TICK_HOOK			            0
+#define configUSE_IDLE_HOOK			            1
+#define configUSE_TICK_HOOK			            1
 #define configCPU_CLOCK_HZ			            ( SystemCoreClock )
 #define configTICK_RATE_HZ			            ( ( TickType_t ) 1000 )
 #define configMAX_PRIORITIES                    ( 56 )
@@ -94,6 +94,12 @@ See http://www.FreeRTOS.org/RTOS-Cortex-M3-M4.html. */
 /* Normal assert() semantics without relying on the provision of an assert.h
 header file. */
 #define configASSERT( x ) if( ( x ) == 0 ) { taskDISABLE_INTERRUPTS(); for( ;; ); }
+
+#define traceTASK_SWITCHED_IN()		extern void StartIdleMonitor(void); \
+                                	StartIdleMonitor()
+
+#define traceTASK_SWITCHED_OUT()	extern void EndIdleMonitor(void); \
+									EndIdleMonitor()
 
 /* Definitions that map the FreeRTOS port interrupt handlers to their CMSIS
 standard names. */

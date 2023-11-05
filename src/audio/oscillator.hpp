@@ -34,8 +34,8 @@ public:
     }
 
     uint32_t frequency = 0U;
-    float phase = 0.0f;      // [-1.0, 1.0]
-    float amplitude = 0.5f;  // [0.0,  1.0]
+    float phase        = 0.0f;  // [-1.0, 1.0]
+    float amplitude    = 0.5f;  // [0.0,  1.0]
 
     Wavetable::WavetableType wavetableType;
 

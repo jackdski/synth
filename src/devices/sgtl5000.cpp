@@ -2,8 +2,12 @@
 #include "stm32f4xx.h"
 #include "stm32f4xx_hal.h"
 
-bool SGTL5000::init(void)
+using namespace Devices;
+
+bool SGTL5000::init(I2C_HandleTypeDef *i2c)
 {
+    i2c = i2c;
+
     bool initSuccessful = true;
 
     uint16_t chipIDRxBuffer = 0U;
@@ -74,7 +78,7 @@ bool SGTL5000::writeI2C(const uint8_t reg, const uint16_t txData)
     };
 
     bool ret = true;
-    if (HAL_I2C_Master_Transmit(i2cDriver, SGTL5000_ADDRESS, txBuffer, sizeof(txBuffer), 1) != HAL_OK)
+    if (HAL_I2C_Master_Transmit(i2c, SGTL5000_ADDRESS, txBuffer, sizeof(txBuffer), 1) != HAL_OK)
     {
         ret = false;
     }
@@ -83,10 +87,10 @@ bool SGTL5000::writeI2C(const uint8_t reg, const uint16_t txData)
 
 bool SGTL5000::readI2C(const uint8_t reg, uint16_t *rxData)
 {
-    bool ret = true;
+    bool ret            = true;
     uint8_t rxBuffer[2] = {0U};
 
-    ret &= (HAL_I2C_Master_Receive(i2cDriver, SGTL5000_ADDRESS, rxBuffer, sizeof(rxBuffer), 1) == HAL_OK);
+    ret &= (HAL_I2C_Master_Receive(i2c, SGTL5000_ADDRESS, rxBuffer, sizeof(rxBuffer), 1) == HAL_OK);
 
     if (ret)
     {

@@ -52,6 +52,7 @@ CMakeFiles/synth.dir/main.cpp.obj: \
  /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h \
  /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h \
  /Users/jack/Documents/embedded/synth/src/features.h \
+ /Users/jack/Documents/embedded/synth/src/stm32/Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f429xx.h \
  /Users/jack/Documents/embedded/synth/src/stm32/Core/Inc/adc.h \
  /Users/jack/Documents/embedded/synth/src/stm32/Core/Inc/main.h \
  /Users/jack/Documents/embedded/synth/src/stm32/Core/Inc/dma.h \
@@ -117,6 +118,7 @@ CMakeFiles/synth.dir/main.cpp.obj: \
  /Users/jack/Documents/embedded/synth/src/FreeRTOS/include/task.h \
  /Users/jack/Documents/embedded/synth/src/devices/LEDs.hpp \
  /Applications/ARM/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
+ /Users/jack/Documents/embedded/synth/src/audio/audio.hpp \
  /Users/jack/Documents/embedded/synth/src/audio/mixer.hpp \
  /Users/jack/Documents/embedded/synth/src/audio/oscillator.hpp \
  /Applications/ARM/lib/gcc/arm-none-eabi/10.3.1/include/float.h \
@@ -124,4 +126,5 @@ CMakeFiles/synth.dir/main.cpp.obj: \
  /Users/jack/Documents/embedded/synth/src/wavetables/sine_wavetable.h \
  /Users/jack/Documents/embedded/synth/src/wavetables/saw_wavetable.h \
  /Users/jack/Documents/embedded/synth/src/wavetables/square_wavetable.h \
- /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2s_ex.h
+ /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2s_ex.h \
+ /Users/jack/Documents/embedded/synth/src/devices/sgtl5000.hpp

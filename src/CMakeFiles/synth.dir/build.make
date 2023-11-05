@@ -97,10 +97,24 @@ CMakeFiles/synth.dir/devices/LEDs.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/synth.dir/devices/LEDs.cpp.s"
 	/opt/homebrew/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jack/Documents/embedded/synth/src/devices/LEDs.cpp -o CMakeFiles/synth.dir/devices/LEDs.cpp.s
 
+CMakeFiles/synth.dir/devices/knob.cpp.obj: CMakeFiles/synth.dir/flags.make
+CMakeFiles/synth.dir/devices/knob.cpp.obj: devices/knob.cpp
+CMakeFiles/synth.dir/devices/knob.cpp.obj: CMakeFiles/synth.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/synth.dir/devices/knob.cpp.obj"
+	/opt/homebrew/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/synth.dir/devices/knob.cpp.obj -MF CMakeFiles/synth.dir/devices/knob.cpp.obj.d -o CMakeFiles/synth.dir/devices/knob.cpp.obj -c /Users/jack/Documents/embedded/synth/src/devices/knob.cpp
+
+CMakeFiles/synth.dir/devices/knob.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/synth.dir/devices/knob.cpp.i"
+	/opt/homebrew/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jack/Documents/embedded/synth/src/devices/knob.cpp > CMakeFiles/synth.dir/devices/knob.cpp.i
+
+CMakeFiles/synth.dir/devices/knob.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/synth.dir/devices/knob.cpp.s"
+	/opt/homebrew/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jack/Documents/embedded/synth/src/devices/knob.cpp -o CMakeFiles/synth.dir/devices/knob.cpp.s
+
 CMakeFiles/synth.dir/devices/sgtl5000.cpp.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/devices/sgtl5000.cpp.obj: devices/sgtl5000.cpp
 CMakeFiles/synth.dir/devices/sgtl5000.cpp.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/synth.dir/devices/sgtl5000.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/synth.dir/devices/sgtl5000.cpp.obj"
 	/opt/homebrew/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/synth.dir/devices/sgtl5000.cpp.obj -MF CMakeFiles/synth.dir/devices/sgtl5000.cpp.obj.d -o CMakeFiles/synth.dir/devices/sgtl5000.cpp.obj -c /Users/jack/Documents/embedded/synth/src/devices/sgtl5000.cpp
 
 CMakeFiles/synth.dir/devices/sgtl5000.cpp.i: cmake_force
@@ -111,10 +125,24 @@ CMakeFiles/synth.dir/devices/sgtl5000.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/synth.dir/devices/sgtl5000.cpp.s"
 	/opt/homebrew/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jack/Documents/embedded/synth/src/devices/sgtl5000.cpp -o CMakeFiles/synth.dir/devices/sgtl5000.cpp.s
 
+CMakeFiles/synth.dir/audio/audio.cpp.obj: CMakeFiles/synth.dir/flags.make
+CMakeFiles/synth.dir/audio/audio.cpp.obj: audio/audio.cpp
+CMakeFiles/synth.dir/audio/audio.cpp.obj: CMakeFiles/synth.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/synth.dir/audio/audio.cpp.obj"
+	/opt/homebrew/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/synth.dir/audio/audio.cpp.obj -MF CMakeFiles/synth.dir/audio/audio.cpp.obj.d -o CMakeFiles/synth.dir/audio/audio.cpp.obj -c /Users/jack/Documents/embedded/synth/src/audio/audio.cpp
+
+CMakeFiles/synth.dir/audio/audio.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/synth.dir/audio/audio.cpp.i"
+	/opt/homebrew/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jack/Documents/embedded/synth/src/audio/audio.cpp > CMakeFiles/synth.dir/audio/audio.cpp.i
+
+CMakeFiles/synth.dir/audio/audio.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/synth.dir/audio/audio.cpp.s"
+	/opt/homebrew/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jack/Documents/embedded/synth/src/audio/audio.cpp -o CMakeFiles/synth.dir/audio/audio.cpp.s
+
 CMakeFiles/synth.dir/audio/mixer.cpp.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/audio/mixer.cpp.obj: audio/mixer.cpp
 CMakeFiles/synth.dir/audio/mixer.cpp.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/synth.dir/audio/mixer.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/synth.dir/audio/mixer.cpp.obj"
 	/opt/homebrew/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/synth.dir/audio/mixer.cpp.obj -MF CMakeFiles/synth.dir/audio/mixer.cpp.obj.d -o CMakeFiles/synth.dir/audio/mixer.cpp.obj -c /Users/jack/Documents/embedded/synth/src/audio/mixer.cpp
 
 CMakeFiles/synth.dir/audio/mixer.cpp.i: cmake_force
@@ -128,7 +156,7 @@ CMakeFiles/synth.dir/audio/mixer.cpp.s: cmake_force
 CMakeFiles/synth.dir/utils/util_rollingBuffer.cpp.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/utils/util_rollingBuffer.cpp.obj: utils/util_rollingBuffer.cpp
 CMakeFiles/synth.dir/utils/util_rollingBuffer.cpp.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/synth.dir/utils/util_rollingBuffer.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/synth.dir/utils/util_rollingBuffer.cpp.obj"
 	/opt/homebrew/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/synth.dir/utils/util_rollingBuffer.cpp.obj -MF CMakeFiles/synth.dir/utils/util_rollingBuffer.cpp.obj.d -o CMakeFiles/synth.dir/utils/util_rollingBuffer.cpp.obj -c /Users/jack/Documents/embedded/synth/src/utils/util_rollingBuffer.cpp
 
 CMakeFiles/synth.dir/utils/util_rollingBuffer.cpp.i: cmake_force
@@ -139,9 +167,23 @@ CMakeFiles/synth.dir/utils/util_rollingBuffer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/synth.dir/utils/util_rollingBuffer.cpp.s"
 	/opt/homebrew/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jack/Documents/embedded/synth/src/utils/util_rollingBuffer.cpp -o CMakeFiles/synth.dir/utils/util_rollingBuffer.cpp.s
 
+CMakeFiles/synth.dir/utils/cpu_utils.c.obj: CMakeFiles/synth.dir/flags.make
+CMakeFiles/synth.dir/utils/cpu_utils.c.obj: utils/cpu_utils.c
+CMakeFiles/synth.dir/utils/cpu_utils.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/synth.dir/utils/cpu_utils.c.obj"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/utils/cpu_utils.c.obj -MF CMakeFiles/synth.dir/utils/cpu_utils.c.obj.d -o CMakeFiles/synth.dir/utils/cpu_utils.c.obj -c /Users/jack/Documents/embedded/synth/src/utils/cpu_utils.c
+
+CMakeFiles/synth.dir/utils/cpu_utils.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/synth.dir/utils/cpu_utils.c.i"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/jack/Documents/embedded/synth/src/utils/cpu_utils.c > CMakeFiles/synth.dir/utils/cpu_utils.c.i
+
+CMakeFiles/synth.dir/utils/cpu_utils.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/synth.dir/utils/cpu_utils.c.s"
+	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/jack/Documents/embedded/synth/src/utils/cpu_utils.c -o CMakeFiles/synth.dir/utils/cpu_utils.c.s
+
 CMakeFiles/synth.dir/startup_stm32f429xx.s.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/startup_stm32f429xx.s.obj: startup_stm32f429xx.s
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building ASM object CMakeFiles/synth.dir/startup_stm32f429xx.s.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building ASM object CMakeFiles/synth.dir/startup_stm32f429xx.s.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/synth.dir/startup_stm32f429xx.s.obj -c /Users/jack/Documents/embedded/synth/src/startup_stm32f429xx.s
 
 CMakeFiles/synth.dir/startup_stm32f429xx.s.i: cmake_force
@@ -155,7 +197,7 @@ CMakeFiles/synth.dir/startup_stm32f429xx.s.s: cmake_force
 CMakeFiles/synth.dir/stm32/Core/Src/gpio.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Core/Src/gpio.c.obj: stm32/Core/Src/gpio.c
 CMakeFiles/synth.dir/stm32/Core/Src/gpio.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/synth.dir/stm32/Core/Src/gpio.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/synth.dir/stm32/Core/Src/gpio.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Core/Src/gpio.c.obj -MF CMakeFiles/synth.dir/stm32/Core/Src/gpio.c.obj.d -o CMakeFiles/synth.dir/stm32/Core/Src/gpio.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Core/Src/gpio.c
 
 CMakeFiles/synth.dir/stm32/Core/Src/gpio.c.i: cmake_force
@@ -169,7 +211,7 @@ CMakeFiles/synth.dir/stm32/Core/Src/gpio.c.s: cmake_force
 CMakeFiles/synth.dir/stm32/Core/Src/dma2d.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Core/Src/dma2d.c.obj: stm32/Core/Src/dma2d.c
 CMakeFiles/synth.dir/stm32/Core/Src/dma2d.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/synth.dir/stm32/Core/Src/dma2d.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/synth.dir/stm32/Core/Src/dma2d.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Core/Src/dma2d.c.obj -MF CMakeFiles/synth.dir/stm32/Core/Src/dma2d.c.obj.d -o CMakeFiles/synth.dir/stm32/Core/Src/dma2d.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Core/Src/dma2d.c
 
 CMakeFiles/synth.dir/stm32/Core/Src/dma2d.c.i: cmake_force
@@ -183,7 +225,7 @@ CMakeFiles/synth.dir/stm32/Core/Src/dma2d.c.s: cmake_force
 CMakeFiles/synth.dir/stm32/Core/Src/i2c.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Core/Src/i2c.c.obj: stm32/Core/Src/i2c.c
 CMakeFiles/synth.dir/stm32/Core/Src/i2c.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/synth.dir/stm32/Core/Src/i2c.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object CMakeFiles/synth.dir/stm32/Core/Src/i2c.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Core/Src/i2c.c.obj -MF CMakeFiles/synth.dir/stm32/Core/Src/i2c.c.obj.d -o CMakeFiles/synth.dir/stm32/Core/Src/i2c.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Core/Src/i2c.c
 
 CMakeFiles/synth.dir/stm32/Core/Src/i2c.c.i: cmake_force
@@ -197,7 +239,7 @@ CMakeFiles/synth.dir/stm32/Core/Src/i2c.c.s: cmake_force
 CMakeFiles/synth.dir/stm32/Core/Src/i2s.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Core/Src/i2s.c.obj: stm32/Core/Src/i2s.c
 CMakeFiles/synth.dir/stm32/Core/Src/i2s.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/synth.dir/stm32/Core/Src/i2s.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object CMakeFiles/synth.dir/stm32/Core/Src/i2s.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Core/Src/i2s.c.obj -MF CMakeFiles/synth.dir/stm32/Core/Src/i2s.c.obj.d -o CMakeFiles/synth.dir/stm32/Core/Src/i2s.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Core/Src/i2s.c
 
 CMakeFiles/synth.dir/stm32/Core/Src/i2s.c.i: cmake_force
@@ -211,7 +253,7 @@ CMakeFiles/synth.dir/stm32/Core/Src/i2s.c.s: cmake_force
 CMakeFiles/synth.dir/stm32/Core/Src/sdio.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Core/Src/sdio.c.obj: stm32/Core/Src/sdio.c
 CMakeFiles/synth.dir/stm32/Core/Src/sdio.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/synth.dir/stm32/Core/Src/sdio.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object CMakeFiles/synth.dir/stm32/Core/Src/sdio.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Core/Src/sdio.c.obj -MF CMakeFiles/synth.dir/stm32/Core/Src/sdio.c.obj.d -o CMakeFiles/synth.dir/stm32/Core/Src/sdio.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Core/Src/sdio.c
 
 CMakeFiles/synth.dir/stm32/Core/Src/sdio.c.i: cmake_force
@@ -225,7 +267,7 @@ CMakeFiles/synth.dir/stm32/Core/Src/sdio.c.s: cmake_force
 CMakeFiles/synth.dir/stm32/Core/Src/spi.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Core/Src/spi.c.obj: stm32/Core/Src/spi.c
 CMakeFiles/synth.dir/stm32/Core/Src/spi.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object CMakeFiles/synth.dir/stm32/Core/Src/spi.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object CMakeFiles/synth.dir/stm32/Core/Src/spi.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Core/Src/spi.c.obj -MF CMakeFiles/synth.dir/stm32/Core/Src/spi.c.obj.d -o CMakeFiles/synth.dir/stm32/Core/Src/spi.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Core/Src/spi.c
 
 CMakeFiles/synth.dir/stm32/Core/Src/spi.c.i: cmake_force
@@ -239,7 +281,7 @@ CMakeFiles/synth.dir/stm32/Core/Src/spi.c.s: cmake_force
 CMakeFiles/synth.dir/stm32/Core/Src/tim.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Core/Src/tim.c.obj: stm32/Core/Src/tim.c
 CMakeFiles/synth.dir/stm32/Core/Src/tim.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object CMakeFiles/synth.dir/stm32/Core/Src/tim.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building C object CMakeFiles/synth.dir/stm32/Core/Src/tim.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Core/Src/tim.c.obj -MF CMakeFiles/synth.dir/stm32/Core/Src/tim.c.obj.d -o CMakeFiles/synth.dir/stm32/Core/Src/tim.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Core/Src/tim.c
 
 CMakeFiles/synth.dir/stm32/Core/Src/tim.c.i: cmake_force
@@ -253,7 +295,7 @@ CMakeFiles/synth.dir/stm32/Core/Src/tim.c.s: cmake_force
 CMakeFiles/synth.dir/stm32/Core/Src/usart.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Core/Src/usart.c.obj: stm32/Core/Src/usart.c
 CMakeFiles/synth.dir/stm32/Core/Src/usart.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object CMakeFiles/synth.dir/stm32/Core/Src/usart.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object CMakeFiles/synth.dir/stm32/Core/Src/usart.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Core/Src/usart.c.obj -MF CMakeFiles/synth.dir/stm32/Core/Src/usart.c.obj.d -o CMakeFiles/synth.dir/stm32/Core/Src/usart.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Core/Src/usart.c
 
 CMakeFiles/synth.dir/stm32/Core/Src/usart.c.i: cmake_force
@@ -267,7 +309,7 @@ CMakeFiles/synth.dir/stm32/Core/Src/usart.c.s: cmake_force
 CMakeFiles/synth.dir/stm32/Core/Src/stm32f4xx_it.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Core/Src/stm32f4xx_it.c.obj: stm32/Core/Src/stm32f4xx_it.c
 CMakeFiles/synth.dir/stm32/Core/Src/stm32f4xx_it.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object CMakeFiles/synth.dir/stm32/Core/Src/stm32f4xx_it.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building C object CMakeFiles/synth.dir/stm32/Core/Src/stm32f4xx_it.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Core/Src/stm32f4xx_it.c.obj -MF CMakeFiles/synth.dir/stm32/Core/Src/stm32f4xx_it.c.obj.d -o CMakeFiles/synth.dir/stm32/Core/Src/stm32f4xx_it.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Core/Src/stm32f4xx_it.c
 
 CMakeFiles/synth.dir/stm32/Core/Src/stm32f4xx_it.c.i: cmake_force
@@ -281,7 +323,7 @@ CMakeFiles/synth.dir/stm32/Core/Src/stm32f4xx_it.c.s: cmake_force
 CMakeFiles/synth.dir/stm32/Core/Src/stm32f4xx_hal_timebase_tim.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Core/Src/stm32f4xx_hal_timebase_tim.c.obj: stm32/Core/Src/stm32f4xx_hal_timebase_tim.c
 CMakeFiles/synth.dir/stm32/Core/Src/stm32f4xx_hal_timebase_tim.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building C object CMakeFiles/synth.dir/stm32/Core/Src/stm32f4xx_hal_timebase_tim.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building C object CMakeFiles/synth.dir/stm32/Core/Src/stm32f4xx_hal_timebase_tim.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Core/Src/stm32f4xx_hal_timebase_tim.c.obj -MF CMakeFiles/synth.dir/stm32/Core/Src/stm32f4xx_hal_timebase_tim.c.obj.d -o CMakeFiles/synth.dir/stm32/Core/Src/stm32f4xx_hal_timebase_tim.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Core/Src/stm32f4xx_hal_timebase_tim.c
 
 CMakeFiles/synth.dir/stm32/Core/Src/stm32f4xx_hal_timebase_tim.c.i: cmake_force
@@ -295,7 +337,7 @@ CMakeFiles/synth.dir/stm32/Core/Src/stm32f4xx_hal_timebase_tim.c.s: cmake_force
 CMakeFiles/synth.dir/stm32/Core/Src/stm32f4xx_hal_msp.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Core/Src/stm32f4xx_hal_msp.c.obj: stm32/Core/Src/stm32f4xx_hal_msp.c
 CMakeFiles/synth.dir/stm32/Core/Src/stm32f4xx_hal_msp.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object CMakeFiles/synth.dir/stm32/Core/Src/stm32f4xx_hal_msp.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building C object CMakeFiles/synth.dir/stm32/Core/Src/stm32f4xx_hal_msp.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Core/Src/stm32f4xx_hal_msp.c.obj -MF CMakeFiles/synth.dir/stm32/Core/Src/stm32f4xx_hal_msp.c.obj.d -o CMakeFiles/synth.dir/stm32/Core/Src/stm32f4xx_hal_msp.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Core/Src/stm32f4xx_hal_msp.c
 
 CMakeFiles/synth.dir/stm32/Core/Src/stm32f4xx_hal_msp.c.i: cmake_force
@@ -309,7 +351,7 @@ CMakeFiles/synth.dir/stm32/Core/Src/stm32f4xx_hal_msp.c.s: cmake_force
 CMakeFiles/synth.dir/stm32/Core/Src/system_stm32f4xx.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Core/Src/system_stm32f4xx.c.obj: stm32/Core/Src/system_stm32f4xx.c
 CMakeFiles/synth.dir/stm32/Core/Src/system_stm32f4xx.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building C object CMakeFiles/synth.dir/stm32/Core/Src/system_stm32f4xx.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building C object CMakeFiles/synth.dir/stm32/Core/Src/system_stm32f4xx.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Core/Src/system_stm32f4xx.c.obj -MF CMakeFiles/synth.dir/stm32/Core/Src/system_stm32f4xx.c.obj.d -o CMakeFiles/synth.dir/stm32/Core/Src/system_stm32f4xx.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Core/Src/system_stm32f4xx.c
 
 CMakeFiles/synth.dir/stm32/Core/Src/system_stm32f4xx.c.i: cmake_force
@@ -323,7 +365,7 @@ CMakeFiles/synth.dir/stm32/Core/Src/system_stm32f4xx.c.s: cmake_force
 CMakeFiles/synth.dir/stm32/USB_DEVICE/App/usb_device.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/USB_DEVICE/App/usb_device.c.obj: stm32/USB_DEVICE/App/usb_device.c
 CMakeFiles/synth.dir/stm32/USB_DEVICE/App/usb_device.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building C object CMakeFiles/synth.dir/stm32/USB_DEVICE/App/usb_device.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building C object CMakeFiles/synth.dir/stm32/USB_DEVICE/App/usb_device.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/USB_DEVICE/App/usb_device.c.obj -MF CMakeFiles/synth.dir/stm32/USB_DEVICE/App/usb_device.c.obj.d -o CMakeFiles/synth.dir/stm32/USB_DEVICE/App/usb_device.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/USB_DEVICE/App/usb_device.c
 
 CMakeFiles/synth.dir/stm32/USB_DEVICE/App/usb_device.c.i: cmake_force
@@ -337,7 +379,7 @@ CMakeFiles/synth.dir/stm32/USB_DEVICE/App/usb_device.c.s: cmake_force
 CMakeFiles/synth.dir/stm32/USB_DEVICE/App/usbd_desc.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/USB_DEVICE/App/usbd_desc.c.obj: stm32/USB_DEVICE/App/usbd_desc.c
 CMakeFiles/synth.dir/stm32/USB_DEVICE/App/usbd_desc.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building C object CMakeFiles/synth.dir/stm32/USB_DEVICE/App/usbd_desc.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building C object CMakeFiles/synth.dir/stm32/USB_DEVICE/App/usbd_desc.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/USB_DEVICE/App/usbd_desc.c.obj -MF CMakeFiles/synth.dir/stm32/USB_DEVICE/App/usbd_desc.c.obj.d -o CMakeFiles/synth.dir/stm32/USB_DEVICE/App/usbd_desc.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/USB_DEVICE/App/usbd_desc.c
 
 CMakeFiles/synth.dir/stm32/USB_DEVICE/App/usbd_desc.c.i: cmake_force
@@ -351,7 +393,7 @@ CMakeFiles/synth.dir/stm32/USB_DEVICE/App/usbd_desc.c.s: cmake_force
 CMakeFiles/synth.dir/stm32/USB_DEVICE/App/usbd_audio_if.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/USB_DEVICE/App/usbd_audio_if.c.obj: stm32/USB_DEVICE/App/usbd_audio_if.c
 CMakeFiles/synth.dir/stm32/USB_DEVICE/App/usbd_audio_if.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building C object CMakeFiles/synth.dir/stm32/USB_DEVICE/App/usbd_audio_if.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building C object CMakeFiles/synth.dir/stm32/USB_DEVICE/App/usbd_audio_if.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/USB_DEVICE/App/usbd_audio_if.c.obj -MF CMakeFiles/synth.dir/stm32/USB_DEVICE/App/usbd_audio_if.c.obj.d -o CMakeFiles/synth.dir/stm32/USB_DEVICE/App/usbd_audio_if.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/USB_DEVICE/App/usbd_audio_if.c
 
 CMakeFiles/synth.dir/stm32/USB_DEVICE/App/usbd_audio_if.c.i: cmake_force
@@ -365,7 +407,7 @@ CMakeFiles/synth.dir/stm32/USB_DEVICE/App/usbd_audio_if.c.s: cmake_force
 CMakeFiles/synth.dir/stm32/USB_DEVICE/Target/usbd_conf.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/USB_DEVICE/Target/usbd_conf.c.obj: stm32/USB_DEVICE/Target/usbd_conf.c
 CMakeFiles/synth.dir/stm32/USB_DEVICE/Target/usbd_conf.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building C object CMakeFiles/synth.dir/stm32/USB_DEVICE/Target/usbd_conf.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building C object CMakeFiles/synth.dir/stm32/USB_DEVICE/Target/usbd_conf.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/USB_DEVICE/Target/usbd_conf.c.obj -MF CMakeFiles/synth.dir/stm32/USB_DEVICE/Target/usbd_conf.c.obj.d -o CMakeFiles/synth.dir/stm32/USB_DEVICE/Target/usbd_conf.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/USB_DEVICE/Target/usbd_conf.c
 
 CMakeFiles/synth.dir/stm32/USB_DEVICE/Target/usbd_conf.c.i: cmake_force
@@ -379,7 +421,7 @@ CMakeFiles/synth.dir/stm32/USB_DEVICE/Target/usbd_conf.c.s: cmake_force
 CMakeFiles/synth.dir/stm32/Core/Src/adc.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Core/Src/adc.c.obj: stm32/Core/Src/adc.c
 CMakeFiles/synth.dir/stm32/Core/Src/adc.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building C object CMakeFiles/synth.dir/stm32/Core/Src/adc.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building C object CMakeFiles/synth.dir/stm32/Core/Src/adc.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Core/Src/adc.c.obj -MF CMakeFiles/synth.dir/stm32/Core/Src/adc.c.obj.d -o CMakeFiles/synth.dir/stm32/Core/Src/adc.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Core/Src/adc.c
 
 CMakeFiles/synth.dir/stm32/Core/Src/adc.c.i: cmake_force
@@ -393,7 +435,7 @@ CMakeFiles/synth.dir/stm32/Core/Src/adc.c.s: cmake_force
 CMakeFiles/synth.dir/stm32/Core/Src/dma.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Core/Src/dma.c.obj: stm32/Core/Src/dma.c
 CMakeFiles/synth.dir/stm32/Core/Src/dma.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building C object CMakeFiles/synth.dir/stm32/Core/Src/dma.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building C object CMakeFiles/synth.dir/stm32/Core/Src/dma.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Core/Src/dma.c.obj -MF CMakeFiles/synth.dir/stm32/Core/Src/dma.c.obj.d -o CMakeFiles/synth.dir/stm32/Core/Src/dma.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Core/Src/dma.c
 
 CMakeFiles/synth.dir/stm32/Core/Src/dma.c.i: cmake_force
@@ -407,7 +449,7 @@ CMakeFiles/synth.dir/stm32/Core/Src/dma.c.s: cmake_force
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c.obj: stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c.obj -MF CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c.obj.d -o CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c
 
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c.i: cmake_force
@@ -421,7 +463,7 @@ CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c.
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c.obj: stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c.obj -MF CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c.obj.d -o CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c
 
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c.i: cmake_force
@@ -435,7 +477,7 @@ CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.c.obj: stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.c.obj -MF CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.c.obj.d -o CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.c
 
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.c.i: cmake_force
@@ -449,7 +491,7 @@ CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.c.s
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.c.obj: stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.c.obj -MF CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.c.obj.d -o CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.c
 
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.c.i: cmake_force
@@ -463,7 +505,7 @@ CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.c.
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c.obj: stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c.obj -MF CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c.obj.d -o CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c
 
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c.i: cmake_force
@@ -477,7 +519,7 @@ CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c.obj: stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c.obj -MF CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c.obj.d -o CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c
 
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c.i: cmake_force
@@ -491,7 +533,7 @@ CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c.s
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c.obj: stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c.obj -MF CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c.obj.d -o CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c
 
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c.i: cmake_force
@@ -505,7 +547,7 @@ CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c.
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c.obj: stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c.obj -MF CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c.obj.d -o CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c
 
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c.i: cmake_force
@@ -519,7 +561,7 @@ CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c.obj: stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c.obj -MF CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c.obj.d -o CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c
 
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c.i: cmake_force
@@ -533,7 +575,7 @@ CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c.obj: stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c.obj -MF CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c.obj.d -o CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c
 
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c.i: cmake_force
@@ -547,7 +589,7 @@ CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c.obj: stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c.obj -MF CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c.obj.d -o CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c
 
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c.i: cmake_force
@@ -561,7 +603,7 @@ CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c.obj: stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c.obj -MF CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c.obj.d -o CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c
 
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c.i: cmake_force
@@ -575,7 +617,7 @@ CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c.obj: stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c.obj -MF CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c.obj.d -o CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c
 
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c.i: cmake_force
@@ -589,7 +631,7 @@ CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c.obj: stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c.obj -MF CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c.obj.d -o CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c
 
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c.i: cmake_force
@@ -603,7 +645,7 @@ CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c.
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c.obj: stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c.obj -MF CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c.obj.d -o CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c
 
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c.i: cmake_force
@@ -617,7 +659,7 @@ CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c.
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c.obj: stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c.obj -MF CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c.obj.d -o CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c
 
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c.i: cmake_force
@@ -631,7 +673,7 @@ CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj: stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_44) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj -MF CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj.d -o CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c
 
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c.i: cmake_force
@@ -645,7 +687,7 @@ CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c.obj: stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_45) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c.obj -MF CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c.obj.d -o CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
 
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c.i: cmake_force
@@ -659,7 +701,7 @@ CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c.s: c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c.obj: stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_46) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c.obj -MF CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c.obj.d -o CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c
 
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c.i: cmake_force
@@ -673,7 +715,7 @@ CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2s.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2s.c.obj: stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2s.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2s.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_44) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2s.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_47) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2s.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2s.c.obj -MF CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2s.c.obj.d -o CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2s.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2s.c
 
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2s.c.i: cmake_force
@@ -687,7 +729,7 @@ CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2s.c.
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2s_ex.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2s_ex.c.obj: stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2s_ex.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2s_ex.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_45) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2s_ex.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_48) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2s_ex.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2s_ex.c.obj -MF CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2s_ex.c.obj.d -o CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2s_ex.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2s_ex.c
 
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2s_ex.c.i: cmake_force
@@ -701,7 +743,7 @@ CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2s_ex
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_sdmmc.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_sdmmc.c.obj: stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_sdmmc.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_sdmmc.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_46) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_sdmmc.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_49) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_sdmmc.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_sdmmc.c.obj -MF CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_sdmmc.c.obj.d -o CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_sdmmc.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_sdmmc.c
 
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_sdmmc.c.i: cmake_force
@@ -715,7 +757,7 @@ CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_sdmmc.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sd.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sd.c.obj: stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sd.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sd.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_47) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sd.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_50) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sd.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sd.c.obj -MF CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sd.c.obj.d -o CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sd.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sd.c
 
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sd.c.i: cmake_force
@@ -729,7 +771,7 @@ CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sd.c.s
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj: stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_48) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_51) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj -MF CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj.d -o CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c
 
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.i: cmake_force
@@ -743,7 +785,7 @@ CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c.
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c.obj: stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_49) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_52) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c.obj -MF CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c.obj.d -o CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c
 
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c.i: cmake_force
@@ -757,7 +799,7 @@ CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c.obj: stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_50) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_53) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c.obj -MF CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c.obj.d -o CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c
 
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c.i: cmake_force
@@ -771,7 +813,7 @@ CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma2d.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma2d.c.obj: stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma2d.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma2d.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_51) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma2d.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_54) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma2d.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma2d.c.obj -MF CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma2d.c.obj.d -o CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma2d.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma2d.c
 
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma2d.c.i: cmake_force
@@ -785,7 +827,7 @@ CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma2d.
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c.obj: stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_52) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_55) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c.obj -MF CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c.obj.d -o CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c
 
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c.i: cmake_force
@@ -799,7 +841,7 @@ CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c.
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c.obj: stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_53) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_56) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c.obj -MF CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c.obj.d -o CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c
 
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c.i: cmake_force
@@ -813,7 +855,7 @@ CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c.obj: stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_54) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_57) "Building C object CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c.obj -MF CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c.obj.d -o CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c
 
 CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c.i: cmake_force
@@ -827,7 +869,7 @@ CMakeFiles/synth.dir/stm32/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c.
 CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c.obj: stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c
 CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_55) "Building C object CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_58) "Building C object CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c.obj -MF CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c.obj.d -o CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c
 
 CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c.i: cmake_force
@@ -841,7 +883,7 @@ CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd
 CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c.obj: stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c
 CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_56) "Building C object CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_59) "Building C object CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c.obj -MF CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c.obj.d -o CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c
 
 CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c.i: cmake_force
@@ -855,7 +897,7 @@ CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd
 CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c.obj: stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c
 CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_57) "Building C object CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_60) "Building C object CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c.obj -MF CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c.obj.d -o CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c
 
 CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c.i: cmake_force
@@ -869,7 +911,7 @@ CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd
 CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c.obj: stm32/Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c
 CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_58) "Building C object CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_61) "Building C object CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c.obj -MF CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c.obj.d -o CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c.obj -c /Users/jack/Documents/embedded/synth/src/stm32/Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c
 
 CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c.i: cmake_force
@@ -883,7 +925,7 @@ CMakeFiles/synth.dir/stm32/Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/S
 CMakeFiles/synth.dir/FreeRTOS/croutine.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/FreeRTOS/croutine.c.obj: FreeRTOS/croutine.c
 CMakeFiles/synth.dir/FreeRTOS/croutine.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_59) "Building C object CMakeFiles/synth.dir/FreeRTOS/croutine.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_62) "Building C object CMakeFiles/synth.dir/FreeRTOS/croutine.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/FreeRTOS/croutine.c.obj -MF CMakeFiles/synth.dir/FreeRTOS/croutine.c.obj.d -o CMakeFiles/synth.dir/FreeRTOS/croutine.c.obj -c /Users/jack/Documents/embedded/synth/src/FreeRTOS/croutine.c
 
 CMakeFiles/synth.dir/FreeRTOS/croutine.c.i: cmake_force
@@ -897,7 +939,7 @@ CMakeFiles/synth.dir/FreeRTOS/croutine.c.s: cmake_force
 CMakeFiles/synth.dir/FreeRTOS/event_groups.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/FreeRTOS/event_groups.c.obj: FreeRTOS/event_groups.c
 CMakeFiles/synth.dir/FreeRTOS/event_groups.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_60) "Building C object CMakeFiles/synth.dir/FreeRTOS/event_groups.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_63) "Building C object CMakeFiles/synth.dir/FreeRTOS/event_groups.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/FreeRTOS/event_groups.c.obj -MF CMakeFiles/synth.dir/FreeRTOS/event_groups.c.obj.d -o CMakeFiles/synth.dir/FreeRTOS/event_groups.c.obj -c /Users/jack/Documents/embedded/synth/src/FreeRTOS/event_groups.c
 
 CMakeFiles/synth.dir/FreeRTOS/event_groups.c.i: cmake_force
@@ -911,7 +953,7 @@ CMakeFiles/synth.dir/FreeRTOS/event_groups.c.s: cmake_force
 CMakeFiles/synth.dir/FreeRTOS/list.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/FreeRTOS/list.c.obj: FreeRTOS/list.c
 CMakeFiles/synth.dir/FreeRTOS/list.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_61) "Building C object CMakeFiles/synth.dir/FreeRTOS/list.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_64) "Building C object CMakeFiles/synth.dir/FreeRTOS/list.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/FreeRTOS/list.c.obj -MF CMakeFiles/synth.dir/FreeRTOS/list.c.obj.d -o CMakeFiles/synth.dir/FreeRTOS/list.c.obj -c /Users/jack/Documents/embedded/synth/src/FreeRTOS/list.c
 
 CMakeFiles/synth.dir/FreeRTOS/list.c.i: cmake_force
@@ -925,7 +967,7 @@ CMakeFiles/synth.dir/FreeRTOS/list.c.s: cmake_force
 CMakeFiles/synth.dir/FreeRTOS/queue.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/FreeRTOS/queue.c.obj: FreeRTOS/queue.c
 CMakeFiles/synth.dir/FreeRTOS/queue.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_62) "Building C object CMakeFiles/synth.dir/FreeRTOS/queue.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_65) "Building C object CMakeFiles/synth.dir/FreeRTOS/queue.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/FreeRTOS/queue.c.obj -MF CMakeFiles/synth.dir/FreeRTOS/queue.c.obj.d -o CMakeFiles/synth.dir/FreeRTOS/queue.c.obj -c /Users/jack/Documents/embedded/synth/src/FreeRTOS/queue.c
 
 CMakeFiles/synth.dir/FreeRTOS/queue.c.i: cmake_force
@@ -939,7 +981,7 @@ CMakeFiles/synth.dir/FreeRTOS/queue.c.s: cmake_force
 CMakeFiles/synth.dir/FreeRTOS/stream_buffer.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/FreeRTOS/stream_buffer.c.obj: FreeRTOS/stream_buffer.c
 CMakeFiles/synth.dir/FreeRTOS/stream_buffer.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_63) "Building C object CMakeFiles/synth.dir/FreeRTOS/stream_buffer.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_66) "Building C object CMakeFiles/synth.dir/FreeRTOS/stream_buffer.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/FreeRTOS/stream_buffer.c.obj -MF CMakeFiles/synth.dir/FreeRTOS/stream_buffer.c.obj.d -o CMakeFiles/synth.dir/FreeRTOS/stream_buffer.c.obj -c /Users/jack/Documents/embedded/synth/src/FreeRTOS/stream_buffer.c
 
 CMakeFiles/synth.dir/FreeRTOS/stream_buffer.c.i: cmake_force
@@ -953,7 +995,7 @@ CMakeFiles/synth.dir/FreeRTOS/stream_buffer.c.s: cmake_force
 CMakeFiles/synth.dir/FreeRTOS/tasks.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/FreeRTOS/tasks.c.obj: FreeRTOS/tasks.c
 CMakeFiles/synth.dir/FreeRTOS/tasks.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_64) "Building C object CMakeFiles/synth.dir/FreeRTOS/tasks.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_67) "Building C object CMakeFiles/synth.dir/FreeRTOS/tasks.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/FreeRTOS/tasks.c.obj -MF CMakeFiles/synth.dir/FreeRTOS/tasks.c.obj.d -o CMakeFiles/synth.dir/FreeRTOS/tasks.c.obj -c /Users/jack/Documents/embedded/synth/src/FreeRTOS/tasks.c
 
 CMakeFiles/synth.dir/FreeRTOS/tasks.c.i: cmake_force
@@ -967,7 +1009,7 @@ CMakeFiles/synth.dir/FreeRTOS/tasks.c.s: cmake_force
 CMakeFiles/synth.dir/FreeRTOS/timers.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/FreeRTOS/timers.c.obj: FreeRTOS/timers.c
 CMakeFiles/synth.dir/FreeRTOS/timers.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_65) "Building C object CMakeFiles/synth.dir/FreeRTOS/timers.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_68) "Building C object CMakeFiles/synth.dir/FreeRTOS/timers.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/FreeRTOS/timers.c.obj -MF CMakeFiles/synth.dir/FreeRTOS/timers.c.obj.d -o CMakeFiles/synth.dir/FreeRTOS/timers.c.obj -c /Users/jack/Documents/embedded/synth/src/FreeRTOS/timers.c
 
 CMakeFiles/synth.dir/FreeRTOS/timers.c.i: cmake_force
@@ -981,7 +1023,7 @@ CMakeFiles/synth.dir/FreeRTOS/timers.c.s: cmake_force
 CMakeFiles/synth.dir/FreeRTOS/portable/GCC/ARM_CM4F/port.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/FreeRTOS/portable/GCC/ARM_CM4F/port.c.obj: FreeRTOS/portable/GCC/ARM_CM4F/port.c
 CMakeFiles/synth.dir/FreeRTOS/portable/GCC/ARM_CM4F/port.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_66) "Building C object CMakeFiles/synth.dir/FreeRTOS/portable/GCC/ARM_CM4F/port.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_69) "Building C object CMakeFiles/synth.dir/FreeRTOS/portable/GCC/ARM_CM4F/port.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/FreeRTOS/portable/GCC/ARM_CM4F/port.c.obj -MF CMakeFiles/synth.dir/FreeRTOS/portable/GCC/ARM_CM4F/port.c.obj.d -o CMakeFiles/synth.dir/FreeRTOS/portable/GCC/ARM_CM4F/port.c.obj -c /Users/jack/Documents/embedded/synth/src/FreeRTOS/portable/GCC/ARM_CM4F/port.c
 
 CMakeFiles/synth.dir/FreeRTOS/portable/GCC/ARM_CM4F/port.c.i: cmake_force
@@ -995,7 +1037,7 @@ CMakeFiles/synth.dir/FreeRTOS/portable/GCC/ARM_CM4F/port.c.s: cmake_force
 CMakeFiles/synth.dir/FreeRTOS/portable/Common/mpu_wrappers.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/FreeRTOS/portable/Common/mpu_wrappers.c.obj: FreeRTOS/portable/Common/mpu_wrappers.c
 CMakeFiles/synth.dir/FreeRTOS/portable/Common/mpu_wrappers.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_67) "Building C object CMakeFiles/synth.dir/FreeRTOS/portable/Common/mpu_wrappers.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_70) "Building C object CMakeFiles/synth.dir/FreeRTOS/portable/Common/mpu_wrappers.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/FreeRTOS/portable/Common/mpu_wrappers.c.obj -MF CMakeFiles/synth.dir/FreeRTOS/portable/Common/mpu_wrappers.c.obj.d -o CMakeFiles/synth.dir/FreeRTOS/portable/Common/mpu_wrappers.c.obj -c /Users/jack/Documents/embedded/synth/src/FreeRTOS/portable/Common/mpu_wrappers.c
 
 CMakeFiles/synth.dir/FreeRTOS/portable/Common/mpu_wrappers.c.i: cmake_force
@@ -1009,7 +1051,7 @@ CMakeFiles/synth.dir/FreeRTOS/portable/Common/mpu_wrappers.c.s: cmake_force
 CMakeFiles/synth.dir/FreeRTOS/portable/MemMang/heap_4.c.obj: CMakeFiles/synth.dir/flags.make
 CMakeFiles/synth.dir/FreeRTOS/portable/MemMang/heap_4.c.obj: FreeRTOS/portable/MemMang/heap_4.c
 CMakeFiles/synth.dir/FreeRTOS/portable/MemMang/heap_4.c.obj: CMakeFiles/synth.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_68) "Building C object CMakeFiles/synth.dir/FreeRTOS/portable/MemMang/heap_4.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_71) "Building C object CMakeFiles/synth.dir/FreeRTOS/portable/MemMang/heap_4.c.obj"
 	/opt/homebrew/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/synth.dir/FreeRTOS/portable/MemMang/heap_4.c.obj -MF CMakeFiles/synth.dir/FreeRTOS/portable/MemMang/heap_4.c.obj.d -o CMakeFiles/synth.dir/FreeRTOS/portable/MemMang/heap_4.c.obj -c /Users/jack/Documents/embedded/synth/src/FreeRTOS/portable/MemMang/heap_4.c
 
 CMakeFiles/synth.dir/FreeRTOS/portable/MemMang/heap_4.c.i: cmake_force
@@ -1024,9 +1066,12 @@ CMakeFiles/synth.dir/FreeRTOS/portable/MemMang/heap_4.c.s: cmake_force
 synth_OBJECTS = \
 "CMakeFiles/synth.dir/main.cpp.obj" \
 "CMakeFiles/synth.dir/devices/LEDs.cpp.obj" \
+"CMakeFiles/synth.dir/devices/knob.cpp.obj" \
 "CMakeFiles/synth.dir/devices/sgtl5000.cpp.obj" \
+"CMakeFiles/synth.dir/audio/audio.cpp.obj" \
 "CMakeFiles/synth.dir/audio/mixer.cpp.obj" \
 "CMakeFiles/synth.dir/utils/util_rollingBuffer.cpp.obj" \
+"CMakeFiles/synth.dir/utils/cpu_utils.c.obj" \
 "CMakeFiles/synth.dir/startup_stm32f429xx.s.obj" \
 "CMakeFiles/synth.dir/stm32/Core/Src/gpio.c.obj" \
 "CMakeFiles/synth.dir/stm32/Core/Src/dma2d.c.obj" \
@@ -1096,9 +1141,12 @@ synth_EXTERNAL_OBJECTS =
 
 /Users/jack/Documents/embedded/synth/build/synth.elf: CMakeFiles/synth.dir/main.cpp.obj
 /Users/jack/Documents/embedded/synth/build/synth.elf: CMakeFiles/synth.dir/devices/LEDs.cpp.obj
+/Users/jack/Documents/embedded/synth/build/synth.elf: CMakeFiles/synth.dir/devices/knob.cpp.obj
 /Users/jack/Documents/embedded/synth/build/synth.elf: CMakeFiles/synth.dir/devices/sgtl5000.cpp.obj
+/Users/jack/Documents/embedded/synth/build/synth.elf: CMakeFiles/synth.dir/audio/audio.cpp.obj
 /Users/jack/Documents/embedded/synth/build/synth.elf: CMakeFiles/synth.dir/audio/mixer.cpp.obj
 /Users/jack/Documents/embedded/synth/build/synth.elf: CMakeFiles/synth.dir/utils/util_rollingBuffer.cpp.obj
+/Users/jack/Documents/embedded/synth/build/synth.elf: CMakeFiles/synth.dir/utils/cpu_utils.c.obj
 /Users/jack/Documents/embedded/synth/build/synth.elf: CMakeFiles/synth.dir/startup_stm32f429xx.s.obj
 /Users/jack/Documents/embedded/synth/build/synth.elf: CMakeFiles/synth.dir/stm32/Core/Src/gpio.c.obj
 /Users/jack/Documents/embedded/synth/build/synth.elf: CMakeFiles/synth.dir/stm32/Core/Src/dma2d.c.obj
@@ -1164,7 +1212,7 @@ synth_EXTERNAL_OBJECTS =
 /Users/jack/Documents/embedded/synth/build/synth.elf: CMakeFiles/synth.dir/FreeRTOS/portable/MemMang/heap_4.c.obj
 /Users/jack/Documents/embedded/synth/build/synth.elf: CMakeFiles/synth.dir/build.make
 /Users/jack/Documents/embedded/synth/build/synth.elf: CMakeFiles/synth.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_69) "Linking CXX executable /Users/jack/Documents/embedded/synth/build/synth.elf"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/jack/Documents/embedded/synth/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_72) "Linking CXX executable /Users/jack/Documents/embedded/synth/build/synth.elf"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/synth.dir/link.txt --verbose=$(VERBOSE)
 	/opt/homebrew/bin/arm-none-eabi-size /Users/jack/Documents/embedded/synth/build/synth.elf
 	/opt/homebrew/bin/arm-none-eabi-objcopy -O ihex /Users/jack/Documents/embedded/synth/build/synth.elf ../build/synth.hex

@@ -11,9 +11,9 @@ template <typename T> class RollingBuffer
 {
 private:
     /* data */
-    uint32_t head = 0U;
-    uint32_t tail = 0U;
-    uint32_t size = 0U;
+    uint32_t head     = 0U;
+    uint32_t tail     = 0U;
+    uint32_t size     = 0U;
     uint32_t numItems = 0U;
 
     T *buffer;
@@ -22,7 +22,7 @@ public:
     void add(T item)
     {
         buffer[tail] = item;
-        tail = ((tail + 1U) % size);
+        tail         = ((tail + 1U) % size);
         numItems++;
     }
 

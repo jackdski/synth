@@ -36,12 +36,14 @@ def format(path: pathlib.PosixPath):
     for item in list(path.iterdir()):
         if item.is_dir():
             if item.as_posix() in excluded_directory_paths:
-                print(f"Skipping dir:\t{item.as_posix()}")
+                # print(f"Skipping dir:\t{item.as_posix()}")
+                pass
             else:
                 format(item)
         elif item.is_file():
             if item.as_posix() in excluded_file_paths:
-                print(f"Skipping file:\t{item.as_posix()}")
+                # print(f"Skipping file:\t{item.as_posix()}")
+                pass
             else:
                 if item.suffix in file_types_to_format:
                     print(f"Formating:\t{item}")

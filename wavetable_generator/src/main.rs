@@ -2,6 +2,10 @@ use std::fs::File;
 use std::io::Write;
 use std::f32::consts::PI;
 
+use crate::buffer_prototype::run_buffer;
+
+mod buffer_prototype;
+
 fn main() {
     // const SAMPLE_FREQUENCY: u32 = 88200;  // fs - 2 * 44.1kHz (CD quality)
     const MAX_AMPLITUDE: f32 = 1.0;
@@ -68,4 +72,6 @@ fn main() {
     }
 
     square_wavetable_file.write(b"\n").expect("Unable to write newline to file");
+
+    let _ = run_buffer();
 }

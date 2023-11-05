@@ -3,21 +3,25 @@
 #include "FreeRTOS.h"
 #include "task.h"
 
+#include "main.h"
 #include "stm32f4xx.h"
 #include "stm32f4xx_hal.h"
 #include "stm32f4xx_hal_i2s_ex.h"
 
-using namespace Audio;
+#include "i2c.h"
+#include "sgtl5000.hpp"
 
 #define HALF_OF_MIXER_SAMPLES_PER_BLOCK (MIXER_SAMPLES_PER_BLOCK / 2U)
 
-static Mixer mixer;
+using namespace Audio;
 
 void Mixer::init(void)
 {
+    codec.init(i2c);
+
     for (uint32_t wt = 0U; wt < static_cast<int>(Wavetable::WavetableType::WAVETABLE_COUNT); wt++)
     {
-        mixer.oscillators[wt].selectWavetable(((Wavetable::WavetableType)wt));
+        oscillators[wt].selectWavetable(((Wavetable::WavetableType)wt));
     }
 }
 
@@ -29,38 +33,18 @@ void Mixer::updateSampleBlock(const uint32_t numberOfSamples)
 
         for (uint32_t wt = 0U; wt < static_cast<int>(Wavetable::WavetableType::WAVETABLE_COUNT); wt++)
         {
-            Oscillator osc = mixer.oscillators[wt];
+            Oscillator osc = oscillators[wt];
 
             if ((osc.wavetableType == hfoWavetable) || (osc.wavetableType == lfoWavetable))
             {
                 sample += osc.getSample();
             }
         }
-        sampleBlock[i] = (sample / static_cast<float>(Wavetable::WavetableType::WAVETABLE_COUNT));
+        sampleBlock[activeSampleBlock][i] = (sample / static_cast<float>(Wavetable::WavetableType::WAVETABLE_COUNT));
     }
 }
 
-void Audio::mixerControl(void *pvParameters)
+void Mixer::isrCallback(void)
 {
-    while (1)
-    {
-        vTaskDelay(100U);
-    }
-}
-
-void I2SEx_TxRxDMAHalfCplt(DMA_HandleTypeDef *hdma)
-{
-}
-
-void HAL_I2SEx_TxRxHalfCpltCallback(I2S_HandleTypeDef *hi2s)
-{
-    UBaseType_t uxSavedInterruptStatus = taskENTER_CRITICAL_FROM_ISR();
-
-    if (hi2s == mixer.i2sPeripheral)
-    {
-        mixer.updateSampleBlock(HALF_OF_MIXER_SAMPLES_PER_BLOCK);
-        (void)HAL_I2SEx_TransmitReceive_DMA(mixer.i2sPeripheral, mixer.sampleBlock, NULL, MIXER_SAMPLES_PER_BLOCK);
-    }
-
-    taskEXIT_CRITICAL_FROM_ISR(uxSavedInterruptStatus);
+    updateSampleBlock(MIXER_SAMPLES_PER_BLOCK);
 }
