@@ -13,38 +13,68 @@
 
 #define HALF_OF_MIXER_SAMPLES_PER_BLOCK (MIXER_SAMPLES_PER_BLOCK / 2U)
 
+// #define I2S_DATA_FORMAT_MAX_VALUE       8388608.0f  // 24bit - 2^24 / 2
+#define I2S_DATA_FORMAT_MAX_VALUE       32768.0f  // 16bit
+
 using namespace Audio;
 
-void Mixer::init(void)
-{
-    codec.init(i2c);
+Note _notes[MIXER_MAX_NUMBER_NOTES];
 
-    for (uint32_t wt = 0U; wt < static_cast<int>(Wavetable::WavetableType::WAVETABLE_COUNT); wt++)
-    {
-        oscillators[wt].selectWavetable(((Wavetable::WavetableType)wt));
-    }
+void Mixer::initCodec(void)
+{
+    initialized = codec.init();
 }
 
-void Mixer::updateSampleBlock(const uint32_t numberOfSamples)
+void Mixer::updateInputs(void)
 {
-    for (uint32_t i = 0U; i < numberOfSamples; i++)
-    {
-        float sample = 0.0f;
+    codec.updateRegisters();
+    volumeKnob.update();
+    // volume = volumeKnob.getPosition();
 
-        for (uint32_t wt = 0U; wt < static_cast<int>(Wavetable::WavetableType::WAVETABLE_COUNT); wt++)
+    // const bool newMiddleCActive        = button.isPressed();
+    // const bool middleCActiveRisingEdge = (newMiddleCActive && (middleCTestActive == false));
+    // middleCTestActive ^= newMiddleCActive;
+
+    // note.updateFrequency(440.0f);
+
+    // if (middleCTestActive)
+    // {
+    //     if (middleCActiveRisingEdge)
+    //     {
+    //         notes[0U].updateFrequency(440.0f);
+    //     }
+    // }
+    // else
+    // {
+    //     notes[0U].updateFrequency(0.0f);
+    // }
+}
+
+// void Mixer::updateSampleBlock(const mixerSampleBlock_E block)
+void Mixer::updateSampleBlock(const bool firstHalf)
+{
+    const uint32_t startIndex = (firstHalf) ? 0U : (MIXER_SAMPLES_PER_BLOCK * MIXER_NUMBER_OF_CHANNELS / 2);
+    const uint32_t endIndex   = (firstHalf) ? (MIXER_SAMPLES_PER_BLOCK * MIXER_NUMBER_OF_CHANNELS / 2)
+                                            : (MIXER_SAMPLES_PER_BLOCK * MIXER_NUMBER_OF_CHANNELS);
+    for (uint32_t i = startIndex; i < endIndex; i += MIXER_NUMBER_OF_CHANNELS)
+    {
+        // update all notes
+        float sample       = 0.0f;
+        const bool noteOff = (note.frequency == 0.0f);
+        sample += note.update(noteOff);
+
+        if (lpfActive)
         {
-            Oscillator osc = oscillators[wt];
-
-            if ((osc.wavetableType == hfoWavetable) || (osc.wavetableType == lfoWavetable))
-            {
-                sample += osc.getSample();
-            }
+            sample = lpf.update(sample);
         }
-        sampleBlock[activeSampleBlock][i] = (sample / static_cast<float>(Wavetable::WavetableType::WAVETABLE_COUNT));
-    }
-}
+        else
+        {
+            lpf.reset();
+        }
 
-void Mixer::isrCallback(void)
-{
-    updateSampleBlock(MIXER_SAMPLES_PER_BLOCK);
+        // TODO: divide sample by number of active notes
+        const uint16_t value = static_cast<uint16_t>(static_cast<int16_t>(sample * volume * I2S_DATA_FORMAT_MAX_VALUE));
+        sampleBlock[i]       = value;  // left
+        sampleBlock[i + 1]   = value;  // right
+    }
 }

@@ -7,6 +7,7 @@
 #include "main.h"
 #include "stm32f4xx.h"
 #include "stm32f4xx_hal.h"
+#include "stm32f4xx_hal_i2s.h"
 #include "stm32f4xx_hal_i2s_ex.h"
 
 #include "i2c.h"
@@ -15,43 +16,64 @@
 
 extern Audio::Mixer mixer;
 
+void HAL_I2S_TxHalfCpltCallback(I2S_HandleTypeDef *hi2s)
+{
+    if (hi2s == mixer.i2s)
+    {
+        mixer.updateSampleBlock(true);
+    }
+}
+
+void HAL_I2S_TxCpltCallback(I2S_HandleTypeDef *hi2s)
+{
+    if (hi2s == mixer.i2s)
+    {
+        mixer.updateSampleBlock(false);
+    }
+}
+
 namespace Audio
 {
 
 void mixerControl(void *pvParameters)
 {
-    mixer.init();
+    mixer.note.updateFrequency(440.0f);
+    mixer.updateSampleBlock(true);
+    (void)HAL_I2S_Transmit_DMA(mixer.i2s, mixer.sampleBlock, MIXER_SAMPLES_PER_BLOCK * 2U);
+    mixer.initCodec();
+    (void)HAL_I2S_DMAStop(mixer.i2s);
+
+    bool highLow = false;
 
     while (1)
     {
-        if (mixer.enabled)
+        mixer.updateInputs();
+
+        if (mixer.isEnabled() && mixer.isInitialized())
         {
-            // add first block of samples to buffer
-            // kick off I2S transaction
+            if (mixer.i2sActive == false)
+            {
+                // add first block of samples to buffer
+                mixer.updateSampleBlock(true);
+
+                // kick off I2S transaction
+                (void)HAL_I2S_Transmit_DMA(mixer.i2s, mixer.sampleBlock, MIXER_SAMPLES_PER_BLOCK * 2);
+                mixer.i2sActive = true;
+            }
         }
 
-        vTaskDelay(100U);
+        if (highLow)
+        {
+            mixer.note.updateFrequency(220.0f);
+        }
+        else
+        {
+            mixer.note.updateFrequency(440.0f);
+        }
+        highLow ^= 1U;
+
+        vTaskDelay(1000U);
     }
-}
-
-void I2SEx_TxRxDMAHalfCplt(DMA_HandleTypeDef *hdma)
-{
-}
-
-void HAL_I2SEx_TxRxHalfCpltCallback(I2S_HandleTypeDef *hi2s)
-{
-    UBaseType_t uxSavedInterruptStatus = taskENTER_CRITICAL_FROM_ISR();
-
-    if (hi2s == (I2S_HandleTypeDef *)mixer.codec.i2c)
-    {
-        mixer.isrCallback();
-        (void)HAL_I2SEx_TransmitReceive_DMA((I2S_HandleTypeDef *)mixer.codec.i2c,
-                                            mixer.sampleBlock[mixer.activeSampleBlock],
-                                            NULL,
-                                            MIXER_SAMPLES_PER_BLOCK);
-    }
-
-    taskEXIT_CRITICAL_FROM_ISR(uxSavedInterruptStatus);
 }
 
 }

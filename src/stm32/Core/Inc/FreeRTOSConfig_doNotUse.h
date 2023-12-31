@@ -31,6 +31,8 @@
 #ifndef FREERTOS_CONFIG_H
 #define FREERTOS_CONFIG_H
 
+#if 0
+
 /*-----------------------------------------------------------
  * Application specific definitions.
  *
@@ -56,7 +58,7 @@
 #define CMSIS_device_header "stm32f4xx.h"
 #endif /* CMSIS_device_header */
 
-#define configENABLE_FPU                         0
+#define configENABLE_FPU                         1
 #define configENABLE_MPU                         0
 
 #define configUSE_PREEMPTION                     1
@@ -158,7 +160,6 @@ header file. */
 standard names. */
 #define vPortSVCHandler    SVC_Handler
 #define xPortPendSVHandler PendSV_Handler
-// #define xPortSysTickHandler SysTick_Handler
 
 /* IMPORTANT: After 10.3.1 update, Systick_Handler comes from NVIC (if SYS timebase = systick), otherwise from cmsis_os2.c */
 
@@ -167,5 +168,7 @@ standard names. */
 /* USER CODE BEGIN Defines */
 /* Section where parameter definitions can be added (for instance, to override default ones in FreeRTOS.h) */
 /* USER CODE END Defines */
+
+#endif
 
 #endif /* FREERTOS_CONFIG_H */

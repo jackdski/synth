@@ -5,6 +5,8 @@
 #include "saw_wavetable.h"
 #include "square_wavetable.h"
 
+#define WAVETABLE_NUM_SAMPLES 2048U
+
 namespace Wavetable
 {
     enum class WavetableType

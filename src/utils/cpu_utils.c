@@ -56,6 +56,9 @@ To use this module, the following steps should be followed :
 #include "FreeRTOS.h"
 #include "task.h"
 
+#include "features.h"
+#include "lvgl.h"
+
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -67,6 +70,7 @@ __IO uint32_t  osCPU_Usage = 0;
 uint32_t       osCPU_IdleStartTime = 0; 
 uint32_t       osCPU_IdleSpentTime = 0; 
 uint32_t       osCPU_TotalIdleTime = 0; 
+uint32_t test = 0U;
 
 /* Private functions ---------------------------------------------------------*/
 /**
@@ -76,11 +80,7 @@ uint32_t       osCPU_TotalIdleTime = 0;
   */
 void vApplicationIdleHook(void) 
 {
-  if( xIdleHandle == NULL )
-  {
-    /* Store the handle to the idle task. */
-    xIdleHandle = xTaskGetCurrentTaskHandle();
-  }
+  xIdleHandle = xTaskGetIdleTaskHandle();
 }
 
 /**
@@ -88,21 +88,25 @@ void vApplicationIdleHook(void)
   * @param  None 
   * @retval None
   */
+static int tick = 0;
+
 void vApplicationTickHook (void)
 {
-  static int tick = 0;
-  
-  if(tick ++ > CALCULATION_PERIOD)
-  {
-    tick = 0;
-    
-    if(osCPU_TotalIdleTime > 1000)
+#if (FEATURE_DISPLAY)
+  lv_tick_inc(1);
+#endif
+
+    if(tick++ > CALCULATION_PERIOD)
     {
-      osCPU_TotalIdleTime = 1000;
+        tick = 0;
+
+        if (osCPU_TotalIdleTime > 1000)
+        {
+            osCPU_TotalIdleTime = 1000;
+        }
+        osCPU_Usage = (100 - (osCPU_TotalIdleTime * 100) / CALCULATION_PERIOD);
+        osCPU_TotalIdleTime = 0;
     }
-    osCPU_Usage = (100 - (osCPU_TotalIdleTime * 100) / CALCULATION_PERIOD);
-    osCPU_TotalIdleTime = 0;
-  }
 }
 
 /**
@@ -129,7 +133,7 @@ void EndIdleMonitor (void)
   {
     /* Store the handle to the idle task. */
     osCPU_IdleSpentTime = xTaskGetTickCountFromISR() - osCPU_IdleStartTime;
-    osCPU_TotalIdleTime += osCPU_IdleSpentTime; 
+    osCPU_TotalIdleTime += osCPU_IdleSpentTime;
   }
 }
 

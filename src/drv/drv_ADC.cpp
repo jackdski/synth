@@ -5,7 +5,7 @@
 
 using namespace Drivers;
 
-void drv_ADC::updateValue(void)
+void drv_ADC::sample(void)
 {
     ADC_ChannelConfTypeDef conf = {
         .Channel      = channel,
@@ -23,17 +23,16 @@ void drv_ADC::updateValue(void)
     HAL_ADC_PollForConversion(adc, HAL_MAX_DELAY);
 
     adcValueRaw = HAL_ADC_GetValue(adc);
+    adcValue    = (float)(adcValueRaw / ADC_12_BIT_MAX_VALUE);
     HAL_ADC_Stop(adc);
 }
 
-float drv_ADC::sampleValue(void)
+float drv_ADC::getSampleValue(void)
 {
-    updateValue();
     return (float)(adcValueRaw / ADC_12_BIT_MAX_VALUE);
 }
 
-float drv_ADC::sampleValueRaw(void)
+uint32_t drv_ADC::getSampleValueRaw(void)
 {
-    updateValue();
     return adcValueRaw;
 }

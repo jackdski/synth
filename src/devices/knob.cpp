@@ -10,5 +10,7 @@ using namespace Devices;
 
 void Knob::update(void)
 {
-    position = adcDriver.sampleValue();
+    adcDriver.sample();
+    position = adcDriver.getSampleValue();
+    voltage  = (position * ADC_REFERENCE_VOLTAGE);
 }

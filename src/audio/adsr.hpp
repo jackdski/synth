@@ -31,37 +31,39 @@ typedef enum
 
 typedef struct
 {
-    float attack;
-    float decay;
-    float sustain;
-    float release;
-    float sampleFrequency;
+    float attack          = 0.0f;
+    float decay           = 0.0f;
+    float sustain         = 0.0f;
+    float release         = 0.0f;
+    float sampleFrequency = 0.0f;
 } AdsrSettings_S;
 
 class ADSR
 {
 private:
 public:
-    AdsrMode_E mode;
-    AdsrStage_E stage;
-    float amplitude;
+    AdsrMode_E mode   = AdsrMode_E::ADSR_MODE_LINEAR;
+    AdsrStage_E stage = AdsrStage_E::ADSR_STAGE_ATTACK;
+    float amplitude   = 0.0f;
     AdsrSettings_S settings;
 
     struct
     {
-        float step;
+        float step = 0.0001f;
     } linearData;
 
+    // T = sample period, tau = time constant
+    // a = e^(-T/tau)
     struct
     {
-        float asymtoticValue;  // a = e^(-T/tau)   T = sample period, tau = time constant
+        float asymtoticValue = 1.0f;
     } asymtoticData;
 
+    ADSR(void);
     ADSR(AdsrMode_E mode, AdsrSettings_S AdsrSettings);
-    ~ADSR();
 
-    void updateLinear(void);
-    void updateAsymptotic(const bool noteOff);
+    float updateValue(void);
+    void update(const bool noteOff);
 };
 
 }

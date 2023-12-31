@@ -20,15 +20,16 @@ public:
     {
     }
 
-    uint32_t adcValueRaw = 0U;
-    float adcValue       = 0.0f;  // [0.0-1.0]
-
-    float sampleValue(void);
-    float sampleValueRaw(void);
+    void sample(void);
+    float getSampleValue(void);
+    uint32_t getSampleValueRaw(void);
 
 private:
     ADC_HandleTypeDef *adc;
     uint32_t channel;
+
+    uint32_t adcValueRaw = 0U;
+    float adcValue       = 0.0f;  // [0.0-1.0]
 
     void updateValue(void);
 };

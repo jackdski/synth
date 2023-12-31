@@ -7,6 +7,10 @@
 
 using namespace Audio;
 
+ADSR::ADSR(void)
+{
+}
+
 ADSR::ADSR(AdsrMode_E AdsrMode, AdsrSettings_S AdsrSettings)
 {
     mode  = AdsrMode;
@@ -27,14 +31,60 @@ ADSR::ADSR(AdsrMode_E AdsrMode, AdsrSettings_S AdsrSettings)
     }
 }
 
-void ADSR::updateAsymptotic(const bool noteOff)
+float ADSR::updateValue(void)
 {
+    float newAmplitude = 0.0f;
+
+    switch (mode)
+    {
+        case ADSR_MODE_LINEAR:
+            if (stage == AdsrStage_E::ADSR_STAGE_ATTACK)
+            {
+                newAmplitude = linearData.step + amplitude;
+            }
+            else if ((stage == AdsrStage_E::ADSR_STAGE_DECAY) || (stage == AdsrStage_E::ADSR_STAGE_RELEASE))
+            {
+                newAmplitude = linearData.step - amplitude;
+            }
+            else
+            {
+                // nothing
+            }
+            break;
+
+        case ADSR_MODE_ASYMPTOTIC:
+            if (stage == AdsrStage_E::ADSR_STAGE_ATTACK)
+            {
+                newAmplitude =
+                    asymtoticData.asymtoticValue * amplitude + (1.0f - asymtoticData.asymtoticValue) * settings.attack;
+            }
+            else if ((stage == AdsrStage_E::ADSR_STAGE_DECAY) || (stage == AdsrStage_E::ADSR_STAGE_RELEASE))
+            {
+                newAmplitude =
+                    asymtoticData.asymtoticValue * amplitude - (1.0f - asymtoticData.asymtoticValue) * settings.attack;
+            }
+            else
+            {
+                // nothing
+            }
+            break;
+
+        default:
+            // nothing
+            break;
+    }
+
+    return newAmplitude;
+}
+
+void ADSR::update(const bool noteOff)
+{
+    const float newAmplitude = updateValue();
+
     switch (stage)
     {
         case AdsrStage_E::ADSR_STAGE_ATTACK:
         {
-            const float newAmplitude =
-                asymtoticData.asymtoticValue * amplitude + (1.0f - asymtoticData.asymtoticValue) * settings.attack;
             amplitude = MIN(newAmplitude, settings.attack);
 
             if (noteOff)
@@ -54,8 +104,6 @@ void ADSR::updateAsymptotic(const bool noteOff)
 
         case AdsrStage_E::ADSR_STAGE_DECAY:
         {
-            const float newAmplitude =
-                asymtoticData.asymtoticValue * amplitude + (-1.0f - asymtoticData.asymtoticValue) * settings.decay;
             amplitude = MIN(newAmplitude, settings.decay);
 
             if (amplitude <= settings.decay)
@@ -76,10 +124,10 @@ void ADSR::updateAsymptotic(const bool noteOff)
 
         case AdsrStage_E::ADSR_STAGE_RELEASE:
         {
-            const float newAmplitude =
-                asymtoticData.asymtoticValue * amplitude + (-1.0f - asymtoticData.asymtoticValue) * settings.release;
             amplitude = MAX(0.0f, newAmplitude);
+            break;
         }
+
         default:
             break;
     }

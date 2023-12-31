@@ -45,7 +45,6 @@ void MX_GPIO_Init(void)
   GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOE_CLK_ENABLE();
   __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOF_CLK_ENABLE();
   __HAL_RCC_GPIOH_CLK_ENABLE();
@@ -64,16 +63,10 @@ void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOG, LD3_Pin|LD4_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : PtPin */
-  GPIO_InitStruct.Pin = BUTTON_1_Pin;
+  GPIO_InitStruct.Pin = B3_EXT_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(BUTTON_1_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : PtPin */
-  GPIO_InitStruct.Pin = BUTTON_0_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(BUTTON_0_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(B3_EXT_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PAPin PAPin PAPin */
   GPIO_InitStruct.Pin = B1_Pin|MEMS_INT1_Pin|MEMS_INT2_Pin;
@@ -102,7 +95,7 @@ void MX_GPIO_Init(void)
   HAL_GPIO_Init(OTG_FS_OC_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PB2 PBPin */
-  GPIO_InitStruct.Pin = GPIO_PIN_2|BUTTON_2_Pin;
+  GPIO_InitStruct.Pin = GPIO_PIN_2|B2_EXT_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);

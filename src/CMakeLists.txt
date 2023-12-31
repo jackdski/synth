@@ -76,14 +76,15 @@ set(sources_SRCS
     ${PROJ_PATH}/devices/sgtl5000.cpp
     ${PROJ_PATH}/devices/ssd1306.cpp
     ${PROJ_PATH}/drv/drv_ADC.cpp
+    ${PROJ_PATH}/display/display.cpp
     ${PROJ_PATH}/audio/adsr.cpp
+    ${PROJ_PATH}/audio/note.cpp
     ${PROJ_PATH}/audio/audio.cpp
     ${PROJ_PATH}/audio/mixer.cpp
     ${PROJ_PATH}/utils/util_rollingBuffer.cpp
     ${PROJ_PATH}/utils/cpu_utils.c
     ${PROJ_PATH}/startup_stm32f429xx.s
     ${STM32_PATH}/Core/Src/gpio.c
-    ${STM32_PATH}/Core/Src/dma2d.c
     ${STM32_PATH}/Core/Src/i2c.c
     ${STM32_PATH}/Core/Src/i2s.c
     ${STM32_PATH}/Core/Src/sdio.c
@@ -94,10 +95,9 @@ set(sources_SRCS
     ${STM32_PATH}/Core/Src/stm32f4xx_hal_timebase_tim.c
     ${STM32_PATH}/Core/Src/stm32f4xx_hal_msp.c
     ${STM32_PATH}/Core/Src/system_stm32f4xx.c
-    ${STM32_PATH}/USB_DEVICE/App/usb_device.c
-    ${STM32_PATH}/USB_DEVICE/App/usbd_desc.c
-    ${STM32_PATH}/USB_DEVICE/App/usbd_audio_if.c
-    ${STM32_PATH}/USB_DEVICE/Target/usbd_conf.c
+    # ${STM32_PATH}/USB_DEVICE/App/usb_device.c
+    # ${STM32_PATH}/USB_DEVICE/App/usbd_desc.c
+    # ${STM32_PATH}/USB_DEVICE/Target/usbd_conf.c
     ${STM32_PATH}/Core/Src/adc.c
     ${STM32_PATH}/Core/Src/dma.c
     ${STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c
@@ -126,14 +126,14 @@ set(sources_SRCS
     ${STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c
     ${STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c
     ${STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c
-    ${STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma2d.c
     ${STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c
     ${STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c
     ${STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c
-    ${STM32_PATH}/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c
-    ${STM32_PATH}/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c
-    ${STM32_PATH}/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c
-    ${STM32_PATH}/Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c
+    # ${STM32_PATH}/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c
+    # ${STM32_PATH}/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c
+    # ${STM32_PATH}/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c
+    # ${STM32_PATH}/Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio_if_template.c
+    # ${STM32_PATH}/Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.c
     ${FREERTOS_PATH}/croutine.c
     ${FREERTOS_PATH}/event_groups.c
     ${FREERTOS_PATH}/list.c
@@ -151,27 +151,30 @@ set(sources_SRCS
 #
 set(include_path_DIRS
     ${PROJ_PATH}/
+    ${FREERTOS_PATH}/portable/MemMag
+    ${FREERTOS_PATH}/portable/GCC/ARM_CM4F
+    ${FREERTOS_PATH}/include
+    ${PROJ_PATH}/display/
     ${PROJ_PATH}/audio/
+    ${PROJ_PATH}/audio/effects/
     ${PROJ_PATH}/wavetables/
     ${PROJ_PATH}/devices/
     ${PROJ_PATH}/drv/
     ${PROJ_PATH}/utils/
     ${STM32_PATH}/
     ${STM32_PATH}/Core/Inc
-    ${STM32_PATH}/USB_DEVICE/App
-    ${STM32_PATH}/USB_DEVICE/Target
+    # ${STM32_PATH}/USB_DEVICE/App
+    # ${STM32_PATH}/USB_DEVICE/Target
     ${STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Inc
     ${STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy
-    ${STM32_PATH}/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
-    ${STM32_PATH}/Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Inc
+    # ${STM32_PATH}/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
+    # ${STM32_PATH}/Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Inc
+    # ${STM32_PATH}/Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc
     ${STM32_PATH}/Drivers/CMSIS/Device/ST/STM32F4xx/Include
     ${STM32_PATH}/Drivers/CMSIS/Include
     ${STM32_PATH}/Drivers/CMSIS/Core/Include
     ${STM32_PATH}/Drivers/CMSIS/Core_A/Include
     ${STM32_PATH}/Drivers/CMSIS/DSP/Include
-    ${FREERTOS_PATH}/include
-    ${FREERTOS_PATH}/portable/GCC/ARM_CM4F
-    ${FREERTOS_PATH}/portable/MemMag
 )
 
 #
@@ -187,7 +190,25 @@ set(symbols_SYMB
 add_executable(${EXECUTABLE} ${sources_SRCS})
 
 # Include paths
+# LVGL
+set(LV_CONF_PATH
+    ${CMAKE_CURRENT_SOURCE_DIR}/lv_conf.h
+    CACHE STRING "" FORCE)
+set(LV_CONF_INCLUDE_SIMPLE 1)
+# set(BUILD_SHARED_LIBS ON)
+
+include(${PROJ_PATH}/lvgl/CMakeLists.txt)
+target_link_libraries(${EXECUTABLE} PRIVATE lvgl::lvgl)
 target_include_directories(${EXECUTABLE} PRIVATE ${include_path_DIRS})
+target_compile_options(lvgl PRIVATE
+    ${CPU_PARAMETERS}
+    -Wall
+    -Wextra
+    -Wpedantic
+    -Wno-unused-parameter
+    # Full debug configuration
+    -Og -g3 -ggdb
+)
 
 # Project symbols
 target_compile_definitions(${EXECUTABLE} PRIVATE ${symbols_SYMB})

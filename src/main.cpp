@@ -9,9 +9,30 @@
 #include "stm32f4xx.h"
 #include "stm32f4xx_hal.h"
 
+#include "FreeRTOS.h"
+#include "event_groups.h"
+#include "queue.h"
+#include "task.h"
+
+#include "LEDs.hpp"
+#include "audio.hpp"
+#include "display.hpp"
+#include "mixer.hpp"
+#include "note.hpp"
+
+#include "drv_ADC.hpp"
+#include "ssd1306.hpp"
+
+#include "button.hpp"
+#include "knob.hpp"
+
+#include "lvgl.h"
+
+#include "Utils.h"
+#include "errors.hpp"
+
 #include "adc.h"
 #include "dma.h"
-#include "dma2d.h"
 #include "gpio.h"
 #include "i2c.h"
 #include "i2s.h"
@@ -20,19 +41,7 @@
 #include "spi.h"
 #include "tim.h"
 #include "usart.h"
-#include "usb_device.h"
-
-#include "FreeRTOS.h"
-#include "queue.h"
-#include "task.h"
-
-#include "LEDs.hpp"
-#include "audio.hpp"
-#include "mixer.hpp"
-
-#include "drv_ADC.hpp"
-
-#include "knob.hpp"
+// #include "usb_device.h"
 
 /* SVCall_IRQ_NBR added as SV_Call handler name is not the same for CM0 and for all other CMx */
 #define SVCall_IRQ_NBR (IRQn_Type) - 5
@@ -40,51 +49,59 @@
 using namespace std;
 
 /* Data definitions */
+Errors::Errors errors;
+
 Drivers::drv_ADC volumeKnobAdc(&hadc1, ADC_CHANNEL_0);
 
 Devices::Knob volumeKnob(volumeKnobAdc);
-
+Devices::Button middleCButton(B1_GPIO_Port, B1_Pin);
 Devices::SGTL5000 sgtl500(&hi2c1);
-Audio::Mixer mixer(sgtl500);
+
+Audio::Mixer mixer(sgtl500, &hi2s2, volumeKnob, middleCButton);
+
+#if (FEATURE_DISPLAY)
+Devices::SSD1306 ssd1306(&hi2c2);
+Display::display mDisplay(ssd1306);
+#endif
 
 /* Private Functions Definitions */
 
 static void SystemClock_Config(void);
-static void PeriphCommonClock_Config(void);
-static void blinky(void *pvParameters);
+// static void PeriphCommonClock_Config(void);
+static void initTask(void *pvParameters);
+static void misc10HzTask(void *pvParameters);
 
 /* Main */
 int main()
 {
     HAL_Init();
     SystemClock_Config();
-    PeriphCommonClock_Config();
+    // PeriphCommonClock_Config();
+    HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
 
     // enable FPU
     SCB->CPACR = (SCB->CPACR | ((3UL << 10 * 2) | (3UL << 11 * 2))); /* set CP10 and CP11 Full Access */
 
     MX_GPIO_Init();
     MX_DMA_Init();
-    MX_DMA2D_Init();
     MX_I2C2_Init();
     MX_I2C3_Init();
     MX_I2S2_Init();
-    MX_I2S3_Init();
     // MX_SDIO_SD_Init();
-    MX_SPI4_Init();
     MX_SPI5_Init();
     MX_USART1_UART_Init();
     MX_ADC1_Init();
     MX_I2C1_Init();
     MX_TIM10_Init();
+    MX_ADC2_Init();
+    MX_TIM2_Init();
 
-    (void)xTaskCreate(blinky, "Blinky", configMINIMAL_STACK_SIZE, (void *)NULL, 0U, NULL);
-
-#if (FEATURE_MIXER)
-    (void)xTaskCreate(Audio::mixerControl, "mixerControl", configMINIMAL_STACK_SIZE, (void *)NULL, 0U, NULL);
+#if (FEATURE_DISPLAY)
+    lv_init();
 #endif
 
     NVIC_SetPriority(SVCall_IRQ_NBR, 0U);
+    (void)xTaskCreate(initTask, "init", configMINIMAL_STACK_SIZE, (void *)NULL, 0U, NULL);
     vTaskStartScheduler();
 
     while (1)
@@ -95,14 +112,32 @@ int main()
 
 /* Private Functions */
 
-static void blinky(void *pvParameters)
+static void initTask(void *pvParameters)
+{
+    (void)xTaskCreate(misc10HzTask, "misc10Hz", configMINIMAL_STACK_SIZE, (void *)NULL, 3U, NULL);
+
+#if (FEATURE_MIXER)
+    (void)xTaskCreate(Audio::mixerControl, "mixerControl", configMINIMAL_STACK_SIZE, (void *)NULL, 1U, NULL);
+#endif
+
+#if (FEATURE_DISPLAY)
+    (void)xTaskCreate(Display::displayControl, "displayControl", 512, (void *)NULL, 2U, NULL);
+#endif
+    vTaskDelete(NULL);
+}
+
+static void misc10HzTask(void *pvParameters)
 {
     LED blinkyLED(GPIOG, GPIO_PIN_13);
+    LED errorLED(GPIOG, GPIO_PIN_13);
 
     while (1)
     {
+        const bool errorActive = (errors.getErrors() != Errors::Errors_E::ERROR_NONE);
+        errorLED.set(errorActive);
+
         blinkyLED.toggle();
-        vTaskDelay(500U);
+        vTaskDelay(100);
     }
 }
 
@@ -166,36 +201,36 @@ static void SystemClock_Config(void)
  * @brief Peripherals Common Clock Configuration
  * @retval None
  */
-static void PeriphCommonClock_Config(void)
-{
-    /** Initializes the peripherals clock
-     */
-    RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {
-        .PeriphClockSelection = RCC_PERIPHCLK_I2S,
-        .PLLI2S =
-            {
-                     .PLLI2SN = 50,
-                     .PLLI2SR = 2,
-                     .PLLI2SQ = 0U,
-                     },
-        .PLLSAI =
-            {
-                     .PLLSAIN = 0U,
-                     .PLLSAIQ = 0U,
-                     .PLLSAIR = 0U,
-                     },
-        .PLLI2SDivQ        = 0U,
-        .PLLSAIDivQ        = 0U,
-        .PLLSAIDivR        = 0U,
-        .RTCClockSelection = 0U,
-        .TIMPresSelection  = 0U,
-    };
+// static void PeriphCommonClock_Config(void)
+// {
+//     /** Initializes the peripherals clock
+//      */
+//     RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {
+//         .PeriphClockSelection = RCC_PERIPHCLK_I2S,
+//         .PLLI2S =
+//             {
+//                      .PLLI2SN = 123,
+//                      .PLLI2SR = 2,
+//                      .PLLI2SQ = 0U,
+//                      },
+//         .PLLSAI =
+//             {
+//                      .PLLSAIN = 0U,
+//                      .PLLSAIQ = 0U,
+//                      .PLLSAIR = 0U,
+//                      },
+//         .PLLI2SDivQ        = 0U,
+//         .PLLSAIDivQ        = 0U,
+//         .PLLSAIDivR        = 0U,
+//         .RTCClockSelection = 0U,
+//         .TIMPresSelection  = 0U,
+//     };
 
-    if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
-    {
-        Error_Handler();
-    }
-}
+//     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
+//     {
+//         Error_Handler();
+//     }
+// }
 
 /* Public Functions */
 

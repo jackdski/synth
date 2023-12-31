@@ -46,7 +46,7 @@
 
 /* Software timer definitions. */
 #define configUSE_TIMERS			        1
-#define configTIMER_TASK_PRIORITY		    ( 2 )
+#define configTIMER_TASK_PRIORITY		    ( 5 )
 #define configTIMER_QUEUE_LENGTH		    10
 #define configTIMER_TASK_STACK_DEPTH	    ( configMINIMAL_STACK_SIZE * 2 )
 
@@ -65,6 +65,7 @@ to exclude the API function. */
 #define INCLUDE_uxTaskGetStackHighWaterMark 1
 #define INCLUDE_xTaskGetCurrentTaskHandle   1
 #define INCLUDE_eTaskGetState               1
+#define INCLUDE_xTaskGetIdleTaskHandle		1
 
 /* Cortex-M specific definitions. */
 #ifdef __NVIC_PRIO_BITS
