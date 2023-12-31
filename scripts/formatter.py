@@ -50,3 +50,22 @@ def format(path: pathlib.PosixPath):
                     os.system(f"clang-format -i {item.as_posix()}")
 
 format(cwd)
+
+# run cppcheck linter
+def lint(path: pathlib.PosixPath):
+    for item in list(path.iterdir()):
+        if item.is_dir():
+            if item.as_posix() in excluded_directory_paths:
+                pass
+            else:
+                lint(item)
+        elif item.is_file():
+            if item.as_posix() in excluded_file_paths:
+                pass
+            else:
+                if item.suffix in file_types_to_format:
+                    print(f"Linting:\t{item}")
+                    # os.system(f"cppcheck {item.as_posix()} --addon=misra.py --check-level=exhaustive -j16")
+                    os.system(f"cppcheck {item.as_posix()} --check-level=exhaustive -j16")
+
+lint(cwd)
