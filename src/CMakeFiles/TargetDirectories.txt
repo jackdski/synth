@@ -1,3 +1,0 @@
-/Users/jack/Documents/embedded/synth/src/CMakeFiles/synth.dir
-/Users/jack/Documents/embedded/synth/src/CMakeFiles/edit_cache.dir
-/Users/jack/Documents/embedded/synth/src/CMakeFiles/rebuild_cache.dir

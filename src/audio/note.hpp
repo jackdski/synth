@@ -19,20 +19,23 @@ private:
 public:
     Note(void)
     {
-        frequency = 0.0f;
     }
 
-    Note(float frequency, AdsrSettings_S adsrSettings) : frequency(frequency)
+    Note(float frequency, AdsrSettings_S adsrSettings)
     {
+        osc.setFrequency(frequency);
         adsr = ADSR(AdsrMode_E::ADSR_MODE_LINEAR, adsrSettings);
     }
 
-    float frequency = 0.0f;
-    Oscillator hfo;
-    Oscillator lfo;
+    Oscillator osc;
 
     void updateFrequency(float frequency);
-    float update(bool noteOff);
+    float update(void);
+
+    float getFrequency(void)
+    {
+        return osc.frequency;
+    }
 };
 
 }  // namespace Audio

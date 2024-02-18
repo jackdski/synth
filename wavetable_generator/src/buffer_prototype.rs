@@ -14,7 +14,7 @@ const WAVETABLE_STEP_VALUE: f32 = (2.0 * PI) / WAVETABLE_NUM_SAMPLES as f32;
 // const BUFFER_SIZE: usize = 100;
 const SAMPLE_FREQUENCY: usize = 44100;
 
-const LOW_PASS_FILTER_FREQUENCY: usize = 1e3 as usize;
+const LOW_PASS_FILTER_FREQUENCY: usize = 400 as usize;
 const ADSR_STEP_FACTOR: f32 = 1e-4;
 
 const OUT_FILE_NAME: &'static str = "sample.png";
@@ -229,34 +229,37 @@ pub fn run_buffer() -> Result<(), Box<dyn std::error::Error>>{
     const NUM_CYCLES: usize = 1;
     let mut waveform: Vec<f32> = Vec::new();
 
-    let mut notes: Vec<f32> = vec![300.0, 680.0, 880.0];
+    let notes: Vec<f32> = vec![300.0, 600.0, 120.0, 30.0];
     // const NUM_NOTES: usize = 3;
-
-    osc.notes.push(
-        Note {
-            initialized: false,
-            frequency: notes.pop().ok_or("Not f32")?,
-            wavetable_index: 0usize,
-            wavetable_steps: 0usize,
-            wavetable: sine_wavetable,
-            volume: 0.7f32,
-            lpf: LPF {
-                sampling_frequency: SAMPLE_FREQUENCY as f32,
-                filter_frequency: LOW_PASS_FILTER_FREQUENCY as f32,
-                old_value: 0.0,
+    for note in notes
+    {
+        osc.notes.push(
+            Note {
+                initialized: false,
+                // frequency: notes.pop().ok_or("Not f32")?,
+                frequency: note,
+                wavetable_index: 0usize,
+                wavetable_steps: 0usize,
+                wavetable: sine_wavetable,
+                volume: 0.7f32,
+                lpf: LPF {
+                    sampling_frequency: SAMPLE_FREQUENCY as f32,
+                    filter_frequency: LOW_PASS_FILTER_FREQUENCY as f32,
+                    old_value: 0.0,
+                },
+                envelope: ADSR {
+                    // mode: AdsrMode::Linear,
+                    mode: AdsrMode::Asymptotic,
+                    stage: AdsrStage::Attack,
+                    amplitude: 0.0,
+                    attack: 1.0,
+                    decay: 1.0,
+                    sustain: 1.0,
+                    release: 1.0,
+                },
             },
-            envelope: ADSR {
-                // mode: AdsrMode::Linear,
-                mode: AdsrMode::Asymptotic,
-                stage: AdsrStage::Attack,
-                amplitude: 0.0,
-                attack: 1.0,
-                decay: 1.0,
-                sustain: 1.0,
-                release: 1.0,
-            },
-        },
-    );
+        );
+    }
 
     while waveform.len() <= (SAMPLE_FREQUENCY * NUM_CYCLES)
     {

@@ -14,7 +14,7 @@ namespace Audio
 class Oscillator
 {
 public:
-    uint32_t frequency          = 440U;
+    uint32_t frequency          = 0U;
     uint32_t currentSampleIndex = 0U;
     float phase                 = 0.0f;  // [-1.0, 1.0]
     float amplitude             = 0.5f;  // [0.0,  1.0]
@@ -26,6 +26,11 @@ public:
         frequency          = newFrequency;
         wavetableSteps     = getWavetableSteps();
         currentSampleIndex = 0U;  // TODO: maybe delete?
+    }
+
+    float getFrequency(void)
+    {
+        return frequency;
     }
 
     void selectWavetable(Wavetable::WavetableType wtType)

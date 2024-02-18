@@ -59,6 +59,8 @@ To use this module, the following steps should be followed :
 #include "features.h"
 #include "lvgl.h"
 
+#include "main.h"
+
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/

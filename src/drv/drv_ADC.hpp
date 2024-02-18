@@ -2,8 +2,7 @@
 #define DRV_ADC_HPP_
 
 #include "adc.h"
-#include "stm32f4xx.h"
-#include "stm32f4xx_hal.h"
+#include "main.h"
 
 #define ADC_10_BIT_MAX_VALUE  1023U
 #define ADC_12_BIT_MAX_VALUE  4095U

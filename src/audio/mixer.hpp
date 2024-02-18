@@ -8,9 +8,7 @@
 #include "oscillator.hpp"
 #include "wavetables.hpp"
 
-#include "stm32f4xx.h"
-#include "stm32f4xx_hal.h"
-#include "stm32f4xx_hal_i2s_ex.h"
+#include "main.h"
 
 #include "button.hpp"
 #include "knob.hpp"
@@ -23,7 +21,9 @@ namespace Audio
 
 #define MIXER_SAMPLES_PER_BLOCK  200U
 #define MIXER_NUMBER_OF_CHANNELS 2U
-#define MIXER_MAX_NUMBER_NOTES   1U
+#define MIXER_MAX_NUMBER_NOTES   20U
+
+static Note mixerNotes[MIXER_MAX_NUMBER_NOTES];
 
 class Mixer
 {
@@ -39,10 +39,12 @@ public:
     uint16_t sampleBlock[MIXER_SAMPLES_PER_BLOCK * MIXER_NUMBER_OF_CHANNELS];
 
     // effects
-    bool lpfActive     = true;
-    float lpfFrequency = 400.0f;  // connect this up to a knob
+    float lpfFrequency = 1000.0f;  // connect this up to a knob
     LPF<float> lpf{lpfFrequency, (1.0f / SYNTH_SAMPLE_FREQUENCY)};
-    Note note = Note();
+    Note *notes;
+
+    // LFO
+    Oscillator lfoOsc = Oscillator();
 
     void initCodec(void);
     void updateInputs(void);
@@ -61,6 +63,8 @@ public:
     Mixer(Devices::SGTL5000 &codec, I2S_HandleTypeDef *i2s, Devices::Knob &volumeKnob, Devices::Button &button)
         : codec(codec), i2s(i2s), volumeKnob(volumeKnob), button(button)
     {
+        notes = mixerNotes;
+        lfoOsc.setFrequency(20U);
     }
 
 private:
@@ -72,8 +76,8 @@ private:
 
     bool middleCTestActive = false;
 
-    float volume = 1.0F;
-    float gain   = 1.0F;
+    float volume = 0.3F;
+    float gain   = 0.5F;
 };
 
 }

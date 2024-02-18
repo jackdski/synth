@@ -1,8 +1,7 @@
 #ifndef SSD1306_HPP_
 #define SSD1306_HPP_
 
-#include "stm32f4xx.h"
-#include "stm32f4xx_hal.h"
+#include "main.h"
 #include <stdint.h>
 
 #define SSD1306_DISPLAY_ORIENTATION                  TFT_ORIENTATION_LANDSCAPE

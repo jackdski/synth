@@ -1,6 +1,5 @@
 #include "sgtl5000.hpp"
-#include "stm32f4xx.h"
-#include "stm32f4xx_hal.h"
+#include "main.h"
 
 using namespace Devices;
 
@@ -178,4 +177,12 @@ bool SGTL5000::readI2C(const uint16_t reg, uint16_t *rxData)
     }
 
     return ret;
+}
+
+void SGTL5000::updateVolume(float volume)
+{
+    // range: [+12dB, -51.5dB]
+    const float dB              = -1.0f * ((63.5f * volume) - 12.0f);
+    const uint16_t hpConfigData = (((uint8_t)dB << SGTL5000_HP_VOL_RIGHT_POS) | (uint8_t)dB);
+    (void)writeI2C(SGTL5000_CHIP_ANA_HP_CTRL_REG, hpConfigData);
 }

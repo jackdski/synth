@@ -5,8 +5,11 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/src/FreeRTOS/portable/GCC/ARM_CM4F",
-                "${workspaceFolder}/src/stm32",
-                "${workspaceFolder}/src/stm32/Drivers/CMSIS/DSP/**"
+                "${workspaceFolder}/src/hardwareSpecific/",
+                "${workspaceFolder}/src/hardwareSpecific/F429Discovery/",
+                "${workspaceFolder}/src/hardwareSpecific/F429Discovery/stm32",
+                "${workspaceFolder}/src/hardwareSpecific/F429Discovery/stm32/Drivers/CMSIS/DSP/**",
+                "${workspaceFolder}/src/lvgl"
             ],
             "defines": [
                 "STM32F429xx"

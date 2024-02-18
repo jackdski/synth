@@ -6,9 +6,7 @@
 #include "oscillator.hpp"
 #include "wavetables.hpp"
 
-#include "stm32f4xx.h"
-#include "stm32f4xx_hal.h"
-#include "stm32f4xx_hal_i2s_ex.h"
+#include "main.h"
 
 #include "sgtl5000.hpp"
 
@@ -31,10 +29,10 @@ typedef enum
 
 typedef struct
 {
-    float attack          = 0.0f;
-    float decay           = 0.0f;
-    float sustain         = 0.0f;
-    float release         = 0.0f;
+    float attack          = 0.5f;
+    float decay           = 0.5f;
+    float sustain         = 0.5f;
+    float release         = 0.5f;
     float sampleFrequency = 0.0f;
 } AdsrSettings_S;
 
@@ -49,7 +47,7 @@ public:
 
     struct
     {
-        float step = 0.0001f;
+        float step = 0.00001f;
     } linearData;
 
     // T = sample period, tau = time constant
@@ -64,6 +62,11 @@ public:
 
     float updateValue(void);
     void update(const bool noteOff);
+
+    void setSampleFrequency(float frequency)
+    {
+        settings.sampleFrequency = frequency;
+    }
 };
 
 }

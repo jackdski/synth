@@ -8,7 +8,7 @@
 	extern uint32_t SystemCoreClock;
 #endif
 
-#include "stm32f4xx.h"
+#include "main.h"
 
 #define configENABLE_FPU                        1
 #define configENABLE_MPU                        0

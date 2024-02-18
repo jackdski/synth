@@ -9,7 +9,8 @@ file_types_to_format = [".cpp", ".hpp"]
 exclude_directories = [
     "build",
     "venv",
-    "src/stm32",
+    "src/hardwareSpecific/F429Discovery/stm32",
+    "src/hardwareSpecific/G4_RevA/stm32",
     "src/CMakeFiles",
     "src/FreeRTOS",
     "src/wavetables",

@@ -33,18 +33,36 @@ ADSR::ADSR(AdsrMode_E AdsrMode, AdsrSettings_S AdsrSettings)
 
 float ADSR::updateValue(void)
 {
-    float newAmplitude = 0.0f;
-
     switch (mode)
     {
         case ADSR_MODE_LINEAR:
             if (stage == AdsrStage_E::ADSR_STAGE_ATTACK)
             {
-                newAmplitude = linearData.step + amplitude;
+                amplitude += linearData.step;
+                if (amplitude >= settings.attack)
+                {
+                    amplitude = settings.attack;
+                    stage     = AdsrStage_E::ADSR_STAGE_DECAY;
+                }
             }
-            else if ((stage == AdsrStage_E::ADSR_STAGE_DECAY) || (stage == AdsrStage_E::ADSR_STAGE_RELEASE))
+            else if (stage == AdsrStage_E::ADSR_STAGE_DECAY)
             {
-                newAmplitude = linearData.step - amplitude;
+                amplitude -= linearData.step;
+                if (amplitude < settings.decay)
+                {
+                    stage = AdsrStage_E::ADSR_STAGE_SUSTAIN;
+                }
+            }
+            else if (stage == AdsrStage_E::ADSR_STAGE_SUSTAIN)
+            {
+                if (settings.sampleFrequency == 0.0f)
+                {
+                    stage = AdsrStage_E::ADSR_STAGE_RELEASE;
+                }
+            }
+            else if (stage == AdsrStage_E::ADSR_STAGE_RELEASE)
+            {
+                amplitude = MAX(0.0f, amplitude - linearData.step);
             }
             else
             {
@@ -55,12 +73,12 @@ float ADSR::updateValue(void)
         case ADSR_MODE_ASYMPTOTIC:
             if (stage == AdsrStage_E::ADSR_STAGE_ATTACK)
             {
-                newAmplitude =
+                amplitude =
                     asymtoticData.asymtoticValue * amplitude + (1.0f - asymtoticData.asymtoticValue) * settings.attack;
             }
             else if ((stage == AdsrStage_E::ADSR_STAGE_DECAY) || (stage == AdsrStage_E::ADSR_STAGE_RELEASE))
             {
-                newAmplitude =
+                amplitude =
                     asymtoticData.asymtoticValue * amplitude - (1.0f - asymtoticData.asymtoticValue) * settings.attack;
             }
             else
@@ -74,7 +92,7 @@ float ADSR::updateValue(void)
             break;
     }
 
-    return newAmplitude;
+    return amplitude;
 }
 
 void ADSR::update(const bool noteOff)

@@ -4,9 +4,6 @@
 #include "task.h"
 
 #include "main.h"
-#include "stm32f4xx.h"
-#include "stm32f4xx_hal.h"
-#include "stm32f4xx_hal_i2s_ex.h"
 
 #include "i2c.h"
 #include "sgtl5000.hpp"
@@ -30,27 +27,9 @@ void Mixer::updateInputs(void)
     codec.updateRegisters();
     volumeKnob.update();
     // volume = volumeKnob.getPosition();
-
-    // const bool newMiddleCActive        = button.isPressed();
-    // const bool middleCActiveRisingEdge = (newMiddleCActive && (middleCTestActive == false));
-    // middleCTestActive ^= newMiddleCActive;
-
-    // note.updateFrequency(440.0f);
-
-    // if (middleCTestActive)
-    // {
-    //     if (middleCActiveRisingEdge)
-    //     {
-    //         notes[0U].updateFrequency(440.0f);
-    //     }
-    // }
-    // else
-    // {
-    //     notes[0U].updateFrequency(0.0f);
-    // }
+    codec.updateVolume(volume);
 }
 
-// void Mixer::updateSampleBlock(const mixerSampleBlock_E block)
 void Mixer::updateSampleBlock(const bool firstHalf)
 {
     const uint32_t startIndex = (firstHalf) ? 0U : (MIXER_SAMPLES_PER_BLOCK * MIXER_NUMBER_OF_CHANNELS / 2);
@@ -59,20 +38,29 @@ void Mixer::updateSampleBlock(const bool firstHalf)
     for (uint32_t i = startIndex; i < endIndex; i += MIXER_NUMBER_OF_CHANNELS)
     {
         // update all notes
-        float sample       = 0.0f;
-        const bool noteOff = (note.frequency == 0.0f);
-        sample += note.update(noteOff);
+        float sample         = 0.0f;
+        float numActiveNotes = 0.0f;
 
-        if (lpfActive)
+        for (uint32_t n = 0U; n < MIXER_MAX_NUMBER_NOTES; n++)
         {
-            sample = lpf.update(sample);
-        }
-        else
-        {
-            lpf.reset();
+            Note *note = &notes[n];
+            if (note->getFrequency() > 0.0f)
+            {
+                sample += note->update();
+                numActiveNotes += 1.0f;
+            }
         }
 
-        // TODO: divide sample by number of active notes
+        // apply affects
+        if (lfoOsc.getFrequency() > 0.0f)
+        {
+            sample += lpf.update(sample);
+            numActiveNotes += 1.0f;
+        }
+
+        // divide sample by number of active notes
+        sample /= numActiveNotes;
+
         const uint16_t value = static_cast<uint16_t>(static_cast<int16_t>(sample * volume * I2S_DATA_FORMAT_MAX_VALUE));
         sampleBlock[i]       = value;  // left
         sampleBlock[i + 1]   = value;  // right

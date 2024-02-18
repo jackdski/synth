@@ -1,8 +1,7 @@
 #ifndef SGTL5000_H_
 #define SGTL5000_H_
 
-#include "stm32f4xx.h"
-#include "stm32f4xx_hal.h"
+#include "main.h"
 #include <stdint.h>
 
 namespace Devices
@@ -297,6 +296,7 @@ public:
     bool readI2C(const uint16_t reg, uint16_t *rxData);
 
     bool updateRegisters(void);
+    void updateVolume(float volume);
 
 private:
     SGTL5000_rateMode_E rateMode;
