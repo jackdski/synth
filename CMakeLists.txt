@@ -181,7 +181,7 @@ if(BUILD_F429DISCOVERY)
         RUNTIME_OUTPUT_DIRECTORY "${BUILD_DIRECTORY}/F429Discovery"
     )
 
-    include(${PROJ_PATH}/lvgl/CMakeLists.txt)
+    include(${HARDWARE_SPECIFIC_PATH}/F429Discovery/lvgl/CMakeLists.txt)
     target_link_libraries(synth_F429Discovery PRIVATE lvgl::lvgl)
     target_include_directories(synth_F429Discovery PRIVATE ${include_path_F429Discovery_DIRS})
 
