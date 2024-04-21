@@ -3,15 +3,15 @@
 
 #include <stdint.h>
 
+#include "wavetables.hpp"
+#include "oscillator.hpp"
 #include "lpf.hpp"
 #include "note.hpp"
-#include "oscillator.hpp"
-#include "wavetables.hpp"
+
 
 #include "main.h"
 
 #include "button.hpp"
-#include "knob.hpp"
 #include "sgtl5000.hpp"
 
 #include "Utils.h"
@@ -60,17 +60,13 @@ public:
         return initialized;
     }
 
-    Mixer(Devices::SGTL5000 &codec, I2S_HandleTypeDef *i2s, Devices::Knob &volumeKnob, Devices::Button &button)
-        : codec(codec), i2s(i2s), volumeKnob(volumeKnob), button(button)
+    Mixer(Devices::SGTL5000 &codec, I2S_HandleTypeDef *i2s) : codec(codec), i2s(i2s)
     {
         notes = mixerNotes;
         lfoOsc.setFrequency(20U);
     }
 
 private:
-    Devices::Knob &volumeKnob;
-    Devices::Button &button;
-
     bool enabled     = true;
     bool initialized = false;
 

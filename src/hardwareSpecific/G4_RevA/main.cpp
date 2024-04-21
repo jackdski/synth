@@ -17,20 +17,22 @@
 #include "audio.hpp"
 #include "display.hpp"
 #include "mixer.hpp"
+#include "sequencer.hpp"
 #include "note.hpp"
 
-#include "drv_ADC.hpp"
-#include "ssd1306.hpp"
 
+#include "drv_I2C.hpp"
+
+// devices
+#include "TCA9539.hpp"
+#include "ssd1306.hpp"
 #include "button.hpp"
-#include "knob.hpp"
 
 #include "lvgl.h"
 
 #include "Utils.h"
 #include "errors.hpp"
 
-#include "adc.h"
 #include "app_fatfs.h"
 #include "cordic.h"
 #include "dma.h"
@@ -38,9 +40,9 @@
 #include "gpio.h"
 #include "i2c.h"
 #include "i2s.h"
+#include "rng.h"
 #include "spi.h"
 #include "tim.h"
-#include "ucpd.h"
 #include "usb_device.h"
 #include "wwdg.h"
 
@@ -52,13 +54,20 @@ using namespace std;
 /* Data definitions */
 Errors::Errors errors;
 
-Drivers::drv_ADC volumeKnobAdc(&hadc1, ADC_CHANNEL_0);
+// Drivers
+Drivers::I2CBus I2C3_BUS(&hi2c3);
+Drivers::I2CDevice sgtl5000I2C(SGTL5000_ADDRESS, 2U);
+Drivers::I2CDevice portExpanderButtonInputsI2C(SGTL5000_ADDRESS, 1U);
+Drivers::I2CDevice portExpanderLEDI2C(SGTL5000_ADDRESS, 1U);
 
-Devices::Knob volumeKnob(volumeKnobAdc);
-Devices::Button middleCButton(GPIOB, GPIO_PIN_0);
-Devices::SGTL5000 sgtl500(&hi2c1);
+// Devices
+Devices::SGTL5000 sgtl5000(&I2C3_BUS, sgtl5000I2C);
+Devices::TCA9539 buttonInputs(&I2C3_BUS, portExpanderButtonInputsI2C);
+Devices::TCA9539 ledOutputs(&I2C3_BUS, portExpanderLEDI2C);
 
-Audio::Mixer mixer(sgtl500, &hi2s2, volumeKnob, middleCButton);
+// Application objects
+Audio::Sequencer sequencer;
+Audio::Mixer mixer(sgtl5000, &hi2s2);
 
 #if (FEATURE_DISPLAY)
 Devices::SSD1306 ssd1306(&hi2c2);
@@ -78,11 +87,11 @@ int main()
     HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
 
     // enable FPU
-    SCB->CPACR = (SCB->CPACR | ((3UL << 10 * 2) | (3UL << 11 * 2))); /* set CP10 and CP11 Full Access */
+    SCB->CPACR = (SCB->CPACR | ((3UL << (10 * 2)) | (3UL << (11 * 2)))); /* set CP10 and CP11 Full Access */
 
     MX_GPIO_Init();
     MX_DMA_Init();
-    MX_ADC1_Init();
+    // MX_ADC1_Init();
     MX_I2C1_Init();
     MX_I2S2_Init();
     MX_SPI1_Init();
@@ -91,18 +100,16 @@ int main()
     MX_TIM3_Init();
     MX_TIM4_Init();
     MX_TIM8_Init();
-    MX_TIM15_Init();
-    MX_UCPD1_Init();
     MX_WWDG_Init();
     MX_USB_Device_Init();
     MX_CORDIC_Init();
     MX_FMAC_Init();
     MX_I2C3_Init();
     MX_SPI3_Init();
-    // if (MX_FATFS_Init() != APP_OK)
-    // {
-        // Error_Handler();
+    // if (MX_FATFS_Init() != APP_OK) {
+    //     Error_Handler();
     // }
+    MX_RNG_Init();
 
 #if (FEATURE_DISPLAY)
     lv_init();
@@ -167,18 +174,16 @@ void SystemClock_Config(void)
     /** Initializes the RCC Oscillators according to the specified parameters
      * in the RCC_OscInitTypeDef structure.
      */
-    RCC_OscInitStruct.OscillatorType      = RCC_OSCILLATORTYPE_HSI | RCC_OSCILLATORTYPE_HSI48 | RCC_OSCILLATORTYPE_HSE;
-    RCC_OscInitStruct.HSEState            = RCC_HSE_ON;
-    RCC_OscInitStruct.HSIState            = RCC_HSI_ON;
-    RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
-    RCC_OscInitStruct.HSI48State          = RCC_HSI48_ON;
-    RCC_OscInitStruct.PLL.PLLState        = RCC_PLL_ON;
-    RCC_OscInitStruct.PLL.PLLSource       = RCC_PLLSOURCE_HSE;
-    RCC_OscInitStruct.PLL.PLLM            = RCC_PLLM_DIV1;
-    RCC_OscInitStruct.PLL.PLLN            = 42;
-    RCC_OscInitStruct.PLL.PLLP            = RCC_PLLP_DIV2;
-    RCC_OscInitStruct.PLL.PLLQ            = RCC_PLLQ_DIV2;
-    RCC_OscInitStruct.PLL.PLLR            = RCC_PLLR_DIV2;
+    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI48 | RCC_OSCILLATORTYPE_HSE;
+    RCC_OscInitStruct.HSEState       = RCC_HSE_ON;
+    RCC_OscInitStruct.HSI48State     = RCC_HSI48_ON;
+    RCC_OscInitStruct.PLL.PLLState   = RCC_PLL_ON;
+    RCC_OscInitStruct.PLL.PLLSource  = RCC_PLLSOURCE_HSE;
+    RCC_OscInitStruct.PLL.PLLM       = RCC_PLLM_DIV1;
+    RCC_OscInitStruct.PLL.PLLN       = 42;
+    RCC_OscInitStruct.PLL.PLLP       = RCC_PLLP_DIV2;
+    RCC_OscInitStruct.PLL.PLLQ       = RCC_PLLQ_DIV2;
+    RCC_OscInitStruct.PLL.PLLR       = RCC_PLLR_DIV2;
     if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
     {
         Error_Handler();

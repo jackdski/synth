@@ -59,14 +59,16 @@ enable_language(C CXX ASM)
 
 set(sources_shared_SRCS
     ${PROJ_PATH}/devices/LEDs.cpp
-    ${PROJ_PATH}/devices/knob.cpp
+    # ${PROJ_PATH}/devices/knob.cpp
     ${PROJ_PATH}/devices/sgtl5000.cpp
     ${PROJ_PATH}/devices/ssd1306.cpp
-    ${PROJ_PATH}/drv/drv_ADC.cpp
+    # ${PROJ_PATH}/drv/drv_ADC.cpp
     ${PROJ_PATH}/display/display.cpp
+    ${PROJ_PATH}/wavetables/wavetables.cpp
     ${PROJ_PATH}/audio/adsr.cpp
     ${PROJ_PATH}/audio/note.cpp
     ${PROJ_PATH}/audio/audio.cpp
+    ${PROJ_PATH}/audio/sequencer.cpp
     ${PROJ_PATH}/audio/mixer.cpp
     ${PROJ_PATH}/utils/util_rollingBuffer.cpp
     ${PROJ_PATH}/utils/cpu_utils.c
@@ -85,9 +87,9 @@ set(sources_shared_SRCS
 set(include_path_shared_DIRS
     ${PROJ_PATH}/
     ${PROJ_PATH}/display/
+    ${PROJ_PATH}/wavetables/
     ${PROJ_PATH}/audio/
     ${PROJ_PATH}/audio/effects/
-    ${PROJ_PATH}/wavetables/
     ${PROJ_PATH}/devices/
     ${PROJ_PATH}/drv/
     ${PROJ_PATH}/utils/
@@ -275,8 +277,8 @@ add_executable(synth_G4RevA
     ${G4_REV_A_STM32_PATH}/Core/Src/i2s.c
     ${G4_REV_A_STM32_PATH}/Core/Src/spi.c
     ${G4_REV_A_STM32_PATH}/Core/Src/tim.c
-    ${G4_REV_A_STM32_PATH}/Core/Src/ucpd.c
     ${G4_REV_A_STM32_PATH}/Core/Src/wwdg.c
+    ${G4_REV_A_STM32_PATH}/Core/Src/rng.c
     ${G4_REV_A_STM32_PATH}/Core/Src/stm32g4xx_it.c
     ${G4_REV_A_STM32_PATH}/Core/Src/stm32g4xx_hal_msp.c
     ${G4_REV_A_STM32_PATH}/Core/Src/stm32g4xx_hal_timebase_tim.c
@@ -286,8 +288,6 @@ add_executable(synth_G4RevA
     ${G4_REV_A_STM32_PATH}/USB_Device/App/usbd_desc.c
     ${G4_REV_A_STM32_PATH}/USB_Device/App/usbd_custom_hid_if.c
     ${G4_REV_A_STM32_PATH}/USB_Device/Target/usbd_conf.c
-    ${G4_REV_A_STM32_PATH}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_utils.c
-    ${G4_REV_A_STM32_PATH}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_exti.c
     ${G4_REV_A_STM32_PATH}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pcd.c
     ${G4_REV_A_STM32_PATH}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pcd_ex.c
     ${G4_REV_A_STM32_PATH}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_usb.c
@@ -304,7 +304,6 @@ add_executable(synth_G4RevA
     ${G4_REV_A_STM32_PATH}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr.c
     ${G4_REV_A_STM32_PATH}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.c
     ${G4_REV_A_STM32_PATH}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.c
-    ${G4_REV_A_STM32_PATH}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_pwr.c
     ${G4_REV_A_STM32_PATH}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_adc.c
     ${G4_REV_A_STM32_PATH}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_adc_ex.c
     ${G4_REV_A_STM32_PATH}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_adc.c
@@ -317,10 +316,8 @@ add_executable(synth_G4RevA
     ${G4_REV_A_STM32_PATH}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_spi_ex.c
     ${G4_REV_A_STM32_PATH}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.c
     ${G4_REV_A_STM32_PATH}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.c
-    ${G4_REV_A_STM32_PATH}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_ucpd.c
-    ${G4_REV_A_STM32_PATH}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_gpio.c
-    ${G4_REV_A_STM32_PATH}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_dma.c
     ${G4_REV_A_STM32_PATH}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_wwdg.c
+    ${G4_REV_A_STM32_PATH}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rng.c
     ${G4_REV_A_STM32_PATH}/Core/Src/system_stm32g4xx.c
     ${G4_REV_A_STM32_PATH}/Middlewares/Third_Party/FatFs/src/diskio.c
     ${G4_REV_A_STM32_PATH}/Middlewares/Third_Party/FatFs/src/ff.c
@@ -335,7 +332,7 @@ add_executable(synth_G4RevA
 
 set(include_path_G4_RevA_DIRS
     ${include_path_shared_DIRS}
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/hardwareSpecific/G4_RevA/
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/
     ${G4_REV_A_STM32_PATH}/
     ${G4_REV_A_STM32_PATH}/Core/Inc
     ${G4_REV_A_STM32_PATH}/FATFS/Target
@@ -400,9 +397,8 @@ target_compile_options(synth_G4RevA PRIVATE
 
 set(symbols_SYMB_G4_RevA
     "DEBUG"
-    "USE_FULL_LL_DRIVER"
-    "STM32G491xx"
     "USE_HAL_DRIVER"
+    "STM32G491xx"
 )
 target_compile_definitions(synth_G4RevA PUBLIC ${symbols_SYMB_G4_RevA})
 

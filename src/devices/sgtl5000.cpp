@@ -1,4 +1,5 @@
 #include "sgtl5000.hpp"
+#include "drv_I2C.hpp"
 #include "main.h"
 
 using namespace Devices;
@@ -156,27 +157,12 @@ bool SGTL5000::writeI2C(const uint16_t reg, const uint16_t txData)
         (uint8_t)(txData & 0x00FF),
     };
 
-    bool ret = true;
-    if (HAL_I2C_Master_Transmit(i2c, SGTL5000_ADDRESS, txBuffer, sizeof(txBuffer), 1) != HAL_OK)
-    {
-        ret = false;
-    }
-    return ret;
+    return i2c->write(i2cDevice, txBuffer, sizeof(txBuffer));
 }
 
 bool SGTL5000::readI2C(const uint16_t reg, uint16_t *rxData)
 {
-    bool ret            = true;
-    uint8_t rxBuffer[2] = {0U};
-
-    ret &= (HAL_I2C_Mem_Read(i2c, SGTL5000_ADDRESS, reg, 2U, rxBuffer, sizeof(rxBuffer), 10) == HAL_OK);
-
-    if (ret)
-    {
-        *rxData = ((rxBuffer[0] << 8U) | (rxBuffer[1]));
-    }
-
-    return ret;
+    return i2c->read(i2cDevice, reg, reinterpret_cast<uint8_t *>(rxData), sizeof(rxData));
 }
 
 void SGTL5000::updateVolume(float volume)

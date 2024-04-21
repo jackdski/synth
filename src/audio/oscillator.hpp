@@ -19,7 +19,7 @@ public:
     float phase                 = 0.0f;  // [-1.0, 1.0]
     float amplitude             = 0.5f;  // [0.0,  1.0]
 
-    Wavetable::WavetableType wavetableType = Wavetable::WavetableType::SINE_WAVETABLE;
+    Wavetables::WavetableType wavetableType = Wavetables::WavetableType::SINE_WAVETABLE;
 
     void setFrequency(uint32_t newFrequency)
     {
@@ -33,30 +33,15 @@ public:
         return frequency;
     }
 
-    void selectWavetable(Wavetable::WavetableType wtType)
+    void selectWavetable(Wavetables::WavetableType wtType)
     {
-        wavetableType = wtType;
-        switch (wavetableType)
-        {
-            case Wavetable::WavetableType::SAW_WAVETABLE:
-                wavetable = saw_wavetable;
-                break;
-
-            case Wavetable::WavetableType::SQUARE_WAVETABLE:
-                wavetable = square_wavetable;
-                break;
-
-            case Wavetable::WavetableType::SINE_WAVETABLE:
-            default:
-                wavetable = sine_wavetable;
-                break;
-        }
+        wavetable = Wavetables::getWavetable(wtType);
     }
 
     float getSample(void)
     {
         float sample = 0.0f;
-        if (frequency > 0U)
+        if ((frequency > 0U) && (wavetable != nullptr))
         {
             currentSampleIndex += wavetableSteps;
             if (currentSampleIndex > WAVETABLE_NUM_SAMPLES)
@@ -64,16 +49,21 @@ public:
                 currentSampleIndex -= WAVETABLE_NUM_SAMPLES;
             }
 
-            sample = wavetable[currentSampleIndex] * amplitude;
+            sample = wavetable->wavetableData[currentSampleIndex] * amplitude;
         }
 
         return sample;
     }
 
+    Oscillator(void)
+    {
+        wavetable = Wavetables::getWavetable(Wavetables::WavetableType::SINE_WAVETABLE);
+    }
+
 private:
-    const float *wavetable         = sine_wavetable;
-    const uint32_t sampleFrequency = SYNTH_SAMPLE_FREQUENCY;
-    uint32_t wavetableSteps        = getWavetableSteps();
+    Wavetables::Wavetable *wavetable = nullptr;
+    const uint32_t sampleFrequency  = SYNTH_SAMPLE_FREQUENCY;
+    uint32_t wavetableSteps         = getWavetableSteps();
 
     uint32_t getWavetableSteps(void)
     {

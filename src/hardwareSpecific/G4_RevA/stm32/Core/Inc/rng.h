@@ -1,9 +1,9 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    ucpd.h
+  * @file    rng.h
   * @brief   This file contains all the function prototypes for
-  *          the ucpd.c file
+  *          the rng.c file
   ******************************************************************************
   * @attention
   *
@@ -18,8 +18,8 @@
   */
 /* USER CODE END Header */
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __UCPD_H__
-#define __UCPD_H__
+#ifndef __RNG_H__
+#define __RNG_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -32,11 +32,13 @@ extern "C" {
 
 /* USER CODE END Includes */
 
+extern RNG_HandleTypeDef hrng;
+
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
 
-void MX_UCPD1_Init(void);
+void MX_RNG_Init(void);
 
 /* USER CODE BEGIN Prototypes */
 
@@ -46,5 +48,5 @@ void MX_UCPD1_Init(void);
 }
 #endif
 
-#endif /* __UCPD_H__ */
+#endif /* __RNG_H__ */
 

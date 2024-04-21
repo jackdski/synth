@@ -68,7 +68,7 @@ int32_t MX_FATFS_Init(void)
 {
   /*## FatFS: Link the disk I/O driver(s)  ###########################*/
 
-  if (FATFS_LinkDriver(&USER_Driver, USERPath) != 0)
+if (FATFS_LinkDriver(&USER_Driver, USERPath) != 0)
   /* USER CODE BEGIN FATFS_Init */
   {
     return APP_ERROR;

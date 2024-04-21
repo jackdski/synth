@@ -20,11 +20,9 @@
 #include "mixer.hpp"
 #include "note.hpp"
 
-#include "drv_ADC.hpp"
 #include "ssd1306.hpp"
 
 #include "button.hpp"
-#include "knob.hpp"
 
 #include "lvgl.h"
 
@@ -51,13 +49,18 @@ using namespace std;
 /* Data definitions */
 Errors::Errors errors;
 
-Drivers::drv_ADC volumeKnobAdc(&hadc1, ADC_CHANNEL_0);
+// Drivers::drv_ADC volumeKnobAdc(&hadc1, ADC_CHANNEL_0);
 
-Devices::Knob volumeKnob(volumeKnobAdc);
-Devices::Button middleCButton(B1_GPIO_Port, B1_Pin);
-Devices::SGTL5000 sgtl500(&hi2c1);
+// Devices::Knob volumeKnob(volumeKnobAdc);
+// Devices::Button middleCButton(B1_GPIO_Port, B1_Pin);
+Drivers::I2CBus I2C1_BUS(&hi2c1);
+Drivers::I2CDevice sgtl5000I2C(SGTL5000_ADDRESS, 2U);
 
-Audio::Mixer mixer(sgtl500, &hi2s2, volumeKnob, middleCButton);
+// Devices::SGTL5000 sgtl5000(&hi2c1);
+Devices::SGTL5000 sgtl5000(&I2C1_BUS, sgtl5000I2C);
+
+// Audio::Mixer mixer(sgtl500, &hi2s2, volumeKnob, middleCButton);
+Audio::Mixer mixer(sgtl5000, &hi2s2);
 
 #if (FEATURE_DISPLAY)
 Devices::SSD1306 ssd1306(&hi2c2);

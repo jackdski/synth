@@ -25,8 +25,6 @@ void Mixer::initCodec(void)
 void Mixer::updateInputs(void)
 {
     codec.updateRegisters();
-    volumeKnob.update();
-    // volume = volumeKnob.getPosition();
     codec.updateVolume(volume);
 }
 

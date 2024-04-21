@@ -1,7 +1,9 @@
 #ifndef SGTL5000_H_
 #define SGTL5000_H_
 
+#include "drv_I2C.hpp"
 #include "main.h"
+
 #include <stdint.h>
 
 namespace Devices
@@ -285,11 +287,12 @@ typedef enum
 class SGTL5000
 {
 public:
-    SGTL5000(I2C_HandleTypeDef *i2c) : i2c(i2c)
+    SGTL5000(Drivers::I2CBus *i2c, Drivers::I2CDevice i2cDevice) : i2c(i2c), i2cDevice(i2cDevice)
     {
     }
 
-    I2C_HandleTypeDef *i2c;
+    Drivers::I2CBus *i2c;
+    Drivers::I2CDevice i2cDevice;
 
     bool init(void);
     bool writeI2C(const uint16_t reg, const uint16_t txData);

@@ -3,8 +3,8 @@
 
 #include <stdint.h>
 
-#include "oscillator.hpp"
 #include "wavetables.hpp"
+#include "oscillator.hpp"
 
 #include "main.h"
 
