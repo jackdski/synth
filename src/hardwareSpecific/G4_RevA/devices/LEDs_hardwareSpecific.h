@@ -1,0 +1,11 @@
+#ifndef LEDSHARDWARE_SPECIFIC_H_
+#define LEDS_HARDWARE_SPECIFIC_H_
+
+typedef enum
+{
+    LED_CHANNEL_BLINKY,
+
+    LED_CHANNEL_COUNT,
+} LED_channel_E;
+
+#endif /* LEDS_HARDWARE_SPECIFIC_H_ */

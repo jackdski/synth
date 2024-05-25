@@ -282,7 +282,7 @@
 #if (osCMSIS < 0x20000U)
 #define _SYNC_t         osSemaphoreId
 #else
-#define	_SYNC_t         SemaphoreHandle_t
+#define	_SYNC_t         osSemaphoreId_t
 #endif
 
 #endif

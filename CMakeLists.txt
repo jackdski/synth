@@ -58,19 +58,25 @@ project(synth)
 enable_language(C CXX ASM)
 
 set(sources_shared_SRCS
-    ${PROJ_PATH}/devices/LEDs.cpp
+    ${PROJ_PATH}/main.c
+    ${PROJ_PATH}/misc/misc.c
+    ${PROJ_PATH}/drv/drv_I2C.c
+    ${PROJ_PATH}/drv/drv_GPIO.c
+    ${PROJ_PATH}/devices/LEDs.c
+    ${PROJ_PATH}/devices/PCA9555.c
     # ${PROJ_PATH}/devices/knob.cpp
-    ${PROJ_PATH}/devices/sgtl5000.cpp
-    ${PROJ_PATH}/devices/ssd1306.cpp
-    # ${PROJ_PATH}/drv/drv_ADC.cpp
-    ${PROJ_PATH}/display/display.cpp
-    ${PROJ_PATH}/wavetables/wavetables.cpp
-    ${PROJ_PATH}/audio/adsr.cpp
-    ${PROJ_PATH}/audio/note.cpp
-    ${PROJ_PATH}/audio/audio.cpp
-    ${PROJ_PATH}/audio/sequencer.cpp
-    ${PROJ_PATH}/audio/mixer.cpp
-    ${PROJ_PATH}/utils/util_rollingBuffer.cpp
+    ${PROJ_PATH}/devices/sgtl5000.c
+    ${PROJ_PATH}/devices/ST7789.c
+    ${PROJ_PATH}/display/display.c
+    ${PROJ_PATH}/wavetables/wavetables.c
+    ${PROJ_PATH}/audio/effects/lpf.c
+    ${PROJ_PATH}/audio/oscillator.c
+    ${PROJ_PATH}/audio/adsr.c
+    # ${PROJ_PATH}/audio/note.cpp
+    # ${PROJ_PATH}/audio/audio.cpp
+    # ${PROJ_PATH}/audio/sequencer.cpp
+    # ${PROJ_PATH}/audio/mixer.cpp
+    # ${PROJ_PATH}/utils/util_rollingBuffer.cpp
     ${PROJ_PATH}/utils/cpu_utils.c
     ${FREERTOS_PATH}/croutine.c
     ${FREERTOS_PATH}/event_groups.c
@@ -86,6 +92,7 @@ set(sources_shared_SRCS
 
 set(include_path_shared_DIRS
     ${PROJ_PATH}/
+    ${PROJ_PATH}/misc/
     ${PROJ_PATH}/display/
     ${PROJ_PATH}/wavetables/
     ${PROJ_PATH}/audio/
@@ -267,27 +274,31 @@ set(G4_REV_A_STM32_PATH ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32)
 
 add_executable(synth_G4RevA
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/startup_stm32g491xx.s
-    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/main.cpp
-    ${G4_REV_A_STM32_PATH}/Core/Src/gpio.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/hardwareSpecific.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/drv/drv_GPIO_hardwareSpecific.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/drv/drv_I2C_hardwareSpecific.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/devices/LEDs_hardwareSpecific.c
     ${G4_REV_A_STM32_PATH}/Core/Src/adc.c
     ${G4_REV_A_STM32_PATH}/Core/Src/cordic.c
     ${G4_REV_A_STM32_PATH}/Core/Src/dma.c
     ${G4_REV_A_STM32_PATH}/Core/Src/fmac.c
+    ${G4_REV_A_STM32_PATH}/Core/Src/gpio.c
     ${G4_REV_A_STM32_PATH}/Core/Src/i2c.c
     ${G4_REV_A_STM32_PATH}/Core/Src/i2s.c
+    ${G4_REV_A_STM32_PATH}/Core/Src/iwdg.c
+    ${G4_REV_A_STM32_PATH}/Core/Src/rng.c
     ${G4_REV_A_STM32_PATH}/Core/Src/spi.c
     ${G4_REV_A_STM32_PATH}/Core/Src/tim.c
     ${G4_REV_A_STM32_PATH}/Core/Src/wwdg.c
-    ${G4_REV_A_STM32_PATH}/Core/Src/rng.c
     ${G4_REV_A_STM32_PATH}/Core/Src/stm32g4xx_it.c
     ${G4_REV_A_STM32_PATH}/Core/Src/stm32g4xx_hal_msp.c
     ${G4_REV_A_STM32_PATH}/Core/Src/stm32g4xx_hal_timebase_tim.c
-    ${G4_REV_A_STM32_PATH}/FATFS/App/app_fatfs.c
-    ${G4_REV_A_STM32_PATH}/FATFS/Target/user_diskio.c
-    ${G4_REV_A_STM32_PATH}/USB_Device/App/usb_device.c
-    ${G4_REV_A_STM32_PATH}/USB_Device/App/usbd_desc.c
-    ${G4_REV_A_STM32_PATH}/USB_Device/App/usbd_custom_hid_if.c
-    ${G4_REV_A_STM32_PATH}/USB_Device/Target/usbd_conf.c
+    # ${G4_REV_A_STM32_PATH}/FATFS/App/app_fatfs.c
+    # ${G4_REV_A_STM32_PATH}/FATFS/Target/user_diskio.c
+    # ${G4_REV_A_STM32_PATH}/USB_Device/App/usb_device.c
+    # ${G4_REV_A_STM32_PATH}/USB_Device/App/usbd_desc.c
+    # ${G4_REV_A_STM32_PATH}/USB_Device/App/usbd_custom_hid_if.c
+    # ${G4_REV_A_STM32_PATH}/USB_Device/Target/usbd_conf.c
     ${G4_REV_A_STM32_PATH}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pcd.c
     ${G4_REV_A_STM32_PATH}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pcd_ex.c
     ${G4_REV_A_STM32_PATH}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_usb.c
@@ -318,11 +329,12 @@ add_executable(synth_G4RevA
     ${G4_REV_A_STM32_PATH}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.c
     ${G4_REV_A_STM32_PATH}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_wwdg.c
     ${G4_REV_A_STM32_PATH}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rng.c
+    ${G4_REV_A_STM32_PATH}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c
     ${G4_REV_A_STM32_PATH}/Core/Src/system_stm32g4xx.c
-    ${G4_REV_A_STM32_PATH}/Middlewares/Third_Party/FatFs/src/diskio.c
-    ${G4_REV_A_STM32_PATH}/Middlewares/Third_Party/FatFs/src/ff.c
-    ${G4_REV_A_STM32_PATH}/Middlewares/Third_Party/FatFs/src/ff_gen_drv.c
-    ${G4_REV_A_STM32_PATH}/Middlewares/Third_Party/FatFs/src/option/syscall.c
+    # ${G4_REV_A_STM32_PATH}/Middlewares/Third_Party/FatFs/src/diskio.c
+    # ${G4_REV_A_STM32_PATH}/Middlewares/Third_Party/FatFs/src/ff.c
+    # ${G4_REV_A_STM32_PATH}/Middlewares/Third_Party/FatFs/src/ff_gen_drv.c
+    # ${G4_REV_A_STM32_PATH}/Middlewares/Third_Party/FatFs/src/option/syscall.c
     ${G4_REV_A_STM32_PATH}/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c
     ${G4_REV_A_STM32_PATH}/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c
     ${G4_REV_A_STM32_PATH}/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c
@@ -333,19 +345,21 @@ add_executable(synth_G4RevA
 set(include_path_G4_RevA_DIRS
     ${include_path_shared_DIRS}
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/drv
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/devices
     ${G4_REV_A_STM32_PATH}/
     ${G4_REV_A_STM32_PATH}/Core/Inc
-    ${G4_REV_A_STM32_PATH}/FATFS/Target
-    ${G4_REV_A_STM32_PATH}/FATFS/App
-    ${G4_REV_A_STM32_PATH}/FATFS/
+    # ${G4_REV_A_STM32_PATH}/FATFS/Target
+    # ${G4_REV_A_STM32_PATH}/FATFS/App
+    # ${G4_REV_A_STM32_PATH}/FATFS/
     ${G4_REV_A_STM32_PATH}/USB_Device/App
     ${G4_REV_A_STM32_PATH}/USB_Device/Target
     ${G4_REV_A_STM32_PATH}/Drivers/STM32G4xx_HAL_Driver/Inc
     ${G4_REV_A_STM32_PATH}/Drivers/STM32G4xx_HAL_Driver/Inc/Legacy
     ${G4_REV_A_STM32_PATH}/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
     ${G4_REV_A_STM32_PATH}/Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc
-    ${G4_REV_A_STM32_PATH}/Middlewares/Third_Party/FatFs/
-    ${G4_REV_A_STM32_PATH}/Middlewares/Third_Party/FatFs/src/
+    # ${G4_REV_A_STM32_PATH}/Middlewares/Third_Party/FatFs/
+    # ${G4_REV_A_STM32_PATH}/Middlewares/Third_Party/FatFs/src/
     ${G4_REV_A_STM32_PATH}/Drivers/CMSIS/Device/ST/STM32G4xx/Include
     ${G4_REV_A_STM32_PATH}/Drivers/CMSIS/Include
     ${G4_REV_A_STM32_PATH}/Drivers/CMSIS/Core/Include
@@ -403,7 +417,7 @@ set(symbols_SYMB_G4_RevA
 target_compile_definitions(synth_G4RevA PUBLIC ${symbols_SYMB_G4_RevA})
 
 # Linker options
-set(G4_RevA_linker_script_SRC    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/STM32G491METx_FLASH.ld)
+set(G4_RevA_linker_script_SRC    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/STM32G491CETx_FLASH.ld)
 target_link_options(synth_G4RevA PRIVATE
     -T${G4_RevA_linker_script_SRC}
     -mthumb

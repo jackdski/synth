@@ -1,8 +1,8 @@
 #ifndef SEQUENCER_HPP_
 #define SEQUENCER_HPP_
 
-#include "wavetables.hpp"
 #include "oscillator.hpp"
+#include "wavetables.h"
 
 #include <stdint.h>
 
@@ -19,19 +19,18 @@ enum class SequencerStepCount
 class SequencerChannel
 {
 public:
-    bool cycleSample = true;
-    Wavetables::Wavetable * wavetable = nullptr;
+    bool cycleSample                 = true;
+    Wavetables::Wavetable *wavetable = nullptr;
 
     void setCycleSampleSetting(bool setting);
-    void setWavetable(Wavetables::Wavetable * newWavetable);
+    void setWavetable(Wavetables::Wavetable *newWavetable);
 };
 
 class SequencerStep
 {
-    private:
-
-    public:
-        bool active = false;
+private:
+public:
+    bool active = false;
 };
 
 class Sequencer
@@ -50,7 +49,7 @@ private:
 
     static constexpr uint32_t maxConcurrentChannelsPerStep = 2U;
 
-    bool stepActive[maxSteps] = { false };
+    bool stepActive[maxSteps] = {false};
     SequencerChannel channels[maxConcurrentChannelsPerStep];
 };
 

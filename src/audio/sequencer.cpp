@@ -3,13 +3,12 @@
 namespace Audio
 {
 
-
 void SequencerChannel::setCycleSampleSetting(bool setting)
 {
     cycleSample = setting;
 }
 
-void SequencerChannel::setWavetable(Wavetables::Wavetable * newWavetable)
+void SequencerChannel::setWavetable(Wavetables::Wavetable *newWavetable)
 {
     if (newWavetable != nullptr)
     {
@@ -29,17 +28,16 @@ void Sequencer::setStepActive(uint32_t step, bool active)
 
 float Sequencer::getSample(void)
 {
-    float sample = 0.0f;
+    float sample   = 0.0f;
     float numSteps = 0.0f;
 
-    for (auto& channels : this->steps)
+    for (auto &channels : this->steps)
     {
         const uint32_t currentWavetableIndex = step.wavetable->getIndex();
         const uint32_t numSamplesInWavetable = step.wavetable->getNumberOfSamples();
 
         bool applySample = cycleSample;
-        applySample |= ((cycleSample == false) &&
-                        (currentWavetableIndex == numSamplesInWavetable));
+        applySample |= ((cycleSample == false) && (currentWavetableIndex == numSamplesInWavetable));
 
         if (applySample && step.active)
         {
@@ -52,5 +50,4 @@ float Sequencer::getSample(void)
     return (sample / numSteps);
 }
 
-} // namespace Audio
-
+}  // namespace Audio

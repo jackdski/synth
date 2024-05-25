@@ -3,11 +3,10 @@
 
 #include <stdint.h>
 
-#include "wavetables.hpp"
-#include "oscillator.hpp"
-#include "lpf.hpp"
+#include "lpf.h"
 #include "note.hpp"
-
+#include "oscillator.h"
+#include "wavetables.h"
 
 #include "main.h"
 

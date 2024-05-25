@@ -26,6 +26,7 @@
 #include "fmac.h"
 #include "i2c.h"
 #include "i2s.h"
+#include "iwdg.h"
 #include "rng.h"
 #include "spi.h"
 #include "tim.h"
@@ -100,25 +101,23 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_DMA_Init();
-  MX_ADC1_Init();
+  MX_FMAC_Init();
   MX_I2C1_Init();
   MX_I2S2_Init();
   MX_SPI1_Init();
-  MX_TIM1_Init();
-  MX_TIM2_Init();
-  MX_TIM3_Init();
-  MX_TIM4_Init();
-  MX_TIM8_Init();
-  MX_WWDG_Init();
-  MX_USB_Device_Init();
-  MX_CORDIC_Init();
-  MX_FMAC_Init();
-  MX_I2C3_Init();
-  MX_SPI3_Init();
   if (MX_FATFS_Init() != APP_OK) {
     Error_Handler();
   }
+  MX_USB_Device_Init();
+  MX_ADC1_Init();
+  MX_CORDIC_Init();
+  MX_TIM2_Init();
+  MX_TIM3_Init();
+  MX_TIM15_Init();
+  MX_TIM6_Init();
+  MX_IWDG_Init();
   MX_RNG_Init();
+  MX_WWDG_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -160,15 +159,17 @@ void SystemClock_Config(void)
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI48|RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI48|RCC_OSCILLATORTYPE_LSI
+                              |RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.LSIState = RCC_LSI_ON;
   RCC_OscInitStruct.HSI48State = RCC_HSI48_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLM = RCC_PLLM_DIV1;
-  RCC_OscInitStruct.PLL.PLLN = 42;
+  RCC_OscInitStruct.PLL.PLLN = 40;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
-  RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
+  RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV8;
   RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
@@ -196,7 +197,7 @@ void SystemClock_Config(void)
 
 /**
   * @brief  Period elapsed callback in non blocking mode
-  * @note   This function is called  when TIM6 interrupt took place, inside
+  * @note   This function is called  when TIM1 interrupt took place, inside
   * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
   * a global variable "uwTick" used as application time base.
   * @param  htim : TIM handle
@@ -207,7 +208,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   /* USER CODE BEGIN Callback 0 */
 
   /* USER CODE END Callback 0 */
-  if (htim->Instance == TIM6) {
+  if (htim->Instance == TIM1) {
     HAL_IncTick();
   }
   /* USER CODE BEGIN Callback 1 */

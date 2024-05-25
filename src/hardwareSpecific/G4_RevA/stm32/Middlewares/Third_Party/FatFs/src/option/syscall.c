@@ -52,8 +52,8 @@ int ff_cre_syncobj (	/* 1:Function succeeded, 0:Could not create the sync object
 #else
 
 #if (osCMSIS < 0x20000U)
-    // osSemaphoreDef(SEM);
-    *sobj = xSemaphoreCreateMutex();
+    osSemaphoreDef(SEM);
+    *sobj = osSemaphoreCreate(osSemaphore(SEM), 1);
 #else
     *sobj = osSemaphoreNew(1, 1, NULL);
 #endif
@@ -81,7 +81,7 @@ int ff_del_syncobj (	/* 1:Function succeeded, 0:Could not delete due to any erro
 #if _USE_MUTEX
     osMutexDelete (sobj);
 #else
-    vSemaphoreDelete (sobj);
+    osSemaphoreDelete (sobj);
 #endif
     return 1;
 }
@@ -105,7 +105,7 @@ int ff_req_grant (	/* 1:Got a grant to access the volume, 0:Could not get a gran
 #if _USE_MUTEX
   if(osMutexWait(sobj, _FS_TIMEOUT) == osOK)
 #else
-  if(xSemaphoreTake(sobj, _FS_TIMEOUT) == pdTRUE)
+  if(osSemaphoreWait(sobj, _FS_TIMEOUT) == osOK)
 #endif
 
 #else
@@ -139,7 +139,7 @@ void ff_rel_grant (
 #if _USE_MUTEX
   osMutexRelease(sobj);
 #else
-  xSemaphoreGive(sobj);
+  osSemaphoreRelease(sobj);
 #endif
 }
 
