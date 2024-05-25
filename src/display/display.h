@@ -3,7 +3,7 @@
 
 #include "features.h"
 
-# if (FEATURE_DISPLAY)
+#if (FEATURE_DISPLAY)
 
 #include <stdint.h>
 
@@ -14,10 +14,10 @@
 
 // #include "ssd1306.hpp"
 
-#define DISPLAY_WIDTH   240U
-#define DISPLAY_HEIGHT  135U
+#define DISPLAY_WIDTH  240U
+#define DISPLAY_HEIGHT 135U
 
 void displayControl(void *pvParameters);
 
-# endif // FEATURE_DISPLAY
+#endif  // FEATURE_DISPLAY
 #endif  // DISPLAY_H_

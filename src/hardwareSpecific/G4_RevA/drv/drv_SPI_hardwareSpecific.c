@@ -5,8 +5,8 @@
 #include "features.h"
 
 #include "i2c.h"
-#include "main.h"
 #include "lvgl.h"
+#include "main.h"
 
 #include "stm32g4xx_hal.h"
 
@@ -14,19 +14,18 @@
 
 /* D E F I N E S */
 
-
 /* P R I V A T E   F U N C T I O N   D E F I N I T I O N S */
 
-static bool drv_SPI_private_writeBytesBus1(drv_SPI_TransactionConfig_S * xfer);
-static bool drv_SPI_private_readBytesBus1(drv_SPI_TransactionConfig_S * xfer);
+static bool drv_SPI_private_writeBytesBus1(drv_SPI_TransactionConfig_S *xfer);
+static bool drv_SPI_private_readBytesBus1(drv_SPI_TransactionConfig_S *xfer);
 
 /* D A T A   D E F I N I T I O N S */
 
 extern SPI_HandleTypeDef hspi1;
-extern lv_color_t displayBuffer1; // [BUFFER_SIZE];
+extern lv_color_t displayBuffer1;  // [BUFFER_SIZE];
 
-static drv_SPI_busConfig_S spiBus1Config[DRV_SPI_BUS_COUNT] =
-{
+// clang-format off
+static drv_SPI_busConfig_S spiBus1Config[DRV_SPI_BUS_COUNT] = {
     [DRV_SPI_BUS_1] =
     {
         .writeBytes = drv_SPI_private_writeBytesBus1,
@@ -34,8 +33,7 @@ static drv_SPI_busConfig_S spiBus1Config[DRV_SPI_BUS_COUNT] =
     },
 };
 
-static drv_SPI_deviceConfig_S spiDeviceConfig[DRV_SPI_DEVICE_COUNT] =
-{
+static drv_SPI_deviceConfig_S spiDeviceConfig[DRV_SPI_DEVICE_COUNT] = {
     [DRV_SPI_DEVICE_ST7789_DISPLAY] =
     {
         .csPin      = DRV_GPIO_CHANNEL_SPI_LCD_CS,
@@ -47,10 +45,11 @@ static drv_SPI_deviceConfig_S spiDeviceConfig[DRV_SPI_DEVICE_COUNT] =
         .frameSize  = 1U,
     },
 };
+// clang-format on
 
 /* P R I V A T E   F U N C T I O N S */
 
-static bool drv_SPI_private_writeBytesBus1(drv_SPI_TransactionConfig_S * xfer)
+static bool drv_SPI_private_writeBytesBus1(drv_SPI_TransactionConfig_S *xfer)
 {
     bool ret = true;
 
@@ -61,7 +60,7 @@ static bool drv_SPI_private_writeBytesBus1(drv_SPI_TransactionConfig_S * xfer)
     return ret;
 }
 
-static bool drv_SPI_private_readBytesBus1(drv_SPI_TransactionConfig_S * xfer)
+static bool drv_SPI_private_readBytesBus1(drv_SPI_TransactionConfig_S *xfer)
 {
     bool ret = true;
 

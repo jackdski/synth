@@ -5,7 +5,6 @@
 #include "math.h"
 #include <stdint.h>
 
-
 // ADSR::ADSR(AdsrMode_E AdsrMode, AdsrSettings_S AdsrSettings)
 // {
 //     mode  = AdsrMode;
@@ -26,7 +25,7 @@
 //     }
 // }
 
-float ADSR_updateValue(ADSR_S * adsr)
+float ADSR_updateValue(ADSR_S *adsr)
 {
     float amplitude = adsr->amplitude;
 
@@ -38,8 +37,8 @@ float ADSR_updateValue(ADSR_S * adsr)
                 amplitude += adsr->data.linearData.step;
                 if (amplitude >= adsr->settings.attack)
                 {
-                    amplitude = adsr->settings.attack;
-                    adsr->stage     = ADSR_STAGE_DECAY;
+                    amplitude   = adsr->settings.attack;
+                    adsr->stage = ADSR_STAGE_DECAY;
                 }
             }
             else if (adsr->stage == ADSR_STAGE_DECAY)
@@ -59,7 +58,9 @@ float ADSR_updateValue(ADSR_S * adsr)
             }
             else if (adsr->stage == ADSR_STAGE_RELEASE)
             {
+                // clang-format off
                 amplitude = MAX(0.0f, amplitude - adsr->data.linearData.step);
+                // clang-format on
             }
             else
             {
@@ -70,13 +71,15 @@ float ADSR_updateValue(ADSR_S * adsr)
         case ADSR_MODE_ASYMPTOTIC:
             if (adsr->stage == ADSR_STAGE_ATTACK)
             {
-                amplitude =
-                    adsr->data.asymptoticData.asymtoticValue * amplitude + (1.0f - adsr->data.asymptoticData.asymtoticValue) * adsr->settings.attack;
+                // clang-format off
+                amplitude = adsr->data.asymptoticData.asymtoticValue * amplitude + (1.0f - adsr->data.asymptoticData.asymtoticValue) * adsr->settings.attack;
+                // clang-format on
             }
             else if ((adsr->stage == ADSR_STAGE_DECAY) || (adsr->stage == ADSR_STAGE_RELEASE))
             {
-                amplitude =
-                    adsr->data.asymptoticData.asymtoticValue * amplitude - (1.0f - adsr->data.asymptoticData.asymtoticValue) * adsr->settings.attack;
+                // clang-format off
+                amplitude = adsr->data.asymptoticData.asymtoticValue * amplitude - (1.0f - adsr->data.asymptoticData.asymtoticValue) * adsr->settings.attack;
+                // clang-format on
             }
             else
             {
@@ -92,7 +95,7 @@ float ADSR_updateValue(ADSR_S * adsr)
     return amplitude;
 }
 
-void ADSR_update(ADSR_S * adsr, const bool noteOff)
+void ADSR_update(ADSR_S *adsr, const bool noteOff)
 {
     float newAmplitude = ADSR_updateValue(adsr);
 
@@ -150,7 +153,7 @@ void ADSR_update(ADSR_S * adsr, const bool noteOff)
     adsr->amplitude = newAmplitude;
 }
 
-void ADSR_setSampleFrequency(ADSR_S * adsr, float frequency)
+void ADSR_setSampleFrequency(ADSR_S *adsr, float frequency)
 {
     adsr->settings.sampleFrequency = frequency;
 }

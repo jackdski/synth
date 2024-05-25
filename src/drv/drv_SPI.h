@@ -4,8 +4,8 @@
 /* I N C L U D E S */
 
 #include "features.h"
-#include <stdint.h>
 #include <stdbool.h>
+#include <stdint.h>
 
 #include "FreeRTOS.h"
 #include "queue.h"
@@ -14,7 +14,7 @@
 
 #include "drv_GPIO.h"
 
-# if (FEATURE_SPI)
+#if (FEATURE_SPI)
 
 /* D E F I N E S */
 
@@ -36,32 +36,37 @@ typedef enum
 
 typedef struct
 {
-    drv_SPI_device_E            spiDevice;
-    drv_SPI_transactionType_E   transactionType;
-    uint8_t                   * txBuffer;
-    uint8_t                   * rxBuffer;
-    uint32_t                    txLength;
-    uint32_t                    rxLength;
-}  drv_SPI_TransactionConfig_S;
+    drv_SPI_device_E spiDevice;
+    drv_SPI_transactionType_E transactionType;
+    uint8_t *txBuffer;
+    uint8_t *rxBuffer;
+    uint32_t txLength;
+    uint32_t rxLength;
+} drv_SPI_TransactionConfig_S;
 
 typedef struct
 {
-    bool (*writeBytes)(drv_SPI_TransactionConfig_S * xfer);
-    bool (*readBytes)(drv_SPI_TransactionConfig_S * xfer);
+    bool (*writeBytes)(drv_SPI_TransactionConfig_S *xfer);
+    bool (*readBytes)(drv_SPI_TransactionConfig_S *xfer);
 } drv_SPI_busConfig_S;
 
-
 typedef struct
 {
-    drv_GPIO_channel_E  csPin;
-    uint8_t             frameSize;
+    drv_GPIO_channel_E csPin;
+    uint8_t frameSize;
 } drv_SPI_deviceConfig_S;
 
 /* P U B L I C   F U N C T I O N S */
 
 void drv_SPI_init(void);
-void drv_SPI_registerMailbox(const drv_SPI_device_E device, drv_SPI_mailbox_E mailbox, uint8_t * txBuffer, uint8_t * rxBuffer);
-void drv_SPI_registerMailbox(const drv_SPI_device_E device, drv_SPI_mailbox_E mailbox, uint8_t * txBuffer, uint8_t * rxBuffer);
+void drv_SPI_registerMailbox(const drv_SPI_device_E device,
+                             drv_SPI_mailbox_E mailbox,
+                             uint8_t *txBuffer,
+                             uint8_t *rxBuffer);
+void drv_SPI_registerMailbox(const drv_SPI_device_E device,
+                             drv_SPI_mailbox_E mailbox,
+                             uint8_t *txBuffer,
+                             uint8_t *rxBuffer);
 
-# endif // FEATURE_SPI
-#endif // DRV_SPI_H_
+#endif  // FEATURE_SPI
+#endif  // DRV_SPI_H_

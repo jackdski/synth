@@ -1,7 +1,6 @@
 #include "main.h"
 #include "features.h"
 
-
 /* I N C L U D E S */
 #include "FreeRTOS.h"
 #include "event_groups.h"
@@ -14,7 +13,6 @@
 #include "misc.h"
 
 /* D E F I N E S */
-
 
 /* P R I V A T E   F U N C T I O N   D E F I N I T I O N S */
 
@@ -32,7 +30,6 @@ int main(void)
     {
         // loop
     }
-
 }
 
 /* P R I V A T E    F U N C T I O N S */
@@ -50,8 +47,6 @@ static void initTask(void *pvParameters)
 #endif
     vTaskDelete(NULL);
 }
-
-
 
 /**
  * @brief  This function is executed in case of error occurrence.

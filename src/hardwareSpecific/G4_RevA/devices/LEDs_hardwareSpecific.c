@@ -8,9 +8,9 @@
 
 /* P R I V A T E   F U N C T I O N   D E F I N I T I O N S */
 
-
 /* D A T A   D E F I N I T I O N S */
 
+// clang-format off
 static LED_channelConfig_S ledChannelConfig[LED_CHANNEL_COUNT] =
 {
     [LED_CHANNEL_BLINKY] =
@@ -19,15 +19,14 @@ static LED_channelConfig_S ledChannelConfig[LED_CHANNEL_COUNT] =
         .gpioConfig = { .gpio = DRV_GPIO_CHANNEL_LED_BLINKY, },
     }
 };
+// clang-format on
 
 extern LED_config_S ledConfig;
-LED_config_S ledConfig =
-{
+LED_config_S ledConfig = {
     .channelConfig = ledChannelConfig,
     .channelCount  = LED_CHANNEL_COUNT,
 };
 
 /* P U B L I C   F U N C T I O N S */
 
-
-#endif // FEATURE_LEDS
+#endif  // FEATURE_LEDS

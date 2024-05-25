@@ -8,7 +8,7 @@
 
 #include <stdint.h>
 
-# if FEATURE_SGTL5000
+#if FEATURE_SGTL5000
 
 /* D E F I N E S */
 
@@ -251,7 +251,6 @@ typedef enum
 #define SGTL5000_BASS_CUTOFF_FREQ_BITMASK                    0x70U
 #define SGTL5000_BASS_ENHANCE_EN_POS                         0U
 
-
 /* T Y P E D E F S */
 
 typedef enum
@@ -330,7 +329,6 @@ typedef enum
     SGTL5000_REGISTER_COUNT,
 } SGTL5000_registers_E;
 
-
 /* P U B L I C   F U N C T I O N S */
 
 bool SGTL5000_init(void);
@@ -341,6 +339,5 @@ void SGTL5000_updateVolume(float volume);
 bool SGTL5000_writeI2C(const uint16_t reg, const uint16_t txData);
 bool SGTL5000_readI2C(const uint16_t reg, uint16_t *rxData);
 
-
-# endif // FEATURE_SGTL5000
-#endif /* SGTL5000_H_ */
+#endif  // FEATURE_SGTL5000
+#endif  /* SGTL5000_H_ */

@@ -11,7 +11,7 @@ typedef struct
     float samplePeriod;
 } LPF_S;
 
-float LPF_update(LPF_S * lpf, float newValue);
-void LPF_reset(LPF_S * lpf);
+float LPF_update(LPF_S *lpf, float newValue);
+void LPF_reset(LPF_S *lpf);
 
 #endif  // LPF_H_

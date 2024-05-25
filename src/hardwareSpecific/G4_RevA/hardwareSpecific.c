@@ -5,9 +5,9 @@
 
 /* I N C L U D E S */
 
+#include "features.h"
 #include "stm32g4xx.h"
 #include "stm32g4xx_hal.h"
-#include "features.h"
 
 #include "LEDs.h"
 
@@ -19,6 +19,7 @@
 #include "dma.h"
 // #include "app_fatfs.h"
 #include "fmac.h"
+#include "gpio.h"
 #include "i2c.h"
 #include "i2s.h"
 #include "iwdg.h"
@@ -27,7 +28,6 @@
 #include "tim.h"
 #include "usb_device.h"
 #include "wwdg.h"
-#include "gpio.h"
 
 /* D E F I N E S */
 
@@ -107,17 +107,17 @@ void hardwareSpecificInit(void)
     // enable FPU
     SCB->CPACR = (SCB->CPACR | ((3UL << (10 * 2)) | (3UL << (11 * 2)))); /* set CP10 and CP11 Full Access */
 
-    drv_GPIO_init(); // MX_GPIO_Init();
+    drv_GPIO_init();  // MX_GPIO_Init();
     MX_DMA_Init();
     MX_FMAC_Init();
-    drv_I2C_init(); // MX_I2C1_Init();
+    drv_I2C_init();  // MX_I2C1_Init();
     MX_I2S2_Init();
     MX_SPI1_Init();
 
 #if (FEATURE_FATFS)
     if (MX_FATFS_Init() != APP_OK)
     {
-    Error_Handler();
+        Error_Handler();
     }
 #endif
 
@@ -135,7 +135,6 @@ void hardwareSpecificInit(void)
     NVIC_SetPriority(SVCall_IRQ_NBR, 0U);
 
     hardwareSpecific_deviceInit();
-
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)

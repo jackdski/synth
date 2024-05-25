@@ -16,7 +16,7 @@
 static lv_disp_draw_buf_t draw_buf;
 static lv_color_t displayBuffer1[BUFFER_SIZE]; /*Declare a buffer for 1/10 screen size*/
 static lv_color_t displayBuffer2[BUFFER_SIZE];
-static lv_disp_t * disp;
+static lv_disp_t *disp;
 static lv_disp_drv_t disp_drv;
 
 static void display_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p);
@@ -84,4 +84,4 @@ void displayControl(void *pvParameters)
     }
 }
 
-#endif // FEATURE_DISPLAY
+#endif  // FEATURE_DISPLAY

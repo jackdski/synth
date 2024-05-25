@@ -4,17 +4,19 @@ import pathlib
 current_dir = os.getcwd()
 source_dir_name = "src"
 
-file_types_to_format = [".cpp", ".hpp"]
+file_types_to_format = [".c", ".h", ".cpp", ".hpp"]
 
 exclude_directories = [
     "build",
     "venv",
     "src/hardwareSpecific/F429Discovery/stm32",
+    "src/hardwareSpecific/F429Discovery/lvgl",
     "src/hardwareSpecific/G4_RevA/stm32",
+    "src/hardwareSpecific/G4_RevA/lvgl",
     "src/CMakeFiles",
     "src/FreeRTOS",
     "src/wavetables",
-    "src/CMakeFiles"
+    "src/CMakeFiles",
 ]
 
 exclude_files = [

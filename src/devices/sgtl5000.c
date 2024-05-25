@@ -10,7 +10,6 @@
 
 /* D E F I N E S */
 
-
 /* T Y P E D E F S */
 
 typedef struct
@@ -73,22 +72,19 @@ typedef struct
 
 /* P R I V A T E   F U N C T I O N   D E F I N I T I O N S */
 
-
 /* D A T A   D E F I N I T I O N S */
 
-SGTL5000_config_S config =
-{
-    .i2cDevice  = DRV_I2C_DEVICE_SGTL5000,
-    .rateMode   = SGTL5000_RATE_MODE_SYS_FS,
-    .sysFs      = SGTL5000_DIG_POWER_SYS_FS_44_1_KHZ,
-    .mclkFreq   = SGTL5000_MCLK_FREQ_256_FS,
+SGTL5000_config_S config = {
+    .i2cDevice      = DRV_I2C_DEVICE_SGTL5000,
+    .rateMode       = SGTL5000_RATE_MODE_SYS_FS,
+    .sysFs          = SGTL5000_DIG_POWER_SYS_FS_44_1_KHZ,
+    .mclkFreq       = SGTL5000_MCLK_FREQ_256_FS,
     .lineOutCurrent = SGTL5000_LINE_OUT_CURRENT_0_54_MA,
 };
 
 static SGTL5000_data_S SGTL5000_data;
 
 /* P R I V A T E   F U N C T I O N S */
-
 
 /* P U B L I C   F U N C T I O N S */
 
@@ -97,7 +93,6 @@ bool SGTL5000_init(void)
     memset(&SGTL5000_data, 0U, sizeof(SGTL5000_data_S));
     return true;
 }
-
 
 bool SGTL5000_configure(void)
 {
@@ -112,15 +107,16 @@ bool SGTL5000_configure(void)
 
     {
         const uint16_t linRegData = ((1U << SGTL5000_VDDC_MAIN_ASSN_POS) | (1U << SGTL5000_VDDC_MAIN_OVRD_POS) |
-                                    SGTL5000_D_PROGRAMMING_GET_VAL_FROM_MV(1000U));
+                                     SGTL5000_D_PROGRAMMING_GET_VAL_FROM_MV(1000U));
 
         initSuccessful &= SGTL5000_writeI2C(SGTL5000_CHIP_LINREG_CTRL_REG, linRegData);
     }
 
     // CHIP_REF_CTRL
     {
-        const uint16_t chipRefData = ((SGTL5000_CHIP_REF_CTRL_VAG_VAL_1_575V << SGTL5000_CHIP_REF_CTRL_VAG_VAL_POS) |
-                                    (SGTL5000_CHIP_REF_CTRL_BIAS_CTRL_pos12_5p << SGTL5000_CHIP_REF_CTRL_BIAS_CTRL_POS));
+        const uint16_t chipRefData =
+            ((SGTL5000_CHIP_REF_CTRL_VAG_VAL_1_575V << SGTL5000_CHIP_REF_CTRL_VAG_VAL_POS) |
+             (SGTL5000_CHIP_REF_CTRL_BIAS_CTRL_pos12_5p << SGTL5000_CHIP_REF_CTRL_BIAS_CTRL_POS));
 
         initSuccessful &= SGTL5000_writeI2C(SGTL5000_CHIP_REF_CTRL_REG, chipRefData);
     }
@@ -137,10 +133,10 @@ bool SGTL5000_configure(void)
     {
         const uint16_t shortCtrlData =
             ((SGTL5000_CHIP_SHORT_CTRL_LVLADJR_125MA << SGTL5000_CHIP_SHORT_CTRL_LVLADJR_POS) |
-            (SGTL5000_CHIP_SHORT_CTRL_LVLADJL_125MA << SGTL5000_CHIP_SHORT_CTRL_LVLADJR_POS) |
-            (SGTL5000_CHIP_SHORT_CTRL_LVLADJC_250MA << SGTL5000_CHIP_SHORT_CTRL_LVLADJC_POS) |
-            (SGTL5000_CHIP_SHORT_CTRL_MODE_LR_ENABLE_MANUAL_RESET << SGTL5000_CHIP_SHORT_CTRL_MODE_LR_POS) |
-            (SGTL5000_CHIP_SHORT_CTRL_MODE_CM_ENABLE_AUTO_RESET << SGTL5000_CHIP_SHORT_CTRL_MODE_CM_POS));
+             (SGTL5000_CHIP_SHORT_CTRL_LVLADJL_125MA << SGTL5000_CHIP_SHORT_CTRL_LVLADJR_POS) |
+             (SGTL5000_CHIP_SHORT_CTRL_LVLADJC_250MA << SGTL5000_CHIP_SHORT_CTRL_LVLADJC_POS) |
+             (SGTL5000_CHIP_SHORT_CTRL_MODE_LR_ENABLE_MANUAL_RESET << SGTL5000_CHIP_SHORT_CTRL_MODE_LR_POS) |
+             (SGTL5000_CHIP_SHORT_CTRL_MODE_CM_ENABLE_AUTO_RESET << SGTL5000_CHIP_SHORT_CTRL_MODE_CM_POS));
 
         initSuccessful &= SGTL5000_writeI2C(SGTL5000_CHIP_SHORT_CTRL_REG, shortCtrlData);
     }
@@ -148,9 +144,9 @@ bool SGTL5000_configure(void)
     // CHIP_ANA_CTRL
     {
         const uint16_t anaCtrlData = ((SGTL5000_MUTE_LINEOUT_MUTE_ENABLED) | (SGTL5000_EN_ZCD_HEADPHONE_ENABLED) |
-                                    (SGTL5000_MUTE_HEADPHONE_OUTPUT_MUTE_ENABLED) |
-                                    (SGTL5000_SELECT_ADC_INPUT_LINEIN << SGTL5000_SELECT_ADC_INPUT_POS) |
-                                    (SGTL5000_EN_ZCD_ADC_ENABLED) | (SGTL5000_MUTE_ADC_MUTE_ENABLED));
+                                      (SGTL5000_MUTE_HEADPHONE_OUTPUT_MUTE_ENABLED) |
+                                      (SGTL5000_SELECT_ADC_INPUT_LINEIN << SGTL5000_SELECT_ADC_INPUT_POS) |
+                                      (SGTL5000_EN_ZCD_ADC_ENABLED) | (SGTL5000_MUTE_ADC_MUTE_ENABLED));
 
         initSuccessful &= SGTL5000_writeI2C(SGTL5000_CHIP_ANA_CTRL_REG, anaCtrlData);
     }
@@ -158,8 +154,8 @@ bool SGTL5000_configure(void)
     {
         const uint16_t digPowerData =
             ((1U << SGTL5000_DIG_POWER_ADC_POWERUP_POS) | (1U << SGTL5000_DIG_POWER_DAC_POWERUP_POS) |
-            (1U << SGTL5000_DIG_POWER_DAP_POWERUP_POS) | (1U << SGTL5000_DIG_POWER_I2S_OUT_POWERUP_POS) |
-            (1U << SGTL5000_DIG_POWER_I2S_IN_POWERUP_POS));
+             (1U << SGTL5000_DIG_POWER_DAP_POWERUP_POS) | (1U << SGTL5000_DIG_POWER_I2S_OUT_POWERUP_POS) |
+             (1U << SGTL5000_DIG_POWER_I2S_IN_POWERUP_POS));
 
         initSuccessful &= SGTL5000_writeI2C(SGTL5000_DIG_POWER_REG, digPowerData);
     }
@@ -184,7 +180,7 @@ bool SGTL5000_configure(void)
     {
         const uint16_t chipClkData =
             ((SGTL5000_RATE_MODE_SYS_FS << SGTL5000_CHIP_CLK_CTRL_RATE_MODE_POS) |  // rate mode
-            (SGTL5000_DIG_POWER_SYS_FS_44_1_KHZ << SGTL5000_CHIP_CLK_CTRL_SYS_FS_POS) | (SGTL5000_MCLK_FREQ_256_FS));
+             (SGTL5000_DIG_POWER_SYS_FS_44_1_KHZ << SGTL5000_CHIP_CLK_CTRL_SYS_FS_POS) | (SGTL5000_MCLK_FREQ_256_FS));
 
         initSuccessful &= SGTL5000_writeI2C(SGTL5000_CHIP_CLK_CTRL_REG, chipClkData);
     }
@@ -207,7 +203,7 @@ bool SGTL5000_configure(void)
         const uint16_t adcDacCtrlConfigData =
             // ((1U << SGTL5000_ADC_DAC_CTRL_VOL_RAMP_EN_POS) | (0U << SGTL5000_ADC_DAC_CTRL_DAC_MUTE_RIGHT_POS) |
             ((0U << SGTL5000_ADC_DAC_CTRL_DAC_MUTE_RIGHT_POS) |
-            (0U << SGTL5000_ADC_DAC_CTRL_DAC_MUTE_LEFT_POS));  // enable volume ramp, disable DAC L+R mute
+             (0U << SGTL5000_ADC_DAC_CTRL_DAC_MUTE_LEFT_POS));  // enable volume ramp, disable DAC L+R mute
 
         initSuccessful &= SGTL5000_writeI2C(SGTL5000_CHIP_ADC_DAC_CTRL_REG, adcDacCtrlConfigData);
     }
@@ -215,8 +211,8 @@ bool SGTL5000_configure(void)
     {
         const uint16_t dacVolConfigData =
             (SGTL5000_DAC_VOL_SET_RIGHT_VOLUME(SGTL5000_DAC_VOL_GET_DB_VALUE(-12.0f)) |
-            SGTL5000_DAC_VOL_SET_LEFT_VOLUME(SGTL5000_DAC_VOL_GET_DB_VALUE(-12.0f)));  // digital gain, 0dB
-        initSuccessful &= SGTL5000_writeI2C(SGTL5000_CHIP_DAC_VOL_REG, dacVolConfigData);    
+             SGTL5000_DAC_VOL_SET_LEFT_VOLUME(SGTL5000_DAC_VOL_GET_DB_VALUE(-12.0f)));  // digital gain, 0dB
+        initSuccessful &= SGTL5000_writeI2C(SGTL5000_CHIP_DAC_VOL_REG, dacVolConfigData);
     }
 
     // ANA_HP_CTRL
@@ -244,7 +240,7 @@ bool SGTL5000_pollRegisters(void)
 {
     bool ret = true;
 
-    SGTL5000_registerData_S * registerData = &SGTL5000_data.registerData;
+    SGTL5000_registerData_S *registerData = &SGTL5000_data.registerData;
 
     ret &= SGTL5000_readI2C(SGTL5000_CHIP_ID_REG, &registerData->chipIdRegister);
     ret &= SGTL5000_readI2C(SGTL5000_DIG_POWER_REG, &registerData->digPowerRegister);
@@ -275,8 +271,7 @@ bool SGTL5000_pollRegisters(void)
 
 bool SGTL5000_writeI2C(const uint16_t reg, const uint16_t txData)
 {
-    uint8_t txBuffer[] =
-    {
+    uint8_t txBuffer[] = {
         (uint8_t)((reg & 0xFF00) >> 8U),
         (uint8_t)(reg & 0x00FF),
         (uint8_t)((txData & 0xFF00) >> 8U),
@@ -288,14 +283,13 @@ bool SGTL5000_writeI2C(const uint16_t reg, const uint16_t txData)
 
 bool SGTL5000_readI2C(const uint16_t reg, uint16_t *rxData)
 {
-    uint8_t txBuffer[] =
-    {
+    uint8_t txBuffer[] = {
         (uint8_t)((reg & 0xFF00) >> 8U),
         (uint8_t)(reg & 0x00FF),
     };
 
-    uint8_t privateRXData[2U] = { 0U };
-    const bool ret = drv_I2C_readBytes(config.i2cDevice, txBuffer, sizeof(txBuffer), privateRXData, 2U);
+    uint8_t privateRXData[2U] = {0U};
+    const bool ret            = drv_I2C_readBytes(config.i2cDevice, txBuffer, sizeof(txBuffer), privateRXData, 2U);
 
     if (rxData != NULL)
     {
@@ -313,4 +307,4 @@ void SGTL5000_updateVolume(float volume)
     (void)SGTL5000_writeI2C(SGTL5000_CHIP_ANA_HP_CTRL_REG, hpConfigData);
 }
 
-#endif // FEATURE_SGTL5000
+#endif  // FEATURE_SGTL5000

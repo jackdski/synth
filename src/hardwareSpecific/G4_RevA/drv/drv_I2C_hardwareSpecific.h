@@ -1,8 +1,8 @@
 #ifndef DRV_I2C_HARDWARE_SPECIFIC_H_
 #define DRV_I2C_HARDWARE_SPECIFIC_H_
 
-#include "features.h"
 #include "drv_I2C.h"
+#include "features.h"
 
 #include "i2c.h"
 #include "main.h"
@@ -19,7 +19,7 @@ typedef enum
     DRV_I2C_DEVICE_LED_DRIVER,
 
     DRV_I2C_DEVICE_COUNT,
-}  drv_I2C_device_E;
+} drv_I2C_device_E;
 
 typedef enum
 {
@@ -28,9 +28,7 @@ typedef enum
     DRV_I2C_BUS_COUNT,
 } drv_I2C_bus_E;
 
-
 void drv_I2C_hardwareSpecific_init(void);
-
 
 #endif  // FEATURE_I2C
 #endif  // DRV_I2C_HARDWARE_SPECIFIC_H_

@@ -19,13 +19,12 @@
 
 typedef struct
 {
-    LED_channel_E   blinkyLEDChannel;
+    LED_channel_E blinkyLEDChannel;
 } MiscConfig_S;
 
 /* P R I V A T E   D A T A   D E F I N I T I O N S */
 
-static MiscConfig_S miscConfig =
-{
+static MiscConfig_S miscConfig = {
     .blinkyLEDChannel = LED_CHANNEL_BLINKY,
 };
 
@@ -38,4 +37,4 @@ void misc10HzTask(void *pvParameters)
     }
 }
 
-#endif // FEATURE_MISC
+#endif  // FEATURE_MISC

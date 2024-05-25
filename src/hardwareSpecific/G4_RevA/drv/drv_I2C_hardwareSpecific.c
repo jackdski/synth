@@ -10,23 +10,23 @@
 
 /* D E F I N E S */
 
-#define SGTL5000_I2C_ADDRESS            (0x0A << 1U)  // or 0x2A
-#define PCA9685PW_I2C_ADDRESS(aValue)   ((0x40 | aValue) << 1U)  // or 0x80 | R/W
-#define PCA9555DB_I2C_ADDRESS(aValue)   ((0x20 | aValue) << 1U)  // or 0x40 | R/W
-
+#define SGTL5000_I2C_ADDRESS          (0x0A << 1U)             // or 0x2A
+#define PCA9685PW_I2C_ADDRESS(aValue) ((0x40 | aValue) << 1U)  // or 0x80 | R/W
+#define PCA9555DB_I2C_ADDRESS(aValue) ((0x20 | aValue) << 1U)  // or 0x40 | R/W
 
 /* P R I V A T E   F U N C T I O N   D E F I N I T I O N S */
 
-static bool drv_I2C_private_writeBytesBus0(drv_I2C_TransactionConfig_S * xfer);
-static bool drv_I2C_private_readBytesBus0(drv_I2C_TransactionConfig_S * xfer);
+static bool drv_I2C_private_writeBytesBus0(drv_I2C_TransactionConfig_S *xfer);
+static bool drv_I2C_private_readBytesBus0(drv_I2C_TransactionConfig_S *xfer);
 static bool drv_I2C_private_isBusyBus0(void);
 
 /* D A T A   D E F I N I T I O N S */
 
 extern I2C_HandleTypeDef hi2c1;
 
-static drv_I2C_busConfig_S i2cBusConfig[DRV_I2C_BUS_COUNT] =
-{
+// clang-format off
+
+static drv_I2C_busConfig_S i2cBusConfig[DRV_I2C_BUS_COUNT] = {
     [DRV_I2C_BUS_1] =
     {
         .writeBytes = drv_I2C_private_writeBytesBus0,
@@ -35,8 +35,7 @@ static drv_I2C_busConfig_S i2cBusConfig[DRV_I2C_BUS_COUNT] =
     },
 };
 
-static drv_I2C_deviceConfig_S i2cDeviceConfig[DRV_I2C_DEVICE_COUNT] =
-{
+static drv_I2C_deviceConfig_S i2cDeviceConfig[DRV_I2C_DEVICE_COUNT] = {
     [DRV_I2C_DEVICE_SGTL5000] =
     {
         .deviceAddress = SGTL5000_I2C_ADDRESS,
@@ -54,16 +53,13 @@ static drv_I2C_deviceConfig_S i2cDeviceConfig[DRV_I2C_DEVICE_COUNT] =
     },
 };
 
-const drv_I2C_config_S drv_I2C_config =
-{
-    .busConfig = i2cBusConfig,
-    .deviceConfig = i2cDeviceConfig
-};
+// clang-format on
 
+const drv_I2C_config_S drv_I2C_config = {.busConfig = i2cBusConfig, .deviceConfig = i2cDeviceConfig};
 
 /* P R I V A T E   F U N C T I O N S */
 
-static bool drv_I2C_private_writeBytesBus0(drv_I2C_TransactionConfig_S * xfer)
+static bool drv_I2C_private_writeBytesBus0(drv_I2C_TransactionConfig_S *xfer)
 {
     bool ret = true;
 
@@ -76,7 +72,7 @@ static bool drv_I2C_private_writeBytesBus0(drv_I2C_TransactionConfig_S * xfer)
     return ret;
 }
 
-static bool drv_I2C_private_readBytesBus0(drv_I2C_TransactionConfig_S * xfer)
+static bool drv_I2C_private_readBytesBus0(drv_I2C_TransactionConfig_S *xfer)
 {
     bool ret = true;
 
@@ -123,4 +119,4 @@ void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *hi2c)
     }
 }
 
-#endif // I2C_ASYNC
+#endif  // I2C_ASYNC

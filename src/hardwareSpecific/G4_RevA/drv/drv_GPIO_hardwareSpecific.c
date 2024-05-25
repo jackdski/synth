@@ -18,8 +18,9 @@ typedef struct
 
 static drv_GPIO_hardwareSpecific_data_S drv_GPIO_hardwareSpecific_data;
 
-static drv_GPIO_channelConfig_S drv_GPIO_channelConfig[DRV_GPIO_CHANNEL_COUNT] =
-{
+// clang-format off
+
+static drv_GPIO_channelConfig_S drv_GPIO_channelConfig[DRV_GPIO_CHANNEL_COUNT] = {
     [DRV_GPIO_CHANNEL_SPI_SD_CARD_CS] =
     {
         .gpio       = GPIOB,
@@ -78,31 +79,31 @@ static drv_GPIO_channelConfig_S drv_GPIO_channelConfig[DRV_GPIO_CHANNEL_COUNT] =
     },
 };
 
-static drv_GPIO_config_S drv_GPIO_config =
-{
+// clang-format on
+
+static drv_GPIO_config_S drv_GPIO_config = {
     .channelConfig = drv_GPIO_channelConfig,
     .channelCount  = DRV_GPIO_CHANNEL_COUNT,
 };
 
 /* P U B L I C   F U N C T I O N S */
 
-
 void drv_GPIO_setOutput(drv_GPIO_channel_E channel, drv_GPIO_state_E state)
 {
-    const drv_GPIO_channelConfig_S * channelConfig = &drv_GPIO_config.channelConfig[channel];
+    const drv_GPIO_channelConfig_S *channelConfig = &drv_GPIO_config.channelConfig[channel];
     HAL_GPIO_WritePin(channelConfig->gpio, channelConfig->pin, (GPIO_PinState)state);
 }
 
 void drv_GPIO_toggleOutput(drv_GPIO_channel_E channel)
 {
-    const drv_GPIO_channelConfig_S * channelConfig = &drv_GPIO_config.channelConfig[channel];
+    const drv_GPIO_channelConfig_S *channelConfig = &drv_GPIO_config.channelConfig[channel];
     HAL_GPIO_TogglePin(channelConfig->gpio, channelConfig->pin);
 }
 
 drv_GPIO_state_E drv_GPIO_getInput(drv_GPIO_channel_E channel)
 {
-    drv_GPIO_hardwareSpecific_channelData_S * channelData = &drv_GPIO_hardwareSpecific_data.channelData[channel];
-    drv_GPIO_channelConfig_S * channelConfig = &drv_GPIO_config.channelConfig[channel];
+    drv_GPIO_hardwareSpecific_channelData_S *channelData = &drv_GPIO_hardwareSpecific_data.channelData[channel];
+    drv_GPIO_channelConfig_S *channelConfig              = &drv_GPIO_config.channelConfig[channel];
 
     if (channelConfig->type == DRV_GPIO_TYPE_INPUT)
     {
@@ -123,8 +124,8 @@ void drv_GPIO_update(void)
 {
     for (drv_GPIO_channel_E channel = (drv_GPIO_channel_E)0U; channel < DRV_GPIO_CHANNEL_COUNT; channel++)
     {
-        drv_GPIO_hardwareSpecific_channelData_S * channelData = &drv_GPIO_hardwareSpecific_data.channelData[channel];
-        drv_GPIO_channelConfig_S * channelConfig = &drv_GPIO_config.channelConfig[channel];
+        drv_GPIO_hardwareSpecific_channelData_S *channelData = &drv_GPIO_hardwareSpecific_data.channelData[channel];
+        drv_GPIO_channelConfig_S *channelConfig              = &drv_GPIO_config.channelConfig[channel];
 
         if (channelConfig->type == DRV_GPIO_TYPE_INPUT)
         {
