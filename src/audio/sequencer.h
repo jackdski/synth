@@ -1,20 +1,17 @@
 #ifndef SEQUENCER_HPP_
 #define SEQUENCER_HPP_
 
-#include "oscillator.hpp"
+#include "oscillator.h"
 #include "wavetables.h"
 
 #include <stdint.h>
 
-namespace Audio
-{
-
-enum class SequencerStepCount
+typedef enum
 {
     SEQUENCER_STEP_COUNT_4  = 4U,
     SEQUENCER_STEP_COUNT_8  = 8U,
     SEQUENCER_STEP_COUNT_16 = 16U,
-};
+} SequencerStepCount_E;
 
 class SequencerChannel
 {
@@ -52,7 +49,6 @@ private:
     bool stepActive[maxSteps] = {false};
     SequencerChannel channels[maxConcurrentChannelsPerStep];
 };
-
 }
 
 #endif  // SEQUENCER_HPP_

@@ -1,7 +1,17 @@
 #include "oscillator.h"
+
+/* I N C L U D E S */
+
+#include "constants.h"
 #include "wavetables.h"
 
 #include <stdint.h>
+
+/* D E F I N E S */
+
+/* P R I V A T E   F U N C T I O N   D E F I N I T I O N S */
+
+/* T Y P E D E F S */
 
 typedef struct
 {
@@ -14,6 +24,8 @@ typedef struct
     OscillatorChannelData_S channelData[OSCILLATOR_COUNT];
 } OscillatorData_S;
 
+/* D A T A   D E F I N I T I O N S */
+
 static OscillatorChannelConfig_S oscillatorChannelConfig[OSCILLATOR_COUNT];
 
 static OscillatorConfig_S oscillatorConfig = {
@@ -21,6 +33,16 @@ static OscillatorConfig_S oscillatorConfig = {
 };
 
 static OscillatorData_S oscillatorData;
+
+/* P R I V A T E   F U N C T I O N S */
+
+/* P U B L I C   F U N C T I O N S */
+
+void oscillator_init(const Oscillator_E oscillator, const WavetableType_E wavetableType, const float frequency)
+{
+    oscillatorConfig.channelConfig[oscillator].wavetableType = wavetableType;
+    oscillator_setFrequency(oscillator, frequency);
+}
 
 float oscillator_getSample(Oscillator_E oscillator)
 {
@@ -37,7 +59,6 @@ float oscillator_getSample(Oscillator_E oscillator)
         }
 
         sample = wavetable_getSample(channelConfig->wavetableType, channelData->currentSampleIndex);
-        sample *= channelConfig->amplitude;
     }
 
     return sample;
@@ -49,14 +70,14 @@ void oscillator_selectWavetable(const Oscillator_E oscillator, WavetableType_E w
     channelConfig->wavetableType             = wavetableType;
 }
 
-void oscillator_setFrequency(const Oscillator_E oscillator, uint32_t newFrequency)
+void oscillator_setFrequency(const Oscillator_E oscillator, float newFrequency)
 {
     OscillatorChannelData_S *channelData     = &oscillatorData.channelData[oscillator];
     OscillatorChannelConfig_S *channelConfig = &oscillatorConfig.channelConfig[oscillator];
 
     channelConfig->frequency        = newFrequency;
     channelData->wavetableSteps     = oscillator_getWavetableSteps(oscillator);
-    channelData->currentSampleIndex = 0U;  // TODO: maybe delete?
+    channelData->currentSampleIndex = 0U;
 }
 
 float oscillator_getFrequency(const Oscillator_E oscillator)
@@ -69,6 +90,6 @@ uint32_t oscillator_getWavetableSteps(const Oscillator_E oscillator)
 {
     OscillatorChannelConfig_S *channelConfig = &oscillatorConfig.channelConfig[oscillator];
 
-    const uint32_t wavelengthsPerSecond = (channelConfig->sampleFrequency / channelConfig->frequency);
-    return (WAVETABLE_NUM_SAMPLES * wavelengthsPerSecond) / channelConfig->sampleFrequency;
+    const uint32_t wavelengthsPerSecond = (uint32_t)(SYNTH_SAMPLE_FREQUENCY / channelConfig->frequency);
+    return (WAVETABLE_NUM_SAMPLES * wavelengthsPerSecond) / SYNTH_SAMPLE_FREQUENCY;
 }

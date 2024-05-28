@@ -10,9 +10,15 @@
 #include "stm32g4xx_hal.h"
 
 #include "LEDs.h"
+#include "PCA9555.h"
+#include "button.h"
+#include "knob.h"
+#include "sgtl5000.h"
 
 #include "drv_GPIO.h"
 #include "drv_I2C.h"
+#include "drv_SPI.h"
+#include "drv_encoder.h"
 
 #include "adc.h"
 #include "cordic.h"
@@ -92,8 +98,29 @@ void SystemClock_Config(void)
 
 static void hardwareSpecific_deviceInit(void)
 {
+#if FEATURE_PCA9555
+    extern PCA9555_config_S PCA9555_config;
+    PCA9555_init(&PCA9555_config);
+#endif
+
+#if FEATURE_LEDS
     extern LED_config_S ledConfig;
     LED_init(&ledConfig);
+#endif
+
+#if FEATURE_BUTTON
+    extern Button_config_S buttonConfig;
+    Button_init(&buttonConfig);
+#endif
+
+#if FEATURE_KNOB
+    extern Knob_config_S Knob_config;
+    Knob_init(&Knob_config);
+#endif
+
+#if FEATURE_SGTL5000
+    SGTL5000_init();
+#endif
 }
 
 /* P U B L I C   F U N C T I O N S */
@@ -124,8 +151,7 @@ void hardwareSpecificInit(void)
     // MX_USB_Device_Init();
     MX_ADC1_Init();
     MX_CORDIC_Init();
-    MX_TIM2_Init();
-    MX_TIM3_Init();
+    drv_encoder_init();
     MX_TIM15_Init();
     MX_TIM6_Init();
     MX_IWDG_Init();

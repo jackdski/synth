@@ -60,9 +60,12 @@ typedef struct
 
 /* P U B L I C   F U N C T I O N S */
 
+void PCA9555_init(PCA9555_config_S *config);
 void PCA9555_configure(void);
 void PCA9555_updateOutputs(void);
 void PCA9555_updateInputs(void);
+
+bool PCA9555_getState(const PCA9555_channel_E channel);
 
 #endif  // FEATURE_PCA9555
 #endif  /* PCA9555_H_ */

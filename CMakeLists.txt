@@ -12,7 +12,6 @@ set(CPP_FLAGS                       "${FLAGS} -fno-rtti -fno-exceptions -fno-thr
 
 set(CMAKE_C_FLAGS                   ${FLAGS})
 set(CMAKE_CXX_FLAGS                 ${CPP_FLAGS})
-
 set(CMAKE_C_COMPILER                ${TOOLCHAIN_PREFIX}gcc)
 set(CMAKE_ASM_COMPILER              ${CMAKE_C_COMPILER})
 set(CMAKE_CXX_COMPILER              ${TOOLCHAIN_PREFIX}g++)
@@ -62,21 +61,24 @@ set(sources_shared_SRCS
     ${PROJ_PATH}/misc/misc.c
     ${PROJ_PATH}/drv/drv_I2C.c
     ${PROJ_PATH}/drv/drv_GPIO.c
+    ${PROJ_PATH}/drv/drv_encoder.c
     ${PROJ_PATH}/devices/LEDs.c
     ${PROJ_PATH}/devices/PCA9555.c
-    # ${PROJ_PATH}/devices/knob.cpp
+    ${PROJ_PATH}/devices/button.c
+    ${PROJ_PATH}/devices/knob.c
     ${PROJ_PATH}/devices/sgtl5000.c
     ${PROJ_PATH}/devices/ST7789.c
     ${PROJ_PATH}/display/display.c
     ${PROJ_PATH}/wavetables/wavetables.c
     ${PROJ_PATH}/audio/effects/lpf.c
     ${PROJ_PATH}/audio/oscillator.c
+    ${PROJ_PATH}/audio/note_info.c
+    ${PROJ_PATH}/audio/keyboard.c
     ${PROJ_PATH}/audio/adsr.c
-    # ${PROJ_PATH}/audio/note.cpp
-    # ${PROJ_PATH}/audio/audio.cpp
+    ${PROJ_PATH}/audio/note.c
+    ${PROJ_PATH}/audio/audio.c
     # ${PROJ_PATH}/audio/sequencer.cpp
-    # ${PROJ_PATH}/audio/mixer.cpp
-    # ${PROJ_PATH}/utils/util_rollingBuffer.cpp
+    ${PROJ_PATH}/audio/mixer.c
     ${PROJ_PATH}/utils/cpu_utils.c
     ${FREERTOS_PATH}/croutine.c
     ${FREERTOS_PATH}/event_groups.c
@@ -275,9 +277,14 @@ set(G4_REV_A_STM32_PATH ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32)
 add_executable(synth_G4RevA
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/startup_stm32g491xx.s
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/hardwareSpecific.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/audio/audio_hardwareSpecific.c
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/drv/drv_GPIO_hardwareSpecific.c
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/drv/drv_I2C_hardwareSpecific.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/drv/drv_encoder_hardwareSpecific.c
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/devices/LEDs_hardwareSpecific.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/devices/button_hardwareSpecific.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/devices/knob_hardwareSpecific.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/devices/PCA9555_hardwareSpecific.c
     ${G4_REV_A_STM32_PATH}/Core/Src/adc.c
     ${G4_REV_A_STM32_PATH}/Core/Src/cordic.c
     ${G4_REV_A_STM32_PATH}/Core/Src/dma.c

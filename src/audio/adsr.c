@@ -1,31 +1,23 @@
 #include "adsr.h"
 
+/* I N C L U D E S */
+
 #include "Utils.h"
 
 #include "math.h"
 #include <stdint.h>
 
-// ADSR::ADSR(AdsrMode_E AdsrMode, AdsrSettings_S AdsrSettings)
-// {
-//     mode  = AdsrMode;
-//     stage = ADSR_STAGE_ATTACK;
+/* D E F I N E S */
 
-//     settings.attack          = MAX(0.0f, MIN(1.0f, AdsrSettings.attack));
-//     settings.decay           = MAX(0.0f, MIN(1.0f, AdsrSettings.decay));
-//     settings.sustain         = MAX(0.0f, MIN(1.0f, AdsrSettings.sustain));
-//     settings.release         = MAX(0.0f, MIN(1.0f, AdsrSettings.release));
-//     settings.sampleFrequency = MAX(0.0f, AdsrSettings.sampleFrequency);
+/* P R I V A T E   F U N C T I O N   D E F I N I T I O N S */
 
-//     if (mode == AdsrMode_E::ADSR_MODE_ASYMPTOTIC and (settings.sampleFrequency > 0.0f))
-//     {
-//         const float tau              = 2.0e-1;  // make configurable
-//         const float sample_period    = (1.0f / settings.sampleFrequency);
-//         const float exponent         = ((-1.0f * sample_period) / tau);
-//         asymtoticData.asymtoticValue = exp(exponent);
-//     }
-// }
+static float ADSR_private_updateAmplitude(ADSR_S *adsr, const bool noteOff);
 
-float ADSR_updateValue(ADSR_S *adsr)
+/* D A T A   D E F I N I T I O N S */
+
+/* P R I V A T E   F U N C T I O N S */
+
+static float ADSR_private_updateAmplitude(ADSR_S *adsr, const bool noteOff)
 {
     float amplitude = adsr->amplitude;
 
@@ -37,30 +29,22 @@ float ADSR_updateValue(ADSR_S *adsr)
                 amplitude += adsr->data.linearData.step;
                 if (amplitude >= adsr->settings.attack)
                 {
-                    amplitude   = adsr->settings.attack;
-                    adsr->stage = ADSR_STAGE_DECAY;
+                    amplitude = adsr->settings.attack;
                 }
             }
             else if (adsr->stage == ADSR_STAGE_DECAY)
             {
                 amplitude -= adsr->data.linearData.step;
-                if (amplitude < adsr->settings.decay)
-                {
-                    adsr->stage = ADSR_STAGE_SUSTAIN;
-                }
-            }
-            else if (adsr->stage == ADSR_STAGE_SUSTAIN)
-            {
-                if (adsr->settings.sampleFrequency == 0.0f)
-                {
-                    adsr->stage = ADSR_STAGE_RELEASE;
-                }
             }
             else if (adsr->stage == ADSR_STAGE_RELEASE)
             {
                 // clang-format off
                 amplitude = MAX(0.0f, amplitude - adsr->data.linearData.step);
                 // clang-format on
+            }
+            else if (adsr->stage == ADSR_STAGE_SUSTAIN)
+            {
+                // no change
             }
             else
             {
@@ -95,9 +79,11 @@ float ADSR_updateValue(ADSR_S *adsr)
     return amplitude;
 }
 
-void ADSR_update(ADSR_S *adsr, const bool noteOff)
+/* P U B L I C   F U N C T I O N S */
+
+float ADSR_update(ADSR_S *adsr, const bool noteOff)
 {
-    float newAmplitude = ADSR_updateValue(adsr);
+    float newAmplitude = ADSR_private_updateAmplitude(adsr, noteOff);
 
     switch (adsr->stage)
     {
@@ -151,9 +137,10 @@ void ADSR_update(ADSR_S *adsr, const bool noteOff)
     }
 
     adsr->amplitude = newAmplitude;
+    return adsr->amplitude;
 }
 
-void ADSR_setSampleFrequency(ADSR_S *adsr, float frequency)
+void ADSR_setNoteOn(ADSR_S *adsr, bool noteOn)
 {
-    adsr->settings.sampleFrequency = frequency;
+    adsr->settings.noteOn = noteOn;
 }

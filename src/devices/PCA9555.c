@@ -34,6 +34,14 @@ static PCA9555_data_S data;
 
 /* P U B L I C   F U N C T I O N S */
 
+void PCA9555_init(PCA9555_config_S *config)
+{
+    if (config != NULL)
+    {
+        data.config = config;
+    }
+}
+
 void PCA9555_configure(void)
 {
     const PCA9555_config_S *config = data.config;
@@ -97,6 +105,12 @@ void PCA9555_updateInputs(void)
             pinData->actualState       = (rxBuffer[1U] && BIT_U8((channel - PCA9555_PORT1_START_PIN)));
         }
     }
+}
+
+bool PCA9555_getState(const PCA9555_channel_E channel)
+{
+    const PCA9555_pinData_S *pinData = &data.pinData[channel];
+    return pinData->actualState;
 }
 
 #endif  // FEATURE_PCA9555

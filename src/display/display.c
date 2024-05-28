@@ -47,7 +47,7 @@ static void display_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t
 
 void display_init(void)
 {
-    ST7789_init();
+    // ST7789_init();
 
     lv_disp_draw_buf_init(&draw_buf, displayBuffer1, displayBuffer2, BUFFER_SIZE);
     lv_disp_drv_init(&disp_drv);

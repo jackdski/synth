@@ -9,6 +9,7 @@
 
 #include "hardwareSpecific.h"
 
+#include "audio.h"
 #include "display.h"
 #include "misc.h"
 
@@ -30,6 +31,7 @@ int main(void)
     {
         // loop
     }
+    // ITM->PORT[]
 }
 
 /* P R I V A T E    F U N C T I O N S */
@@ -39,7 +41,7 @@ static void initTask(void *pvParameters)
     (void)xTaskCreate(misc10HzTask, "misc10Hz", configMINIMAL_STACK_SIZE, (void *)NULL, 3U, NULL);
 
 #if (FEATURE_MIXER)
-    (void)xTaskCreate(runMixerControl, "mixerControl", configMINIMAL_STACK_SIZE, (void *)NULL, 1U, NULL);
+    (void)xTaskCreate(audioTask, "audioTask", configMINIMAL_STACK_SIZE, (void *)NULL, 1U, NULL);
 #endif
 
 #if (FEATURE_DISPLAY)

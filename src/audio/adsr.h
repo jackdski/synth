@@ -14,6 +14,9 @@
 
 /* D E F I N E S */
 
+#define ADSR_MAX_AMPLITUDE 1.0F
+#define ADSR_MIN_AMPLITUDE 0.0F
+
 /* T Y P E D E F S */
 
 typedef enum
@@ -32,11 +35,11 @@ typedef enum
 
 typedef struct
 {
-    float attack;           //         = 0.5f;
-    float decay;            //         = 0.5f;
-    float sustain;          //         = 0.5f;
-    float release;          //         = 0.5f;
-    float sampleFrequency;  //  = 0.0f;
+    float attack;
+    float decay;
+    float sustain;
+    float release;
+    bool noteOn;
 } AdsrSettings_S;
 
 typedef struct
@@ -69,8 +72,7 @@ typedef struct
 
 /* P U B L I C   F U N C T I O N S */
 
-float ADSR_updateValue(ADSR_S *adsr);
-void ADSR_update(ADSR_S *adsr, const bool noteOff);
+float ADSR_update(ADSR_S *adsr, const bool noteOff);
 void ADSR_setSampleFrequency(ADSR_S *adsr, float frequency);
 
 #endif

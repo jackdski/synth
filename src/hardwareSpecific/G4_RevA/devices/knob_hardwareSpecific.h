@@ -1,0 +1,11 @@
+#ifndef KNOB_HARDWARE_SPECIFIC_H
+#define KNOB_HARDWARE_SPECIFIC_H
+
+typedef enum
+{
+    KNOB_CHANNEL_0,
+    KNOB_CHANNEL_1,
+    KNOB_CHANNEL_COUNT
+} Knob_channel_E;
+
+#endif  // KNOB_HARDWARE_SPECIFIC_H

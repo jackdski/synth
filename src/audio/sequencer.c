@@ -1,7 +1,4 @@
-#include "sequencer.hpp"
-
-namespace Audio
-{
+#include "sequencer.h"
 
 void SequencerChannel::setCycleSampleSetting(bool setting)
 {
@@ -49,5 +46,3 @@ float Sequencer::getSample(void)
 
     return (sample / numSteps);
 }
-
-}  // namespace Audio

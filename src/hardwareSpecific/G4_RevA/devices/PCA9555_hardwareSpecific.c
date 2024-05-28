@@ -19,7 +19,7 @@ static PCA9555_pinConfig_S PCA9555_pinConfig[PCA9555_CHANNEL_COUNT] = {
     [PCA9555_CHANNEL_15] = {.pinType = PCA9555_PIN_TYPE_INPUT},
 };
 
-static PCA9555_config_S PCA9555_config = {
+PCA9555_config_S PCA9555_config = {
     .i2cDevice      = DRV_I2C_DEVICE_PORT_EXPANDER,
     .pinConfig      = PCA9555_pinConfig,
     .pinConfigCount = (uint32_t)(PCA9555_CHANNEL_COUNT),
