@@ -5,6 +5,8 @@
 #include "Utils.h"
 #include "features.h"
 
+#if FEATURE_I2C
+
 #include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
@@ -188,3 +190,5 @@ bool drv_I2C_startNextTransactionISR(const drv_I2C_bus_E i2cBus)
     return ret;
 }
 #endif
+
+#endif  // FEATURE_I2C

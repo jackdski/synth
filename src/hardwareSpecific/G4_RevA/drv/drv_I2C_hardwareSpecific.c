@@ -4,6 +4,8 @@
 
 #include "features.h"
 
+#if FEATURE_I2C
+
 #include "i2c.h"
 #include "main.h"
 #include "stm32g4xx_hal.h"
@@ -11,7 +13,7 @@
 /* D E F I N E S */
 
 #define SGTL5000_I2C_ADDRESS          (0x0A << 1U)             // or 0x2A
-#define PCA9685PW_I2C_ADDRESS(aValue) ((0x40 | aValue) << 1U)  // or 0x80 | R/W
+#define PCA9685PW_I2C_ADDRESS         ((0x40) << 1U)           // or 0x80 | R/W
 #define PCA9555DB_I2C_ADDRESS(aValue) ((0x20 | aValue) << 1U)  // or 0x40 | R/W
 
 /* P R I V A T E   F U N C T I O N   D E F I N I T I O N S */
@@ -48,7 +50,7 @@ static drv_I2C_deviceConfig_S i2cDeviceConfig[DRV_I2C_DEVICE_COUNT] = {
     },
     [DRV_I2C_DEVICE_LED_DRIVER] =
     {
-        .deviceAddress = PCA9685PW_I2C_ADDRESS(0U),
+        .deviceAddress = PCA9685PW_I2C_ADDRESS,
         .bus           = DRV_I2C_BUS_1,
     },
 };
@@ -65,7 +67,7 @@ static bool drv_I2C_private_writeBytesBus0(drv_I2C_TransactionConfig_S *xfer)
 
     const uint16_t deviceAddress = i2cDeviceConfig[xfer->i2cDevice].deviceAddress;
 
-    if (HAL_I2C_Master_Transmit(&hi2c1, deviceAddress, xfer->txBuffer, xfer->txLength, 5U) != HAL_OK)
+    if (HAL_I2C_Master_Transmit(&hi2c1, deviceAddress, xfer->txBuffer, xfer->txLength, 10U) != HAL_OK)
     {
         ret = false;
     }
@@ -74,19 +76,20 @@ static bool drv_I2C_private_writeBytesBus0(drv_I2C_TransactionConfig_S *xfer)
 
 static bool drv_I2C_private_readBytesBus0(drv_I2C_TransactionConfig_S *xfer)
 {
-    bool ret = true;
 
     const uint16_t deviceAddress = i2cDeviceConfig[xfer->i2cDevice].deviceAddress;
-
-    if (HAL_I2C_Master_Transmit(&hi2c1, deviceAddress, xfer->txBuffer, sizeof(xfer->txLength), 5U) == HAL_OK)
+    uint16_t memAddress          = 0U;
+    if (xfer->txLength == 2U)
     {
-        ret = (HAL_I2C_Master_Receive(&hi2c1, deviceAddress, xfer->rxBuffer, sizeof(xfer->rxLength), 5U) == HAL_OK);
+        memAddress = (xfer->txBuffer[1U] << 8U) | (xfer->txBuffer[0U]);
     }
     else
     {
-        ret = false;
+        memAddress = *xfer->txBuffer;
     }
-    return ret;
+
+    return (HAL_I2C_Mem_Read(&hi2c1, deviceAddress, memAddress, xfer->txLength, xfer->rxBuffer, xfer->rxLength, 10U) ==
+            HAL_OK);
 }
 
 static bool drv_I2C_private_isBusyBus0(void)
@@ -120,3 +123,5 @@ void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *hi2c)
 }
 
 #endif  // I2C_ASYNC
+
+#endif  // FEATURE_I2C

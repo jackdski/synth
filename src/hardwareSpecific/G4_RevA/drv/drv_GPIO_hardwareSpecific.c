@@ -2,6 +2,8 @@
 
 #include <stdbool.h>
 
+#if FEATURE_GPIO
+
 /* T Y P E D E F S */
 
 typedef struct
@@ -54,7 +56,7 @@ static drv_GPIO_channelConfig_S drv_GPIO_channelConfig[DRV_GPIO_CHANNEL_COUNT] =
         .gpio       = GPIOB,
         .pin        = GPIO_PIN_6,
         .type       = DRV_GPIO_TYPE_OUTPUT,
-        .activeLow  = true,
+        .activeLow  = false,
     },
     [DRV_GPIO_CHANNEL_LCD_RST] =
     {
@@ -140,3 +142,5 @@ void drv_GPIO_update(void)
         }
     }
 }
+
+#endif  // FEATURE_GPIO

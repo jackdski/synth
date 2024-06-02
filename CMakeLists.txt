@@ -64,6 +64,7 @@ set(sources_shared_SRCS
     ${PROJ_PATH}/drv/drv_encoder.c
     ${PROJ_PATH}/devices/LEDs.c
     ${PROJ_PATH}/devices/PCA9555.c
+    ${PROJ_PATH}/devices/PCA9685.c
     ${PROJ_PATH}/devices/button.c
     ${PROJ_PATH}/devices/knob.c
     ${PROJ_PATH}/devices/sgtl5000.c
@@ -285,6 +286,7 @@ add_executable(synth_G4RevA
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/devices/button_hardwareSpecific.c
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/devices/knob_hardwareSpecific.c
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/devices/PCA9555_hardwareSpecific.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/devices/PCA9685_hardwareSpecific.c
     ${G4_REV_A_STM32_PATH}/Core/Src/adc.c
     ${G4_REV_A_STM32_PATH}/Core/Src/cordic.c
     ${G4_REV_A_STM32_PATH}/Core/Src/dma.c

@@ -9,13 +9,16 @@
 
 #include "LEDs_hardwareSpecific.h"
 
+#include "PCA9685.h"
 #include "drv_GPIO.h"
-// #include "PCA9685.h"
 
 #include <stdbool.h>
 #include <stdint.h>
 
 /* D E F I N E S */
+
+#define LED_BRIGHTNESS_MIN_VALUE 0.0f
+#define LED_BRIGHTNESS_MAX_VALUE 1.0f
 
 /* T Y P E D E F S */
 
@@ -58,7 +61,7 @@ void LED_init(LED_config_S *config);
 void LED_setState(LED_channel_E channel, bool enable);
 void LED_toggle(LED_channel_E channel);
 bool LED_getState(LED_channel_E channel);
-// void LED_setDutyCycle(float dutyCycle);
+void LED_setBrightness(LED_channel_E channel, float brightness);
 
 #endif  // FEATURE_LEDS
 #endif  // LEDS_H_

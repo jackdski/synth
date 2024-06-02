@@ -2,6 +2,11 @@
 
 /* I N C L U D E S */
 
+#include "features.h"
+
+#if FEATURE_MIXER
+
+#include "audio.h"
 #include "i2s.h"
 #include "mixer.h"
 
@@ -42,3 +47,5 @@ void HAL_I2S_TxCpltCallback(I2S_HandleTypeDef *hi2s)
         audio_txCompleteCallback();
     }
 }
+
+#endif  // FEATURE_MIXER

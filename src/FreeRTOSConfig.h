@@ -111,4 +111,8 @@ standard names. */
 
 #define USE_CUSTOM_SYSTICK_HANDLER_IMPLEMENTATION 0
 
+#if (USE_CUSTOM_SYSTICK_HANDLER_IMPLEMENTATION == 0)
+# define xPortSysTickHandler SysTick_Handler
+#endif
+
 #endif /* FREERTOS_CONFIG_H */

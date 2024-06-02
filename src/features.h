@@ -15,14 +15,16 @@
 #define FEATURE_KNOB     1
 
 // COMPLEX DEVICES
-#define FEATURE_DISPLAY  1
+#define FEATURE_DISPLAY  0
 #define FEATURE_FATFS    0
 #define FEATURE_SGTL5000 1
 #define FEATURE_ST7789   0
 #define FEATURE_PCA9555  1
+#define FEATURE_PCA9685  1
 
 // AUDIO
 #define FEATURE_MIXER    1
 #define FEATURE_NOTE     1
+#define FEATURE_KEYBOARD 1
 
 #endif

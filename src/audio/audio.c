@@ -7,6 +7,8 @@
 
 #include "sgtl5000.h"
 
+#if FEATURE_MIXER
+
 static uint16_t sampleBlock[MIXER_SAMPLES_PER_BLOCK * MIXER_NUMBER_OF_CHANNELS];
 
 void audioTask(void *pvParameters)
@@ -55,3 +57,5 @@ void audio_txCompleteCallback(void)
 {
     Mixer_updateSampleBlock(sampleBlock, false);
 }
+
+#endif  // FEATURE_MIXER

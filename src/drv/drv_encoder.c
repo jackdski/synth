@@ -1,6 +1,8 @@
 /* I N C L U D E S */
 
 #include "drv_encoder.h"
+
+#if (FEATURE_ENCODER)
 #include "tim.h"
 
 /* D E F I N E S */
@@ -20,3 +22,4 @@ void drv_encoder_init(void)
 }
 
 // get direction: __HAL_TIM_IS_TIM_COUNTING_DOWN
+#endif  // FEATURE_ENCODER

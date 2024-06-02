@@ -3,6 +3,8 @@
 
 #include "keyboard.h"
 
+#if FEATURE_KEYBOARD
+
 /* D E F I N E S */
 
 /* T Y P E D E F S */
@@ -60,3 +62,5 @@ void Keyboard_updateInputs(void)
         Note_setActive(channelConfig[channel].noteChannel, buttonActive);
     }
 }
+
+#endif  // FEATURE_KEYBOARD

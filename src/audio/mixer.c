@@ -1,7 +1,5 @@
 #include "mixer.h"
 
-#if (FEATURE_MIXER)
-
 /* I N C L U D E S */
 
 #include "FreeRTOS.h"
@@ -11,6 +9,8 @@
 
 #include "i2c.h"
 #include "sgtl5000.h"
+
+#if (FEATURE_MIXER)
 
 /* D E F I N E S */
 

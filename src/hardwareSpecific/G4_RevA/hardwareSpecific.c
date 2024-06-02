@@ -11,6 +11,7 @@
 
 #include "LEDs.h"
 #include "PCA9555.h"
+#include "PCA9685.h"
 #include "button.h"
 #include "knob.h"
 #include "sgtl5000.h"
@@ -103,6 +104,11 @@ static void hardwareSpecific_deviceInit(void)
     PCA9555_init(&PCA9555_config);
 #endif
 
+#if FEATURE_PCA9685
+    extern PCA9685_config_S PCA9685_config;
+    PCA9685_init(&PCA9685_config);
+#endif
+
 #if FEATURE_LEDS
     extern LED_config_S ledConfig;
     LED_init(&ledConfig);
@@ -118,9 +124,9 @@ static void hardwareSpecific_deviceInit(void)
     Knob_init(&Knob_config);
 #endif
 
-#if FEATURE_SGTL5000
-    SGTL5000_init();
-#endif
+    // #if FEATURE_SGTL5000
+    // SGTL5000_init();
+    // #endif
 }
 
 /* P U B L I C   F U N C T I O N S */
@@ -134,10 +140,12 @@ void hardwareSpecificInit(void)
     // enable FPU
     SCB->CPACR = (SCB->CPACR | ((3UL << (10 * 2)) | (3UL << (11 * 2)))); /* set CP10 and CP11 Full Access */
 
-    drv_GPIO_init();  // MX_GPIO_Init();
+    drv_GPIO_init();
     MX_DMA_Init();
     MX_FMAC_Init();
-    drv_I2C_init();  // MX_I2C1_Init();
+#if FEATURE_I2C
+    drv_I2C_init();
+#endif
     MX_I2S2_Init();
     MX_SPI1_Init();
 
@@ -149,14 +157,16 @@ void hardwareSpecificInit(void)
 #endif
 
     // MX_USB_Device_Init();
-    MX_ADC1_Init();
+    // MX_ADC1_Init();
     MX_CORDIC_Init();
+#if FEATURE_ENCODER
     drv_encoder_init();
+#endif
     MX_TIM15_Init();
     MX_TIM6_Init();
-    MX_IWDG_Init();
-    MX_RNG_Init();
-    MX_WWDG_Init();
+    // MX_IWDG_Init();
+    // MX_RNG_Init();
+    // MX_WWDG_Init();
 
     NVIC_SetPriority(SVCall_IRQ_NBR, 0U);
 

@@ -5,6 +5,10 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#include "features.h"
+
+#if FEATURE_KEYBOARD
+
 #include "button.h"
 #include "note.h"
 #include "note_info.h"
@@ -29,4 +33,5 @@ typedef struct
 void Keyboard_init(void);
 void Keyboard_updateInputs(void);
 
+#endif  // FEATURE_KEYBOARD
 #endif  // KEYBOARD_H_

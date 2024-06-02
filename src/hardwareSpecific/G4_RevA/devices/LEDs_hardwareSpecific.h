@@ -4,6 +4,8 @@
 typedef enum
 {
     LED_CHANNEL_BLINKY,
+    LED_CHANNEL_BUTTON_4,
+    LED_CHANNEL_BUTTON_7,
 
     LED_CHANNEL_COUNT,
 } LED_channel_E;

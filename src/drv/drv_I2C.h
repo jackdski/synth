@@ -5,6 +5,8 @@
 
 #include "features.h"
 
+#if FEATURE_I2C
+
 #include "Utils.h"
 #include "main.h"
 
@@ -42,8 +44,8 @@ typedef struct
     uint8_t *txBuffer;
     uint8_t *rxBuffer;
 
-    uint32_t txLength;
-    uint32_t rxLength;
+    uint16_t txLength;
+    uint16_t rxLength;
 } drv_I2C_TransactionConfig_S;
 
 typedef struct
@@ -77,4 +79,5 @@ bool drv_I2C_startNextTransactionISR(const drv_I2C_bus_E i2cBus);
 
 // clang-format on
 
+#endif  // FEATURE_I2C
 #endif  //  DRV_I2C_H_

@@ -9,6 +9,9 @@
 #include <stdint.h>
 
 #include "LEDs.h"
+#include "PCA9555.h"
+#include "PCA9685.h"
+#include "button.h"
 
 #include "FreeRTOS.h"
 #include "task.h"
@@ -17,23 +20,70 @@
 
 /* T Y P E D E F S */
 
-typedef struct
-{
-    LED_channel_E blinkyLEDChannel;
-} MiscConfig_S;
+// static float brightness = 0.0f;
+// static bool direction   = false;
 
 /* P R I V A T E   D A T A   D E F I N I T I O N S */
 
-static MiscConfig_S miscConfig = {
-    .blinkyLEDChannel = LED_CHANNEL_BLINKY,
-};
-
 void misc10HzTask(void *pvParameters)
 {
+    UNUSED(pvParameters);
     while (1)
     {
-        LED_toggle(miscConfig.blinkyLEDChannel);
-        vTaskDelay(100);
+#if FEATURE_PCA9555
+        PCA9555_updateInputs();
+#endif
+
+        // if (direction)
+        // {
+        //     brightness += 0.01f;
+        //     if (brightness >= LED_BRIGHTNESS_MAX_VALUE)
+        //     {
+        //         brightness = LED_BRIGHTNESS_MAX_VALUE;
+        //         direction  = false;
+        //     }
+        // }
+        // else
+        // {
+        //     brightness -= 0.01f;
+        //     if (brightness <= LED_BRIGHTNESS_MIN_VALUE)
+        //     {
+        //         brightness = LED_BRIGHTNESS_MIN_VALUE;
+        //         direction  = true;
+        //     }
+        // }
+        // LED_setBrightness(LED_CHANNEL_BUTTON_7, brightness);
+        // LED_setBrightness(LED_CHANNEL_BUTTON_4, brightness);
+
+        // const float led7Brightness = Button_isPressed(BUTTON_CHANNEL_7) ? LED_BRIGHTNESS_MAX_VALUE :
+        // LED_BRIGHTNESS_MIN_VALUE; LED_setBrightness(LED_CHANNEL_BUTTON_7, led7Brightness);
+
+        // const float led4Brightness = Button_isPressed(BUTTON_CHANNEL_4) ? LED_BRIGHTNESS_MAX_VALUE :
+        // LED_BRIGHTNESS_MIN_VALUE;
+        if (Button_isPressed(BUTTON_CHANNEL_4))
+        {
+            LED_toggle(LED_CHANNEL_BUTTON_4);
+        }
+        if (Button_isPressed(BUTTON_CHANNEL_7))
+        {
+            LED_toggle(LED_CHANNEL_BUTTON_7);
+        }
+        // LED_setState(LED_CHANNEL_BUTTON_4, pressed);
+
+        // LED_toggle(LED_CHANNEL_BUTTON_7);
+
+#if FEATURE_PCA9685
+        PCA9685_updateOutputs();
+#endif
+
+#if FEATURE_GPIO
+        drv_GPIO_update();
+#endif
+
+#if FEATURE_LEDS
+        LED_toggle(LED_CHANNEL_BLINKY);
+#endif
+        vTaskDelay(100U);
     }
 }
 

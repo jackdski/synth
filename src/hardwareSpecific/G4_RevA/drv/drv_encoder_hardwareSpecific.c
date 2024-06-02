@@ -1,6 +1,8 @@
 #include "drv_encoder.h"
 #include "tim.h"
 
+#if FEATURE_ENCODER
+
 extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim3;
 
@@ -29,3 +31,5 @@ uint32_t drv_encoder_getCount(const drv_encoder_channel_E channel)
     }
     return count;
 }
+
+#endif  // FEATURE_ENCODER

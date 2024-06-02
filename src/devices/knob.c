@@ -3,6 +3,10 @@
 
 #include "knob.h"
 
+#include "features.h"
+
+#if FEATURE_ENCODER
+
 /* D E F I N E S */
 
 /* T Y P E D E F S */
@@ -32,3 +36,5 @@ uint32_t Knob_getCount(const Knob_channel_E channel)
 }
 
 // get direction: __HAL_TIM_IS_TIM_COUNTING_DOWN
+
+#endif  // FEATURE_ENCODER

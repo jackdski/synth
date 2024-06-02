@@ -2,6 +2,9 @@
 /* I N C L U D E S */
 
 #include "sgtl5000.h"
+
+#include "features.h"
+
 #include "drv_I2C.h"
 #include "main.h"
 #include <string.h>
@@ -91,6 +94,7 @@ static SGTL5000_data_S SGTL5000_data;
 bool SGTL5000_init(void)
 {
     memset(&SGTL5000_data, 0U, sizeof(SGTL5000_data_S));
+    SGTL5000_configure();
     return true;
 }
 
