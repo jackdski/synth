@@ -9,6 +9,8 @@
 #include "stm32g4xx.h"
 #include "stm32g4xx_hal.h"
 
+#include "lvgl.h"
+
 #include "LEDs.h"
 #include "PCA9555.h"
 #include "PCA9685.h"
@@ -123,10 +125,6 @@ static void hardwareSpecific_deviceInit(void)
     extern Knob_config_S Knob_config;
     Knob_init(&Knob_config);
 #endif
-
-    // #if FEATURE_SGTL5000
-    // SGTL5000_init();
-    // #endif
 }
 
 /* P U B L I C   F U N C T I O N S */
@@ -135,7 +133,7 @@ void hardwareSpecificInit(void)
 {
     HAL_Init();
     SystemClock_Config();
-    HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
+    // HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
 
     // enable FPU
     SCB->CPACR = (SCB->CPACR | ((3UL << (10 * 2)) | (3UL << (11 * 2)))); /* set CP10 and CP11 Full Access */
@@ -147,7 +145,10 @@ void hardwareSpecificInit(void)
     drv_I2C_init();
 #endif
     MX_I2S2_Init();
-    MX_SPI1_Init();
+
+#if FEATURE_SPI
+    drv_SPI_init();
+#endif
 
 #if (FEATURE_FATFS)
     if (MX_FATFS_Init() != APP_OK)
@@ -163,14 +164,21 @@ void hardwareSpecificInit(void)
     drv_encoder_init();
 #endif
     MX_TIM15_Init();
+    extern TIM_HandleTypeDef htim15;
+    (void)HAL_TIM_PWM_Start(&htim15, TIM_CHANNEL_1);
+
     MX_TIM6_Init();
     // MX_IWDG_Init();
     // MX_RNG_Init();
     // MX_WWDG_Init();
 
-    NVIC_SetPriority(SVCall_IRQ_NBR, 0U);
-
     hardwareSpecific_deviceInit();
+
+#if FEATURE_DISPLAY
+    lv_init();
+#endif
+
+    NVIC_SetPriority(SVCall_IRQ_NBR, 0U);
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)

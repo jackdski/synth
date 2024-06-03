@@ -26,4 +26,10 @@ drv_GPIO_hardwareSpecific_data_S drv_GPIO_hardwareSpecific_data;
 void drv_GPIO_init(void)
 {
     MX_GPIO_Init();
+
+    extern drv_GPIO_config_S drv_GPIO_config;
+    for (drv_GPIO_channel_E channel = (drv_GPIO_channel_E)0U; channel < DRV_GPIO_CHANNEL_COUNT; channel++)
+    {
+        drv_GPIO_setOutput(channel, drv_GPIO_config.channelConfig[channel].initState);
+    }
 }

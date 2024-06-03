@@ -23,15 +23,13 @@ static void initTask(void *pvParameters);
 int main(void)
 {
     hardwareSpecificInit();
-#if 1
+
     (void)xTaskCreate(initTask, "init", configMINIMAL_STACK_SIZE, (void *)NULL, 0U, NULL);
     vTaskStartScheduler();
-#endif
     while (1)
     {
         // loop
     }
-    // ITM->PORT[]
 }
 
 /* P R I V A T E    F U N C T I O N S */

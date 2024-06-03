@@ -4,6 +4,7 @@
 
 #include "FreeRTOS.h"
 #include "task.h"
+#include "semphr.h"
 
 #include "lvgl.h"
 
@@ -19,35 +20,27 @@ static lv_color_t displayBuffer2[BUFFER_SIZE];
 static lv_disp_t *disp;
 static lv_disp_drv_t disp_drv;
 
+
+SemaphoreHandle_t xGuiSemaphore = NULL;
+
+
 static void display_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p);
 
 static void display_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p)
 {
-    /* Divide by 8 */
-    const uint8_t row1 = area->y1 >> 3;
-    const uint8_t row2 = area->y2 >> 3;
+    uint16_t width, height = 0U;
 
-    // uint8_t conf[] = {
-    //     SSD1306_CONTROL_BYTE_CMD_STREAM,
-    //     SSD1306_CMD_SET_MEMORY_ADDR_MODE,
-    //     0x00,
-    //     SSD1306_CMD_SET_COLUMN_RANGE,
-    //     (uint8_t)area->x1,
-    //     (uint8_t)area->x2,
-    //     SSD1306_CMD_SET_PAGE_RANGE,
-    //     row1,
-    //     row2,
-    // };
+    width = (area->x2 - area->x1) + 1U;
+    height = (area->y2 - area->y1) + 1U;
 
-    // bool err = mDisplay.ssd1306.writeBytes(conf, sizeof(conf));
-    // err |= mDisplay.ssd1306.writeBytes((uint8_t *)color_p, SSD1306_COLUMNS * (1 + row2 - row1));
-
+    ST7789_drawBuffer(area->x1, area->y1, width, height, (uint8_t *)color_p, (width * height * 2U));
     lv_disp_flush_ready(disp);
 }
 
 void display_init(void)
 {
-    // ST7789_init();
+    ST7789_init();
+    xGuiSemaphore = xSemaphoreCreateMutex();
 
     lv_disp_draw_buf_init(&draw_buf, displayBuffer1, displayBuffer2, BUFFER_SIZE);
     lv_disp_drv_init(&disp_drv);
@@ -61,12 +54,35 @@ void display_init(void)
 
 void display_homeScreen(void)
 {
-    lv_obj_t *label1 = lv_label_create(lv_scr_act());
-    // lv_label_set_long_mode(label1, LV_LABEL_LONG_WRAP); /*Break the long lines*/
-    lv_label_set_text(label1, "Home Screen");
-    // lv_obj_set_width(label1, 150); /*Set smaller width to make the lines wrap*/
-    // lv_obj_set_style_text_align(label1, LV_TEXT_ALIGN_CENTER, 0);
-    // lv_obj_align(label1, LV_ALIGN_CENTER, 0, 40);
+    // lv_obj_t *label1 = lv_label_create(lv_scr_act());
+    // // lv_label_set_long_mode(label1, LV_LABEL_LONG_WRAP); /*Break the long lines*/
+    // lv_label_set_text(label1, "Home Screen");
+    // // lv_obj_set_width(label1, 150); /*Set smaller width to make the lines wrap*/
+    // // lv_obj_set_style_text_align(label1, LV_TEXT_ALIGN_CENTER, 0);
+    // // lv_obj_align(label1, LV_ALIGN_CENTER, 0, 40);
+
+    static lv_style_t style;
+    lv_style_init(&style);
+
+    lv_style_set_radius(&style, 5);
+    lv_style_set_bg_opa(&style, LV_OPA_COVER);
+    lv_style_set_bg_color(&style, lv_palette_lighten(LV_PALETTE_GREY, 2));
+    lv_style_set_border_width(&style, 2);
+    lv_style_set_border_color(&style, lv_palette_main(LV_PALETTE_BLUE));
+    lv_style_set_pad_all(&style, 10);
+
+    lv_style_set_text_color(&style, lv_palette_main(LV_PALETTE_BLUE));
+    lv_style_set_text_letter_space(&style, 5);
+    lv_style_set_text_line_space(&style, 20);
+    lv_style_set_text_decor(&style, LV_TEXT_DECOR_UNDERLINE);
+
+    /*Create an object with the new style*/
+    lv_obj_t * obj = lv_label_create(lv_scr_act());
+    lv_obj_add_style(obj, &style, 0);
+    lv_label_set_text(obj, "Text of\n"
+                      "a label");
+
+    lv_obj_center(obj);
 }
 
 void displayControl(void *pvParameters)
@@ -75,11 +91,19 @@ void displayControl(void *pvParameters)
 
     while (1)
     {
-        vTaskDelay(10U);
-        // if (mDisplay.initialized)
-        {
-            lv_task_handler();
+        vTaskDelay(50U);
+
+        if (pdTRUE == xSemaphoreTake(xGuiSemaphore, portMAX_DELAY)) {
             display_homeScreen();
+            xSemaphoreGive(xGuiSemaphore);
+        }
+
+        if (ST7789_isInitialized())
+        {
+            if (pdTRUE == xSemaphoreTake(xGuiSemaphore, portMAX_DELAY)) {
+                lv_task_handler();
+                xSemaphoreGive(xGuiSemaphore);
+            }
         }
     }
 }

@@ -54,6 +54,7 @@ To use this module, the following steps should be followed :
 
 #include "FreeRTOS.h"
 #include "task.h"
+#include "semphr.h"
 
 #include "features.h"
 #include "lvgl.h"
@@ -90,11 +91,15 @@ void vApplicationIdleHook(void)
  * @retval None
  */
 static int tick = 0;
+// extern SemaphoreHandle_t xGuiSemaphore;
 
 void vApplicationTickHook(void)
 {
 #if (FEATURE_DISPLAY)
-    lv_tick_inc(1);
+    // if (pdTRUE == xSemaphoreTake(xGuiSemaphore, 0U)) {
+        lv_tick_inc(1);
+        // xSemaphoreGive(xGuiSemaphore);
+    // }
 #endif
 
     if (tick++ > CALCULATION_PERIOD)

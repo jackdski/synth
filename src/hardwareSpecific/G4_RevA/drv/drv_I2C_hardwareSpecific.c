@@ -10,6 +10,9 @@
 #include "main.h"
 #include "stm32g4xx_hal.h"
 
+#include "FreeRTOS.h"
+#include "task.h"
+
 /* D E F I N E S */
 
 #define SGTL5000_I2C_ADDRESS          (0x0A << 1U)             // or 0x2A
@@ -55,9 +58,13 @@ static drv_I2C_deviceConfig_S i2cDeviceConfig[DRV_I2C_DEVICE_COUNT] = {
     },
 };
 
-// clang-format on
+const drv_I2C_config_S drv_I2C_config =
+{
+    .busConfig = i2cBusConfig,
+    .deviceConfig = i2cDeviceConfig,
+};
 
-const drv_I2C_config_S drv_I2C_config = {.busConfig = i2cBusConfig, .deviceConfig = i2cDeviceConfig};
+// clang-format on
 
 /* P R I V A T E   F U N C T I O N S */
 
@@ -67,7 +74,19 @@ static bool drv_I2C_private_writeBytesBus0(drv_I2C_TransactionConfig_S *xfer)
 
     const uint16_t deviceAddress = i2cDeviceConfig[xfer->i2cDevice].deviceAddress;
 
-    if (HAL_I2C_Master_Transmit(&hi2c1, deviceAddress, xfer->txBuffer, xfer->txLength, 10U) != HAL_OK)
+    // if (HAL_I2C_Master_Transmit_(&hi2c1, deviceAddress, xfer->txBuffer, xfer->txLength, 10U) != HAL_OK)
+    // {
+    //     ret = false;
+    // }
+    while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY);
+    if (HAL_I2C_Master_Transmit_IT(&hi2c1, deviceAddress, xfer->txBuffer, xfer->txLength) == HAL_OK)
+    {
+        while (drv_I2C_private_isBusyBus0())
+        {
+            taskYIELD();
+        }
+    }
+    else
     {
         ret = false;
     }
@@ -76,6 +95,7 @@ static bool drv_I2C_private_writeBytesBus0(drv_I2C_TransactionConfig_S *xfer)
 
 static bool drv_I2C_private_readBytesBus0(drv_I2C_TransactionConfig_S *xfer)
 {
+    bool ret = true;
 
     const uint16_t deviceAddress = i2cDeviceConfig[xfer->i2cDevice].deviceAddress;
     uint16_t memAddress          = 0U;
@@ -88,8 +108,21 @@ static bool drv_I2C_private_readBytesBus0(drv_I2C_TransactionConfig_S *xfer)
         memAddress = *xfer->txBuffer;
     }
 
-    return (HAL_I2C_Mem_Read(&hi2c1, deviceAddress, memAddress, xfer->txLength, xfer->rxBuffer, xfer->rxLength, 10U) ==
-            HAL_OK);
+    // return (HAL_I2C_Mem_Read(&hi2c1, deviceAddress, memAddress, xfer->txLength, xfer->rxBuffer, xfer->rxLength, 10U) ==
+    //         HAL_OK);
+    while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY);
+    if (HAL_I2C_Mem_Read_IT(&hi2c1, deviceAddress, memAddress, xfer->txLength, xfer->rxBuffer, xfer->rxLength) == HAL_OK)
+    {
+        while (drv_I2C_private_isBusyBus0())
+        {
+            taskYIELD();
+        }
+    }
+    else
+    {
+        ret = false;
+    }
+    return ret;
 }
 
 static bool drv_I2C_private_isBusyBus0(void)

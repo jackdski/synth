@@ -60,6 +60,7 @@ set(sources_shared_SRCS
     ${PROJ_PATH}/main.c
     ${PROJ_PATH}/misc/misc.c
     ${PROJ_PATH}/drv/drv_I2C.c
+    ${PROJ_PATH}/drv/drv_SPI.c
     ${PROJ_PATH}/drv/drv_GPIO.c
     ${PROJ_PATH}/drv/drv_encoder.c
     ${PROJ_PATH}/devices/LEDs.c
@@ -281,6 +282,7 @@ add_executable(synth_G4RevA
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/audio/audio_hardwareSpecific.c
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/drv/drv_GPIO_hardwareSpecific.c
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/drv/drv_I2C_hardwareSpecific.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/drv/drv_SPI_hardwareSpecific.c
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/drv/drv_encoder_hardwareSpecific.c
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/devices/LEDs_hardwareSpecific.c
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/devices/button_hardwareSpecific.c
@@ -372,7 +374,6 @@ set(include_path_G4_RevA_DIRS
     ${G4_REV_A_STM32_PATH}/Drivers/CMSIS/Device/ST/STM32G4xx/Include
     ${G4_REV_A_STM32_PATH}/Drivers/CMSIS/Include
     ${G4_REV_A_STM32_PATH}/Drivers/CMSIS/Core/Include
-    ${G4_REV_A_STM32_PATH}/Drivers/CMSIS/Core_A/Include
     ${G4_REV_A_STM32_PATH}/Drivers/CMSIS/DSP/Include
 )
 

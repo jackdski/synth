@@ -33,6 +33,7 @@ typedef struct
     uint16_t pin;
     drv_GPIO_type_E type;
     bool activeLow;
+    drv_GPIO_state_E initState;
 } drv_GPIO_channelConfig_S;
 
 typedef struct

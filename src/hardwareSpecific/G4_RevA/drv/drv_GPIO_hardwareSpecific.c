@@ -29,6 +29,7 @@ static drv_GPIO_channelConfig_S drv_GPIO_channelConfig[DRV_GPIO_CHANNEL_COUNT] =
         .pin        = GPIO_PIN_0,
         .type       = DRV_GPIO_TYPE_OUTPUT,
         .activeLow  = true,
+        .initState  = DRV_GPIO_HIGH,
     },
     [DRV_GPIO_CHANNEL_LCD_DC] =
     {
@@ -36,6 +37,7 @@ static drv_GPIO_channelConfig_S drv_GPIO_channelConfig[DRV_GPIO_CHANNEL_COUNT] =
         .pin        = GPIO_PIN_1,
         .type       = DRV_GPIO_TYPE_OUTPUT,
         .activeLow  = false,
+        .initState  = DRV_GPIO_HIGH,
     },
     [DRV_GPIO_CHANNEL_BUTTON_A] =
     {
@@ -43,6 +45,7 @@ static drv_GPIO_channelConfig_S drv_GPIO_channelConfig[DRV_GPIO_CHANNEL_COUNT] =
         .pin        = GPIO_PIN_2,
         .type       = DRV_GPIO_TYPE_INPUT,
         .activeLow  = false,
+        .initState  = DRV_GPIO_LOW,
     },
     [DRV_GPIO_CHANNEL_SPI_LCD_CS] =
     {
@@ -50,6 +53,7 @@ static drv_GPIO_channelConfig_S drv_GPIO_channelConfig[DRV_GPIO_CHANNEL_COUNT] =
         .pin        = GPIO_PIN_5,
         .type       = DRV_GPIO_TYPE_OUTPUT,
         .activeLow  = true,
+        .initState  = DRV_GPIO_HIGH,
     },
     [DRV_GPIO_CHANNEL_LED_DRIVER_OE] =
     {
@@ -57,6 +61,7 @@ static drv_GPIO_channelConfig_S drv_GPIO_channelConfig[DRV_GPIO_CHANNEL_COUNT] =
         .pin        = GPIO_PIN_6,
         .type       = DRV_GPIO_TYPE_OUTPUT,
         .activeLow  = false,
+        .initState  = DRV_GPIO_HIGH,
     },
     [DRV_GPIO_CHANNEL_LCD_RST] =
     {
@@ -64,6 +69,7 @@ static drv_GPIO_channelConfig_S drv_GPIO_channelConfig[DRV_GPIO_CHANNEL_COUNT] =
         .pin        = GPIO_PIN_9,
         .type       = DRV_GPIO_TYPE_OUTPUT,
         .activeLow  = false,
+        .initState  = DRV_GPIO_HIGH,
     },
     [DRV_GPIO_CHANNEL_BUTTON_B] =
     {
@@ -71,6 +77,7 @@ static drv_GPIO_channelConfig_S drv_GPIO_channelConfig[DRV_GPIO_CHANNEL_COUNT] =
         .pin        = GPIO_PIN_11,
         .type       = DRV_GPIO_TYPE_INPUT,
         .activeLow  = false,
+        .initState  = DRV_GPIO_LOW,
     },
     [DRV_GPIO_CHANNEL_LED_BLINKY] =
     {
@@ -78,12 +85,13 @@ static drv_GPIO_channelConfig_S drv_GPIO_channelConfig[DRV_GPIO_CHANNEL_COUNT] =
         .pin        = GPIO_PIN_14,
         .type       = DRV_GPIO_TYPE_OUTPUT,
         .activeLow  = false,
+        .initState  = DRV_GPIO_LOW,
     },
 };
 
 // clang-format on
 
-static drv_GPIO_config_S drv_GPIO_config = {
+drv_GPIO_config_S drv_GPIO_config = {
     .channelConfig = drv_GPIO_channelConfig,
     .channelCount  = DRV_GPIO_CHANNEL_COUNT,
 };

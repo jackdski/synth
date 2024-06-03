@@ -1,11 +1,11 @@
 #ifndef SPI_HARDWARE_SPECIFIC_HPP_
-#define SPI_HARDWARE_SPECIFIC_SPI_HPP_
+#define SPI_HARDWARE_SPECIFIC_HPP_
 
 #include "drv_SPI.h"
 #include "features.h"
 
-#include "i2c.h"
 #include "main.h"
+#include "spi.h"
 #include "stm32g4xx_hal.h"
 
 #if (FEATURE_SPI)
@@ -36,4 +36,4 @@ typedef enum
 void drv_SPI_hardwareSpecific_init(void);
 
 #endif  // FEATURE_SPI
-#endif  // SPI_HARDWARE_SPECIFIC_SPI_HPP_
+#endif  // SPI_HARDWARE_SPECIFIC_HPP_

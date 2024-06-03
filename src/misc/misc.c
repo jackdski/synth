@@ -13,6 +13,8 @@
 #include "PCA9685.h"
 #include "button.h"
 
+#include "drv_encoder.h"
+
 #include "FreeRTOS.h"
 #include "task.h"
 
@@ -28,6 +30,8 @@
 void misc10HzTask(void *pvParameters)
 {
     UNUSED(pvParameters);
+
+    CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
     while (1)
     {
 #if FEATURE_PCA9555
@@ -83,6 +87,12 @@ void misc10HzTask(void *pvParameters)
 #if FEATURE_LEDS
         LED_toggle(LED_CHANNEL_BLINKY);
 #endif
+
+#if FEATURE_ENCODER
+        ITM_SendChar(drv_encoder_getCount(DRV_ENCODER_CHANNEL_0));
+        ITM_SendChar(drv_encoder_getCount(DRV_ENCODER_CHANNEL_1));
+#endif
+
         vTaskDelay(100U);
     }
 }

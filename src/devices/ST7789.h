@@ -11,6 +11,9 @@
 
 /* D E F I N E S */
 
+#define ST7789_LCD_WIDTH        240U
+#define ST7789_LCD_HEIGHT       135U
+
 #define ST7789_REG_NOP                    0x00
 #define ST7789_REG_SWRESET                0x01
 #define ST7789_REG_READ_DIS_ID            0x04  // RDDID
@@ -48,6 +51,8 @@
 #define ST7789_REG_WRITE_CTRL_DISPLAY     0x53  // WRCTRLD
 #define ST7789_REG_READ_CTRL_DISPLAY      0x54  // RDCTRLD
 
+#define ST7789_REG_VDV_SET                0xC4
+
 #define ST7789_REG_READ_ID_1              0xDA  // RDID1
 #define ST7789_REG_READ_ID_2              0xDB  // RDID2
 #define ST7789_REG_READ_ID_3              0xDC  // RDID3
@@ -80,6 +85,9 @@ typedef struct
 /* P U B L I C   F U N C T I O N S */
 
 void ST7789_init(void);
+bool ST7789_isInitialized(void);
+
+void ST7789_drawBuffer(uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint8_t* data, size_t size);
 
 #endif  // FEATURE_ST7789
 #endif  // ST7789_H_
