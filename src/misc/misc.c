@@ -7,6 +7,7 @@
 
 #include <stdbool.h>
 #include <stdint.h>
+#include <stdio.h>
 
 #include "LEDs.h"
 #include "PCA9555.h"
@@ -34,7 +35,6 @@ void misc10HzTask(void *pvParameters)
 {
     UNUSED(pvParameters);
 
-    CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
     while (1)
     {
 #if FEATURE_PCA9555
@@ -92,8 +92,8 @@ void misc10HzTask(void *pvParameters)
 #endif
 
 #if FEATURE_ENCODER
-        ITM_SendChar(drv_encoder_getCount(DRV_ENCODER_CHANNEL_0));
-        ITM_SendChar(drv_encoder_getCount(DRV_ENCODER_CHANNEL_1));
+        printf("%d\n", (int)drv_encoder_getCount(DRV_ENCODER_CHANNEL_0));
+        printf("%d\n", (int)drv_encoder_getCount(DRV_ENCODER_CHANNEL_1));
 #endif
 
         vTaskDelay(100U);

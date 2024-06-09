@@ -47,6 +47,7 @@
 
 static void SystemClock_Config(void);
 static void hardwareSpecific_deviceInit(void);
+static void hardwareSpecific_debugInit(void);
 
 /* P R I V A T E    F U N C T I O N S */
 
@@ -127,6 +128,19 @@ static void hardwareSpecific_deviceInit(void)
 #endif
 }
 
+static void hardwareSpecific_debugInit(void)
+{
+    CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
+    CoreDebug->DHCSR = CoreDebug_DHCSR_C_DEBUGEN_Msk;
+    DBGMCU->CR = DBGMCU_CR_TRACE_IOEN;
+
+    // from ref man pg. 2104
+    ITM->LAR = 0xC5ACCE55;
+    ITM->TCR = 0x00010005; // (ITM_TCR_SWOENA_Msk | ITM_TCR_ITMENA_Msk);
+    ITM->TER = 0x1U;
+    ITM->TPR = 0x1U;
+}
+
 /* P U B L I C   F U N C T I O N S */
 
 void hardwareSpecificInit(void)
@@ -187,4 +201,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     {
         HAL_IncTick();
     }
+}
+
+int _write(int file, char *ptr, int len)
+{
+     int DataIdx;
+     for (DataIdx = 0; DataIdx < len; DataIdx++)
+     {
+         ITM_SendChar(*ptr++);
+     }
+     return len;
 }
