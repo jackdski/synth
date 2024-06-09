@@ -12,10 +12,10 @@
 
 #include "lvgl.h"
 
-// #include "ssd1306.hpp"
+#include "ST7789.h"
 
-#define DISPLAY_WIDTH  240U
-#define DISPLAY_HEIGHT 135U
+#define DISPLAY_WIDTH  ST7789_LCD_WIDTH
+#define DISPLAY_HEIGHT ST7789_LCD_HEIGHT
 
 void displayControl(void *pvParameters);
 

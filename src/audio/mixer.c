@@ -84,8 +84,7 @@ void Mixer_updateVolume(float volume)
 void Mixer_updateSampleBlock(uint16_t *sampleBlock, const bool firstHalf)
 {
     const uint32_t startIndex = (firstHalf) ? 0U : (MIXER_SAMPLES_PER_BLOCK * MIXER_NUMBER_OF_CHANNELS / 2);
-    const uint32_t endIndex   = (firstHalf) ? (MIXER_SAMPLES_PER_BLOCK * MIXER_NUMBER_OF_CHANNELS / 2)
-                                            : (MIXER_SAMPLES_PER_BLOCK * MIXER_NUMBER_OF_CHANNELS);
+    const uint32_t endIndex   = (firstHalf) ? (MIXER_SAMPLES_PER_BLOCK * MIXER_NUMBER_OF_CHANNELS / 2) : (MIXER_SAMPLES_PER_BLOCK * MIXER_NUMBER_OF_CHANNELS);
 
     for (uint32_t i = startIndex; i < endIndex; i += MIXER_NUMBER_OF_CHANNELS)
     {

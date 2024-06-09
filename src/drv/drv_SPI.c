@@ -36,6 +36,12 @@ static bool drv_SPI_private_startNextTransaction(const drv_SPI_bus_E spiBus)
     // peek so queue element remains in queue until transaction is complete
     if (xQueuePeek(spiTransationQueue[spiBus], &xfer, 0U))
     {
+
+        if (xfer.startTransactionCallback != NULL)
+        {
+            xfer.startTransactionCallback();
+        }
+
         const drv_SPI_busConfig_S *spiBusConfig = &drv_SPI_config.busConfig[spiBus];
         switch (xfer.transactionType)
         {
@@ -111,11 +117,7 @@ void drv_SPI_init(void)
     drv_SPI_hardwareSpecific_init();
 }
 
-bool drv_SPI_write(drv_SPI_device_E spiDevice,
-                   uint8_t *txBuffer,
-                   uint32_t length,
-                   void (*startTransactionCallback)(void),
-                   void (*endTransactionCallback)(void))
+bool drv_SPI_write(drv_SPI_device_E spiDevice, uint8_t *txBuffer, uint32_t length, void (*startTransactionCallback)(void), void (*endTransactionCallback)(void))
 {
     bool ret = true;
 
@@ -150,11 +152,7 @@ bool drv_SPI_write(drv_SPI_device_E spiDevice,
     return ret;
 }
 
-bool drv_SPI_read(drv_SPI_device_E spiDevice,
-                  uint8_t *rxBuffer,
-                  uint32_t length,
-                  void (*startTransactionCallback)(void),
-                  void (*endTransactionCallback)(void))
+bool drv_SPI_read(drv_SPI_device_E spiDevice, uint8_t *rxBuffer, uint32_t length, void (*startTransactionCallback)(void), void (*endTransactionCallback)(void))
 {
     bool ret = true;
 

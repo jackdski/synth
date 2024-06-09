@@ -80,12 +80,8 @@ bool drv_I2C_writeBytes(drv_I2C_device_E i2cDevice, uint8_t *txData, const uint3
     bool ret                   = true;
     const drv_I2C_bus_E i2cBus = drv_I2C_config.deviceConfig[i2cDevice].bus;
 
-    drv_I2C_TransactionConfig_S xfer = {.i2cDevice       = i2cDevice,
-                                        .transactionType = I2C_TRANSACTION_TX,
-                                        .txBuffer        = txData,
-                                        .rxBuffer        = NULL,
-                                        .txLength        = numBytes,
-                                        .rxLength        = 0U};
+    drv_I2C_TransactionConfig_S xfer = {
+        .i2cDevice = i2cDevice, .transactionType = I2C_TRANSACTION_TX, .txBuffer = txData, .rxBuffer = NULL, .txLength = numBytes, .rxLength = 0U};
 
 #if (I2C_ASYNC)
     if (xQueueSend(i2cTransationQueue[i2cBus], &xfer, (TickType_t)10) != pdPASS)

@@ -70,25 +70,12 @@ typedef struct
 /* P U B L I C   F U N C T I O N S */
 
 void drv_SPI_init(void);
-void drv_SPI_registerMailbox(const drv_SPI_device_E device,
-                             drv_SPI_mailbox_E mailbox,
-                             uint8_t *txBuffer,
-                             uint8_t *rxBuffer);
-void drv_SPI_registerMailbox(const drv_SPI_device_E device,
-                             drv_SPI_mailbox_E mailbox,
-                             uint8_t *txBuffer,
-                             uint8_t *rxBuffer);
+void drv_SPI_registerMailbox(const drv_SPI_device_E device, drv_SPI_mailbox_E mailbox, uint8_t *txBuffer, uint8_t *rxBuffer);
+void drv_SPI_registerMailbox(const drv_SPI_device_E device, drv_SPI_mailbox_E mailbox, uint8_t *txBuffer, uint8_t *rxBuffer);
 
-bool drv_SPI_write(drv_SPI_device_E spiDevice,
-                   uint8_t *txBuffer,
-                   uint32_t length,
-                   void (*startTransactionCallback)(void),
-                   void (*endTransactionCallback)(void));
-bool drv_SPI_read(drv_SPI_device_E spiDevice,
-                  uint8_t *rxBuffer,
-                  uint32_t length,
-                  void (*startTransactionCallback)(void),
-                  void (*endTransactionCallback)(void));
+bool drv_SPI_write(
+    drv_SPI_device_E spiDevice, uint8_t *txBuffer, uint32_t length, void (*startTransactionCallback)(void), void (*endTransactionCallback)(void));
+bool drv_SPI_read(drv_SPI_device_E spiDevice, uint8_t *rxBuffer, uint32_t length, void (*startTransactionCallback)(void), void (*endTransactionCallback)(void));
 
 void drv_SPI_isrCallback(const drv_SPI_bus_E bus);
 

@@ -1,28 +1,26 @@
 #ifndef UTILS_H_
 #define UTILS_H_
 
-#ifdef __cplusplus
-extern "C"
-{
-#endif
-
 #include <float.h>
 #include <stdint.h>
 
-#define MIN(X, Y)                  (((X) < (Y)) ? (X) : (Y))
-#define MAX(X, Y)                  (((X) > (Y)) ? (Y) : (X))
+#define MIN(X, Y)                         (((X) < (Y)) ? (X) : (Y))
+#define MAX(X, Y)                         (((X) > (Y)) ? (X) : (Y))
 
-#define BIT_U8(X)                  ((uint8_t)(1U << X))
-#define BIT_U16(X)                 ((uint16_t)(1U << X))
-#define BIT_U32(X)                 ((uint32_t)(1U << X))
+#define BIT_U8(X)                         ((uint8_t)(1U << X))
+#define BIT_U16(X)                        ((uint16_t)(1U << X))
+#define BIT_U32(X)                        ((uint32_t)(1U << X))
 
-#define BIT_SET(X, Y)              ((X) |= (1U << Y))
-#define BIT_SET_VALUE(X, Y, VALUE) ((X) |= (VALUE << Y))
-#define BIT_CLEAR(X, Y)            ((X) &= ~(1U << Y))
-#define BIT_GET(X, Y)              ((X) & (1U << Y))
+#define GET_BIT(X, BIT)                   ((X >> BIT) & 1U)
 
-#ifdef __cplusplus
-}
-#endif
+#define BIT_SET(X, Y)                     ((X) |= (1U << Y))
+#define BIT_SET_VALUE(X, Y, VALUE)        ((X) |= (VALUE << Y))
+#define BIT_CLEAR(X, Y)                   ((X) &= ~(1U << Y))
+#define BIT_GET(X, Y)                     ((X) & (1U << Y))
+
+#define SATURATE_MAX(X, SATURATION_VALUE) (X = (((X) >= (SATURATION_VALUE)) ? (SATURATION_VALUE) : (X)))
+#define SATURATE_MIN(X, SATURATION_VALUE) (X = (((X) <= (SATURATION_VALUE)) ? (SATURATION_VALUE) : (X)))
+#define SATURATE_INC(X, Y, INC)           (X = (((X) == (Y)) ? (X) : ((X) + INC)))
+#define SATURATE_DEC(X, Y, INC)           (X = (((X) == (Y)) ? (X) : ((X)-INC)))
 
 #endif  // UTILS_H_

@@ -31,8 +31,7 @@ private:
     bool _writeI2CBytes(I2C_Transaction xfer)
     {
         bool ret = true;
-        if (HAL_I2C_Master_Transmit(i2c, xfer._i2cDevice.deviceAddress, xfer.txBuffer, sizeof(xfer.txBuffer), 1U) !=
-            HAL_OK)
+        if (HAL_I2C_Master_Transmit(i2c, xfer._i2cDevice.deviceAddress, xfer.txBuffer, sizeof(xfer.txBuffer), 1U) != HAL_OK)
         {
             ret = false;
         }
@@ -42,11 +41,9 @@ private:
     bool _readI2CBytes(I2C_Transaction xfer)
     {
         bool ret = true;
-        if (HAL_I2C_Master_Transmit(i2c, xfer._i2cDevice.deviceAddress, xfer.txBuffer, sizeof(xfer.txBuffer), 1) ==
-            HAL_OK)
+        if (HAL_I2C_Master_Transmit(i2c, xfer._i2cDevice.deviceAddress, xfer.txBuffer, sizeof(xfer.txBuffer), 1) == HAL_OK)
         {
-            ret = (HAL_I2C_Master_Receive_IT(
-                       i2c, xfer._i2cDevice.deviceAddress, xfer.rxBuffer, sizeof(xfer.rxBuffer)) == HAL_OK);
+            ret = (HAL_I2C_Master_Receive_IT(i2c, xfer._i2cDevice.deviceAddress, xfer.rxBuffer, sizeof(xfer.rxBuffer)) == HAL_OK);
         }
         else
         {

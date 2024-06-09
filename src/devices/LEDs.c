@@ -32,6 +32,10 @@ void LED_init(LED_config_S *config)
     if (config != NULL)
     {
         ledData.config = config;
+        for (LED_channel_E channel = (LED_channel_E)0U; channel < LED_CHANNEL_COUNT; channel++)
+        {
+            LED_setState(channel, false);
+        }
     }
 }
 

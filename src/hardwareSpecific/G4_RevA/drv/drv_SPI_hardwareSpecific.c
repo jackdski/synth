@@ -169,4 +169,4 @@ void HAL_SPI_TxRxCpltCallback(SPI_HandleTypeDef *hspi)
 // {
 // }
 
-#endif // FEATURE_SPI
+#endif  // FEATURE_SPI

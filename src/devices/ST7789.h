@@ -11,8 +11,8 @@
 
 /* D E F I N E S */
 
-#define ST7789_LCD_WIDTH        240U
-#define ST7789_LCD_HEIGHT       135U
+#define ST7789_LCD_WIDTH                  135U
+#define ST7789_LCD_HEIGHT                 240U
 
 #define ST7789_REG_NOP                    0x00
 #define ST7789_REG_SWRESET                0x01
@@ -58,6 +58,12 @@
 #define ST7789_REG_READ_ID_3              0xDC  // RDID3
 #define ST7789_REG_READ_CTRL_DISPLAY      0x54  // RDCTRLD
 
+#define ST7789_MADCTL_MY                  0x80
+#define ST7789_MADCTL_MX                  0x40
+#define ST7789_MADCTL_MV                  0x20
+#define ST7789_MADCTL_ML                  0x10
+#define ST7789_MADCTL_RGB                 0x00
+
 /* T Y P E D E F S */
 
 typedef enum
@@ -69,6 +75,14 @@ typedef enum
 
     ST7789_STATE_COUNT
 } ST7789_state_E;
+
+typedef enum
+{
+    ST7789_ROTATION_0DEG,
+    ST7789_ROTATION_90DEG,
+    ST7789_ROTATION_180DEG,
+    ST7789_ROTATION_270DEG,
+} ST7789_rotation_E;
 
 typedef struct
 {
@@ -87,7 +101,8 @@ typedef struct
 void ST7789_init(void);
 bool ST7789_isInitialized(void);
 
-void ST7789_drawBuffer(uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint8_t* data, size_t size);
+void ST7789_setRotation(ST7789_rotation_E rotation);
+void ST7789_drawBuffer(uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint8_t *data, size_t size);
 
 #endif  // FEATURE_ST7789
 #endif  // ST7789_H_

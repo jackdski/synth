@@ -3,8 +3,8 @@
 #include <stdint.h>
 
 #include "FreeRTOS.h"
-#include "task.h"
 #include "semphr.h"
+#include "task.h"
 
 #include "lvgl.h"
 
@@ -20,9 +20,7 @@ static lv_color_t displayBuffer2[BUFFER_SIZE];
 static lv_disp_t *disp;
 static lv_disp_drv_t disp_drv;
 
-
 SemaphoreHandle_t xGuiSemaphore = NULL;
-
 
 static void display_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p);
 
@@ -30,7 +28,7 @@ static void display_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t
 {
     uint16_t width, height = 0U;
 
-    width = (area->x2 - area->x1) + 1U;
+    width  = (area->x2 - area->x1) + 1U;
     height = (area->y2 - area->y1) + 1U;
 
     ST7789_drawBuffer(area->x1, area->y1, width, height, (uint8_t *)color_p, (width * height * 2U));
@@ -66,7 +64,7 @@ void display_homeScreen(void)
 
     lv_style_set_radius(&style, 5);
     lv_style_set_bg_opa(&style, LV_OPA_COVER);
-    lv_style_set_bg_color(&style, lv_palette_lighten(LV_PALETTE_GREY, 2));
+    lv_style_set_bg_color(&style, lv_palette_lighten(LV_PALETTE_RED, 2));
     lv_style_set_border_width(&style, 2);
     lv_style_set_border_color(&style, lv_palette_main(LV_PALETTE_BLUE));
     lv_style_set_pad_all(&style, 10);
@@ -77,9 +75,10 @@ void display_homeScreen(void)
     lv_style_set_text_decor(&style, LV_TEXT_DECOR_UNDERLINE);
 
     /*Create an object with the new style*/
-    lv_obj_t * obj = lv_label_create(lv_scr_act());
+    lv_obj_t *obj = lv_label_create(lv_scr_act());
     lv_obj_add_style(obj, &style, 0);
-    lv_label_set_text(obj, "Text of\n"
+    lv_label_set_text(obj,
+                      "Text of\n"
                       "a label");
 
     lv_obj_center(obj);
@@ -93,15 +92,18 @@ void displayControl(void *pvParameters)
     {
         vTaskDelay(50U);
 
-        if (pdTRUE == xSemaphoreTake(xGuiSemaphore, portMAX_DELAY)) {
+        if (pdTRUE == xSemaphoreTake(xGuiSemaphore, portMAX_DELAY))
+        {
             display_homeScreen();
             xSemaphoreGive(xGuiSemaphore);
         }
 
         if (ST7789_isInitialized())
         {
-            if (pdTRUE == xSemaphoreTake(xGuiSemaphore, portMAX_DELAY)) {
+            if (xSemaphoreTake(xGuiSemaphore, portMAX_DELAY) == pdTRUE)
+            {
                 lv_task_handler();
+                lv_timer_handler();
                 xSemaphoreGive(xGuiSemaphore);
             }
         }

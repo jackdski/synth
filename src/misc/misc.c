@@ -18,12 +18,15 @@
 #include "FreeRTOS.h"
 #include "task.h"
 
+#include "Utils.h"
+
 /* D E F I N E S */
 
 /* T Y P E D E F S */
 
-// static float brightness = 0.0f;
-// static bool direction   = false;
+static float brightness = 0.0f;
+static bool direction   = false;
+#define BRIGHTNESS_STEP 0.01F
 
 /* P R I V A T E   D A T A   D E F I N I T I O N S */
 
@@ -38,43 +41,43 @@ void misc10HzTask(void *pvParameters)
         PCA9555_updateInputs();
 #endif
 
-        // if (direction)
-        // {
-        //     brightness += 0.01f;
-        //     if (brightness >= LED_BRIGHTNESS_MAX_VALUE)
-        //     {
-        //         brightness = LED_BRIGHTNESS_MAX_VALUE;
-        //         direction  = false;
-        //     }
-        // }
-        // else
-        // {
-        //     brightness -= 0.01f;
-        //     if (brightness <= LED_BRIGHTNESS_MIN_VALUE)
-        //     {
-        //         brightness = LED_BRIGHTNESS_MIN_VALUE;
-        //         direction  = true;
-        //     }
-        // }
-        // LED_setBrightness(LED_CHANNEL_BUTTON_7, brightness);
+        if (direction)
+        {
+            brightness += BRIGHTNESS_STEP;
+            if (brightness >= LED_BRIGHTNESS_MAX_VALUE)
+            {
+                SATURATE_MAX(brightness, LED_BRIGHTNESS_MAX_VALUE);
+                direction = false;
+            }
+        }
+        else
+        {
+            brightness -= BRIGHTNESS_STEP;
+            if (brightness <= LED_BRIGHTNESS_MIN_VALUE)
+            {
+                SATURATE_MIN(brightness, LED_BRIGHTNESS_MIN_VALUE);
+                direction = true;
+            }
+        }
+        LED_setBrightness(LED_CHANNEL_BUTTON_1, brightness);
         // LED_setBrightness(LED_CHANNEL_BUTTON_4, brightness);
 
-        // const float led7Brightness = Button_isPressed(BUTTON_CHANNEL_7) ? LED_BRIGHTNESS_MAX_VALUE :
-        // LED_BRIGHTNESS_MIN_VALUE; LED_setBrightness(LED_CHANNEL_BUTTON_7, led7Brightness);
+        const float led2Brightness = Button_isPressed(BUTTON_CHANNEL_2) ? LED_BRIGHTNESS_MAX_VALUE : LED_BRIGHTNESS_MIN_VALUE;
+        LED_setBrightness(LED_CHANNEL_BUTTON_2, led2Brightness);
+        // const float led4Brightness = Button_isPressed(BUTTON_CHANNEL_4) ? LED_BRIGHTNESS_MAX_VALUE : LED_BRIGHTNESS_MIN_VALUE;
 
-        // const float led4Brightness = Button_isPressed(BUTTON_CHANNEL_4) ? LED_BRIGHTNESS_MAX_VALUE :
-        // LED_BRIGHTNESS_MIN_VALUE;
-        if (Button_isPressed(BUTTON_CHANNEL_4))
+        // if (Button_isPressed(BUTTON_CHANNEL_1))
+        // {
+        //     LED_toggle(LED_CHANNEL_BUTTON_1);
+        // }
+        if (Button_isPressed(BUTTON_CHANNEL_9))
         {
-            LED_toggle(LED_CHANNEL_BUTTON_4);
+            LED_toggle(LED_CHANNEL_BUTTON_9);
         }
-        if (Button_isPressed(BUTTON_CHANNEL_7))
+        else
         {
-            LED_toggle(LED_CHANNEL_BUTTON_7);
+            LED_setState(LED_CHANNEL_BUTTON_9, false);
         }
-        // LED_setState(LED_CHANNEL_BUTTON_4, pressed);
-
-        // LED_toggle(LED_CHANNEL_BUTTON_7);
 
 #if FEATURE_PCA9685
         PCA9685_updateOutputs();

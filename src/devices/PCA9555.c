@@ -156,33 +156,27 @@ void PCA9555_updateInputs(void)
     uint8_t rxBufferPort0 = 0U;
     uint8_t txBufferPort0 = PCA9555_INPUT_PORT0_CMD;
 
-    if (drv_I2C_readBytes(PCA9555_data.config->i2cDevice,
-                          &txBufferPort0,
-                          sizeof(txBufferPort0),
-                          &rxBufferPort0,
-                          sizeof(rxBufferPort0)))
+    if (drv_I2C_readBytes(PCA9555_data.config->i2cDevice, &txBufferPort0, sizeof(txBufferPort0), &rxBufferPort0, sizeof(rxBufferPort0)))
     {
 
         for (PCA9555_channel_E channel = PCA9555_PORT0_START_PIN; channel < PCA9555_PORT0_END_PIN; channel++)
         {
             PCA9555_pinData_S *pinData = &PCA9555_data.pinData[channel];
-            pinData->actualState       = (rxBufferPort0 && BIT_U8(channel));
+            // pinData->actualState       = (rxBufferPort0 && BIT_U8(channel));
+            pinData->actualState = GET_BIT(rxBufferPort0, channel);
         }
     }
 
     uint8_t rxBufferPort1 = 0U;
     uint8_t txBufferPort1 = PCA9555_INPUT_PORT1_CMD;
 
-    if (drv_I2C_readBytes(PCA9555_data.config->i2cDevice,
-                          &txBufferPort1,
-                          sizeof(txBufferPort1),
-                          &rxBufferPort1,
-                          sizeof(rxBufferPort1)))
+    if (drv_I2C_readBytes(PCA9555_data.config->i2cDevice, &txBufferPort1, sizeof(txBufferPort1), &rxBufferPort1, sizeof(rxBufferPort1)))
     {
         for (PCA9555_channel_E channel = PCA9555_PORT1_START_PIN; channel < PCA9555_PORT1_END_PIN; channel++)
         {
             PCA9555_pinData_S *pinData = &PCA9555_data.pinData[channel];
-            pinData->actualState       = (rxBufferPort1 && BIT_U8((channel - PCA9555_PORT1_START_PIN)));
+            // pinData->actualState       = (rxBufferPort1 && BIT_U8((channel - PCA9555_PORT1_START_PIN)));
+            pinData->actualState = GET_BIT(rxBufferPort1, (channel - PCA9555_PORT1_START_PIN));
         }
     }
 }

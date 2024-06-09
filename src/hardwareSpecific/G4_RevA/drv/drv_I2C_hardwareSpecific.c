@@ -78,7 +78,8 @@ static bool drv_I2C_private_writeBytesBus0(drv_I2C_TransactionConfig_S *xfer)
     // {
     //     ret = false;
     // }
-    while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY);
+    while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
+        ;
     if (HAL_I2C_Master_Transmit_IT(&hi2c1, deviceAddress, xfer->txBuffer, xfer->txLength) == HAL_OK)
     {
         while (drv_I2C_private_isBusyBus0())
@@ -108,9 +109,11 @@ static bool drv_I2C_private_readBytesBus0(drv_I2C_TransactionConfig_S *xfer)
         memAddress = *xfer->txBuffer;
     }
 
-    // return (HAL_I2C_Mem_Read(&hi2c1, deviceAddress, memAddress, xfer->txLength, xfer->rxBuffer, xfer->rxLength, 10U) ==
+    // return (HAL_I2C_Mem_Read(&hi2c1, deviceAddress, memAddress, xfer->txLength, xfer->rxBuffer, xfer->rxLength, 10U)
+    // ==
     //         HAL_OK);
-    while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY);
+    while (HAL_I2C_GetState(&hi2c1) != HAL_I2C_STATE_READY)
+        ;
     if (HAL_I2C_Mem_Read_IT(&hi2c1, deviceAddress, memAddress, xfer->txLength, xfer->rxBuffer, xfer->rxLength) == HAL_OK)
     {
         while (drv_I2C_private_isBusyBus0())

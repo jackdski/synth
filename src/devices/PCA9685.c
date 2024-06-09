@@ -109,36 +109,22 @@ void PCA9685_updateOutputs(void)
         PCA9685_ledData_S *ledData = &PCA9685_data.ledData[channel];
         const uint8_t startByte    = (channel * PCA9685_BYTES_PER_LED) + 6U;
 
-        // const uint16_t onCounts = PCA9685_PWM_PERCENT_TO_COUNT(ledData->desiredBrightness);
-        // const uint16_t offCounts = (PCA9685_PWM_MAX_VALUE - onCounts);
-        if (ledData->desiredBrightness > PCA9685_BRIGHTNESS_MIN_VALUE)
+        const uint16_t onCounts = (PCA9685_PWM_PERCENT_TO_COUNT(ledData->desiredBrightness) - 1U);
+
+        if (ledData->desiredBrightness >= PCA9685_BRIGHTNESS_MAX_VALUE)
         {
-            PCA9685_SET_LED_FULL_ON(txData[startByte + 1U], 1U);
-            // PCA9685_SET_LED_FULL_OFF(txData[startByte +3U], 0U);
+            PCA9685_SET_LED_FULL_ON(txData, startByte);
+        }
+        else if ((ledData->desiredBrightness < PCA9685_BRIGHTNESS_MAX_VALUE) && (ledData->desiredBrightness > PCA9685_BRIGHTNESS_MIN_VALUE))
+        {
+            // PCA9685_SET_LED_ON_COUNT(txData, startByte, 0U);
+            PCA9685_SET_LED_OFF_COUNT(txData, startByte, MAX(1U, onCounts));
         }
         else
         {
-            // PCA9685_SET_LED_FULL_ON(txData[startByte +1U], 0U);
-            PCA9685_SET_LED_FULL_OFF(txData[startByte + 3U], 1U);
+            PCA9685_SET_LED_FULL_OFF(txData, startByte);
         }
 
-        // txData[startByte + 2U]       = (uint8_t)(offCounts & 0xFFU);          // ON_L
-        // txData[startByte + 3U]  = (uint8_t)((offCounts >> 8U) & 0x0FU);  // ON_H
-        // PCA9685_SET_LED_FULL_OFF(txData[startByte +3U], 0U);
-        // // txData[startByte + 0U]  = 0U; // & 0xFFU;// 0U;                                   // OFF_L - no phase
-        // shift
-        // // txData[startByte + 1U]  = 0U; //4095U >> 8U;//0U;
-        // txData[startByte]       = (uint8_t)(onCounts & 0xFFU);          // ON_L
-        // txData[startByte + 1U]  = (uint8_t)((onCounts >> 8U) & 0x0FU);  // ON_H
-
-        // PCA9685_SET_LED_FULL_ON(txData[startByte], 0U)                             // OFF_H - no phase shift
-
-        // txData[startByte]       = (uint8_t)(onCounts & 0xFFU);          // ON_L
-        // txData[startByte + 1U]  = (uint8_t)((onCounts >> 8U) & 0x0FU);  // ON_H
-        // PCA9685_SET_LED_FULL_ON(txData[startByte +1U], 0U);
-        // txData[startByte + 2U]  = 0U; // & 0xFFU;// 0U;                                   // OFF_L - no phase shift
-        // txData[startByte + 3U]  = 0U; //4095U >> 8U;//0U;
-        // PCA9685_SET_LED_FULL_ON(txData[startByte +3U], 0U)                             // OFF_H - no phase shift
         ledData->brightness = ledData->desiredBrightness;
     }
 

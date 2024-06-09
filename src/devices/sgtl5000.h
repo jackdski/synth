@@ -68,82 +68,80 @@ typedef enum
     SGTL5000_I2S_MODE_PCM_FORMAT_A_B,
 } SGTL5000_i2sMode_E;
 
-#define SGTL5000_CHIP_I2S_CTRL_LRALIGN_POS           1U
-#define SGTL5000_CHIP_I2S_CTRL_LRPOL_POS             0U
+#define SGTL5000_CHIP_I2S_CTRL_LRALIGN_POS                   1U
+#define SGTL5000_CHIP_I2S_CTRL_LRPOL_POS                     0U
 
-#define SGTL5000_CHIP_ADC_DAC_CTRL_REG               0x000EU
-#define SGTL5000_ADC_DAC_CTRL_VOL_BUSY_DAC_RIGHT_POS 13U
-#define SGTL5000_ADC_DAC_CTRL_VOL_BUSY_DAC_LEFT_POS  12U
-#define SGTL5000_ADC_DAC_CTRL_VOL_RAMP_EN_POS        9U
-#define SGTL5000_ADC_DAC_CTRL_VOL_EXPO_RAMP_POS      8U
-#define SGTL5000_ADC_DAC_CTRL_DAC_MUTE_RIGHT_POS     3U
-#define SGTL5000_ADC_DAC_CTRL_DAC_MUTE_LEFT_POS      2U
-#define SGTL5000_ADC_DAC_CTRL_DAC_ADC_HPF_FREEZE_POS 1U
-#define SGTL5000_ADC_DAC_CTRL_DAC_ADC_HPF_BYPASS_POS 0U
+#define SGTL5000_CHIP_ADC_DAC_CTRL_REG                       0x000EU
+#define SGTL5000_ADC_DAC_CTRL_VOL_BUSY_DAC_RIGHT_POS         13U
+#define SGTL5000_ADC_DAC_CTRL_VOL_BUSY_DAC_LEFT_POS          12U
+#define SGTL5000_ADC_DAC_CTRL_VOL_RAMP_EN_POS                9U
+#define SGTL5000_ADC_DAC_CTRL_VOL_EXPO_RAMP_POS              8U
+#define SGTL5000_ADC_DAC_CTRL_DAC_MUTE_RIGHT_POS             3U
+#define SGTL5000_ADC_DAC_CTRL_DAC_MUTE_LEFT_POS              2U
+#define SGTL5000_ADC_DAC_CTRL_DAC_ADC_HPF_FREEZE_POS         1U
+#define SGTL5000_ADC_DAC_CTRL_DAC_ADC_HPF_BYPASS_POS         0U
 
-#define SGTL5000_CHIP_DAC_VOL_REG                    0x0010U
-#define SGTL5000_DAC_VOL_RIGHT_POS                   8U
-#define SGTL5000_DAC_VOL_RIGHT_BITMASK               (0xFFU << SGTL5000_DAC_VOL_RIGHT_POS)
-#define SGTL5000_DAC_VOL_SET_RIGHT_VOLUME(VOL)       ((0xFFU & (uint16_t)VOL) << SGTL5000_DAC_VOL_RIGHT_POS)
-#define SGTL5000_DAC_VOL_LEFT_BITMASK                0xFFY
-#define SGTL5000_DAC_VOL_SET_LEFT_VOLUME(VOL)        (0xFFU & (uint16_t)VOL)
-#define SGTL5000_DAC_VOL_NO_VOLUME                   0x3CU    // 0dB
-#define SGTL5000_DAC_VOL_MAX_VOLUME                  0xF0U    // -90dB
-#define SGTL5000_DAC_VOL_MUTED_VOLUME                0xFCU    // 0xFC and greater = Muted
-#define SGTL5000_DAC_VOL_DB_STEP                     0.5017F  // dB / step from 0 (0x3C) to -90dB (0xF0)
-#define SGTL5000_DAC_VOL_GET_DB_VALUE(DB)                                                                              \
-    (SGTL5000_DAC_VOL_NO_VOLUME + (uint16_t)(((-1.0f * DB) + 0.5f) / SGTL5000_DAC_VOL_DB_STEP))
+#define SGTL5000_CHIP_DAC_VOL_REG                            0x0010U
+#define SGTL5000_DAC_VOL_RIGHT_POS                           8U
+#define SGTL5000_DAC_VOL_RIGHT_BITMASK                       (0xFFU << SGTL5000_DAC_VOL_RIGHT_POS)
+#define SGTL5000_DAC_VOL_SET_RIGHT_VOLUME(VOL)               ((0xFFU & (uint16_t)VOL) << SGTL5000_DAC_VOL_RIGHT_POS)
+#define SGTL5000_DAC_VOL_LEFT_BITMASK                        0xFFY
+#define SGTL5000_DAC_VOL_SET_LEFT_VOLUME(VOL)                (0xFFU & (uint16_t)VOL)
+#define SGTL5000_DAC_VOL_NO_VOLUME                           0x3CU    // 0dB
+#define SGTL5000_DAC_VOL_MAX_VOLUME                          0xF0U    // -90dB
+#define SGTL5000_DAC_VOL_MUTED_VOLUME                        0xFCU    // 0xFC and greater = Muted
+#define SGTL5000_DAC_VOL_DB_STEP                             0.5017F  // dB / step from 0 (0x3C) to -90dB (0xF0)
+#define SGTL5000_DAC_VOL_GET_DB_VALUE(DB)                    (SGTL5000_DAC_VOL_NO_VOLUME + (uint16_t)(((-1.0f * DB) + 0.5f) / SGTL5000_DAC_VOL_DB_STEP))
 
-#define SGTL5000_CHIP_ANA_HP_CTRL_REG               0x0022U
-#define SGTL5000_HP_VOL_RIGHT_POS                   8U
-#define SGTL5000_HP_VOL_RIGHT_BITMASK               (0x7FU << 8U)
-#define SGTL5000_HP_VOL_LEFT_BITMASK                0x7FU
-#define SGTL5000_HEADPHONE_VOLUME_MIN               0x00U  // +12dB
-#define SGTL5000_HEADPHONE_VOLUME_MAX               0x7FU  // -51.5dB
-#define SGTL5000_HEADPHONE_VOLUME_DB_PER_STEP       0.5F   // 0.5 dB / step
+#define SGTL5000_CHIP_ANA_HP_CTRL_REG                        0x0022U
+#define SGTL5000_HP_VOL_RIGHT_POS                            8U
+#define SGTL5000_HP_VOL_RIGHT_BITMASK                        (0x7FU << 8U)
+#define SGTL5000_HP_VOL_LEFT_BITMASK                         0x7FU
+#define SGTL5000_HEADPHONE_VOLUME_MIN                        0x00U  // +12dB
+#define SGTL5000_HEADPHONE_VOLUME_MAX                        0x7FU  // -51.5dB
+#define SGTL5000_HEADPHONE_VOLUME_DB_PER_STEP                0.5F   // 0.5 dB / step
 
-#define SGTL5000_CHIP_ANA_CTRL_REG                  0x0024U
-#define SGTL5000_MUTE_LINEOUT_POS                   8U
-#define SGTL5000_MUTE_LINEOUT_MUTE_ENABLED          (1U << SGTL5000_MUTE_LINEOUT_POS)
-#define SGTL5000_SELECT_HEADPHONE_INPUT_POS         6U  // 0 = DAC, 1 = LINEIN
-#define SGTL5000_EN_ZCD_HEADPHONE_POS               5U
-#define SGTL5000_EN_ZCD_HEADPHONE_ENABLED           (1U << SGTL5000_EN_ZCD_HEADPHONE_POS)
-#define SGTL5000_MUTE_HEADPHONE_OUTPUT_POS          4U
-#define SGTL5000_MUTE_HEADPHONE_OUTPUT_MUTE_ENABLED 1U << SGTL5000_MUTE_HEADPHONE_OUTPUT_POS
-#define SGTL5000_SELECT_ADC_INPUT_POS               2U  // 0 = microphone, 1 = LINEIN
-#define SGTL5000_SELECT_ADC_INPUT_LINEIN            1U
-#define SGTL5000_SELECT_ADC_INPUT_MIC               0U
-#define SGTL5000_EN_ZCD_ADC_POS                     1U
-#define SGTL5000_EN_ZCD_ADC_ENABLED                 (1U << SGTL5000_EN_ZCD_ADC_POS)
-#define SGTL5000_MUTE_ADC_POS                       0U
-#define SGTL5000_MUTE_ADC_MUTE_ENABLED              (1U << SGTL5000_MUTE_ADC_POS)
+#define SGTL5000_CHIP_ANA_CTRL_REG                           0x0024U
+#define SGTL5000_MUTE_LINEOUT_POS                            8U
+#define SGTL5000_MUTE_LINEOUT_MUTE_ENABLED                   (1U << SGTL5000_MUTE_LINEOUT_POS)
+#define SGTL5000_SELECT_HEADPHONE_INPUT_POS                  6U  // 0 = DAC, 1 = LINEIN
+#define SGTL5000_EN_ZCD_HEADPHONE_POS                        5U
+#define SGTL5000_EN_ZCD_HEADPHONE_ENABLED                    (1U << SGTL5000_EN_ZCD_HEADPHONE_POS)
+#define SGTL5000_MUTE_HEADPHONE_OUTPUT_POS                   4U
+#define SGTL5000_MUTE_HEADPHONE_OUTPUT_MUTE_ENABLED          1U << SGTL5000_MUTE_HEADPHONE_OUTPUT_POS
+#define SGTL5000_SELECT_ADC_INPUT_POS                        2U  // 0 = microphone, 1 = LINEIN
+#define SGTL5000_SELECT_ADC_INPUT_LINEIN                     1U
+#define SGTL5000_SELECT_ADC_INPUT_MIC                        0U
+#define SGTL5000_EN_ZCD_ADC_POS                              1U
+#define SGTL5000_EN_ZCD_ADC_ENABLED                          (1U << SGTL5000_EN_ZCD_ADC_POS)
+#define SGTL5000_MUTE_ADC_POS                                0U
+#define SGTL5000_MUTE_ADC_MUTE_ENABLED                       (1U << SGTL5000_MUTE_ADC_POS)
 
-#define SGTL5000_CHIP_LINREG_CTRL_REG               0x0026U
-#define SGTL5000_VDDC_MAIN_ASSN_POS                 6U  // 0 = VDDA, 1 = VDDIO
-#define SGTL5000_VDDC_MAIN_OVRD_POS                 5U  // 0 = charge pump auto assigned, 1 = charge pump manually assigned
+#define SGTL5000_CHIP_LINREG_CTRL_REG                        0x0026U
+#define SGTL5000_VDDC_MAIN_ASSN_POS                          6U  // 0 = VDDA, 1 = VDDIO
+#define SGTL5000_VDDC_MAIN_OVRD_POS                          5U  // 0 = charge pump auto assigned, 1 = charge pump manually assigned
 
-#define SGTL5000_CHIP_REF_CTRL_REG                  0x0028
-#define SGTL5000_CHIP_REF_CTRL_VAG_VAL_POS          4U  // [8:4]
-#define SGTL5000_CHIP_REF_CTRL_VAG_VAL_1_575V       0x1FU
-#define SGTL5000_CHIP_REF_CTRL_VAG_VAL_0_800V       0x00U
-#define SGTL5000_CHIP_REF_CTRL_BIAS_CTRL_POS        1U  // [3:1]
-#define SGTL5000_CHIP_REF_CTRL_BIAS_CTRL_NOMINAL    0U
-#define SGTL5000_CHIP_REF_CTRL_BIAS_CTRL_pos12_5p   0x3U
-#define SGTL5000_CHIP_REF_CTRL_BIAS_CTRL_neg12_5p   0x4U
-#define SGTL5000_CHIP_REF_CTRL_BIAS_CTRL_25p        0x5U
-#define SGTL5000_CHIP_REF_CTRL_BIAS_CTRL_neg37_5p   0x6U
-#define SGTL5000_CHIP_REF_CTRL_BIAS_CTRL_neg50p     0x7U
+#define SGTL5000_CHIP_REF_CTRL_REG                           0x0028
+#define SGTL5000_CHIP_REF_CTRL_VAG_VAL_POS                   4U  // [8:4]
+#define SGTL5000_CHIP_REF_CTRL_VAG_VAL_1_575V                0x1FU
+#define SGTL5000_CHIP_REF_CTRL_VAG_VAL_0_800V                0x00U
+#define SGTL5000_CHIP_REF_CTRL_BIAS_CTRL_POS                 1U  // [3:1]
+#define SGTL5000_CHIP_REF_CTRL_BIAS_CTRL_NOMINAL             0U
+#define SGTL5000_CHIP_REF_CTRL_BIAS_CTRL_pos12_5p            0x3U
+#define SGTL5000_CHIP_REF_CTRL_BIAS_CTRL_neg12_5p            0x4U
+#define SGTL5000_CHIP_REF_CTRL_BIAS_CTRL_25p                 0x5U
+#define SGTL5000_CHIP_REF_CTRL_BIAS_CTRL_neg37_5p            0x6U
+#define SGTL5000_CHIP_REF_CTRL_BIAS_CTRL_neg50p              0x7U
 
-#define SGTL5000_CHIP_MIC_CTRL_REG                  0x002A
+#define SGTL5000_CHIP_MIC_CTRL_REG                           0x002A
 
 // 0x0 = 1.6V, 0xF = 0.85V, 50mV steps. Must clear LINREG_SIMPLE_POWERUP and STARTUP_POWERUP bits in 0x0030 register
 // after power up, for this setting to produce the proper VDDD voltage
-#define SGTL5000_D_PROGRAMMING_MAX_VALUE            0xFU
-#define SGTL5000_D_PROGRAMMING_MAX_VOLTAGE_MV       1600U
-#define SGTL5000_D_PROGRAMMING_MIN_VOLTAGE_MV       850U
-#define SGTL5000_D_PROGRAMMING_MILLIVOLTS_PER_STEP  50U
-#define SGTL5000_D_PROGRAMMING_GET_VAL_FROM_MV(MV)                                                                     \
-    ((SGTL5000_D_PROGRAMMING_MAX_VOLTAGE_MV - MV) / SGTL5000_D_PROGRAMMING_MILLIVOLTS_PER_STEP)
+#define SGTL5000_D_PROGRAMMING_MAX_VALUE                     0xFU
+#define SGTL5000_D_PROGRAMMING_MAX_VOLTAGE_MV                1600U
+#define SGTL5000_D_PROGRAMMING_MIN_VOLTAGE_MV                850U
+#define SGTL5000_D_PROGRAMMING_MILLIVOLTS_PER_STEP           50U
+#define SGTL5000_D_PROGRAMMING_GET_VAL_FROM_MV(MV)           ((SGTL5000_D_PROGRAMMING_MAX_VOLTAGE_MV - MV) / SGTL5000_D_PROGRAMMING_MILLIVOLTS_PER_STEP)
 
 #define SGTL5000_CHIP_LINE_OUT_CTRL_REG                      0x002CU
 #define SGTL5000_LINE_OUT_CURRENT_POS                        8U
