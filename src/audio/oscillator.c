@@ -6,6 +6,7 @@
 #include "wavetables.h"
 
 #include <stdint.h>
+#include <string.h>
 
 /* D E F I N E S */
 
@@ -40,6 +41,7 @@ static OscillatorData_S oscillatorData;
 
 void oscillator_init(const Oscillator_E oscillator, const WavetableType_E wavetableType, const float frequency)
 {
+    memset(&oscillatorData, 0U, sizeof(oscillatorData));
     oscillatorConfig.channelConfig[oscillator].wavetableType = wavetableType;
     oscillator_setFrequency(oscillator, frequency);
 }
@@ -52,13 +54,13 @@ float oscillator_getSample(Oscillator_E oscillator)
     float sample = 0.0f;
     if (channelConfig->frequency > 0U)
     {
+        sample = wavetable_getSample(channelConfig->wavetableType, channelData->currentSampleIndex);
+
         channelData->currentSampleIndex += channelData->wavetableSteps;
         if (channelData->currentSampleIndex > WAVETABLE_NUM_SAMPLES)
         {
             channelData->currentSampleIndex -= WAVETABLE_NUM_SAMPLES;
         }
-
-        sample = wavetable_getSample(channelConfig->wavetableType, channelData->currentSampleIndex);
     }
 
     return sample;

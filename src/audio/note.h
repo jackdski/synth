@@ -51,6 +51,7 @@ typedef struct
 {
     ADSR_S adsr;
     Oscillator_E osc;
+    WavetableType_E wavetableType;
 } Note_config_S;
 
 /* P U B L I C   F U N C T I O N S */

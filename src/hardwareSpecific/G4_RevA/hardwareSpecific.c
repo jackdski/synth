@@ -38,6 +38,10 @@
 #include "usb_device.h"
 #include "wwdg.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* D E F I N E S */
 
 /* SVCall_IRQ_NBR added as SV_Call handler name is not the same for CM0 and for all other CMx */
@@ -132,11 +136,11 @@ static void hardwareSpecific_debugInit(void)
 {
     CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
     CoreDebug->DHCSR = CoreDebug_DHCSR_C_DEBUGEN_Msk;
-    DBGMCU->CR = DBGMCU_CR_TRACE_IOEN;
+    DBGMCU->CR       = DBGMCU_CR_TRACE_IOEN;
 
     // from ref man pg. 2104
     ITM->LAR = 0xC5ACCE55;
-    ITM->TCR = 0x00010005; // (ITM_TCR_SWOENA_Msk | ITM_TCR_ITMENA_Msk);
+    ITM->TCR = 0x00010005;  // (ITM_TCR_SWOENA_Msk | ITM_TCR_ITMENA_Msk);
     ITM->TER = 0x1U;
     ITM->TPR = 0x1U;
 }
@@ -147,6 +151,7 @@ void hardwareSpecificInit(void)
 {
     HAL_Init();
     SystemClock_Config();
+    hardwareSpecific_debugInit();
     // HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
 
     // enable FPU
@@ -177,6 +182,11 @@ void hardwareSpecificInit(void)
 #if FEATURE_ENCODER
     drv_encoder_init();
 #endif
+
+    MX_TIM16_Init();
+    extern TIM_HandleTypeDef htim16;
+    HAL_TIM_Base_Start(&htim16);
+
     MX_TIM15_Init();
     extern TIM_HandleTypeDef htim15;
     (void)HAL_TIM_PWM_Start(&htim15, TIM_CHANNEL_1);
@@ -203,12 +213,16 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     }
 }
 
-int _write(int file, char *ptr, int len)
+int _write_debug(char *ptr, int len)
 {
-     int DataIdx;
-     for (DataIdx = 0; DataIdx < len; DataIdx++)
-     {
-         ITM_SendChar(*ptr++);
-     }
-     return len;
+    int DataIdx;
+    for (DataIdx = 0; DataIdx < len; DataIdx++)
+    {
+        ITM_SendChar(*ptr++);
+    }
+    return len;
 }
+
+#ifdef __cplusplus
+}
+#endif

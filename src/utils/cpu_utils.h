@@ -53,7 +53,7 @@ extern "C"
 #define CALCULATION_PERIOD 1000
 
     /* Exported functions ------------------------------------------------------- */
-    uint16_t osGetCPUUsage(void);
+uint16_t osGetCPUUsage(void);
 
 #ifdef __cplusplus
 }

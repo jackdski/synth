@@ -1,5 +1,9 @@
 /* I N C L U D E S */
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "button.h"
 #include "PCA9555.h"
 #include "Utils.h"
@@ -42,7 +46,14 @@ bool Button_isPressed(const Button_channel_E channel)
     switch (channelConfig->inputType)
     {
         case BUTTON_INPUT_TYPE_GPIO:
-            ret = drv_GPIO_getInput(channelConfig->gpioChannel);
+        {
+            bool pressed = drv_GPIO_getInput(channelConfig->gpioConfig.gpioChannel);
+            if (channelConfig->gpioConfig.invert)
+            {
+                pressed = (pressed == false);
+            }
+            ret = pressed;
+        }
             break;
 
         case BUTTON_INPUT_TYPE_PORT_EXPANDER:
@@ -57,5 +68,10 @@ bool Button_isPressed(const Button_channel_E channel)
 
     return ret;
 }
+
+#ifdef __cplusplus
+}
+#endif
+
 
 #endif  // FEATURE_BUTTON

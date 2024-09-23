@@ -27,9 +27,9 @@ static float ADSR_private_updateAmplitude(ADSR_S *adsr, const bool noteOff)
             if (adsr->stage == ADSR_STAGE_ATTACK)
             {
                 amplitude += adsr->data.linearData.step;
-                if (amplitude >= adsr->settings.attack)
+                if (amplitude >= (1.0f - adsr->settings.attack))
                 {
-                    amplitude = adsr->settings.attack;
+                    amplitude = (1.0f - adsr->settings.attack);
                 }
             }
             else if (adsr->stage == ADSR_STAGE_DECAY)

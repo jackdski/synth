@@ -1,8 +1,8 @@
-use std::f32::consts::{PI, E};
+use std::f32::consts::{E, PI};
 // use std::collections::VecDeque;
+use core::marker::Copy;
 use plotters::prelude::*;
 use std::clone::Clone;
-use core::marker::Copy;
 
 // const MAX_AMPLITUDE: f32 = 1.0;
 // const MIN_AMPLITUDE: f32 = -1.0;
@@ -13,6 +13,7 @@ const WAVETABLE_STEP_VALUE: f32 = (2.0 * PI) / WAVETABLE_NUM_SAMPLES as f32;
 
 // const BUFFER_SIZE: usize = 100;
 const SAMPLE_FREQUENCY: usize = 44100;
+const WAVEFORM_DEMO_NUM_SAMPLES: usize = 100;
 
 const LOW_PASS_FILTER_FREQUENCY: usize = 400 as usize;
 const ADSR_STEP_FACTOR: f32 = 1e-4;
@@ -98,34 +99,31 @@ impl Clone for Note {
     }
 }
 
-
-
 struct Oscillator {
     notes: Vec<Note>,
 }
 
-
 impl ADSR {
     fn update_linear(&mut self) {
         match self.stage {
-            AdsrStage::Attack  => {
+            AdsrStage::Attack => {
                 self.amplitude = self.amplitude + ADSR_STEP_FACTOR;
                 if self.amplitude >= self.attack {
                     self.amplitude = self.attack;
                     self.stage = AdsrStage::Decay;
                 }
-            },
+            }
             AdsrStage::Decay => {
                 self.amplitude = self.amplitude - ADSR_STEP_FACTOR;
                 if self.amplitude <= self.decay {
                     self.amplitude = self.decay;
                     self.stage = AdsrStage::Sustain
                 }
-            },
+            }
             AdsrStage::Sustain => (), // TODO: noise generator?
             AdsrStage::Release => {
                 self.amplitude = f32::max(self.amplitude - (ADSR_STEP_FACTOR * self.release), 0.0);
-            },
+            }
         }
     }
 
@@ -136,17 +134,19 @@ impl ADSR {
         let exponent: f32 = (-1.0 / SAMPLE_FREQUENCY as f32) / tau;
         let a: f32 = f32::powf(E, exponent);
         match self.stage {
-            AdsrStage::Attack  => {
+            AdsrStage::Attack => {
                 let old_amplitude: f32 = self.amplitude;
                 self.amplitude = a * old_amplitude + (1.0f32 - a) * self.attack
-            },
-            AdsrStage::Decay   => self.amplitude = a * self.amplitude + (-1.0f32 - a) * self.decay,
+            }
+            AdsrStage::Decay => self.amplitude = a * self.amplitude + (-1.0f32 - a) * self.decay,
             AdsrStage::Sustain => (),
-            AdsrStage::Release => self.amplitude = a * self.amplitude + (-1.0f32 - a) * self.release,
+            AdsrStage::Release => {
+                self.amplitude = a * self.amplitude + (-1.0f32 - a) * self.release
+            }
         };
     }
 
-    fn update(&mut self) -> f32{
+    fn update(&mut self) -> f32 {
         match self.mode {
             AdsrMode::Linear => self.update_linear(),
             AdsrMode::Asymptotic => self.update_asymptotic(),
@@ -156,15 +156,17 @@ impl ADSR {
 }
 
 impl LPF {
-    fn update(&mut self, new_value: f32) -> f32{
+    fn update(&mut self, new_value: f32) -> f32 {
         /*
-        * Filter:
-        *  y_f(k) = (Ts / (Tf + Ts)) + y(k)
-        *  smoothing factor = a = (1 / SAMPLE_FREQUENCY) / ((1 / LOW_PASS_FILTER_FREQUENCY) + (1 / SAMPLE_FREQUENCY))
-        *  y = (1 - a) old_value + new_value * a
-        */
-        let smoothing_factor: f32 = (1.0 / self.sampling_frequency as f32 ) / ((1.0 / self.filter_frequency  as f32) + (1.0 / self.sampling_frequency as f32));
-        let output: f32 = ((1.0 - smoothing_factor) * self.old_value) + (new_value * smoothing_factor);
+         * Filter:
+         *  y_f(k) = (Ts / (Tf + Ts)) + y(k)
+         *  smoothing factor = a = (1 / SAMPLE_FREQUENCY) / ((1 / LOW_PASS_FILTER_FREQUENCY) + (1 / SAMPLE_FREQUENCY))
+         *  y = (1 - a) old_value + new_value * a
+         */
+        let smoothing_factor: f32 = (1.0 / self.sampling_frequency as f32)
+            / ((1.0 / self.filter_frequency as f32) + (1.0 / self.sampling_frequency as f32));
+        let output: f32 =
+            ((1.0 - smoothing_factor) * self.old_value) + (new_value * smoothing_factor);
         self.old_value = output;
         return output;
         // return new_value;
@@ -174,7 +176,10 @@ impl LPF {
 impl Note {
     fn init(&mut self) {
         let number_of_wavelengths_per_second: usize = SAMPLE_FREQUENCY / self.frequency as usize;
-        self.wavetable_steps = ((WAVETABLE_NUM_SAMPLES as f32 * number_of_wavelengths_per_second as f32) / SAMPLE_FREQUENCY as f32).round() as usize;
+        self.wavetable_steps = ((WAVETABLE_NUM_SAMPLES as f32
+            * number_of_wavelengths_per_second as f32)
+            / SAMPLE_FREQUENCY as f32)
+            .round() as usize;
         self.initialized = true;
     }
 
@@ -197,6 +202,11 @@ impl Note {
     }
 }
 
+pub fn cross_fade(cross: f32, a: f32, b: f32) {
+    // simplifying (1 - x[n])y[n] + x[n]z[n]
+    return (a + cross * (b - a));
+}
+
 
 // struct Buffer {
 //     buffer_a: VecDeque<f32>,
@@ -204,12 +214,13 @@ impl Note {
 //     active_buffer_channel: BufferChannel,
 // }
 
-
-pub fn run_buffer() -> Result<(), Box<dyn std::error::Error>>{
+pub fn run_buffer() -> Result<(), Box<dyn std::error::Error>> {
     println!("Running buffer sim");
 
     // SINE wavetable
-    let sine_wavetable: [f32; WAVETABLE_NUM_SAMPLES] = core::array::from_fn(|i| ((WAVETABLE_START_VALUE + (i as f32 * WAVETABLE_STEP_VALUE)).sin()));
+    let sine_wavetable: [f32; WAVETABLE_NUM_SAMPLES] = core::array::from_fn(|i| {
+        ((WAVETABLE_START_VALUE + (i as f32 * WAVETABLE_STEP_VALUE)).sin())
+    });
 
     // let buffer_a: VecDeque<f32> = VecDeque::new();
     // let buffer_b: VecDeque<f32> = VecDeque::new();
@@ -222,47 +233,42 @@ pub fn run_buffer() -> Result<(), Box<dyn std::error::Error>>{
 
     let osc_notes: Vec<Note> = Vec::new();
 
-    let mut osc: Oscillator = Oscillator{
-        notes: osc_notes,
-    };
+    let mut osc: Oscillator = Oscillator { notes: osc_notes };
 
     const NUM_CYCLES: usize = 1;
     let mut waveform: Vec<f32> = Vec::new();
+    let mut demo_waveform: Vec<f32> = Vec::new();
 
     let notes: Vec<f32> = vec![300.0, 600.0, 120.0, 30.0];
     // const NUM_NOTES: usize = 3;
-    for note in notes
-    {
-        osc.notes.push(
-            Note {
-                initialized: false,
-                // frequency: notes.pop().ok_or("Not f32")?,
-                frequency: note,
-                wavetable_index: 0usize,
-                wavetable_steps: 0usize,
-                wavetable: sine_wavetable,
-                volume: 0.7f32,
-                lpf: LPF {
-                    sampling_frequency: SAMPLE_FREQUENCY as f32,
-                    filter_frequency: LOW_PASS_FILTER_FREQUENCY as f32,
-                    old_value: 0.0,
-                },
-                envelope: ADSR {
-                    // mode: AdsrMode::Linear,
-                    mode: AdsrMode::Asymptotic,
-                    stage: AdsrStage::Attack,
-                    amplitude: 0.0,
-                    attack: 1.0,
-                    decay: 1.0,
-                    sustain: 1.0,
-                    release: 1.0,
-                },
+    for note in notes {
+        osc.notes.push(Note {
+            initialized: false,
+            // frequency: notes.pop().ok_or("Not f32")?,
+            frequency: note,
+            wavetable_index: 0usize,
+            wavetable_steps: 0usize,
+            wavetable: sine_wavetable,
+            volume: 0.7f32,
+            lpf: LPF {
+                sampling_frequency: SAMPLE_FREQUENCY as f32,
+                filter_frequency: LOW_PASS_FILTER_FREQUENCY as f32,
+                old_value: 0.0,
             },
-        );
+            envelope: ADSR {
+                // mode: AdsrMode::Linear,
+                mode: AdsrMode::Asymptotic,
+                stage: AdsrStage::Attack,
+                amplitude: 0.0,
+                attack: 1.0,
+                decay: 1.0,
+                sustain: 1.0,
+                release: 1.0,
+            },
+        });
     }
 
-    while waveform.len() <= (SAMPLE_FREQUENCY * NUM_CYCLES)
-    {
+    while waveform.len() <= (SAMPLE_FREQUENCY * NUM_CYCLES) {
         let mut values: Vec<f32> = Vec::new();
         for i in 0..osc.notes.len() {
             let new_val: f32 = osc.notes[i].update();
@@ -284,9 +290,12 @@ pub fn run_buffer() -> Result<(), Box<dyn std::error::Error>>{
         //     BufferChannel::BufferB => sine_buffer.buffer_b.pop_front(),
         // };
         // if waveform.len() % 10 == 0 {
-            // println!("{}", sample_value);
+        // println!("{}", sample_value);
         // }
         waveform.push(sample_value);
+        if waveform.len() % WAVEFORM_DEMO_NUM_SAMPLES == 0 {
+            demo_waveform.push(sample_value)
+        }
 
         // match value {
         //     Some(value) => waveform.push(value),
@@ -335,23 +344,42 @@ pub fn run_buffer() -> Result<(), Box<dyn std::error::Error>>{
     let x_len: f32 = waveform.len() as f32;
     // let x_len: f32 = 50000.0;
 
+    // 1s waveform chart
     let mut chart = ChartBuilder::on(&root)
         .x_label_area_size(35)
         .y_label_area_size(40)
         .right_y_label_area_size(40)
         .margin(5)
-        .caption("Waveform", ("sans-serif", 50.0).into_font())
+        .caption("Samples - Waveform", ("sans-serif", 50.0).into_font())
         .build_cartesian_2d(0f32..x_len, -1.0f32..1.0f32)?;
 
-    chart
-        .configure_mesh()
-        .draw()?;
+    chart.configure_mesh().draw()?;
 
-    chart
-        .draw_series(LineSeries::new(
-            (0..waveform.len()).map(|x: usize| (x as f32, waveform[x])),
-            &BLUE,
-        ))?;
+    chart.draw_series(LineSeries::new(
+        (0..waveform.len()).map(|x: usize| (x as f32, waveform[x])),
+        &BLUE,
+    ))?;
+
+
+    // waveform chart
+    let mut waveform_cycle_chart = ChartBuilder::on(&root)
+        .x_label_area_size(35)
+        .y_label_area_size(40)
+        .right_y_label_area_size(40)
+        .margin(5)
+        .caption("1 Cycle of Waveform", ("sans-serif", 50.0).into_font())
+        .build_cartesian_2d(0f32..x_len, -1.0f32..1.0f32)?;
+
+        waveform_cycle_chart.configure_mesh().draw()?;
+
+        waveform_cycle_chart.draw_series(LineSeries::new(
+        (0..waveform.len()).map(|x: usize| (x as f32, waveform[x])),
+        &BLUE,
+    ))?;
+    waveform_cycle_chart.draw_series(LineSeries::new(
+        (0..demo_waveform.len()).map(|x: usize| (x as f32, demo_waveform[x])),
+        &RED,
+    ))?;
 
     // To avoid the IO failure being ignored silently, we manually call the present function
     root.present().expect("Unable to write result to file, please make sure 'plotters-doc-data' dir exists under current dir");

@@ -3,6 +3,10 @@
 
 #include "features.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #if (FEATURE_BUTTON)
 
 /* I N C L U D E S */
@@ -27,11 +31,17 @@ typedef enum
 
 typedef struct
 {
+    drv_GPIO_channel_E gpioChannel;
+    bool               invert;
+} Button_gpioConfig_S;
+
+typedef struct
+{
     Button_inputType_E inputType;
     union
     {
         PCA9555_channel_E pca9555Channel;
-        drv_GPIO_channel_E gpioChannel;
+        Button_gpioConfig_S gpioConfig;
     };
 
     // uint32_t debounceMs;
@@ -48,6 +58,10 @@ typedef struct
 void Button_init(Button_config_S *config);
 
 bool Button_isPressed(const Button_channel_E channel);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // FEATURE_BUTTON
 #endif  // BUTTON_HPP_

@@ -20,48 +20,59 @@ typedef struct
 
 /* D A T A   D E F I N I T I O N S */
 
-static Note_config_S noteConfig[NOTE_CHANNEL_COUNT] = {
+// clang-format off
+static Note_config_S noteConfig[NOTE_CHANNEL_COUNT] =
+{
     [NOTE_CHANNEL_0] =
-        {
-                          .osc  = OSCILLATOR_0,
-                          .adsr = DEFAULT_ADSR_SETTINGS,
-                          },
+    {
+        .osc  = OSCILLATOR_0,
+        .adsr = DEFAULT_ADSR_SETTINGS,
+        .wavetableType = WAVETABLE_TYPE_SINE,
+    },
     [NOTE_CHANNEL_1] =
-        {
-                          .osc  = OSCILLATOR_1,
-                          .adsr = DEFAULT_ADSR_SETTINGS,
-                          },
+    {
+        .osc  = OSCILLATOR_1,
+        .adsr = DEFAULT_ADSR_SETTINGS,
+        .wavetableType = WAVETABLE_TYPE_SINE,
+    },
     [NOTE_CHANNEL_2] =
-        {
-                          .osc  = OSCILLATOR_2,
-                          .adsr = DEFAULT_ADSR_SETTINGS,
-                          },
+    {
+        .osc  = OSCILLATOR_2,
+        .adsr = DEFAULT_ADSR_SETTINGS,
+        .wavetableType = WAVETABLE_TYPE_SINE,
+    },
     [NOTE_CHANNEL_3] =
-        {
-                          .osc  = OSCILLATOR_3,
-                          .adsr = DEFAULT_ADSR_SETTINGS,
-                          },
+    {
+        .osc  = OSCILLATOR_3,
+        .adsr = DEFAULT_ADSR_SETTINGS,
+        .wavetableType = WAVETABLE_TYPE_SINE,
+    },
     [NOTE_CHANNEL_4] =
-        {
-                          .osc  = OSCILLATOR_4,
-                          .adsr = DEFAULT_ADSR_SETTINGS,
-                          },
+    {
+        .osc  = OSCILLATOR_4,
+        .adsr = DEFAULT_ADSR_SETTINGS,
+        .wavetableType = WAVETABLE_TYPE_SINE,
+    },
     [NOTE_CHANNEL_5] =
-        {
-                          .osc  = OSCILLATOR_5,
-                          .adsr = DEFAULT_ADSR_SETTINGS,
-                          },
+    {
+        .osc  = OSCILLATOR_5,
+        .adsr = DEFAULT_ADSR_SETTINGS,
+        .wavetableType = WAVETABLE_TYPE_SINE,
+    },
     [NOTE_CHANNEL_6] =
-        {
-                          .osc  = OSCILLATOR_6,
-                          .adsr = DEFAULT_ADSR_SETTINGS,
-                          },
+    {
+        .osc  = OSCILLATOR_6,
+        .adsr = DEFAULT_ADSR_SETTINGS,
+        .wavetableType = WAVETABLE_TYPE_SINE,
+    },
     [NOTE_CHANNEL_7] =
-        {
-                          .osc  = OSCILLATOR_7,
-                          .adsr = DEFAULT_ADSR_SETTINGS,
-                          },
+    {
+        .osc  = OSCILLATOR_7,
+        .adsr = DEFAULT_ADSR_SETTINGS,
+        .wavetableType = WAVETABLE_TYPE_SINE,
+    },
 };
+// clang-format on
 
 static Note_data_S noteData[NOTE_CHANNEL_COUNT];
 
@@ -73,7 +84,7 @@ void Note_init(void)
 {
     for (Note_channel_E channel = (Note_channel_E)0U; channel < NOTE_CHANNEL_COUNT; channel++)
     {
-        Note_setFrequency(channel, 0.0F);
+        oscillator_init(noteConfig[channel].osc, noteConfig[channel].wavetableType, 0.0f);
     }
 }
 

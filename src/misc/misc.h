@@ -16,7 +16,9 @@
 
 /* P U B L I C   F U N C T I O N S */
 
+void misc1HzTask(void *pvParameters);
 void misc10HzTask(void *pvParameters);
+void misc100HzTask(void *pvParameters);
 
 #endif  // FEATURE_MISC
 #endif  // MISC_H_

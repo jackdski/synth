@@ -18,11 +18,11 @@ uint32_t drv_encoder_getCount(const drv_encoder_channel_E channel)
     switch (channel)
     {
         case DRV_ENCODER_CHANNEL_0:
-            count = TIM2->CNT;
+            count = (uint32_t)(TIM2->CNT);
             break;
 
         case DRV_ENCODER_CHANNEL_1:
-            count = TIM3->CNT;
+            count = (uint32_t)(TIM3->CNT);
             break;
 
         case DRV_ENCODER_CHANNEL_COUNT:

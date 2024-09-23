@@ -15,15 +15,12 @@
 typedef struct
 {
     bool initialized;
-    // uint8_t miscCommandMailboxPosition;
     uint32_t colStart;
     uint32_t rowStart;
     ST7789_rotation_E rotation;
 } ST7789_data_S;
 
 /* P R I V A T E   F U N C T I O N   D E F I N I T I O N S */
-
-// static uint8_t ST7789_private_getNextCommandBufferPosition(void);
 
 static void ST7789_private_setCommandPin(void);
 static void ST7789_private_clearCommandPin(void);
@@ -53,19 +50,7 @@ static ST7789_data_S ST7789_data =
 };
 // clang-format on
 
-// static uint8_t drv_SPI_displayCommandTxBuffer[MISC_COMMAND_BUFFER_SIZE];
-// static uint8_t drv_SPI_displayCommandRxBuffer[MISC_COMMAND_BUFFER_SIZE];
-
 /* P R I V A T E   F U N C T I O N S */
-
-// static uint8_t ST7789_private_getNextCommandBufferPosition(void)
-// {
-//     if (ST7789_data.miscCommandMailboxPosition < MISC_COMMAND_BUFFER_SIZE)
-//     {
-//         ST7789_data.miscCommandMailboxPosition++;
-//     }
-//     return ST7789_data.miscCommandMailboxPosition;
-// }
 
 static void ST7789_private_setCommandPin(void)
 {
@@ -97,11 +82,6 @@ static void ST7789_private_hardwareReset(void)
     drv_GPIO_setOutput(DRV_GPIO_CHANNEL_LCD_RST, DRV_GPIO_LOW);
     vTaskDelay(pdMS_TO_TICKS(2));
     drv_GPIO_setOutput(DRV_GPIO_CHANNEL_LCD_RST, DRV_GPIO_HIGH);
-
-    // If hardware reset started while sleep out, reset time may be up to 120ms
-    // Unconditionally wait as hardware reset doesn't need to be performant
-    //   sleepIn = true;
-    //   lastSleepExit = xTaskGetTickCount();
     vTaskDelay(pdMS_TO_TICKS(125U));
 }
 
@@ -182,11 +162,6 @@ static void ST7789_writeToRam(uint8_t *data, size_t size)
 
 void ST7789_init(void)
 {
-    // clang-format off
-    // drv_SPI_registerMailbox(DRV_SPI_DEVICE_ST7789_DISPLAY, DRV_SPI_MAILBOX_DISPLAY_COMMAND, drv_SPI_displayCommandTxBuffer, drv_SPI_displayCommandTxBuffer);
-    // drv_SPI_registerMailbox(DRV_SPI_DEVICE_ST7789_DISPLAY, DRV_SPI_MAILBOX_DISPLAY_DRAW, drv_SPI_displayCommandTxBuffer, drv_SPI_displayCommandTxBuffer);
-    // clang-format on
-
     ST7789_private_writeCommand(ST7789_REG_SWRESET);  // send a byte so that the CLK line goes low - stm32 bug?
     vTaskDelay(pdMS_TO_TICKS(2U));
 

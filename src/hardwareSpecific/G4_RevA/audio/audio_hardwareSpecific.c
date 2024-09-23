@@ -1,14 +1,18 @@
-#include "audio.h"
+// #include "audio.hpp"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /* I N C L U D E S */
 
 #include "features.h"
 
-#if FEATURE_MIXER
+#if (FEATURE_MIXER || FEATURE_AUDIO)
 
-#include "audio.h"
+#include "audio_hardwareSpecific.h"
 #include "i2s.h"
-#include "mixer.h"
+// #include "mixer.h"
 
 /* D E F I N E S */
 
@@ -24,7 +28,7 @@ extern I2S_HandleTypeDef hi2s2;
 
 void audio_hardwareSpecific_i2sTransmit(uint16_t *sampleBlock, uint32_t numSamples)
 {
-    (void)HAL_I2S_Transmit_DMA(&hi2s2, sampleBlock, MIXER_SAMPLES_PER_BLOCK * 2U);
+    (void)HAL_I2S_Transmit_DMA(&hi2s2, sampleBlock, numSamples);
 }
 
 void audio_hardwareSpecific_i2sStop(void)
@@ -32,20 +36,24 @@ void audio_hardwareSpecific_i2sStop(void)
     (void)HAL_I2S_DMAStop(&hi2s2);
 }
 
-void HAL_I2S_TxHalfCpltCallback(I2S_HandleTypeDef *hi2s)
-{
-    if (hi2s == &hi2s2)
-    {
-        audio_txHalfCompleteCallback();
-    }
-}
+// void HAL_I2S_TxHalfCpltCallback(I2S_HandleTypeDef *hi2s)
+// {
+//     if (hi2s == &hi2s2)
+//     {
+//         audio_txHalfCompleteCallback();
+//     }
+// }
 
-void HAL_I2S_TxCpltCallback(I2S_HandleTypeDef *hi2s)
-{
-    if (hi2s == &hi2s2)
-    {
-        audio_txCompleteCallback();
-    }
-}
+// void HAL_I2S_TxCpltCallback(I2S_HandleTypeDef *hi2s)
+// {
+//     if (hi2s == &hi2s2)
+//     {
+//         audio_txCompleteCallback();
+//     }
+// }
 
-#endif  // FEATURE_MIXER
+#ifdef __cplusplus
+}
+#endif
+
+#endif  // FEATURE_MIXER || FEATURE_AUDIO

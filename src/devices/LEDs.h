@@ -5,6 +5,10 @@
 
 #include "features.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #if (FEATURE_LEDS)
 
 #include "LEDs_hardwareSpecific.h"
@@ -62,6 +66,11 @@ void LED_setState(LED_channel_E channel, bool enable);
 void LED_toggle(LED_channel_E channel);
 bool LED_getState(LED_channel_E channel);
 void LED_setBrightness(LED_channel_E channel, float brightness);
+
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // FEATURE_LEDS
 #endif  // LEDS_H_

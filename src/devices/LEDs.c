@@ -3,6 +3,10 @@
 
 #include "LEDs.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #if FEATURE_LEDS
 
 #include "PCA9685.h"
@@ -99,5 +103,9 @@ void LED_setBrightness(LED_channel_E channel, float brightness)
             break;
     }
 }
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // FEATURE_LEDS

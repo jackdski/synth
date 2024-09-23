@@ -1,6 +1,6 @@
+use std::f32::consts::PI;
 use std::fs::File;
 use std::io::Write;
-use std::f32::consts::PI;
 
 use crate::buffer_prototype::run_buffer;
 
@@ -22,56 +22,71 @@ fn main() {
 
     for i in 0..WAVETABLE_NUM_SAMPLES {
         if i % VALUES_PER_LINE == 0 {
-            sine_wavetable_file.write(b"\n").expect("Unable to write newline to file");
+            sine_wavetable_file
+                .write(b"\n")
+                .expect("Unable to write newline to file");
         }
         let n = WAVETABLE_START_VALUE + (i as f32 * WAVETABLE_STEP_VALUE);
         let new_val: f32 = n.sin();
         assert!(new_val <= MAX_AMPLITUDE && new_val >= MIN_AMPLITUDE);
         let num_str = format!("{}, ", new_val);
-        sine_wavetable_file.write(num_str.as_bytes()).expect("Unable to write to file");
+        sine_wavetable_file
+            .write(num_str.as_bytes())
+            .expect("Unable to write to file");
     }
 
-    sine_wavetable_file.write(b"\n").expect("Unable to write newline to file");
+    sine_wavetable_file
+        .write(b"\n")
+        .expect("Unable to write newline to file");
 
     // SAW wavetable
     let mut saw_wavetable_file = File::create("saw_wavetable.txt").expect("failed");
     for i in 0..WAVETABLE_NUM_SAMPLES {
         if i % VALUES_PER_LINE == 0 {
-            saw_wavetable_file.write(b"\n").expect("Unable to write newline");
+            saw_wavetable_file
+                .write(b"\n")
+                .expect("Unable to write newline");
         }
-        let n = WAVETABLE_START_VALUE + (i as f32 * WAVETABLE_STEP_VALUE);
+        let n: f32 = WAVETABLE_START_VALUE + (i as f32 * WAVETABLE_STEP_VALUE);
         let new_val: f32 = -1.0 * n / PI;
         assert!(new_val <= MAX_AMPLITUDE && new_val >= MIN_AMPLITUDE);
-        let num_str = format!("{}, ", new_val);
-        saw_wavetable_file.write(num_str.as_bytes()).expect("Unable to write to file");
+        let num_str: String = format!("{}, ", new_val);
+        saw_wavetable_file
+            .write(num_str.as_bytes())
+            .expect("Unable to write to file");
     }
-    saw_wavetable_file.write(b"\n").expect("Unable to write newline to file");
+    saw_wavetable_file
+        .write(b"\n")
+        .expect("Unable to write newline to file");
 
     // SQUARE wavetable
     let mut square_wavetable_file = File::create("square_wavetable.txt").expect("failed");
 
     for i in 0..WAVETABLE_NUM_SAMPLES {
         if i % VALUES_PER_LINE == 0 {
-            square_wavetable_file.write(b"\n").expect("Unable to write newline to file");
+            square_wavetable_file
+                .write(b"\n")
+                .expect("Unable to write newline to file");
         }
-        let n = WAVETABLE_START_VALUE + (i as f32 * WAVETABLE_STEP_VALUE);
+        let n: f32 = WAVETABLE_START_VALUE + (i as f32 * WAVETABLE_STEP_VALUE);
         let mut new_val: f32 = n.sin();
         assert!(new_val <= MAX_AMPLITUDE && new_val >= MIN_AMPLITUDE);
 
-        if new_val.is_sign_positive()
-        {
+        if new_val.is_sign_positive() {
             new_val = 0.999999;
-        }
-        else
-        {
+        } else {
             new_val = 0.0001;
         }
 
         let num_str = format!("{}, ", new_val);
-        square_wavetable_file.write(num_str.as_bytes()).expect("Unable to write to file");
+        square_wavetable_file
+            .write(num_str.as_bytes())
+            .expect("Unable to write to file");
     }
 
-    square_wavetable_file.write(b"\n").expect("Unable to write newline to file");
+    square_wavetable_file
+        .write(b"\n")
+        .expect("Unable to write newline to file");
 
     let _ = run_buffer();
 }

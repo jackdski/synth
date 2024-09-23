@@ -1,6 +1,10 @@
 #ifndef WAVETABLES_H_
 #define WAVETABLES_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stdint.h>
 
 #define WAVETABLE_NUM_SAMPLES 2048U
@@ -27,5 +31,8 @@ float wavetable_getSample(const WavetableType_E type, const uint32_t index);
 uint32_t wavetable_getNumberOfSamples(const WavetableType_E type);
 uint32_t wavetable_getIndex(const WavetableType_E type);
 
+#ifdef __cplusplus
+}
+#endif
 
 #endif // WAVETABLES_H_

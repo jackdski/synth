@@ -24,6 +24,7 @@ typedef enum
     BUTTON_CHANNEL_16,
 
     BUTTON_CHANNEL_COUNT,
+    BUTTON_CHANNEL_UNDEFINED,
 } Button_channel_E;
 
 #endif /* BUTTON_HARDWARE_SPECIFIC_H_ */

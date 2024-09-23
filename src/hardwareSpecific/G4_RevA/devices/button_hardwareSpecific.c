@@ -18,8 +18,8 @@
 // clang-format off
 static Button_channelConfig_S button_channelConfig[BUTTON_CHANNEL_COUNT] =
 {
-    [BUTTON_CHANNEL_A] = {         .inputType = BUTTON_INPUT_TYPE_GPIO, .gpioChannel = DRV_GPIO_CHANNEL_BUTTON_A},
-    [BUTTON_CHANNEL_B] = {         .inputType = BUTTON_INPUT_TYPE_GPIO, .gpioChannel = DRV_GPIO_CHANNEL_BUTTON_B},
+    [BUTTON_CHANNEL_A] = { .inputType = BUTTON_INPUT_TYPE_GPIO, .gpioConfig = { .gpioChannel = DRV_GPIO_CHANNEL_BUTTON_A, .invert = true, } },
+    [BUTTON_CHANNEL_B] = { .inputType = BUTTON_INPUT_TYPE_GPIO, .gpioConfig = { .gpioChannel = DRV_GPIO_CHANNEL_BUTTON_B, .invert = true, } },
 
     [BUTTON_CHANNEL_1]  = {.inputType = BUTTON_INPUT_TYPE_PORT_EXPANDER,     .pca9555Channel = PCA9555_CHANNEL_7},
     [BUTTON_CHANNEL_2]  = {.inputType = BUTTON_INPUT_TYPE_PORT_EXPANDER,     .pca9555Channel = PCA9555_CHANNEL_6},

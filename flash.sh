@@ -2,8 +2,8 @@
 case "$1" in
     "G4")
         echo "Flashing G4_RevA"
-        st-flash write ./build/G4_RevA/synth.bin 0x08000000
-        st-flash --format ihex write ./build/G4_RevA/synth.hex
+        st-flash write ./build/build/G4_RevA/synth_G4RevA.bin 0x08000000
+        st-flash --format ihex write ./build/build/G4_RevA/synth_G4RevA.bin
     ;;
     "F4")
         echo "Flashing F429Discovery"

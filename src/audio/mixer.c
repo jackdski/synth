@@ -19,6 +19,9 @@
 // #define I2S_DATA_FORMAT_MAX_VALUE       8388608.0f  // 24bit - 2^24 / 2
 #define I2S_DATA_FORMAT_MAX_VALUE       32768.0f  // 16bit
 
+#define I2S_BUFFER_HALFWAY_INDEX        (MIXER_SAMPLES_PER_BLOCK * MIXER_NUMBER_OF_CHANNELS / 2U)
+#define I2S_BUFFER_SIZE                 (uint32_t)(MIXER_SAMPLES_PER_BLOCK * 2U)
+
 /* P R I V A T E   F U N C T I O N   D E F I N I T I O N S */
 
 /* T Y P E D E F S */
@@ -72,7 +75,7 @@ void Mixer_init(void)
 
 void Mixer_updateInputs(void)
 {
-    SGTL5000_pollRegisters();
+    // SGTL5000_pollRegisters();
     SGTL5000_updateVolume(mixer.volume);
 }
 
@@ -83,8 +86,8 @@ void Mixer_updateVolume(float volume)
 
 void Mixer_updateSampleBlock(uint16_t *sampleBlock, const bool firstHalf)
 {
-    const uint32_t startIndex = (firstHalf) ? 0U : (MIXER_SAMPLES_PER_BLOCK * MIXER_NUMBER_OF_CHANNELS / 2);
-    const uint32_t endIndex   = (firstHalf) ? (MIXER_SAMPLES_PER_BLOCK * MIXER_NUMBER_OF_CHANNELS / 2) : (MIXER_SAMPLES_PER_BLOCK * MIXER_NUMBER_OF_CHANNELS);
+    const uint32_t startIndex = (firstHalf) ? 0U : (I2S_BUFFER_HALFWAY_INDEX);
+    const uint32_t endIndex   = (firstHalf) ? (I2S_BUFFER_HALFWAY_INDEX) : (I2S_BUFFER_SIZE);
 
     for (uint32_t i = startIndex; i < endIndex; i += MIXER_NUMBER_OF_CHANNELS)
     {
@@ -116,7 +119,7 @@ void Mixer_updateSampleBlock(uint16_t *sampleBlock, const bool firstHalf)
         // sample as a 16bit value
         const uint16_t value = (uint16_t)(sample * mixer.volume) * I2S_DATA_FORMAT_MAX_VALUE;
         sampleBlock[i]       = value;  // left
-        sampleBlock[i + 1]   = value;  // right
+        sampleBlock[i + 1U]   = value; // right
     }
 }
 

@@ -1,6 +1,10 @@
 #ifndef SGTL5000_H_
 #define SGTL5000_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* I N C L U D E S */
 
 #include "drv_I2C.h"
@@ -249,6 +253,10 @@ typedef enum
 #define SGTL5000_BASS_CUTOFF_FREQ_BITMASK                    0x70U
 #define SGTL5000_BASS_ENHANCE_EN_POS                         0U
 
+#define SGTL5000_VOLUME_DB_MIN                               12.0f
+#define SGTL5000_VOLUME_DB_MAX                               -51.5f
+#define SGTL5000_INITIAL_VOLUME_DB                           3.0f
+
 /* T Y P E D E F S */
 
 typedef enum
@@ -334,8 +342,14 @@ bool SGTL5000_configure(void);
 bool SGTL5000_pollRegisters(void);
 void SGTL5000_updateVolume(float volume);
 
+float SGTL5000_getVolume(void);
+
 bool SGTL5000_writeI2C(const uint16_t reg, const uint16_t txData);
 bool SGTL5000_readI2C(const uint16_t reg, uint16_t *rxData);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // FEATURE_SGTL5000
 #endif  /* SGTL5000_H_ */

@@ -58,7 +58,6 @@ enable_language(C CXX ASM)
 
 set(sources_shared_SRCS
     ${PROJ_PATH}/main.c
-    ${PROJ_PATH}/misc/misc.c
     ${PROJ_PATH}/drv/drv_I2C.c
     ${PROJ_PATH}/drv/drv_SPI.c
     ${PROJ_PATH}/drv/drv_GPIO.c
@@ -71,16 +70,22 @@ set(sources_shared_SRCS
     ${PROJ_PATH}/devices/sgtl5000.c
     ${PROJ_PATH}/devices/ST7789.c
     ${PROJ_PATH}/display/display.c
+    ${PROJ_PATH}/display/screens/homeScreen.c
+    ${PROJ_PATH}/display/screens/waveformScreen.c
+    ${PROJ_PATH}/display/screens/settingsSelection.c
+    ${PROJ_PATH}/misc/misc.c
+    ${PROJ_PATH}/misc/knobControls.c
     ${PROJ_PATH}/wavetables/wavetables.c
     ${PROJ_PATH}/audio/effects/lpf.c
     ${PROJ_PATH}/audio/oscillator.c
     ${PROJ_PATH}/audio/note_info.c
-    ${PROJ_PATH}/audio/keyboard.c
+    ${PROJ_PATH}/audio/keyboard.cpp
     ${PROJ_PATH}/audio/adsr.c
-    ${PROJ_PATH}/audio/note.c
-    ${PROJ_PATH}/audio/audio.c
+    # ${PROJ_PATH}/audio/note.c
+    ${PROJ_PATH}/audio/audio.cpp
+    ${PROJ_PATH}/audio/AudioManager.cpp
     # ${PROJ_PATH}/audio/sequencer.cpp
-    ${PROJ_PATH}/audio/mixer.c
+    # ${PROJ_PATH}/audio/mixer.c
     ${PROJ_PATH}/utils/cpu_utils.c
     ${FREERTOS_PATH}/croutine.c
     ${FREERTOS_PATH}/event_groups.c
@@ -92,6 +97,13 @@ set(sources_shared_SRCS
     ${FREERTOS_PATH}/portable/GCC/ARM_CM4F/port.c
     ${FREERTOS_PATH}/portable/Common/mpu_wrappers.c
     ${FREERTOS_PATH}/portable/MemMang/heap_4.c
+    # ${PROJ_PATH}/lib/SystemView/SEGGER/SEGGER_SYSVIEW.c
+    # ${PROJ_PATH}/lib/SystemView/SEGGER/SEGGER_RTT.c
+    # ${PROJ_PATH}/lib/SystemView/SEGGER/SEGGER_RTT_printf.c
+    # ${PROJ_PATH}/lib/SystemView/Sample/FreeRTOSV10.4/SEGGER_SYSVIEW_FreeRTOS.c
+    # ${PROJ_PATH}/lib/SystemView/Sample/FreeRTOSV10.4/Config/Cortex-M/SEGGER_SYSVIEW_Config_FreeRTOS.c
+    # ${PROJ_PATH}/lib/SystemView/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.c
+    # ${PROJ_PATH}/lib/SystemView/SEGGER/SEGGER_RTT_ASM_ARMv7M.S
 )
 
 set(include_path_shared_DIRS
@@ -104,6 +116,11 @@ set(include_path_shared_DIRS
     ${PROJ_PATH}/devices/
     ${PROJ_PATH}/drv/
     ${PROJ_PATH}/utils/
+    ${PROJ_PATH}/lib/
+    # ${PROJ_PATH}/lib/SystemView
+    # ${PROJ_PATH}/lib/SystemView/SEGGER
+    # ${PROJ_PATH}/lib/SystemView/CONFIG
+    # ${PROJ_PATH}/lib/SystemView/Sample/FreeRTOSV10.4
     ${FREERTOS_PATH}/portable/MemMag
     ${FREERTOS_PATH}/portable/GCC/ARM_CM4F
     ${FREERTOS_PATH}/include
@@ -211,7 +228,9 @@ if(BUILD_F429DISCOVERY)
         -Wpedantic
         -Wno-unused-parameter
         # Full debug configuration
-        -Og -g3 -ggdb
+        # -Og -g3 -ggdb
+        # Optimization
+        -O2 -g3 -ggdb
     )
 
     target_compile_options(synth_F429Discovery PRIVATE
@@ -224,7 +243,9 @@ if(BUILD_F429DISCOVERY)
         -Wpedantic
         -Wno-unused-parameter
         # Full debug configuration
-        -Og -g3 -ggdb
+        # -Og -g3 -ggdb
+        # Optimization
+        -O2 -g3 -ggdb
     )
 
     set(symbols_SYMB_F429_DISCOVERY
@@ -279,7 +300,8 @@ set(G4_REV_A_STM32_PATH ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32)
 add_executable(synth_G4RevA
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/startup_stm32g491xx.s
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/hardwareSpecific.c
-    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/audio/audio_hardwareSpecific.c
+    # ${HARDWARE_SPECIFIC_PATH}/G4_RevA/audio/audio_hardwareSpecific.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/audio/audio_hardwareSpecific.cpp
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/drv/drv_GPIO_hardwareSpecific.c
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/drv/drv_I2C_hardwareSpecific.c
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/drv/drv_SPI_hardwareSpecific.c
@@ -350,12 +372,14 @@ add_executable(synth_G4RevA
     ${G4_REV_A_STM32_PATH}/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c
     ${G4_REV_A_STM32_PATH}/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c
     ${G4_REV_A_STM32_PATH}/Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Src/usbd_customhid.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/lvgl/src/extra/themes/default/lv_theme_default.c
     ${sources_shared_SRCS}
 )
 
 set(include_path_G4_RevA_DIRS
     ${include_path_shared_DIRS}
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/audio/
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/drv
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/devices
     ${G4_REV_A_STM32_PATH}/
@@ -375,6 +399,8 @@ set(include_path_G4_RevA_DIRS
     ${G4_REV_A_STM32_PATH}/Drivers/CMSIS/Include
     ${G4_REV_A_STM32_PATH}/Drivers/CMSIS/Core/Include
     ${G4_REV_A_STM32_PATH}/Drivers/CMSIS/DSP/Include
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/lvgl/src/extra/themes
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/lvgl/src/extra/themes/default
 )
 
 set(LV_CONF_PATH
@@ -403,7 +429,9 @@ target_compile_options(lvgl_G4 PRIVATE
     -Wpedantic
     -Wno-unused-parameter
     # Full debug configuration
-    -Og -g3 -ggdb
+    # -Og -g3 -ggdb
+    # Optimization
+    -O2 -g3 -ggdb
 )
 
 target_compile_options(synth_G4RevA PRIVATE
@@ -416,7 +444,9 @@ target_compile_options(synth_G4RevA PRIVATE
     -Wpedantic
     -Wno-unused-parameter
     # Full debug configuration
-    -Og -g3 -ggdb
+    # -Og -g3 -ggdb
+    # Optimization
+    -O2 -g3 -ggdb
 )
 
 set(symbols_SYMB_G4_RevA

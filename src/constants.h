@@ -1,6 +1,6 @@
 #ifndef CONSTANTS_H_
 #define CONSTANTS_H_
 
-#define SYNTH_SAMPLE_FREQUENCY 44100U
+#define SYNTH_SAMPLE_FREQUENCY      44100U
 
 #endif  // CONSTANTS_H_

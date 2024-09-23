@@ -19,6 +19,12 @@
 
 /* T Y P E D E F S */
 
+/*
+    Attack is the time taken for the rise of the level from nil to peak.
+    Decay is the time taken for the level to reduce from the attack level to the sustain level.
+    Sustain is the level maintained until the key is released.
+    Release is the time taken for the level to decay to nil.
+*/
 typedef enum
 {
     ADSR_STAGE_ATTACK,

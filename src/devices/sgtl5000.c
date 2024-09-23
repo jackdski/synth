@@ -1,12 +1,16 @@
 
 /* I N C L U D E S */
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "sgtl5000.h"
 
 #include "features.h"
 
 #include "drv_I2C.h"
-#include "main.h"
+
 #include <string.h>
 
 #if FEATURE_SGTL5000
@@ -70,7 +74,7 @@ typedef struct
     SGTL5000_registerData_S registerData;
 
     // float32_t                   dacVolumeDb;        // 0dB to -90dB in 0.5017dB steps
-    // float32_t                   headphoneVolumeDb;  // +12dB to -51.5dB in 0.5dB steps
+    float headphoneVolumeDb;  // +12dB to -51.5dB in 0.5dB steps
 } SGTL5000_data_S;
 
 /* P R I V A T E   F U N C T I O N   D E F I N I T I O N S */
@@ -295,9 +299,22 @@ bool SGTL5000_readI2C(const uint16_t reg, uint16_t *rxData)
 void SGTL5000_updateVolume(float volume)
 {
     // range: [+12dB, -51.5dB]
-    const float dB              = -1.0f * ((63.5f * volume) - 12.0f);
-    const uint16_t hpConfigData = (((uint8_t)dB << SGTL5000_HP_VOL_RIGHT_POS) | (uint8_t)dB);
+    float dB = -1.0f * ((63.5f * volume) - 12.0f);
+    dB       = MIN(dB, SGTL5000_VOLUME_DB_MIN);
+    dB       = MAX(dB, SGTL5000_VOLUME_DB_MAX);
+
+    SGTL5000_data.headphoneVolumeDb = dB;
+    const uint16_t hpConfigData     = (((uint8_t)dB << SGTL5000_HP_VOL_RIGHT_POS) | (uint8_t)dB);
     (void)SGTL5000_writeI2C(SGTL5000_CHIP_ANA_HP_CTRL_REG, hpConfigData);
 }
+
+float SGTL5000_getVolume(void)
+{
+    return SGTL5000_data.headphoneVolumeDb;
+}
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // FEATURE_SGTL5000

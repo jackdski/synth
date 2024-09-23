@@ -1,4 +1,18 @@
+/* I N C L U D E S */
+
 #include "sequencer.h"
+#include "features.h"
+
+#if FEATURE_SEQUENCER
+
+/* D E F I N E S */
+
+/* T Y P E D E F S */
+
+
+/* P R I V A T E   D A T A   D E F I N I T I O N S */
+
+/* P U B L I C   F U N C T I O N S */
 
 void SequencerChannel::setCycleSampleSetting(bool setting)
 {
@@ -46,3 +60,5 @@ float Sequencer::getSample(void)
 
     return (sample / numSteps);
 }
+
+#endif  // FEATURE_SEQUENCER
