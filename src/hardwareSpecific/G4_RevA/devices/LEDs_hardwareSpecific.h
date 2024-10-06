@@ -1,9 +1,13 @@
 #ifndef LEDSHARDWARE_SPECIFIC_H_
 #define LEDS_HARDWARE_SPECIFIC_H_
 
+#include "features.h"
+
 typedef enum
 {
     LED_CHANNEL_BLINKY,
+
+#if FEATURE_PCA9685
     LED_CHANNEL_BUTTON_1,
     LED_CHANNEL_BUTTON_2,
     LED_CHANNEL_BUTTON_3,
@@ -20,6 +24,7 @@ typedef enum
     LED_CHANNEL_BUTTON_14,
     LED_CHANNEL_BUTTON_15,
     LED_CHANNEL_BUTTON_16,
+#endif
 
     LED_CHANNEL_COUNT,
 } LED_channel_E;

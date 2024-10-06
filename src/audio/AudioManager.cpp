@@ -8,6 +8,8 @@
 
 #include "hardwareSpecific.h"
 
+#if FEATURE_AUDIO
+
 using namespace Audio;
 
 AudioManager audioManager;
@@ -54,11 +56,18 @@ void AudioManager::updateSampleBlock(uint16_t *sampleBlock, const bool firstHalf
             }
         }
 
+        // apply LFO
+        const float lfoSample = lfo.getSample() * lfoVolume;
+        sample = (lfoSample + sample) / 2.0f;
+
         // sample as a 16bit value
         // uint16_t value = (uint16_t)((int16_t)(sample * I2S_DATA_FORMAT_MAX_VALUE));
         uint16_t value = static_cast<uint16_t>(static_cast<int16_t>(sample * I2S_DATA_FORMAT_MAX_VALUE));
         // value *= volume;
+
         sampleBlock[i]       = value;  // left
         sampleBlock[i + 1U]  = value; // right
     }
 }
+
+#endif // FEATURE_AUDIO

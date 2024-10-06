@@ -8,7 +8,7 @@
 #include "semphr.h"
 #include "task.h"
 
-#include "lv_themes.h"
+// #include "lv_themes.h"
 #include "lvgl.h"
 
 #include "ST7789.h"
@@ -118,10 +118,12 @@ static void display_setScreen(const Display_screen_E screen)
 
 static void display_private_update_inputs(void)
 {
+#if (FEATURE_BUTTON)
     const bool buttonPressedA = Button_isPressed(BUTTON_CHANNEL_A);
     const bool buttonPressedB = Button_isPressed(BUTTON_CHANNEL_B);
     displayData.buttonPressedA = (buttonPressedA && (displayData.buttonPressedA == false));
     displayData.buttonPressedB = (buttonPressedB && (displayData.buttonPressedB == false));
+#endif
 
     displayData.homeScreenPress |= (displayData.buttonPressedA || displayData.buttonPressedB);
 }

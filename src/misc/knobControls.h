@@ -21,7 +21,6 @@ typedef enum
 {
     KNOB_CONTROLS_CHANNEL_SELECTOR,
     KNOB_CONTROLS_CHANNEL_VOLUME,
-
     KNOB_CONTROLS_CHANNEL_COUNT
 } KnobControls_channel_E;
 

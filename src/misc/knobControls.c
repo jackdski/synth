@@ -34,11 +34,11 @@ static KnobControls_channelConfig_S knobControls_channelConfig[KNOB_CONTROLS_CHA
     {
         .encoderChannel     = DRV_ENCODER_CHANNEL_1,
         .valueType          = KNOB_CONTROLS_VALUE_TYPE_FLOAT,
-        .incrementValue.f32 = (-1.0f * SGTL5000_HEADPHONE_VOLUME_DB_PER_STEP), // dB - lower is higher volume
-        .initialValue.f32   = SGTL5000_INITIAL_VOLUME_DB,
+        .incrementValue.f32 = 0.5f, //(-1.0f * SGTL5000_HEADPHONE_VOLUME_DB_PER_STEP), // dB - lower is higher volume
+        .initialValue.f32   = 0.5, // SGTL5000_INITIAL_VOLUME_DB,
         .applyMinMax        = true,
-        .minValue.f32       = SGTL5000_VOLUME_DB_MAX,
-        .maxValue.f32       = SGTL5000_VOLUME_DB_MIN,
+        .minValue.f32       = 1.0f, //SGTL5000_VOLUME_DB_MAX,
+        .maxValue.f32       = 1.0f, //SGTL5000_VOLUME_DB_MIN,
     },
 };
 // clang-format on

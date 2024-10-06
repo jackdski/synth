@@ -6,6 +6,8 @@
 
 #include "audio_hardwareSpecific.hpp"
 
+#if FEATURE_AUDIO
+
 namespace Audio
 {
 
@@ -42,6 +44,7 @@ public:
     Keyboard keyboard;
 
     Oscillator lfo = Oscillator(20.0F, 0.0F, WAVETABLE_TYPE_SINE);
+    float lfoVolume = 0.3f;
 
     Audio_I2SInterface i2sInterface;
 
@@ -58,5 +61,5 @@ public:
 
 }
 
-
+#endif // FEATURE_AUDIO
 #endif // AUDIO_MANAGER_H_

@@ -21,6 +21,23 @@
         },
         {
             "cwd": "${workspaceFolder}",
+            "executable": "./build/build/G4_RevA/synth_G4RevA.elf",
+            "name": "Debug G4 with J-Link",
+            "request": "launch",
+            "type": "cortex-debug",
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "none",
+            "liveWatch": {
+                "enabled": true,
+                "samplesPerSecond": 4
+            },
+            "device": "STM32G491CE",
+            "servertype": "jlink",
+            "serverArgs": [],
+            "svdFile": "${workspaceRoot}/src/hardwareSpecific/G4_RevA/STM32G491.svd"
+        },
+        {
+            "cwd": "${workspaceFolder}",
             "executable": "./build/build/F429Discovery/synth_G4RevA.elf",
             "name": "Debug F429Discovery with ST-Link",
             "request": "launch",

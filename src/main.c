@@ -26,8 +26,8 @@ int main(void)
 
     // traceSTART();
 
-    // (void)xTaskCreate(initTask, "init", configMINIMAL_STACK_SIZE, (void *)NULL, 0U, NULL);
-    initTask(NULL);
+    (void)xTaskCreate(initTask, "init", configMINIMAL_STACK_SIZE, (void *)NULL, 0U, NULL);
+    // initTask(NULL);
     vTaskStartScheduler();
     while (1)
     {
@@ -41,12 +41,12 @@ static void initTask(void *pvParameters)
 {
     // (void)xTaskCreate(misc100HzTask, "misc100Hz", configMINIMAL_STACK_SIZE, (void *)NULL, 2U, NULL);
     (void)xTaskCreate(misc10HzTask,  "misc10Hz", configMINIMAL_STACK_SIZE, (void *)NULL, 3U, NULL);
-    (void)xTaskCreate(misc1HzTask,  "misc1Hz", configMINIMAL_STACK_SIZE, (void *)NULL, 3U, NULL);
+    // (void)xTaskCreate(misc1HzTask,  "misc1Hz", configMINIMAL_STACK_SIZE, (void *)NULL, 3U, NULL);
 
-    (void)xTaskCreate(audioTask, "audioTask", configMINIMAL_STACK_SIZE, (void *)NULL, 1U, NULL);
+    // (void)xTaskCreate(audioTask, "audioTask", configMINIMAL_STACK_SIZE, (void *)NULL, 1U, NULL);
 
 #if (FEATURE_DISPLAY)
-    (void)xTaskCreate(displayControl, "displayControl", 512 * 2, (void *)NULL, 4U, NULL);
+    // (void)xTaskCreate(displayControl, "displayControl", 512 * 2, (void *)NULL, 4U, NULL);
 #endif
     // vTaskDelete(NULL);
 }

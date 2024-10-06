@@ -32,14 +32,21 @@
 
 #define BRIGHTNESS_STEP            0.01F
 
+#if (FEATURE_BUTTON || FEATURE_LED)
 typedef struct
 {
+#if FEATURE_BUTTON
     Button_channel_E button;
+#endif
+#if FEATURE_LED
     LED_channel_E led;
+#endif
 } MiscLedButtonConfig_S;
+#endif
 
 /* P R I V A T E   D A T A   D E F I N I T I O N S */
 
+#if (FEATURE_LED)
 static MiscLedButtonConfig_S ledButtonConfig[16U] = {
     {.button = BUTTON_CHANNEL_1, .led = LED_CHANNEL_BUTTON_1},
     {.button = BUTTON_CHANNEL_2, .led = LED_CHANNEL_BUTTON_2},
@@ -58,6 +65,7 @@ static MiscLedButtonConfig_S ledButtonConfig[16U] = {
     {.button = BUTTON_CHANNEL_15, .led = LED_CHANNEL_BUTTON_15},
     {.button = BUTTON_CHANNEL_16, .led = LED_CHANNEL_BUTTON_16},
 };
+#endif
 
 static TickType_t misc10HzTaskLastWakeTime;
 // static TickType_t misc100HzTaskLastWakeTime;
@@ -71,12 +79,14 @@ void misc1HzTask(void *pvParameters)
     UNUSED(pvParameters);
     while(1)
     {
+#if (FEATURE_SGTL5000)
         SGTL5000_pollRegisters();
+#endif
 
         // vTaskGetRunTimeStats(buffer);
         const uint16_t cpuUsage = osGetCPUUsage();
         sprintf(buffer, "CPU Usage: %d\n", cpuUsage);
-        _write_debug(buffer, 40U * 6U);
+        printf(buffer, 40U * 6U);
         vTaskDelay(1000U);
     }
 }
@@ -94,6 +104,7 @@ void misc10HzTask(void *pvParameters)
         PCA9555_updateInputs();
 #endif
 
+#if (FEATURE_LED)
         for (uint8_t channel = 0U; channel < 16U; channel++)
         {
             const MiscLedButtonConfig_S *config = &ledButtonConfig[channel];
@@ -101,23 +112,26 @@ void misc10HzTask(void *pvParameters)
             const float ledBrightness = Button_isPressed(config->button) ? LED_BRIGHTNESS_MAX_VALUE : LED_BRIGHTNESS_MIN_VALUE;
             LED_setBrightness(config->led, ledBrightness);
         }
-
-#if FEATURE_PCA9685
-        PCA9685_updateOutputs();
 #endif
+
+// #if FEATURE_PCA9685
+//         PCA9685_updateOutputs();
+// #endif
 
 #if FEATURE_GPIO
         drv_GPIO_update();
 #endif
 
-#if FEATURE_LEDS
-        LED_toggle(LED_CHANNEL_BLINKY);
-#endif
+// #if FEATURE_LEDS
+//         LED_toggle(LED_CHANNEL_BLINKY);
+// #endif
 
 #if FEATURE_ENCODER
         knobControls_update();
         const KnobControls_value_U volumeValue = knobControls_getValue(KNOB_CONTROLS_CHANNEL_VOLUME);
         // printf("Volume: %f\n", volumeValue.f32);
+#endif
+#if FEATURE_SGTL5000
         SGTL5000_updateVolume(volumeValue.f32);
 #endif
 

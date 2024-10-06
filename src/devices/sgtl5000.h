@@ -1,16 +1,16 @@
 #ifndef SGTL5000_H_
 #define SGTL5000_H_
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /* I N C L U D E S */
 
 #include "drv_I2C.h"
 #include "main.h"
 
 #include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #if FEATURE_SGTL5000
 

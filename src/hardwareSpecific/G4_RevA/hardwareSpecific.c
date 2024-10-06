@@ -183,9 +183,9 @@ void hardwareSpecificInit(void)
     drv_encoder_init();
 #endif
 
-    MX_TIM16_Init();
-    extern TIM_HandleTypeDef htim16;
-    HAL_TIM_Base_Start(&htim16);
+    // MX_TIM16_Init();
+    // extern TIM_HandleTypeDef htim16;
+    // HAL_TIM_Base_Start(&htim16);
 
     MX_TIM15_Init();
     extern TIM_HandleTypeDef htim15;
@@ -213,7 +213,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     }
 }
 
-int _write_debug(char *ptr, int len)
+int _write(int file, char *ptr, int len)
 {
     int DataIdx;
     for (DataIdx = 0; DataIdx < len; DataIdx++)

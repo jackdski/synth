@@ -4,6 +4,10 @@
 
 #if (FEATURE_LEDS)
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* D E F I N E S */
 
 /* P R I V A T E   F U N C T I O N   D E F I N I T I O N S */
@@ -18,6 +22,7 @@ static LED_channelConfig_S ledChannelConfig[LED_CHANNEL_COUNT] =
         .type = LED_TYPE_GPIO,
         .gpioConfig = { .gpio = DRV_GPIO_CHANNEL_LED_BLINKY, },
     },
+#if FEATURE_PCA9685
     [LED_CHANNEL_BUTTON_1] =
     {
         .type = LED_TYPE_PCA9685,
@@ -98,6 +103,7 @@ static LED_channelConfig_S ledChannelConfig[LED_CHANNEL_COUNT] =
         .type = LED_TYPE_PCA9685,
         .PCA9685Config = { .channel = PCA9685_CHANNEL_12 },
     },
+#endif
 };
 // clang-format on
 
@@ -108,5 +114,9 @@ LED_config_S ledConfig = {
 };
 
 /* P U B L I C   F U N C T I O N S */
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // FEATURE_LEDS

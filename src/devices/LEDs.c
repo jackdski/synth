@@ -3,11 +3,11 @@
 
 #include "LEDs.h"
 
+#if FEATURE_LEDS
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#if FEATURE_LEDS
 
 #include "PCA9685.h"
 #include "drv_GPIO.h"
@@ -55,12 +55,15 @@ void LED_setState(LED_channel_E channel, bool enable)
             break;
         }
 
+#if FEATURE_PCA9685
         case LED_TYPE_PCA9685:
-        default:
         {
             PCA9685_setState(channelConfig->PCA9685Config.channel, enable);
             break;
         }
+#endif
+        default:
+            break;
     }
 }
 
@@ -72,9 +75,11 @@ void LED_toggle(LED_channel_E channel)
         case LED_TYPE_GPIO:
             drv_GPIO_toggleOutput(channelConfig->gpioConfig.gpio);
             break;
+#if FEATURE_PCA9685
         case LED_TYPE_PCA9685:
             PCA9685_toggle(channelConfig->PCA9685Config.channel);
             break;
+#endif
         default:
             // do nothing
             break;
@@ -95,9 +100,12 @@ void LED_setBrightness(LED_channel_E channel, float brightness)
         case LED_TYPE_GPIO:
             drv_GPIO_setOutput(channelConfig->gpioConfig.gpio, (brightness > 0.0f));
             break;
+
+#if FEATURE_PCA9685
         case LED_TYPE_PCA9685:
             PCA9685_setBrightness(channelConfig->PCA9685Config.channel, brightness);
             break;
+#endif
         default:
             // do nothing
             break;

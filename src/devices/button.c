@@ -56,9 +56,11 @@ bool Button_isPressed(const Button_channel_E channel)
         }
             break;
 
+#if FEATURE_PCA9555
         case BUTTON_INPUT_TYPE_PORT_EXPANDER:
             ret = PCA9555_getState(channelConfig->pca9555Channel);
             break;
+#endif
 
         case BUTTON_INPUT_TYPE_COUNT:
         default:

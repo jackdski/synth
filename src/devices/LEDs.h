@@ -5,10 +5,6 @@
 
 #include "features.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #if (FEATURE_LEDS)
 
 #include "LEDs_hardwareSpecific.h"
@@ -18,6 +14,10 @@ extern "C" {
 
 #include <stdbool.h>
 #include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /* D E F I N E S */
 
@@ -29,7 +29,9 @@ extern "C" {
 typedef enum
 {
     LED_TYPE_GPIO,
+#if FEATURE_PCA9685
     LED_TYPE_PCA9685,
+#endif
 } LED_type_E;
 
 typedef struct
@@ -37,10 +39,12 @@ typedef struct
     drv_GPIO_channel_E gpio;
 } LED_GpioConfig_S;
 
+#if FEATURE_PCA9685
 typedef struct
 {
-    uint8_t channel;  // TODO: PCA9685PW driver
+    uint8_t channel;
 } LED_PCA9685Config_S;
+#endif
 
 typedef struct
 {
@@ -49,7 +53,9 @@ typedef struct
     union
     {
         LED_GpioConfig_S gpioConfig;
+#if FEATURE_PCA9685
         LED_PCA9685Config_S PCA9685Config;
+#endif
     };
 } LED_channelConfig_S;
 

@@ -25,7 +25,9 @@ extern "C" {
 typedef enum
 {
     BUTTON_INPUT_TYPE_GPIO,
+#if FEATURE_PCA9555
     BUTTON_INPUT_TYPE_PORT_EXPANDER,
+#endif
     BUTTON_INPUT_TYPE_COUNT
 } Button_inputType_E;
 
@@ -40,7 +42,9 @@ typedef struct
     Button_inputType_E inputType;
     union
     {
+#if FEATURE_PCA9555
         PCA9555_channel_E pca9555Channel;
+#endif
         Button_gpioConfig_S gpioConfig;
     };
 

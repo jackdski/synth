@@ -7,7 +7,7 @@ extern "C" {
 
 void hardwareSpecificInit(void);
 
-int _write_debug(char *ptr, int len);
+// int _write_debug(char *ptr, int len);
 
 #ifdef __cplusplus
 }

@@ -27,6 +27,7 @@
 #define FEATURE_AUDIO         1
 #define FEATURE_MIXER         0
 #define FEATURE_NOTE          0
+#define FEATURE_SAMPLES       0
 #define FEATURE_KEYBOARD      1
 #define FEATURE_SEQUENCER     0
 #define FEATURE_OSC           1
