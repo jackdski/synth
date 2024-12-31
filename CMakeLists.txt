@@ -56,8 +56,8 @@ message("Build type: " ${CMAKE_BUILD_TYPE})
 project(synth)
 enable_language(C CXX ASM)
 
-set(sources_shared_SRCS
-    ${PROJ_PATH}/main.c
+set(SRCS
+    ${PROJ_PATH}/main.cpp
     ${PROJ_PATH}/drv/drv_I2C.c
     ${PROJ_PATH}/drv/drv_SPI.c
     ${PROJ_PATH}/drv/drv_GPIO.c
@@ -68,11 +68,13 @@ set(sources_shared_SRCS
     ${PROJ_PATH}/devices/button.c
     ${PROJ_PATH}/devices/knob.c
     ${PROJ_PATH}/devices/sgtl5000.c
-    ${PROJ_PATH}/devices/ST7789.c
-    ${PROJ_PATH}/display/display.c
-    ${PROJ_PATH}/display/screens/homeScreen.c
-    ${PROJ_PATH}/display/screens/waveformScreen.c
-    ${PROJ_PATH}/display/screens/settingsSelection.c
+    ${PROJ_PATH}/devices/ST7789.cpp
+    # ${PROJ_PATH}/display/display.c
+    ${PROJ_PATH}/display/DisplayManager.cpp
+    ${PROJ_PATH}/display/screens/homeScreen.cpp
+    ${PROJ_PATH}/display/screens/waveformScreen.cpp
+    ${PROJ_PATH}/display/screens/settingsSelection.cpp
+    ${PROJ_PATH}/display/screens/sequencerScreen.cpp
     ${PROJ_PATH}/misc/misc.c
     ${PROJ_PATH}/misc/knobControls.c
     ${PROJ_PATH}/wavetables/wavetables.c
@@ -84,9 +86,84 @@ set(sources_shared_SRCS
     # ${PROJ_PATH}/audio/note.c
     ${PROJ_PATH}/audio/audio.cpp
     ${PROJ_PATH}/audio/AudioManager.cpp
-    # ${PROJ_PATH}/audio/sequencer.cpp
+    ${PROJ_PATH}/audio/sequencer.cpp
     # ${PROJ_PATH}/audio/mixer.c
     ${PROJ_PATH}/utils/cpu_utils.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/startup_stm32g491xx.s
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/hardwareSpecific.c
+    # ${HARDWARE_SPECIFIC_PATH}/G4_RevA/audio/audio_hardwareSpecific.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/audio/audio_hardwareSpecific.cpp
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/drv/drv_GPIO_hardwareSpecific.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/drv/drv_I2C_hardwareSpecific.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/drv/drv_SPI_hardwareSpecific.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/drv/drv_encoder_hardwareSpecific.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/devices/LEDs_hardwareSpecific.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/devices/button_hardwareSpecific.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/devices/knob_hardwareSpecific.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/devices/PCA9555_hardwareSpecific.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/devices/PCA9685_hardwareSpecific.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/lvgl/src/extra/themes/default/lv_theme_default.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Core/Src/adc.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Core/Src/cordic.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Core/Src/dma.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Core/Src/fmac.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Core/Src/gpio.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Core/Src/i2c.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Core/Src/i2s.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Core/Src/iwdg.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Core/Src/rng.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Core/Src/spi.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Core/Src/tim.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Core/Src/wwdg.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Core/Src/stm32g4xx_it.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Core/Src/stm32g4xx_hal_msp.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Core/Src/stm32g4xx_hal_timebase_tim.c
+    # ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/FATFS/App/app_fatfs.c
+    # ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/FATFS/Target/user_diskio.c
+    # ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/USB_Device/App/usb_device.c
+    # ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/USB_Device/App/usbd_desc.c
+    # ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/USB_Device/App/usbd_custom_hid_if.c
+    # ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/USB_Device/Target/usbd_conf.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pcd.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pcd_ex.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_usb.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ex.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ramfunc.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_exti.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma_ex.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_adc.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_adc_ex.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_adc.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cordic.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_fmac.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_i2c.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_i2c_ex.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_i2s.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_spi.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_spi_ex.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_wwdg.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rng.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_iwdg.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Core/Src/system_stm32g4xx.c
+    # ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Middlewares/Third_Party/FatFs/src/diskio.c
+    # ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Middlewares/Third_Party/FatFs/src/ff.c
+    # ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Middlewares/Third_Party/FatFs/src/ff_gen_drv.c
+    # ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Middlewares/Third_Party/FatFs/src/option/syscall.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Src/usbd_customhid.c
     ${FREERTOS_PATH}/croutine.c
     ${FREERTOS_PATH}/event_groups.c
     ${FREERTOS_PATH}/list.c
@@ -99,7 +176,7 @@ set(sources_shared_SRCS
     ${FREERTOS_PATH}/portable/MemMang/heap_4.c
 )
 
-set(include_path_shared_DIRS
+set(INCLUDE_DIRS
     ${PROJ_PATH}/
     ${PROJ_PATH}/misc/
     ${PROJ_PATH}/display/
@@ -114,190 +191,38 @@ set(include_path_shared_DIRS
     ${FREERTOS_PATH}/portable/MemMag
     ${FREERTOS_PATH}/portable/GCC/ARM_CM4F
     ${FREERTOS_PATH}/include
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/audio
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/devices
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/drv
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Core/Inc
+    # ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/FATFS/Target
+    # ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/FATFS/App
+    # ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/FATFS/
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/USB_Device/App
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/USB_Device/Target
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Inc
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Inc/Legacy
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc
+    # ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Middlewares/Third_Party/FatFs/
+    # ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Middlewares/Third_Party/FatFs/src/
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/CMSIS/Device/ST/STM32G4xx/Include
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/CMSIS/Include
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/CMSIS/Core/Include
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/CMSIS/DSP/Include
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/lvgl/src/extra/themes
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/lvgl/src/extra/themes/default
 )
-
-# Options
-option(BUILD_F429DISCOVERY "Enable building F429 Discovery Revision" ON)
-option(BUILD_G4_REV_A "Enable building the STM32G4-based revision A" ON)
-
-
-if(BUILD_F429DISCOVERY)
-
-    set(TARGET synth_G4RevA)
-    # set(synth_F429Discovery synth_F429Discovery)
-    set(F429_DISCOVERY_STM32_PATH ${HARDWARE_SPECIFIC_PATH}/F429Discovery/stm32)
-
-    add_executable(synth_F429Discovery
-        ${HARDWARE_SPECIFIC_PATH}/F429Discovery/startup_stm32f429xx.s
-        ${HARDWARE_SPECIFIC_PATH}/F429Discovery/main.cpp
-        ${F429_DISCOVERY_STM32_PATH}/Core/Src/gpio.c
-        ${F429_DISCOVERY_STM32_PATH}/Core/Src/i2c.c
-        ${F429_DISCOVERY_STM32_PATH}/Core/Src/i2s.c
-        ${F429_DISCOVERY_STM32_PATH}/Core/Src/sdio.c
-        ${F429_DISCOVERY_STM32_PATH}/Core/Src/spi.c
-        ${F429_DISCOVERY_STM32_PATH}/Core/Src/tim.c
-        ${F429_DISCOVERY_STM32_PATH}/Core/Src/usart.c
-        ${F429_DISCOVERY_STM32_PATH}/Core/Src/stm32f4xx_it.c
-        ${F429_DISCOVERY_STM32_PATH}/Core/Src/stm32f4xx_hal_timebase_tim.c
-        ${F429_DISCOVERY_STM32_PATH}/Core/Src/stm32f4xx_hal_msp.c
-        ${F429_DISCOVERY_STM32_PATH}/Core/Src/system_stm32f4xx.c
-        ${F429_DISCOVERY_STM32_PATH}/Core/Src/adc.c
-        ${F429_DISCOVERY_STM32_PATH}/Core/Src/dma.c
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.c
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.c
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2s.c
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2s_ex.c
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_sdmmc.c
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sd.c
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c
-        ${sources_shared_SRCS}
-    )
-
-    set(include_path_F429Discovery_DIRS
-        ${include_path_shared_DIRS}
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/hardwareSpecific/F429Discovery/
-        ${F429_DISCOVERY_STM32_PATH}/
-        ${F429_DISCOVERY_STM32_PATH}/Core/Inc
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Inc
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/CMSIS/Device/ST/STM32F4xx/Include
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/CMSIS/Include
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/CMSIS/Core/Include
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/CMSIS/Core_A/Include
-        ${F429_DISCOVERY_STM32_PATH}/Drivers/CMSIS/DSP/Include
-    )
-
-    set(LV_CONF_PATH
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/lv_conf.h
-        CACHE STRING "" FORCE
-    )
-    set(LV_CONF_INCLUDE_SIMPLE 1)
-    # set(BUILD_SHARED_LIBS ON)
-
-    set_target_properties(synth_F429Discovery
-        PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${BUILD_DIRECTORY}/F429Discovery"
-    )
-
-    include(${HARDWARE_SPECIFIC_PATH}/F429Discovery/lvgl/CMakeLists.txt)
-    target_link_libraries(synth_F429Discovery PRIVATE lvgl::lvgl)
-    target_include_directories(synth_F429Discovery PRIVATE ${include_path_F429Discovery_DIRS})
-
-    target_compile_options(lvgl PRIVATE
-        -MMD
-        -MP
-        -MF
-        -mthumb
-        -mcpu=cortex-m4
-        -mfpu=fpv4-sp-d16
-        -mfloat-abi=hard
-        -Wall
-        -Wextra
-        -Wpedantic
-        -Wno-unused-parameter
-        # Full debug configuration
-        -Og -g3 -ggdb
-        # Optimization
-        # -O2 -g3 -ggdb
-    )
-
-    target_compile_options(synth_F429Discovery PRIVATE
-        -mthumb
-        -mcpu=cortex-m4
-        -mfpu=fpv4-sp-d16
-        -mfloat-abi=hard
-        -Wall
-        -Wextra
-        -Wpedantic
-        -Wno-unused-parameter
-        # Full debug configuration
-        -Og -g3 -ggdb
-        # Optimization
-        # -O2 -g3 -ggdb
-    )
-
-    set(symbols_SYMB_F429_DISCOVERY
-        "DEBUG"
-        "STM32F429xx"
-        "USE_HAL_DRIVER"
-    )
-    target_compile_definitions(synth_F429Discovery PUBLIC ${symbols_SYMB_F429_DISCOVERY})
-
-    # Linker options
-    set(F429_DISCOVERY_linker_script_SRC    ${HARDWARE_SPECIFIC_PATH}/F429Discovery/stm32/STM32F429ZITx_FLASH.ld)
-    target_link_options(synth_F429Discovery PRIVATE
-        -T${F429_DISCOVERY_linker_script_SRC}
-        -mthumb
-        -mcpu=cortex-m4
-        -mfpu=fpv4-sp-d16
-        -mfloat-abi=hard
-        -Wl,-Map=${BUILD_DIRECTORY}/F429Discovery/synth_F429Discovery.map
-        -specs=nosys.specs
-        -u _printf_float                # STDIO float formatting support
-        -Wl,--start-group
-        -lc
-        -lm
-        -lnosys
-        -lstdc++
-        -lsupc++
-        -Wl,--end-group
-        -Wl,--print-memory-usage
-    )
-
-    # Execute post-build to print size
-    add_custom_command(TARGET synth_F429Discovery POST_BUILD
-    COMMAND ${CMAKE_SIZE} $<TARGET_FILE:synth_F429Discovery>
-    )
-
-    # Convert output to hex and binary
-    add_custom_command(TARGET synth_F429Discovery POST_BUILD
-    COMMAND ${CMAKE_OBJCOPY} -O ihex $<TARGET_FILE:synth_F429Discovery> ${BUILD_DIRECTORY}/G4_RevA/synth_F429Discovery.hex
-    )
-
-    # Convert to bin file -> add conditional check?
-    add_custom_command(TARGET synth_F429Discovery POST_BUILD
-    COMMAND ${CMAKE_OBJCOPY} -O binary $<TARGET_FILE:synth_F429Discovery> ${BUILD_DIRECTORY}/G4_RevA/synth_F429Discovery.bin
-    )
-
-endif(BUILD_F429DISCOVERY)
-
-if(BUILD_G4_REV_A)
 
 set(TARGET synth_G4RevA)
-set(G4_REV_A_STM32_PATH ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32)
+set(G4_REV_A_STM32_PATH ${HARDWARE_SPECIFIC_PATH}/G4_RevA/G4_RevA/stm32)
 set(DEVICE STM32G491CE)
 
-add_executable(synth_G4RevA
-    ${sources_shared_SRCS}
-)
+add_executable(synth_G4RevA ${SRCS})
 
-include(${HARDWARE_SPECIFIC_PATH}/G4_RevA/HardwareSpecific_G4_RevA.cmake)
-
-set(include_path_G4_RevA_DIRS
-    ${include_path_shared_DIRS}
-)
+set(include_path_G4_RevA_DIRS ${INCLUDE_DIRS})
 
 set(LV_CONF_PATH
     ${CMAKE_CURRENT_SOURCE_DIR}/src/lv_conf.h
@@ -331,9 +256,9 @@ target_compile_options(lvgl_G4 PRIVATE
     -Wpedantic
     -Wno-unused-parameter
     # Full debug configuration
-    # -Og -g3 -ggdb
+    -Og -g3 -ggdb
     # Optimization
-    -O2 -g3 -ggdb
+    # -O2 -g3 -ggdb
 )
 
 target_compile_options(${TARGET} PRIVATE
@@ -393,5 +318,3 @@ COMMAND ${CMAKE_OBJCOPY} -O ihex $<TARGET_FILE:${TARGET}> ${BUILD_DIRECTORY}/G4_
 add_custom_command(TARGET ${TARGET} POST_BUILD
 COMMAND ${CMAKE_OBJCOPY} -O binary $<TARGET_FILE:${TARGET}> ${BUILD_DIRECTORY}/G4_RevA/${TARGET}.bin
 )
-
-endif(BUILD_G4_REV_A)

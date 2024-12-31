@@ -16,7 +16,7 @@
 
 /* D E F I N E S */
 
-#define TRANSACTION_QUEUE_LENGTH 5U
+#define TRANSACTION_QUEUE_LENGTH 10U
 
 /* P R I V A T E   F U N C T I O N   D E F I N I T I O N S */
 

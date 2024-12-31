@@ -16,8 +16,6 @@ AudioManager audioManager;
 
 void AudioManager::initalizeCodec(uint16_t * sampleBlock)
 {
-    // memset(sampleBlock, 0U, sizeof(sampleBlock));
-
     // need to transmit on I2S to wake up codec
     i2sInterface.i2sTransmit(sampleBlock, I2S_BUFFER_SIZE);
     SGTL5000_init();
@@ -48,6 +46,11 @@ void AudioManager::updateSampleBlock(uint16_t *sampleBlock, const bool firstHalf
             }
 
             case AudioMode::Sequencer:
+            {
+                sample = sequencerManager.getSample();
+                break;
+            }
+
             case AudioMode::Arpeggiator:
             default:
             {
@@ -62,7 +65,7 @@ void AudioManager::updateSampleBlock(uint16_t *sampleBlock, const bool firstHalf
 
         // sample as a 16bit value
         // uint16_t value = (uint16_t)((int16_t)(sample * I2S_DATA_FORMAT_MAX_VALUE));
-        uint16_t value = static_cast<uint16_t>(static_cast<int16_t>(sample * I2S_DATA_FORMAT_MAX_VALUE));
+        const uint16_t value = static_cast<uint16_t>(static_cast<int16_t>(sample * I2S_DATA_FORMAT_MAX_VALUE));
         // value *= volume;
 
         sampleBlock[i]       = value;  // left

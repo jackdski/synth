@@ -1,8 +1,12 @@
-#include "ST7789.h"
+#include "ST7789.hpp"
 
 /* I N C L U D E S */
 
 #include "features.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #if (FEATURE_ST7789)
 
@@ -139,13 +143,26 @@ static void ST7789_private_setAddressWindow(uint16_t x0, uint16_t y0, uint16_t w
 
     {
 
-        uint8_t dataX[] = {(x >> 8U), (x & 0xFFU), (x1 >> 8U), (x1 & 0xFFU)};
+        uint8_t dataX[] =
+        {
+            (uint8_t)((uint16_t)x >> 8U),
+            (uint8_t)((uint16_t)x & 0xFFU),
+            (uint8_t)((uint16_t)x1 >> 8U),
+            (uint8_t)((uint16_t)x1 & 0xFFU),
+        };
+
         ST7789_private_writeCommand(ST7789_REG_COLUMN_ADDR_SET);
         ST7789_private_writeData(dataX, 4U);
     }
 
     {
-        uint8_t dataY[] = {(y >> 8U), (y & 0xFFU), (y1 >> 8U), (y1 & 0xFFU)};
+        uint8_t dataY[] =
+        {
+            (uint8_t)((uint16_t)y >> 8U),
+            (uint8_t)((uint16_t)y & 0xFFU),
+            (uint8_t)((uint16_t)y1 >> 8U),
+            (uint8_t)((uint16_t)y1 & 0xFFU),
+        };
         ST7789_private_writeCommand(ST7789_REG_ROW_ADDR_SET);
         ST7789_private_writeData(dataY, 4U);
     }
@@ -233,5 +250,9 @@ void ST7789_setRotation(ST7789_rotation_E rotation)
     ST7789_private_writeCommand(ST7789_REG_MEM_DATA_ACCESS_CTL);
     ST7789_private_writeByte(madctl);
 }
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // FEATURE_ST7789

@@ -8,6 +8,12 @@
 #include <stdint.h>
 #include <string.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#if (FEATURE_OSC)
+
 /* D E F I N E S */
 
 /* P R I V A T E   F U N C T I O N   D E F I N I T I O N S */
@@ -95,3 +101,9 @@ uint32_t oscillator_getWavetableSteps(const Oscillator_E oscillator)
     const uint32_t wavelengthsPerSecond = (uint32_t)(SYNTH_SAMPLE_FREQUENCY / channelConfig->frequency);
     return (WAVETABLE_NUM_SAMPLES * wavelengthsPerSecond) / SYNTH_SAMPLE_FREQUENCY;
 }
+
+#endif // FEATURE_OSC
+
+#ifdef __cplusplus
+}
+#endif

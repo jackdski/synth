@@ -3,7 +3,7 @@
 
 #include "features.h"
 
-#if (FEATURE_DISPLAY)
+#if 0 // (FEATURE_DISPLAY)
 
 #include <stdint.h>
 
@@ -13,6 +13,10 @@
 #include "lvgl.h"
 
 #include "ST7789.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define DISPLAY_WIDTH  ST7789_LCD_HEIGHT
 #define DISPLAY_HEIGHT ST7789_LCD_WIDTH
@@ -35,6 +39,10 @@ void display_waveformScreen(void);
 
 // ADD ONS
 void display_volume_bar(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // FEATURE_DISPLAY
 #endif  // DISPLAY_H_

@@ -6,6 +6,7 @@ extern "C" {
 #endif
 
 void hardwareSpecificInit(void);
+void hardwareSpecific_deviceInit(void);
 
 // int _write_debug(char *ptr, int len);
 

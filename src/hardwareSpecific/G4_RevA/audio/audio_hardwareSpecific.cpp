@@ -15,7 +15,9 @@ void HAL_I2S_TxHalfCpltCallback(I2S_HandleTypeDef *hi2s)
 {
     if (hi2s == &hi2s2)
     {
+        taskENTER_CRITICAL();
         audio_txHalfCompleteCallback();
+        taskEXIT_CRITICAL();
     }
 }
 
@@ -23,7 +25,9 @@ void HAL_I2S_TxCpltCallback(I2S_HandleTypeDef *hi2s)
 {
     if (hi2s == &hi2s2)
     {
+        taskENTER_CRITICAL();
         audio_txCompleteCallback();
+        taskEXIT_CRITICAL();
     }
 }
 

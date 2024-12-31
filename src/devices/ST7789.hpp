@@ -3,6 +3,10 @@
 
 /* I N C L U D E S */
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "drv_GPIO.h"
 #include "drv_SPI.h"
 #include "features.h"
@@ -105,4 +109,9 @@ void ST7789_setRotation(ST7789_rotation_E rotation);
 void ST7789_drawBuffer(uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint8_t *data, size_t size);
 
 #endif  // FEATURE_ST7789
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif  // ST7789_H_

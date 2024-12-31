@@ -64,7 +64,7 @@ void knobControls_update(void)
         KnobControls_channelData_S *channelData     = &knobControls_channelData[channel];
 
         const uint32_t currentPosition = drv_encoder_getCount(channelConfig->encoderChannel);
-        printf("Channel %d: %lu\n", channel, currentPosition);
+        // printf("Channel %d: %lu\n", channel, currentPosition);
 
         const uint32_t diff            = (currentPosition - channelData->previousPosition);
 

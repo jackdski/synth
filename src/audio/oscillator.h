@@ -3,12 +3,20 @@
 
 /* I N C L U D E S */
 
+#include "features.h"
+
 #include <float.h>
 #include <stdbool.h>
 #include <stdint.h>
 
 #include "Utils.h"
 #include "wavetables.h"
+
+#if (FEATURE_OSC)
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /* D E F I N E S */
 
@@ -53,4 +61,9 @@ float oscillator_getFrequency(const Oscillator_E oscillator);
 
 uint32_t oscillator_getWavetableSteps(const Oscillator_E oscillator);
 
+#ifdef __cplusplus
+}
+#endif
+
+#endif  // FEATURE_OSC
 #endif  // OSCILLATOR_H_

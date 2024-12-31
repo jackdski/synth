@@ -25,7 +25,6 @@ static bool drv_SPI_private_isBusyBus1(void);
 /* D A T A   D E F I N I T I O N S */
 
 extern SPI_HandleTypeDef hspi1;
-extern lv_color_t displayBuffer1;  // [BUFFER_SIZE];
 
 // clang-format off
 static drv_SPI_busConfig_S spiBus1Config[DRV_SPI_BUS_COUNT] =

@@ -8,13 +8,18 @@
 #include "semphr.h"
 #include "task.h"
 
-// #include "lv_themes.h"
+#include "lv_themes.h"
 #include "lvgl.h"
 
 #include "ST7789.h"
 
 #include "button.h"
 #include "sgtl5000.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 
 #if (FEATURE_DISPLAY)
 
@@ -89,21 +94,25 @@ static void display_setScreen(const Display_screen_E screen)
             case DISPLAY_SCREEN_HOME:
             {
                 lv_obj_clean(lv_scr_act());
-                display_homeScreen();
+                // display_homeScreen();
+    lv_obj_t *obj = lv_label_create(lv_scr_act());
+    // lv_obj_add_style(obj, &style, 0);
+    lv_label_set_text(obj, "JD");
+    lv_obj_center(obj);                
                 break;
             }
 
             case DISPLAY_SCREEN_SETTINGS:
             {
                 lv_obj_clean(lv_scr_act());
-                display_settingsSelection();
+                // display_settingsSelection();
                 break;
             }
 
             case DISPLAY_SCREEN_WAVEFORM:
             {
                 lv_obj_clean(lv_scr_act());
-                display_waveformScreen();
+                // display_waveformScreen();
                 break;
             }
 
@@ -233,5 +242,9 @@ void displayControl(void *pvParameters)
         }
     }
 }
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // FEATURE_DISPLAY

@@ -50,7 +50,7 @@ extern "C" {
 /* P R I V A T E    F U N C T I O N   D E C L A R A T I O N S */
 
 static void SystemClock_Config(void);
-static void hardwareSpecific_deviceInit(void);
+// static void hardwareSpecific_deviceInit(void);
 static void hardwareSpecific_debugInit(void);
 
 /* P R I V A T E    F U N C T I O N S */
@@ -104,7 +104,7 @@ void SystemClock_Config(void)
     }
 }
 
-static void hardwareSpecific_deviceInit(void)
+void hardwareSpecific_deviceInit(void)
 {
 #if FEATURE_PCA9555
     extern PCA9555_config_S PCA9555_config;
@@ -178,20 +178,25 @@ void hardwareSpecificInit(void)
 
     // MX_USB_Device_Init();
     // MX_ADC1_Init();
+
     MX_CORDIC_Init();
 #if FEATURE_ENCODER
     drv_encoder_init();
 #endif
 
-    // MX_TIM16_Init();
-    // extern TIM_HandleTypeDef htim16;
-    // HAL_TIM_Base_Start(&htim16);
-
+    // display backlight PWM
     MX_TIM15_Init();
     extern TIM_HandleTypeDef htim15;
     (void)HAL_TIM_PWM_Start(&htim15, TIM_CHANNEL_1);
 
-    MX_TIM6_Init();
+    // profiling
+    MX_TIM16_Init();
+    extern TIM_HandleTypeDef htim16;
+    HAL_TIM_Base_Start(&htim16);
+
+    // BPM tick
+    MX_TIM17_Init();
+
     // MX_IWDG_Init();
     // MX_RNG_Init();
     // MX_WWDG_Init();

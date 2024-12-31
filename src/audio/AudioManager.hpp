@@ -2,11 +2,13 @@
 #define AUDIO_MANAGER_H_
 
 #include "keyboard.hpp"
+#include "sequencer.hpp"
+
 #include "sgtl5000.h"
 
 #include "audio_hardwareSpecific.hpp"
 
-#if FEATURE_AUDIO
+#if (FEATURE_AUDIO)
 
 namespace Audio
 {
@@ -36,12 +38,11 @@ enum class AudioSettings
 
 class AudioManager
 {
-private:
-    /* data */
 public:
-    AudioMode mode = AudioMode::Keyboard;
+    AudioMode mode = AudioMode::Sequencer;
 
-    Keyboard keyboard;
+    SequencerManager sequencerManager;
+    Keyboard         keyboard;
 
     Oscillator lfo = Oscillator(20.0F, 0.0F, WAVETABLE_TYPE_SINE);
     float lfoVolume = 0.3f;
@@ -52,6 +53,11 @@ public:
     float volume = 0.3F;
 
     void initalizeCodec(uint16_t * sampleBlock);
+    void setMode(const AudioMode newMode)
+    {
+        mode = newMode;
+    }
+
     void updateIsActive(void);
 
     void update10Hz(void);

@@ -21,7 +21,7 @@
 
 /* D E F I N E S */
 
-#define MAX_BUFFER_LENGTH 10U
+#define MAX_BUFFER_LENGTH 20U
 
 /* T Y P E D E F S */
 

@@ -23,4 +23,6 @@
 #define SATURATE_INC(X, Y, INC)           (X = (((X) == (Y)) ? (X) : ((X) + INC)))
 #define SATURATE_DEC(X, Y, INC)           (X = (((X) == (Y)) ? (X) : ((X)-INC)))
 
+#define CONVERT_BPM_TO_TICKS(CLK_FREQ, BPM)     (CLK_FREQ * (60U / BPM))
+
 #endif  // UTILS_H_

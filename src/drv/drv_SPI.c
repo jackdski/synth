@@ -189,7 +189,6 @@ bool drv_SPI_read(drv_SPI_device_E spiDevice, uint8_t *rxBuffer, uint32_t length
 
 void drv_SPI_isrCallback(const drv_SPI_bus_E bus)
 {
-    // could maybe do something smarter here, but eh
     for (drv_SPI_device_E device = (drv_SPI_device_E)0U; device < DRV_SPI_DEVICE_COUNT; device++)
     {
         const drv_SPI_deviceConfig_S *spiDeviceConfig = &drv_SPI_config.deviceConfig[device];

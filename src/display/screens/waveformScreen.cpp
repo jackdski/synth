@@ -1,15 +1,18 @@
-#include "display.h"
 #include "features.h"
+
+#include "DisplayManager.hpp"
 #include "lvgl.h"
 
 #if (FEATURE_DISPLAY)
 
-#include "lvgl.h"
+using namespace Display;
 
-#define NUM_WAVEFORM_POINTS 3U
+constexpr uint32_t NUM_WAVEFORM_POINTS = 3U;
 
 void display_waveformScreen(void)
 {
+    // CONVERT TO CHART: https://docs.lvgl.io/8.3/widgets/extra/chart.html
+
     /*Create an array for the points of the line*/
     static lv_point_t line_points[NUM_WAVEFORM_POINTS] = {
         {                      (lv_coord_t)0, DISPLAY_HEIGHT / 4},
@@ -31,7 +34,7 @@ void display_waveformScreen(void)
     lv_obj_add_style(line1, &style_line, 0);
     lv_obj_center(line1);
 
-    display_volume_bar();
+    // display_volume_bar();
 }
 
 #endif // FEATURE_DISPLAY
