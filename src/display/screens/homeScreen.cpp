@@ -4,7 +4,13 @@
 #include "AudioManager.hpp"
 #include "lvgl.h"
 
+#include "volume_bar.hpp"
+
 #include "sgtl5000.h"
+#include "knobControls.h"
+#include "drv_encoder.h"
+
+#include <cstring>
 
 #if (FEATURE_DISPLAY)
 
@@ -15,71 +21,43 @@ constexpr char sequencer_str[]   = "Sequencer";
 constexpr char keyboard_str[]    = "Keyboard";
 constexpr char arpeggiator_str[] = "Arpeggiator";
 
+constexpr uint32_t display_width  =  ST7789_LCD_HEIGHT;
+constexpr uint32_t display_height = ST7789_LCD_WIDTH;
+
 // Data Definitions
+extern DisplayManager displayManager;
 extern Audio::AudioManager audioManager;
 
-
-static lv_obj_t *volumeBar;
-static int32_t prevVolume = 0;
-
+static lv_group_t * g;
+static lv_indev_t * encoderIndev;
 static lv_obj_t * modeList;
 
 // Static Function Declarations
 
-static void display_volume_bar(void);
-static void volume_cb(lv_event_t *e);
 static void mode_selection_cb(lv_event_t *e);
+static void encoder_read(lv_indev_t * indev, lv_indev_data_t * data);
 
 // Static Function Definitions
-
-static void display_volume_bar(void)
-{
-    static lv_style_t style_indic;
-
-    lv_style_init(&style_indic);
-    lv_style_set_bg_opa(&style_indic, LV_OPA_COVER);
-    lv_style_set_bg_color(&style_indic, lv_palette_main(LV_PALETTE_RED));
-    lv_style_set_bg_grad_color(&style_indic, lv_palette_main(LV_PALETTE_BLUE));
-    lv_style_set_bg_grad_dir(&style_indic, LV_GRAD_DIR_VER);
-
-    volumeBar = lv_bar_create(lv_scr_act());
-    lv_obj_add_style(volumeBar, &style_indic, LV_PART_INDICATOR);
-    lv_obj_set_size(volumeBar, 20, 100);
-    lv_obj_align(volumeBar, LV_ALIGN_RIGHT_MID, 0, 0);
-    lv_bar_set_range(volumeBar, 0, 100);
-    lv_bar_set_value(volumeBar, 0, LV_ANIM_ON);
-
-    lv_obj_add_event_cb(volumeBar, volume_cb, LV_EVENT_VALUE_CHANGED, NULL);
-}
-
-static void volume_cb(lv_event_t *e)
-{
-    if (e != NULL)
-    {
-        lv_obj_t *volumeBar = lv_event_get_target(e);
-        int32_t volume      = (int32_t)e->param;
-        lv_bar_set_value(volumeBar, volume, LV_ANIM_OFF);
-    }
-}
 
 static void mode_selection_cb(lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
-    lv_obj_t * obj = lv_event_get_target(e);
+    lv_obj_t * obj = (lv_obj_t *)lv_event_get_target(e);
 
     if (code == LV_EVENT_CLICKED)
     {
-        const char * btn_text = lv_list_get_btn_text(modeList, obj);
+        const char * btn_text = lv_list_get_button_text(modeList, obj);
 
-        if (btn_text == sequencer_str)
+        if (strcmp(btn_text, sequencer_str) == 0)
         {
+            displayManager.SetScreen(DisplayScreen::SEQUENCER);
             audioManager.setMode(Audio::AudioMode::Sequencer);
         }
-        else if (btn_text == keyboard_str)
+        else if (strcmp(btn_text, keyboard_str) == 0)
         {
             audioManager.setMode(Audio::AudioMode::Keyboard);
         }
-        else if (btn_text == arpeggiator_str)
+        else if (strcmp(btn_text, arpeggiator_str)  == 0)
         {
             audioManager.setMode(Audio::AudioMode::Arpeggiator);
         }
@@ -90,10 +68,33 @@ static void mode_selection_cb(lv_event_t *e)
     }
 }
 
+static void encoder_read(lv_indev_t * indev, lv_indev_data_t * data)
+{
+    data->enc_diff = drv_encoder_updateAndGetDiff(DRV_ENCODER_CHANNEL_0);
+
+    if (Button_isPressed(BUTTON_CHANNEL_A))
+    {
+        data->state = LV_INDEV_STATE_PRESSED;
+    }
+    else
+    {
+        data->state = LV_INDEV_STATE_RELEASED;
+    }
+}
+
 static void mode_selection(void)
 {
+    g = lv_group_create();
+    lv_group_set_default(g);
+
+    encoderIndev = lv_indev_create();
+    lv_indev_set_type(encoderIndev, LV_INDEV_TYPE_ENCODER);
+    lv_indev_set_read_cb(encoderIndev, encoder_read);
+
+    lv_indev_set_group(encoderIndev, g);
     modeList = lv_list_create(lv_scr_act());
-    lv_obj_set_size(modeList, 180, 220);
+
+    lv_obj_set_size(modeList, lv_pct(95), lv_pct(99));
     lv_obj_set_align(modeList, LV_ALIGN_LEFT_MID);
 
     /*Add buttons to the list*/
@@ -101,13 +102,13 @@ static void mode_selection(void)
     lv_list_add_text(modeList, "Modes");
 
     /* SCREENS */
-    btn = lv_list_add_btn(modeList, LV_SYMBOL_AUDIO, sequencer_str);
+    btn = lv_list_add_button(modeList, LV_SYMBOL_AUDIO, sequencer_str);
     lv_obj_add_event_cb(btn, mode_selection_cb, LV_EVENT_CLICKED, NULL);
 
-    btn = lv_list_add_btn(modeList, LV_SYMBOL_AUDIO, keyboard_str);
+    btn = lv_list_add_button(modeList, LV_SYMBOL_AUDIO, keyboard_str);
     lv_obj_add_event_cb(btn, mode_selection_cb, LV_EVENT_CLICKED, NULL);
 
-    btn = lv_list_add_btn(modeList, LV_SYMBOL_NEW_LINE, arpeggiator_str);
+    btn = lv_list_add_button(modeList, LV_SYMBOL_AUDIO, arpeggiator_str);
     lv_obj_add_event_cb(btn, mode_selection_cb, LV_EVENT_CLICKED, NULL);
 }
 
@@ -122,17 +123,6 @@ void display_homeScreen(void)
     mode_selection();
 
     display_volume_bar();
-}
-
-void display_homeScreenUpdate(void)
-{
-    const float volume = SGTL5000_getVolume();
-    const int32_t vol  = (int32_t)(100.0f * (volume + SGTL5000_VOLUME_DB_MIN) / (SGTL5000_VOLUME_DB_MIN + 51.5f));
-    if (prevVolume != vol)
-    {
-        lv_event_send(volumeBar, LV_EVENT_VALUE_CHANGED, (void *)vol);
-    }
-    prevVolume = vol;
 }
 
 #endif // FEATURE_DISPLAY

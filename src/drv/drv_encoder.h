@@ -5,6 +5,10 @@
 
 #include "features.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "Utils.h"
 #include "drv_encoder_hardwareSpecific.h"
 #include "main.h"
@@ -19,8 +23,13 @@
 
 void drv_encoder_init(void);
 uint32_t drv_encoder_getCount(const drv_encoder_channel_E channel);
+int32_t drv_encoder_updateAndGetDiff(const drv_encoder_channel_E channel);
 
 void drv_encoder_hardwareSpecific_init(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // FEATURE_ENCODER
 #endif  // DRV_ENCODER_HPP_

@@ -23,6 +23,7 @@ enum class DisplayScreen
     SETTINGS,
     WAVEFORM,
     AUDIO_SELECTION,
+    SEQUENCER,
 
     COUNT,
     NONE
@@ -80,6 +81,7 @@ void display_homeScreenUpdate(void);
 
 void display_settingsSelection(void);
 void display_waveformScreen(void);
+void display_sequencer(void);
 
 #endif // FEATURE_DISPLAY
 #endif // DISPLAY_MANGER_HPP_

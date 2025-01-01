@@ -14,7 +14,7 @@ void display_waveformScreen(void)
     // CONVERT TO CHART: https://docs.lvgl.io/8.3/widgets/extra/chart.html
 
     /*Create an array for the points of the line*/
-    static lv_point_t line_points[NUM_WAVEFORM_POINTS] = {
+    static lv_point_precise_t line_points[NUM_WAVEFORM_POINTS] = {
         {                      (lv_coord_t)0, DISPLAY_HEIGHT / 4},
         {(lv_coord_t)(DISPLAY_WIDTH * 2 / 5), DISPLAY_HEIGHT / 2},
         {(lv_coord_t)(DISPLAY_WIDTH * 3 / 5), DISPLAY_HEIGHT / 4},

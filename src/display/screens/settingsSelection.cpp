@@ -69,7 +69,7 @@ void display_settingsSelection(void)
     lv_obj_center(menu);
 
     /*Modify the header*/
-    lv_obj_t * back_btn = lv_menu_get_main_header_back_btn(menu);
+    lv_obj_t * back_btn = lv_menu_get_main_header_back_button(menu);
     lv_obj_t * back_btn_label = lv_label_create(back_btn);
     lv_label_set_text(back_btn_label, "Back");
 
