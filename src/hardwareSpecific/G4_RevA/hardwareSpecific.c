@@ -210,19 +210,12 @@ void hardwareSpecificInit(void)
     NVIC_SetPriority(SVCall_IRQ_NBR, 0U);
 }
 
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-    if (htim->Instance == TIM1)
-    {
-        HAL_IncTick();
-    }
-}
-
 int _write(int file, char *ptr, int len)
 {
-    int DataIdx;
-    for (DataIdx = 0; DataIdx < len; DataIdx++)
-    {
+	int DataIdx;
+
+	for (DataIdx = 0; DataIdx < len; DataIdx++)
+	{
         ITM_SendChar(*ptr++);
     }
     return len;

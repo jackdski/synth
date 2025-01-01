@@ -1,5 +1,6 @@
 #include "audio.hpp"
 #include "AudioManager.hpp"
+#include "sequencer.hpp"
 #include "audio_hardwareSpecific.hpp"
 
 #include "i2s.h"

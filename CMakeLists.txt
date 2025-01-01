@@ -69,8 +69,8 @@ set(SRCS
     ${PROJ_PATH}/devices/knob.c
     ${PROJ_PATH}/devices/sgtl5000.c
     ${PROJ_PATH}/devices/ST7789.cpp
-    # ${PROJ_PATH}/display/display.c
     ${PROJ_PATH}/display/DisplayManager.cpp
+    ${PROJ_PATH}/display/sub_screens/volume_bar.cpp
     ${PROJ_PATH}/display/screens/homeScreen.cpp
     ${PROJ_PATH}/display/screens/waveformScreen.cpp
     ${PROJ_PATH}/display/screens/settingsSelection.cpp
@@ -89,8 +89,10 @@ set(SRCS
     ${PROJ_PATH}/audio/sequencer.cpp
     # ${PROJ_PATH}/audio/mixer.c
     ${PROJ_PATH}/utils/cpu_utils.c
+    ${PROJ_PATH}/lvgl/src/themes/mono/lv_theme_mono.c
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/startup_stm32g491xx.s
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/hardwareSpecific.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/interrupts.cpp
     # ${HARDWARE_SPECIFIC_PATH}/G4_RevA/audio/audio_hardwareSpecific.c
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/audio/audio_hardwareSpecific.cpp
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/drv/drv_GPIO_hardwareSpecific.c
@@ -102,7 +104,6 @@ set(SRCS
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/devices/knob_hardwareSpecific.c
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/devices/PCA9555_hardwareSpecific.c
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/devices/PCA9685_hardwareSpecific.c
-    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/lvgl/src/extra/themes/default/lv_theme_default.c
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Core/Src/adc.c
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Core/Src/cordic.c
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Core/Src/dma.c
@@ -179,6 +180,7 @@ set(SRCS
 set(INCLUDE_DIRS
     ${PROJ_PATH}/
     ${PROJ_PATH}/misc/
+    ${PROJ_PATH}/display/sub_screens/
     ${PROJ_PATH}/display/
     ${PROJ_PATH}/wavetables/
     ${PROJ_PATH}/audio/
@@ -212,8 +214,8 @@ set(INCLUDE_DIRS
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/CMSIS/Include
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/CMSIS/Core/Include
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/CMSIS/DSP/Include
-    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/lvgl/src/extra/themes
-    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/lvgl/src/extra/themes/default
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/lvgl/src/themes
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/lvgl/src/themes/mono
 )
 
 set(TARGET synth_G4RevA)
@@ -242,11 +244,11 @@ if(SEGGER_SYSTEMVIEW)
     include(${PROJ_PATH}/lib/SystemView/SystemView.cmake)
 endif(SEGGER_SYSTEMVIEW)
 
-include(${HARDWARE_SPECIFIC_PATH}/G4_RevA/lvgl/CMakeLists.txt)
-target_link_libraries(synth_G4RevA PRIVATE lvgl_G4::lvgl_G4)
+include(${PROJ_PATH}/lvgl/CMakeLists.txt)
+target_link_libraries(synth_G4RevA PRIVATE lvgl::lvgl)
 target_include_directories(synth_G4RevA PRIVATE ${include_path_G4_RevA_DIRS})
 
-target_compile_options(lvgl_G4 PRIVATE
+target_compile_options(lvgl PRIVATE
     -mthumb
     -mcpu=cortex-m4
     -mfpu=fpv4-sp-d16

@@ -65,6 +65,8 @@ public:
     void updateSampleBlock(uint16_t *sampleBlock, const bool firstHalf);
 };
 
+void audio_incrementBpmTick(void);
+
 }
 
 #endif // FEATURE_AUDIO

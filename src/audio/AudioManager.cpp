@@ -73,4 +73,12 @@ void AudioManager::updateSampleBlock(uint16_t *sampleBlock, const bool firstHalf
     }
 }
 
+void Audio::audio_incrementBpmTick(void)
+{
+    if (audioManager.mode == AudioMode::Sequencer)
+    {
+        audioManager.sequencerManager.incrementStep();
+    }
+}
+
 #endif // FEATURE_AUDIO

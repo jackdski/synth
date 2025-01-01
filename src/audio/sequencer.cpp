@@ -6,14 +6,17 @@
 #include "FreeRTOS.h"
 #include "task.h"
 
+#include "sequencer_hardwareSpecific.hpp"
+
 #if FEATURE_SEQUENCER
 
 /* D E F I N E S */
 
 /* T Y P E D E F S */
 
-
 /* P R I V A T E   D A T A   D E F I N I T I O N S */
+
+SequencerTimer sequencerTickTimer;
 
 SequencerSettings defaultSettings;
 SequencerManager sequencerManager(&defaultSettings);

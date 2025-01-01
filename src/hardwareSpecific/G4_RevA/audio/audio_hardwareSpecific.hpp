@@ -15,6 +15,25 @@ public:
     void i2sStop(uint16_t *sampleBlock, uint32_t numSamples) override;
 };
 
+class SequencerTimer: public SequencerTimerBase
+{
+public:
+    void startTimer(void)
+    {
+
+    }
+
+    void stopTimer(void)
+    {
+
+    }
+
+    void tick(void)
+    {
+        
+    }
+};
+
 }
 
 #endif

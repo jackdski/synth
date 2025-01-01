@@ -11,7 +11,6 @@
 
 typedef struct
 {
-    uint32_t previousPosition;
     KnobControls_value_U value;
 } KnobControls_channelData_S;
 
@@ -20,16 +19,6 @@ static KnobControls_channelData_S knobControls_channelData[KNOB_CONTROLS_CHANNEL
 // clang-format off
 static KnobControls_channelConfig_S knobControls_channelConfig[KNOB_CONTROLS_CHANNEL_COUNT] =
 {
-    [KNOB_CONTROLS_CHANNEL_SELECTOR] =
-    {
-        .encoderChannel     = DRV_ENCODER_CHANNEL_0,
-        .valueType          = KNOB_CONTROLS_VALUE_TYPE_UINT32,
-        .incrementValue.i32 = 1,
-        .initialValue.i32   = 0,
-        .applyMinMax        = false,
-        .minValue.i32       = 0,
-        .maxValue.i32       = 0,
-    },
     [KNOB_CONTROLS_CHANNEL_VOLUME] =
     {
         .encoderChannel     = DRV_ENCODER_CHANNEL_1,
@@ -63,10 +52,7 @@ void knobControls_update(void)
         KnobControls_channelConfig_S *channelConfig = &knobControls_channelConfig[channel];
         KnobControls_channelData_S *channelData     = &knobControls_channelData[channel];
 
-        const uint32_t currentPosition = drv_encoder_getCount(channelConfig->encoderChannel);
-        // printf("Channel %d: %lu\n", channel, currentPosition);
-
-        const uint32_t diff            = (currentPosition - channelData->previousPosition);
+        const int32_t diff = drv_encoder_updateAndGetDiff(channelConfig->encoderChannel);
 
         switch (channelConfig->valueType)
         {

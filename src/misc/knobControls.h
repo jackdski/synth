@@ -8,6 +8,10 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "drv_encoder.h"
 
 typedef enum
@@ -19,7 +23,6 @@ typedef enum
 
 typedef enum
 {
-    KNOB_CONTROLS_CHANNEL_SELECTOR,
     KNOB_CONTROLS_CHANNEL_VOLUME,
     KNOB_CONTROLS_CHANNEL_COUNT
 } KnobControls_channel_E;
@@ -48,6 +51,10 @@ void knobControls_update(void);
 
 KnobControls_value_U knobControls_getValue(KnobControls_channel_E channel);
 void knobControls_reset(KnobControls_channel_E channel);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // FEATURE_KNOB_CONTROLS
 #endif  // KNOB_CONTROLS_H_
