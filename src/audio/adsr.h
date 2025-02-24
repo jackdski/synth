@@ -1,12 +1,16 @@
 #ifndef ADSR_HPP_
 #define ADSR_HPP_
 
+#include "features.h"
+
+#if (FEATURE_ADSR)
+
 /* I N C L U D E S */
 
 #include <stdint.h>
 
-#include "oscillator.h"
-#include "wavetables.h"
+#include "oscillator.hpp"
+#include "wavetables.hpp"
 
 #include "main.h"
 
@@ -81,4 +85,6 @@ typedef struct
 float ADSR_update(ADSR_S *adsr, const bool noteOff);
 void ADSR_setSampleFrequency(ADSR_S *adsr, float frequency);
 
-#endif
+
+#endif // FEATURE_ADSR
+#endif // ADSR_HPP_

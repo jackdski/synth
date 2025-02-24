@@ -1,7 +1,9 @@
-#ifndef KICK_0_WAVETABLE_H_
-#define KICK_0_WAVETABLE_H_
+#include "kick_0.hpp"
 
-const float kick_0_wavetable[] = {
+namespace GlobalData
+{
+
+float kick_0_wavetable[20023U] = {
 	0.3984375f,
 	0.0f,
 	0.3750114444410535f,
@@ -20028,4 +20030,4 @@ const float kick_0_wavetable[] = {
 
 };
 
-#endif // KICK_0_WAVETABLE_H_
+}

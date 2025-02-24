@@ -1,5 +1,6 @@
 #include "features.h"
 
+#include "waveformScreen.hpp"
 #include "DisplayManager.hpp"
 #include "lvgl.h"
 
@@ -9,7 +10,7 @@ using namespace Display;
 
 constexpr uint32_t NUM_WAVEFORM_POINTS = 3U;
 
-void display_waveformScreen(void)
+void Display::display_waveformScreen(void)
 {
     // CONVERT TO CHART: https://docs.lvgl.io/8.3/widgets/extra/chart.html
 

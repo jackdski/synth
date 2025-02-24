@@ -2,7 +2,9 @@
 
 /* I N C L U D E S */
 
-#include <stdint.h>
+#include "features.h"
+
+#if (FEATURE_DISPLAY)
 
 #include "FreeRTOS.h"
 #include "semphr.h"
@@ -10,17 +12,30 @@
 
 #include "lvgl.h"
 
+#include "AudioManager.hpp"
+
 #include "ST7789.hpp"
 
 #include "button.h"
 #include "sgtl5000.h"
 #include "drv_encoder.h"
 
+// Screens
+#include "homeScreen.hpp"
+#include "sequencerScreen.hpp"
+#include "settingsSelection.hpp"
+#include "waveformScreen.hpp"
+
+// Sub-Screen
 #include "volume_bar.hpp"
 
-#if (FEATURE_DISPLAY)
+#include <stdint.h>
+
+
 
 using namespace Display;
+
+extern Audio::AudioManager audioManager;
 
 /* D E F I N E S */
 
@@ -89,8 +104,12 @@ void DisplayManager::update20Hz(void)
     switch (screen)
     {
         case DisplayScreen::HOME:
+            volume_bar_update();
+            break;
+
         case DisplayScreen::SEQUENCER:
             volume_bar_update();
+            audioManager.setMode(Audio::AudioMode::Sequencer);
             break;
 
         case DisplayScreen::SETTINGS:
@@ -114,11 +133,6 @@ static void display_flush(lv_display_t * display, const lv_area_t * area, uint8_
     lv_display_flush_ready(display);
 }
 
-static void display_update20Hz(void)
-{
-    displayManager.update20Hz();
-}
-
 /* P U B L I C   F U N C T I O N S */
 
 void displayControl(void *pvParameters)
@@ -138,23 +152,10 @@ void displayControl(void *pvParameters)
     {
         if (ST7789_isInitialized())
         {
-            display_update20Hz();
+            displayManager.update20Hz();
 
             if (xSemaphoreTake(lvglMutex, portMAX_DELAY) == pdTRUE)
             {
-                // if (displayManager.buttonPressedRisingEdgeA)
-                // {
-                //     displayManager.SetScreen(DisplayScreen::HOME);
-                // }
-                // else if (displayManager.buttonPressedRisingEdgeB)
-                // {
-                //     displayManager.SetScreen(DisplayScreen::SETTINGS);
-                // }
-                // else
-                // {
-                //     // maintain screen
-                // }
-
                 lv_task_handler();
                 lv_timer_handler();
                 xSemaphoreGive(lvglMutex);

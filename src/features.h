@@ -31,13 +31,15 @@
 #define FEATURE_PCA9685       1
 
 // AUDIO
-#define FEATURE_AUDIO         1
-#define FEATURE_MIXER         0
-#define FEATURE_NOTE          0
-#define FEATURE_VOICE         1
-#define FEATURE_SAMPLE        1
-#define FEATURE_KEYBOARD      1
-#define FEATURE_SEQUENCER     1
-#define FEATURE_OSC           1
+#define FEATURE_AUDIO           1
+#define FEATURE_MIXER           0
+#define FEATURE_NOTE            0
+#define FEATURE_VOICE           1
+#define FEATURE_SAMPLE          1
+#define FEATURE_KEYBOARD        1
+#define FEATURE_SEQUENCER       1
+#define FEATURE_OSC             1
+#define FEATURE_WAVETABLE       1
+#define FEATURE_ADSR            0
 
 #endif

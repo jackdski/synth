@@ -32,7 +32,7 @@ set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 set(CMAKE_C_STANDARD                11)
 set(CMAKE_C_STANDARD_REQUIRED       ON)
 set(CMAKE_C_EXTENSIONS              ON)
-set(CMAKE_CXX_STANDARD              20)
+set(CMAKE_CXX_STANDARD              17)
 set(CMAKE_CXX_STANDARD_REQUIRED     ON)
 set(CMAKE_CXX_EXTENSIONS            ON)
 
@@ -77,24 +77,25 @@ set(SRCS
     ${PROJ_PATH}/display/screens/sequencerScreen.cpp
     ${PROJ_PATH}/misc/misc.c
     ${PROJ_PATH}/misc/knobControls.c
-    ${PROJ_PATH}/wavetables/wavetables.c
+    ${PROJ_PATH}/audio/samples/hi_hat_0.cpp
+    ${PROJ_PATH}/audio/samples/hi_hat_1.cpp
+    ${PROJ_PATH}/audio/samples/hi_hat_2.cpp
+    ${PROJ_PATH}/audio/samples/kick_0.cpp
+    ${PROJ_PATH}/audio/samples/GlobalSamples.cpp
+    ${PROJ_PATH}/wavetables/wavetables.cpp
     ${PROJ_PATH}/audio/effects/lpf.c
-    ${PROJ_PATH}/audio/oscillator.c
     ${PROJ_PATH}/audio/note_info.c
     ${PROJ_PATH}/audio/keyboard.cpp
     ${PROJ_PATH}/audio/adsr.c
-    # ${PROJ_PATH}/audio/note.c
     ${PROJ_PATH}/audio/audio.cpp
     ${PROJ_PATH}/audio/AudioManager.cpp
     ${PROJ_PATH}/audio/sequencer.cpp
-    # ${PROJ_PATH}/audio/mixer.c
     ${PROJ_PATH}/utils/cpu_utils.c
     ${PROJ_PATH}/lvgl/src/themes/mono/lv_theme_mono.c
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/startup_stm32g491xx.s
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/hardwareSpecific.c
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/interrupts.cpp
-    # ${HARDWARE_SPECIFIC_PATH}/G4_RevA/audio/audio_hardwareSpecific.c
-    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/audio/audio_hardwareSpecific.cpp
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/audio/AudioI2SInterface_hardwareSpecific.cpp
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/drv/drv_GPIO_hardwareSpecific.c
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/drv/drv_I2C_hardwareSpecific.c
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/drv/drv_SPI_hardwareSpecific.c
@@ -180,6 +181,7 @@ set(SRCS
 set(INCLUDE_DIRS
     ${PROJ_PATH}/
     ${PROJ_PATH}/misc/
+    ${PROJ_PATH}/display/screens/
     ${PROJ_PATH}/display/sub_screens/
     ${PROJ_PATH}/display/
     ${PROJ_PATH}/wavetables/

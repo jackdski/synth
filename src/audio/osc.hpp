@@ -6,35 +6,40 @@
 #if FEATURE_OSC
 
 #include "constants.h"
-#include "wavetables.h"
+#include "wavetables.hpp"
 
 #include <stdint.h>
 #include <stdbool.h>
+
+#define WAVETABLE_NUM_SAMPLES 2048U
 
 namespace Audio {
 
 class Oscillator
 {
 private:
+    WavetableType   wavetableType;
+    uint32_t        currentSampleIndex = 0U;
+    uint32_t        wavetableStep = 0U;
+
     float frequency;
     float phase;
 
-    WavetableType_E wavetableType;
-
-    uint32_t        currentSampleIndex;
-    uint32_t        wavetableStep;
-
 public:
-    Oscillator(float frequency, float phase, WavetableType_E wavetableType) : frequency(frequency), phase(phase), wavetableType(wavetableType)
+    Oscillator(float frequency, float phase, WavetableType wavetableType) : wavetableType(wavetableType), frequency(frequency), phase(phase)
     {
         updateWavetableSteps();
     }
 
     Oscillator(void)
     {
-        wavetableType = WAVETABLE_TYPE_SINE;
-        frequency = 0.0F;
-        phase = 0.0F;
+        wavetableType = WavetableType::SINE;
+        frequency = 0.0f;
+    }
+
+    Oscillator(WavetableType wavetableType, float frequency): wavetableType(wavetableType), frequency(frequency)
+    {
+        setFrequency(frequency);
     }
 
     void setFrequency(float freq)
@@ -46,7 +51,7 @@ public:
     void updateWavetableSteps(void)
     {
         const uint32_t wavelengthsPerSecond = (uint32_t)(SYNTH_SAMPLE_FREQUENCY / frequency);
-        wavetableStep = (wavetable_getNumberOfSamples(wavetableType) * wavelengthsPerSecond) / SYNTH_SAMPLE_FREQUENCY;
+        wavetableStep = (Audio::wavetable_getNumberOfSamples(wavetableType) * wavelengthsPerSecond) / SYNTH_SAMPLE_FREQUENCY;
     }
 
     float getSample(void)
@@ -54,7 +59,7 @@ public:
         float sample = 0.0F;
         if (frequency > 0.0F)
         {
-            sample = wavetable_getSample(wavetableType, currentSampleIndex);
+            sample = Audio::wavetable_getSample(wavetableType, currentSampleIndex);
 
             currentSampleIndex += wavetableStep;
             if (currentSampleIndex > WAVETABLE_NUM_SAMPLES)
@@ -66,8 +71,6 @@ public:
     }
 };
 
-
 }
 #endif // FEATURE_OSC
-
 #endif // OSC_HPP_

@@ -1,12 +1,14 @@
 #include "features.h"
 
-#include "DisplayManager.hpp"
-#include "AudioManager.hpp"
+// #include "DisplayManager.hpp"
+#include "homeScreen.hpp"
+// #include "AudioManager.hpp"
 #include "lvgl.h"
 
 #include "volume_bar.hpp"
 
 #include "sgtl5000.h"
+#include "ST7789.hpp"
 #include "knobControls.h"
 #include "drv_encoder.h"
 
@@ -25,8 +27,8 @@ constexpr uint32_t display_width  =  ST7789_LCD_HEIGHT;
 constexpr uint32_t display_height = ST7789_LCD_WIDTH;
 
 // Data Definitions
-extern DisplayManager displayManager;
-extern Audio::AudioManager audioManager;
+// extern DisplayManager displayManager;
+// extern Audio::AudioManager audioManager;
 
 static lv_group_t * g;
 static lv_indev_t * encoderIndev;
@@ -50,16 +52,18 @@ static void mode_selection_cb(lv_event_t *e)
 
         if (strcmp(btn_text, sequencer_str) == 0)
         {
-            displayManager.SetScreen(DisplayScreen::SEQUENCER);
-            audioManager.setMode(Audio::AudioMode::Sequencer);
+            // displayManager.SetScreen(DisplayScreen::SEQUENCER);
+            // audioManager.setMode(Audio::AudioMode::Sequencer);
         }
         else if (strcmp(btn_text, keyboard_str) == 0)
         {
-            audioManager.setMode(Audio::AudioMode::Keyboard);
+            // show key on keyboard screen and change key with encoder
+            // audioManager.setMode(Audio::AudioMode::Keyboard);
         }
         else if (strcmp(btn_text, arpeggiator_str)  == 0)
         {
-            audioManager.setMode(Audio::AudioMode::Arpeggiator);
+            // show key on keyboard screen and change key with encoder
+            // audioManager.setMode(Audio::AudioMode::Arpeggiator);
         }
         else
         {
@@ -72,14 +76,14 @@ static void encoder_read(lv_indev_t * indev, lv_indev_data_t * data)
 {
     data->enc_diff = drv_encoder_updateAndGetDiff(DRV_ENCODER_CHANNEL_0);
 
-    if (Button_isPressed(BUTTON_CHANNEL_A))
-    {
-        data->state = LV_INDEV_STATE_PRESSED;
-    }
-    else
-    {
-        data->state = LV_INDEV_STATE_RELEASED;
-    }
+    // if (Button_isPressed(BUTTON_CHANNEL_A))
+    // {
+    //     data->state = LV_INDEV_STATE_PRESSED;
+    // }
+    // else
+    // {
+    //     data->state = LV_INDEV_STATE_RELEASED;
+    // }
 }
 
 static void mode_selection(void)
@@ -94,7 +98,8 @@ static void mode_selection(void)
     lv_indev_set_group(encoderIndev, g);
     modeList = lv_list_create(lv_scr_act());
 
-    lv_obj_set_size(modeList, lv_pct(95), lv_pct(99));
+    // lv_obj_set_size(modeList, lv_pct(95), lv_pct(99));
+    lv_obj_set_size(modeList, lv_pct(100), lv_pct(99));
     lv_obj_set_align(modeList, LV_ALIGN_LEFT_MID);
 
     /*Add buttons to the list*/
@@ -112,7 +117,7 @@ static void mode_selection(void)
     lv_obj_add_event_cb(btn, mode_selection_cb, LV_EVENT_CLICKED, NULL);
 }
 
-void display_homeScreen(void)
+void Display::display_homeScreen(void)
 {
     /*Create an object with the new style*/
     lv_obj_t *obj = lv_label_create(lv_scr_act());
@@ -122,7 +127,7 @@ void display_homeScreen(void)
     /*Mode Selection*/
     mode_selection();
 
-    display_volume_bar();
+    // display_volume_bar();
 }
 
 #endif // FEATURE_DISPLAY

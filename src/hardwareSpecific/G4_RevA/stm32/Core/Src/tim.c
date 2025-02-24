@@ -193,10 +193,11 @@ void MX_TIM16_Init(void)
   /* USER CODE BEGIN TIM16_Init 1 */
 
   /* USER CODE END TIM16_Init 1 */
+  // 0.1ms period
   htim16.Instance = TIM16;
   htim16.Init.Prescaler = 1600;
   htim16.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim16.Init.Period = 50;
+  htim16.Init.Period = 65300;
   htim16.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim16.Init.RepetitionCounter = 0;
   htim16.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
@@ -232,9 +233,7 @@ void MX_TIM16_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN TIM16_Init 2 */
-
   /* USER CODE END TIM16_Init 2 */
-
 }
 /* TIM17 init function */
 void MX_TIM17_Init(void)

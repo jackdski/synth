@@ -16,13 +16,15 @@ extern "C" {
 
 /* T Y P E D E F S */
 
-typedef struct
+class ST7789Data
 {
-    bool initialized;
-    uint32_t colStart;
-    uint32_t rowStart;
-    ST7789_rotation_E rotation;
-} ST7789_data_S;
+public:
+    bool initialized           = false;
+    uint32_t colStart          = 0U;
+    uint32_t rowStart          = 0U;
+    ST7789_rotation_E rotation = ST7789_ROTATION_0DEG;
+    // .miscCommandMailboxPosition = 0U,
+};
 
 /* P R I V A T E   F U N C T I O N   D E F I N I T I O N S */
 
@@ -44,14 +46,7 @@ static void ST7789_writeToRam(uint8_t *data, size_t size);
 /* D A T A   D E F I N I T I O N S */
 
 // clang-format off
-static ST7789_data_S ST7789_data =
-{
-    .initialized = false,
-    .colStart = 0U,
-    .rowStart = 0U,
-    .rotation = ST7789_ROTATION_0DEG,
-    // .miscCommandMailboxPosition = 0U,
-};
+static ST7789Data ST7789_data;
 // clang-format on
 
 /* P R I V A T E   F U N C T I O N S */

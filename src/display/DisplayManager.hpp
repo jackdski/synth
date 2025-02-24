@@ -1,6 +1,10 @@
 #ifndef DISPLAY_MANGER_HPP_
 #define DISPLAY_MANGER_HPP_
 
+#include "features.h"
+
+#if (FEATURE_DISPLAY)
+
 #include <stdint.h>
 #include <stdbool.h>
 
@@ -9,7 +13,6 @@
 
 #include "button.h"
 
-#if (FEATURE_DISPLAY)
 
 namespace Display
 {
@@ -60,11 +63,6 @@ public:
     {
     }
 
-    bool buttonPressedA = false;
-    bool buttonPressedB = false;
-    bool buttonPressedRisingEdgeA = false;
-    bool buttonPressedRisingEdgeB = false;
-
     void Init(void);
     void update20Hz(void);
 
@@ -74,14 +72,6 @@ public:
 }
 
 void displayControl(void *pvParameters);
-
-// SCREENS
-void display_homeScreen(void);
-void display_homeScreenUpdate(void);
-
-void display_settingsSelection(void);
-void display_waveformScreen(void);
-void display_sequencer(void);
 
 #endif // FEATURE_DISPLAY
 #endif // DISPLAY_MANGER_HPP_

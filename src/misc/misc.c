@@ -29,24 +29,26 @@ extern "C" {
 
 /* D E F I N E S */
 
-#define MISC_BRIGHTNESS_PULSE_DEMO 0
+#define PRINT_HIGHWATER_MARKS 0
 
 /* T Y P E D E F S */
 
 #define BRIGHTNESS_STEP            0.01F
 
 
+#if PRINT_HIGHWATER_MARKS
 extern TaskHandle_t misc100HzTaskHandle;
 extern TaskHandle_t misc10HzTaskHandle;
 extern TaskHandle_t audioTaskHandle;
 extern TaskHandle_t displayTaskHandle;
+#endif
 
 /* P R I V A T E   D A T A   D E F I N I T I O N S */
 
 static TickType_t misc10HzTaskLastWakeTime;
 static TickType_t misc100HzTaskLastWakeTime;
 
-static char buffer[40U * 6U];
+static char buffer[40U * 8U];
 
 /* P U B L I C   F U N C T I O N S */
 
@@ -54,10 +56,12 @@ void misc1HzTask(void *pvParameters)
 {
     UNUSED(pvParameters);
 
+#if PRINT_HIGHWATER_MARKS
     UBaseType_t displayTaskHighWaterMark;
     UBaseType_t audioTaskHighWaterMark;
     UBaseType_t misc10HzTaskHighWaterMark;
     UBaseType_t misc100HzTaskHighWaterMark;
+#endif
 
     while(1)
     {
@@ -65,20 +69,24 @@ void misc1HzTask(void *pvParameters)
         SGTL5000_pollRegisters();
 #endif
 
-        // vTaskGetRunTimeStats(buffer);
+        vTaskGetRunTimeStats(buffer);
+        printf(buffer, 40U * 6U);
+
+#if PRINT_HIGHWATER_MARKS
         displayTaskHighWaterMark   = uxTaskGetStackHighWaterMark( displayTaskHandle );
         audioTaskHighWaterMark     = uxTaskGetStackHighWaterMark( audioTaskHandle );
         misc100HzTaskHighWaterMark = uxTaskGetStackHighWaterMark( misc100HzTaskHandle );
         misc10HzTaskHighWaterMark  = uxTaskGetStackHighWaterMark( misc10HzTaskHandle );
 
-        printf("Display Task watermark: %ld\n", (uint32_t)displayTaskHighWaterMark);
-        printf("Audio Task watermark: %ld\n", (uint32_t)audioTaskHighWaterMark);
-        printf("Misc 100Hz Task watermark: %ld\n", (uint32_t)misc100HzTaskHighWaterMark);
-        printf("Misc 10Hz Task watermark: %ld\n", (uint32_t)misc10HzTaskHighWaterMark);
+        // printf("Display Task watermark: %ld\n", (uint32_t)displayTaskHighWaterMark);
+        // printf("Audio Task watermark: %ld\n", (uint32_t)audioTaskHighWaterMark);
+        // printf("Misc 100Hz Task watermark: %ld\n", (uint32_t)misc100HzTaskHighWaterMark);
+        // printf("Misc 10Hz Task watermark: %ld\n", (uint32_t)misc10HzTaskHighWaterMark);
+#endif // PRINT_HIGHWATER_MARKS
 
-        const uint16_t cpuUsage = osGetCPUUsage();
-        sprintf(buffer, "CPU Usage: %d\n", cpuUsage);
-        printf(buffer, 40U * 6U);
+        // const uint16_t cpuUsage = osGetCPUUsage();
+        // sprintf(buffer, "CPU Usage: %d\n", cpuUsage);
+        // printf(buffer, 40U * 6U);
         vTaskDelay(1000U);
     }
 }
@@ -103,15 +111,15 @@ void misc10HzTask(void *pvParameters)
         LED_toggle(LED_CHANNEL_BLINKY);
 #endif
 
-#if FEATURE_ENCODER
-        knobControls_update();
-        const KnobControls_value_U volumeValue = knobControls_getValue(KNOB_CONTROLS_CHANNEL_VOLUME);
+// #if FEATURE_ENCODER
+        // knobControls_update();
+        // const KnobControls_value_U volumeValue = knobControls_getValue(KNOB_CONTROLS_CHANNEL_VOLUME);
         // printf("Volume: %f\n", volumeValue.f32);
-#endif
+// #endif
 
-#if FEATURE_SGTL5000
-        SGTL5000_updateVolume(volumeValue.f32);
-#endif
+// #if FEATURE_SGTL5000
+        // SGTL5000_updateVolume(volumeValue.f32);
+// #endif
 
         xTaskDelayUntil(&misc10HzTaskLastWakeTime, pdMS_TO_TICKS(100U));
     }

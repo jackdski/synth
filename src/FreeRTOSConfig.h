@@ -26,7 +26,6 @@
 #define configMINIMAL_STACK_SIZE		        ((uint16_t) 128 )
 #define configTOTAL_HEAP_SIZE			        ((size_t)( 15 * 1024 )) /* 4 Kbytes */
 #define configMAX_TASK_NAME_LEN			        ( 16 )
-#define configUSE_TRACE_FACILITY		        1
 #define configUSE_16_BIT_TICKS			        0
 #define configIDLE_SHOULD_YIELD			        1
 #define configUSE_MUTEXES			            1
@@ -36,7 +35,6 @@
 #define configUSE_MALLOC_FAILED_HOOK	        0
 #define configUSE_APPLICATION_TASK_TAG	        0
 #define configUSE_COUNTING_SEMAPHORES	        1
-// #define configGENERATE_RUN_TIME_STATS	        1
 #define configUSE_PORT_OPTIMISED_TASK_SELECTION 0
 
 #define configMESSAGE_BUFFER_LENGTH_TYPE         size_t
@@ -69,8 +67,6 @@ to exclude the API function. */
 #define INCLUDE_xTaskGetIdleTaskHandle		1
 // #define INCLUDE_pxTaskGetStackStart			0
 
-// #define configUSE_STATS_FORMATTING_FUNCTIONS 1
-
 /* Cortex-M specific definitions. */
 #ifdef __NVIC_PRIO_BITS
 	/* __BVIC_PRIO_BITS will be specified when CMSIS is being used. */
@@ -96,10 +92,6 @@ to all Cortex-M ports, and do not rely on any particular library functions. */
 See http://www.FreeRTOS.org/RTOS-Cortex-M3-M4.html. */
 #define configMAX_SYSCALL_INTERRUPT_PRIORITY 	( configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY << (8 - configPRIO_BITS) )
 
-// #define configRECORD_STACK_HIGH_ADDRESS		1
-// #define portCONFIGURE_TIMER_FOR_RUN_TIME_STATS()		MX_TIM16_Init()
-// #define portGET_RUN_TIME_COUNTER_VALUE() 				TIM16->CNT
-
 /* Normal assert() semantics without relying on the provision of an assert.h
 header file. */
 #define configASSERT( x ) if( ( x ) == 0 ) { taskDISABLE_INTERRUPTS(); for( ;; ); }
@@ -109,6 +101,14 @@ header file. */
 
 #define traceTASK_SWITCHED_OUT()	extern void EndIdleMonitor(void); \
 									EndIdleMonitor()
+
+#define configGENERATE_RUN_TIME_STATS	        		1
+#define configUSE_TRACE_FACILITY		        		1
+#define configUSE_STATS_FORMATTING_FUNCTIONS 			1
+#define configRECORD_STACK_HIGH_ADDRESS					1
+#define portCONFIGURE_TIMER_FOR_RUN_TIME_STATS()		hardwareSpecific_configureTimerForRunTimeStats()
+#define portGET_RUN_TIME_COUNTER_VALUE() 				hardwareSpecific_getRunTimeCounterValue()
+
 
 /* Definitions that map the FreeRTOS port interrupt handlers to their CMSIS
 standard names. */

@@ -1,8 +1,11 @@
-#ifndef HI_HAT_0_WAVETABLE_H_
-#define HI_HAT_0_WAVETABLE_H_
+#include "hi_hat_0.hpp"
+
+namespace GlobalData
+{
 
 // 24_Hat_SP_135_14.wav
-const float hi_hat_0_wavetable[] = {
+float hi_hat_0_wavetable[7462U] =
+{
 	0.750022888882107f,
 	0.5546875f,
 	0.11719107638782922f,
@@ -7467,4 +7470,5 @@ const float hi_hat_0_wavetable[] = {
 	0.10937833796197394f,
 
 };
-#endif // HI_HAT_0_WAVETABLE_H_
+
+}

@@ -281,8 +281,8 @@ bool SGTL5000_writeI2C(const uint16_t reg, const uint16_t txData)
 bool SGTL5000_readI2C(const uint16_t reg, uint16_t *rxData)
 {
     uint8_t txBuffer[] = {
-        (uint8_t)((reg & 0xFF00) >> 8U),
         (uint8_t)(reg & 0x00FF),
+        (uint8_t)((reg & 0xFF00) >> 8U),
     };
 
     uint8_t privateRXData[2U] = {0U};
@@ -304,7 +304,8 @@ void SGTL5000_updateVolume(float volume)
     dB       = MAX(dB, SGTL5000_VOLUME_DB_MAX);
 
     SGTL5000_data.headphoneVolumeDb = dB;
-    const uint16_t hpConfigData     = (((uint8_t)dB << SGTL5000_HP_VOL_RIGHT_POS) | (uint8_t)dB);
+    const uint8_t dpVolume = (uint8_t)((12.0f - dB)) * 2U;
+    const uint16_t hpConfigData     = ((dpVolume << SGTL5000_HP_VOL_RIGHT_POS) | dpVolume);
     (void)SGTL5000_writeI2C(SGTL5000_CHIP_ANA_HP_CTRL_REG, hpConfigData);
 }
 

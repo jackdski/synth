@@ -1,12 +1,15 @@
 #ifndef AUDIO_MANAGER_H_
 #define AUDIO_MANAGER_H_
 
+#include "features.h"
+
 #include "keyboard.hpp"
 #include "sequencer.hpp"
+#include "osc.hpp"
+
+#include "AudioI2SInterface_hardwareSpecific.hpp"
 
 #include "sgtl5000.h"
-
-#include "audio_hardwareSpecific.hpp"
 
 #if (FEATURE_AUDIO)
 
@@ -18,7 +21,7 @@ constexpr uint32_t I2S_SAMPLES_PER_BLOCK = 256U;
 constexpr uint32_t I2S_BUFFER_SIZE = (uint32_t)(I2S_SAMPLES_PER_BLOCK * I2S_NUMBER_OF_CHANNELS);
 
 // #define I2S_DATA_FORMAT_MAX_VALUE       8388608.0f  // 24bit - 2^24 / 2
-constexpr float I2S_DATA_FORMAT_MAX_VALUE = 32768.0f;  // 16bit
+constexpr float I2S_DATA_FORMAT_MAX_VALUE = 32768.0f;  // 16bit - 2^16 / 2
 constexpr uint32_t I2S_BUFFER_HALFWAY_INDEX = I2S_SAMPLES_PER_BLOCK;
 
 
@@ -39,35 +42,42 @@ enum class AudioSettings
 class AudioManager
 {
 public:
-    AudioMode mode = AudioMode::Sequencer;
+    AudioManager(Audio_I2SInterface * i2sInterface): i2sInterface(i2sInterface)
+    {
+    }
+
+    Audio_I2SInterface * i2sInterface;
+
+    AudioMode mode = AudioMode::Keyboard;
 
     SequencerManager sequencerManager;
+
+#if FEATURE_KEYBOARD
     Keyboard         keyboard;
+#endif
 
-    Oscillator lfo = Oscillator(20.0F, 0.0F, WAVETABLE_TYPE_SINE);
+#if FEATURE_OSC
+    Oscillator lfo = Oscillator(20.0F, 0.0F, WavetableType::SINE);
     float lfoVolume = 0.3f;
-
-    Audio_I2SInterface i2sInterface;
+#endif
 
     bool active = false;
     float volume = 0.3F;
 
-    void initalizeCodec(uint16_t * sampleBlock);
+    void initalizeCodec(void);
     void setMode(const AudioMode newMode)
     {
         mode = newMode;
     }
 
     void updateIsActive(void);
-
     void update10Hz(void);
-
-    void updateSampleBlock(uint16_t *sampleBlock, const bool firstHalf);
+    void updateSampleBlock(const bool firstHalf);
 };
 
-void audio_incrementBpmTick(void);
-
 }
+
+void audio_incrementBpmTick(void);
 
 #endif // FEATURE_AUDIO
 #endif // AUDIO_MANAGER_H_

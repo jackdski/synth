@@ -1,20 +1,24 @@
 #ifndef SAMPLE_HPP_
-#define SAMPLE_HPP
+#define SAMPLE_HPP_
 
-#include <features.h>
-
-#include <stdint.h>
+#include "features.h"
 
 #if FEATURE_SAMPLE
 
+#include "Utils.h"
+
+#include <stdint.h>
+
+namespace Samples
+{
+
 class Sample
 {
-private:
 public:
     float * sampleArray;
 
-    uint32_t sampleRate;
-    uint32_t length;
+    uint32_t sampleRate = 0U;
+    uint32_t length = 0U;
 
     uint32_t currentPosition = 0U;
 
@@ -59,5 +63,7 @@ public:
     }
 };
 
+}
+
 #endif // FEATURE_SAMPLE
-#endif // SAMPLE_HPP
+#endif // SAMPLE_HPP_

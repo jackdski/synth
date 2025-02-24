@@ -61,6 +61,8 @@ To use this module, the following steps should be followed :
 
 #include "main.h"
 
+#include <stdio.h>
+
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -147,6 +149,11 @@ void EndIdleMonitor(void)
 uint16_t osGetCPUUsage(void)
 {
     return (uint16_t)osCPU_Usage;
+}
+
+void vApplicationStackOverflowHook( xTaskHandle *pxTask, signed portCHAR *pcTaskName )
+{
+    printf("Stack Overflow: %s\n", pcTaskName);
 }
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

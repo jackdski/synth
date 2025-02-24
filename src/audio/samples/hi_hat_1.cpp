@@ -1,8 +1,11 @@
-#ifndef HI_HAT_1_WAVETABLE_H_
-#define HI_HAT_1_WAVETABLE_H_
+#include "hi_hat_1.hpp"
+
+namespace GlobalData
+{
 
 // ClickyHiHat_01_534.wav
-const float hi_hat_1_wavetable[] = {
+
+float hi_hat_1_wavetable[5545U] = {
 	0.6875f,
 	0.3984375f,
 	0.5703125f,
@@ -5550,4 +5553,5 @@ const float hi_hat_1_wavetable[] = {
 	0.5703125f,
 
 };
-#endif HI_HAT_1_WAVETABLE_H_
+
+}

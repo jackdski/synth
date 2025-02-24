@@ -1,5 +1,5 @@
-#ifndef ST7789_H_
-#define ST7789_H_
+#ifndef ST7789_HPP_
+#define ST7789_HPP_
 
 /* I N C L U D E S */
 
@@ -114,4 +114,4 @@ void ST7789_drawBuffer(uint16_t x, uint16_t y, uint16_t width, uint16_t height, 
 }
 #endif
 
-#endif  // ST7789_H_
+#endif  // ST7789_HPP_

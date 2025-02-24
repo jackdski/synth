@@ -1,11 +1,14 @@
-#ifndef AUDIO_HARDWARE_SPECIFIC_HPP_
-#define AUDIO_HARDWARE_SPECIFIC_HPP_
+#ifndef SEQUENCER_HARDWARE_SPECIFIC_HPP_
+#define SEQUENCER_HARDWARE_SPECIFIC_HPP_
 
-#include "sequencer.hpp"
+// #include "sequencer.hpp"
 
 #include <stdint.h>
 
 #include "tim.h"
+
+namespace Audio
+{
 
 extern TIM_HandleTypeDef htim17;
 
@@ -34,8 +37,6 @@ public:
         HAL_TIM_Base_Stop(&htim17);
     }
 
-    void tick(void);
-
     void updateFrequency(SequencerBpm bpmSetting, uint32_t customBpm)
     {
         uint32_t ticks = 0U;
@@ -59,7 +60,7 @@ public:
             case SequencerBpm::SEQUENCER_BPM_180:
                 ticks = sequencer_180bpm_ticks;
                 break;
-            case SequencerBpm::SEQUENCER_BPM_CUSTOM:
+            // case SequencerBpm::SEQUENCER_BPM_CUSTOM:
             default:
                 ticks = CONVERT_BPM_TO_TICKS(timer_clock_frequency, customBpm);
                 break;
@@ -69,4 +70,6 @@ public:
     }
 };
 
-#endif
+}
+
+#endif // SEQUENCER_HARDWARE_SPECIFIC_HPP_

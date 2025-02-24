@@ -189,11 +189,6 @@ void hardwareSpecificInit(void)
     extern TIM_HandleTypeDef htim15;
     (void)HAL_TIM_PWM_Start(&htim15, TIM_CHANNEL_1);
 
-    // profiling
-    MX_TIM16_Init();
-    extern TIM_HandleTypeDef htim16;
-    HAL_TIM_Base_Start(&htim16);
-
     // BPM tick
     MX_TIM17_Init();
 
@@ -219,6 +214,17 @@ int _write(int file, char *ptr, int len)
         ITM_SendChar(*ptr++);
     }
     return len;
+}
+
+void hardwareSpecific_configureTimerForRunTimeStats(void)
+{
+    MX_TIM16_Init();
+    HAL_TIM_Base_Start(&htim16);
+}
+
+configRUN_TIME_COUNTER_TYPE hardwareSpecific_getRunTimeCounterValue(void)
+{
+    return (configRUN_TIME_COUNTER_TYPE)TIM16->CNT;
 }
 
 #ifdef __cplusplus

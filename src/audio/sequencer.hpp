@@ -3,6 +3,8 @@
 
 #include "features.h"
 
+#if FEATURE_SEQUENCER
+
 #include "Voice.hpp"
 
 #include <stdint.h>
@@ -11,7 +13,9 @@
 
 #include "Utils.h"
 
-#if FEATURE_SEQUENCER
+
+namespace Audio
+{
 
 constexpr uint32_t sequencer_max_num_voices = 4U;
 constexpr uint32_t sequencer_max_steps_per_bar = 16U;
@@ -22,16 +26,21 @@ TODO:
     - save configs to flash / external storage
 */
 
+enum class SequencerState
+{
+    INACTIVE,
+    ACTIVE,
+};
+
 enum class SequencerStepCount
 {
-    SEQUENCER_STEP_COUNT_4  = 4U,
     SEQUENCER_STEP_COUNT_8  = 8U,
     SEQUENCER_STEP_COUNT_16 = 16U,
 };
 
 enum class SequencerBpm
 {
-    SEQUENCER_BPM_CUSTOM    = 0U,
+    // SEQUENCER_BPM_CUSTOM    = 0U,
     SEQUENCER_BPM_84        = 84U,
     SEQUENCER_BPM_100       = 100U,
     SEQUENCER_BPM_110       = 110U,
@@ -42,9 +51,9 @@ enum class SequencerBpm
 
 enum class SequencerStepState
 {
-    DISABLED,
-    AVAILABLE,
-    PRESSED,
+    INACTIVE,
+    SELECTED,
+    PLAYING,
 };
 
 typedef enum
@@ -63,7 +72,6 @@ public:
 
     void startTimer(void);
     void stopTimer(void);
-    void tick(void);
 
     void updateFrequency(SequencerBpm bpmSetting);
 };
@@ -73,15 +81,20 @@ class SequencerSettings
 public:
     SequencerStepCount stepCount = SequencerStepCount::SEQUENCER_STEP_COUNT_16;
     SequencerBpm       bpm       = SequencerBpm::SEQUENCER_BPM_84;
+
+#if FEATURE_VOICE
     Voice              voices[sequencer_max_num_voices];
+#endif
 
     uint8_t numberBars = 1U;
-    bool    active[sequencer_max_num_voices][sequencer_max_bars][sequencer_max_steps_per_bar]; //  = { false };
+    SequencerStepState    stepState[sequencer_max_num_voices][sequencer_max_steps_per_bar]; //  = { false };
 };
 
 class SequencerManager
 {
 private:
+    SequencerState state = SequencerState::INACTIVE;
+
     SequencerSettings * config;
 
     uint32_t currentStep = 0U;
@@ -100,17 +113,37 @@ public:
     void increaseBarCount(void);
     void decreaseBarCount(void);
 
+    void startSequencer(void);
+    void stopSequencer(void);
+
+    void setBpm(SequencerBpm bpmSetting)
+    {
+        config->bpm = bpmSetting;
+    }
+
+    SequencerBpm getBpmSetting(void)
+    {
+        return config->bpm;
+    }
+
+    SequencerStepCount getStepSetting(void)
+    {
+        return config->stepCount;
+    }
+
     float getSample(void);
 
-    // void setStepActive(uint32_t bar, uint32_t step, bool isActive)
-    // {
-    //     if ((bar < sequencer_max_bars) &&
-    //         (step < sequencer_max_steps_per_bar))
-    //     {
-    //         config->active[bar][step] = isActive;
-    //     }
-    // }
+    void setStepActive(uint32_t bar, uint32_t step, bool isActive)
+    {
+        if ((bar < sequencer_max_bars) &&
+            (step < sequencer_max_steps_per_bar))
+        {
+            config->stepState[bar][step] = isActive ? SequencerStepState::SELECTED : SequencerStepState::INACTIVE;
+        }
+    }
 };
+
+}
 
 #endif // FEATURE_SEQUENCER
 #endif  // SEQUENCER_HPP_

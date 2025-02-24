@@ -1,8 +1,11 @@
-#ifndef HI_HAT_2_WAVETABLE_H_
-#define HI_HAT_2_WAVETABLE_H_
+#include "hi_hat_2.hpp"
+
+namespace GlobalData
+{
 
 // Hat_20_454.wav
-const float hi_hat_2_wavetable[] = {
+
+float hi_hat_2_wavetable[] = {
 	0.5468916898098697f,
 	0.5859553819391461f,
 	0.65625f,
@@ -6620,4 +6623,5 @@ const float hi_hat_2_wavetable[] = {
 	0.3671987060151982f,
 
 };
-#endif HI_HAT_2_WAVETABLE_H_
+
+}

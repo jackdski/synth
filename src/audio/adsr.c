@@ -1,5 +1,9 @@
 #include "adsr.h"
 
+#include "features.h"
+
+#if (FEATURE_ADSR)
+
 /* I N C L U D E S */
 
 #include "Utils.h"
@@ -144,3 +148,5 @@ void ADSR_setNoteOn(ADSR_S *adsr, bool noteOn)
 {
     adsr->settings.noteOn = noteOn;
 }
+
+#endif // FEATURE_ADSR

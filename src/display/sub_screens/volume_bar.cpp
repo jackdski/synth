@@ -1,5 +1,12 @@
 
 #include "volume_bar.hpp"
+#include "features.h"
+
+#include "sgtl5000.h"
+
+#if (FEATURE_DISPLAY)
+
+using namespace Display;
 
 static lv_obj_t *volumeBar;
 static int32_t prevVolume = 0;
@@ -34,7 +41,7 @@ void volume_cb(lv_event_t *e)
     }
 }
 
-void volume_bar_update(void)
+void Display::volume_bar_update(void)
 {
     const float volume = SGTL5000_getVolume();
     int32_t vol  = (int32_t)(100.0f * (volume + SGTL5000_VOLUME_DB_MIN) / (SGTL5000_VOLUME_DB_MIN + 51.5f));
@@ -44,3 +51,5 @@ void volume_bar_update(void)
     }
     prevVolume = vol;
 }
+
+#endif // (FEATURE_DISPLAY)

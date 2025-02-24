@@ -1,7 +1,8 @@
 #include "features.h"
 
-#include "DisplayManager.hpp"
 #include "lvgl.h"
+
+#include "settingsSelection.hpp"
 
 #if (FEATURE_DISPLAY)
 
@@ -28,7 +29,7 @@ static void event_handler(lv_event_t * e)
 }
 #endif
 
-void display_settingsSelection(void)
+void Display::display_settingsSelection(void)
 {
 #if (NEW_SETTINGS == 0)
     /*Create a list*/

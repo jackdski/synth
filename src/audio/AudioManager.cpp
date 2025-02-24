@@ -1,33 +1,40 @@
 #include "AudioManager.hpp"
 
 #include "sgtl5000.h"
-#include "audio.hpp"
 #include "LEDs.h"
 
 #include <stdio.h>
-
-#include "hardwareSpecific.h"
 
 #if FEATURE_AUDIO
 
 using namespace Audio;
 
-AudioManager audioManager;
+static uint16_t sampleBlock[I2S_BUFFER_SIZE];
 
-void AudioManager::initalizeCodec(uint16_t * sampleBlock)
+#if (defined(DEBUG) && (DEBUG) && 0)
+static bool     waveformRising = false;
+static uint16_t lastSample = 0U;
+#endif
+
+void AudioManager::initalizeCodec(void)
 {
+    memset(sampleBlock, 0U, sizeof(sampleBlock));
+
     // need to transmit on I2S to wake up codec
-    i2sInterface.i2sTransmit(sampleBlock, I2S_BUFFER_SIZE);
+    i2sInterface->i2sTransmit(sampleBlock, I2S_BUFFER_SIZE);
     SGTL5000_init();
 }
 
 void AudioManager::update10Hz(void)
 {
+#if (FEATURE_KEYBOARD)
     keyboard.updateInputs();
+#endif
+
     SGTL5000_updateVolume(volume);
 }
 
-void AudioManager::updateSampleBlock(uint16_t *sampleBlock, const bool firstHalf)
+void AudioManager::updateSampleBlock(const bool firstHalf)
 {
     const uint32_t startIndex = (firstHalf) ? 0U : (I2S_BUFFER_HALFWAY_INDEX);
     const uint32_t endIndex   = (firstHalf) ? (I2S_BUFFER_HALFWAY_INDEX) : (I2S_BUFFER_SIZE);
@@ -41,7 +48,9 @@ void AudioManager::updateSampleBlock(uint16_t *sampleBlock, const bool firstHalf
         {
             case AudioMode::Keyboard:
             {
+#if (FEATURE_KEYBOARD)
                 sample = keyboard.getSample();
+#endif
                 break;
             }
 
@@ -60,8 +69,10 @@ void AudioManager::updateSampleBlock(uint16_t *sampleBlock, const bool firstHalf
         }
 
         // apply LFO
-        const float lfoSample = lfo.getSample() * lfoVolume;
-        sample = (lfoSample + sample) / 2.0f;
+// #if FEATURE_OSC
+//         const float lfoSample = lfo.getSample() * lfoVolume;
+//         sample = (lfoSample + sample) / 2.0f;
+// #endif
 
         // sample as a 16bit value
         // uint16_t value = (uint16_t)((int16_t)(sample * I2S_DATA_FORMAT_MAX_VALUE));
@@ -70,14 +81,37 @@ void AudioManager::updateSampleBlock(uint16_t *sampleBlock, const bool firstHalf
 
         sampleBlock[i]       = value;  // left
         sampleBlock[i + 1U]  = value; // right
-    }
-}
 
-void Audio::audio_incrementBpmTick(void)
-{
-    if (audioManager.mode == AudioMode::Sequencer)
-    {
-        audioManager.sequencerManager.incrementStep();
+#if (defined(DEBUG) && (DEBUG) && 0)
+        // TODO: if debug active, print newest sample if there was a change in direction
+        if (i == startIndex)
+        {
+            printf("%i\n", value);
+        }
+        else if (i > startIndex)
+        {
+            if ((waveformRising) &&
+                (lastSample > sample))
+            {
+                printf("%i\n", value);
+            }
+            else if ((waveformRising == false) &&
+                     (lastSample < sample))
+            {
+                printf("%i\n", value);
+            }
+            else
+            {
+                // do noting
+            }
+        }
+        else
+        {
+            // nothing
+        }
+
+        lastSample = sample;
+#endif
     }
 }
 

@@ -5,5 +5,6 @@ wavetable_generator/target/*
 
 .vscode/settings.json
 notes.md
+src/audio/audio.md
 .DS_Store
 synth.drawio

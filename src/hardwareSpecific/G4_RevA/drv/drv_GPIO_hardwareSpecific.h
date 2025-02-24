@@ -1,4 +1,4 @@
-#ifndef GPIO_HPP_
+#ifndef DRV_GPIO_HPP_
 #define DRV_GPIO_HPP_
 
 #include "drv_GPIO.h"

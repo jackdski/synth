@@ -25,4 +25,6 @@
 
 #define CONVERT_BPM_TO_TICKS(CLK_FREQ, BPM)     (CLK_FREQ * (60U / BPM))
 
+#define NUM_ELEMENTS_IN_ARRAY(array)              (sizeof(array) / array[0U])
+
 #endif  // UTILS_H_
