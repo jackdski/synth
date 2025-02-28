@@ -37,10 +37,10 @@ public:
     {
         float ret = sampleArray[currentPosition];
 
-        currentPosition++;
-        if (currentPosition >= length)
+        // do not cycle around samples, only play once
+        if (currentPosition <= length)
         {
-            currentPosition = 0U;
+            currentPosition++;
         }
         return ret;
     }
@@ -54,10 +54,10 @@ public:
 
         float ret = sampleArray[currentPosition];
 
-        currentPosition++;
-        if (currentPosition >= length)
+        // do not cycle around samples, only play once
+        if (currentPosition <= length)
         {
-            currentPosition = 0U;
+            currentPosition++;
         }
         return ret;
     }

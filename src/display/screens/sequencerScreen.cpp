@@ -61,7 +61,7 @@ static void back_button_event_handler(lv_event_t * e)
         lv_event_code_t code = lv_event_get_code(e);
         if (code == LV_EVENT_CLICKED)
         {
-            // displayManager.SetScreen(DisplayScreen::HOME);
+            displayManager.SetScreen(DisplayScreen::HOME);
         }
     }
 }

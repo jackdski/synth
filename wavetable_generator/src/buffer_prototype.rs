@@ -202,9 +202,9 @@ impl Note {
     }
 }
 
-pub fn cross_fade(cross: f32, a: f32, b: f32) {
+pub fn cross_fade(cross: f32, a: f32, b: f32) -> f32 {
     // simplifying (1 - x[n])y[n] + x[n]z[n]
-    return (a + cross * (b - a));
+    return a + (cross * (b - a));
 }
 
 
@@ -219,7 +219,7 @@ pub fn run_buffer() -> Result<(), Box<dyn std::error::Error>> {
 
     // SINE wavetable
     let sine_wavetable: [f32; WAVETABLE_NUM_SAMPLES] = core::array::from_fn(|i| {
-        ((WAVETABLE_START_VALUE + (i as f32 * WAVETABLE_STEP_VALUE)).sin())
+        (WAVETABLE_START_VALUE + (i as f32 * WAVETABLE_STEP_VALUE)).sin()
     });
 
     // let buffer_a: VecDeque<f32> = VecDeque::new();

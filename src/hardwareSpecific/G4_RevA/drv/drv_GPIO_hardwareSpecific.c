@@ -4,6 +4,10 @@
 
 #if FEATURE_GPIO
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* T Y P E D E F S */
 
 typedef struct
@@ -150,5 +154,9 @@ void drv_GPIO_update(void)
         }
     }
 }
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // FEATURE_GPIO

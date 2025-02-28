@@ -71,8 +71,6 @@ void PCA9685_configure(void)
     };
 
     (void)drv_I2C_writeBytes(config->i2cDevice, txDataMode2, sizeof(txDataMode2));
-
-    PCA9685_updateOutputs();
 }
 
 void PCA9685_updateOutputs(void)

@@ -46,11 +46,23 @@ public:
     VoiceConfig(void)
     {
         source = VoiceSource::OSCILLATOR;
+#if FEATURE_SAMPLE
         sample = Samples::Sample();
+#elif FEATURE_OSC
+        oscillator = Oscillator(WavetableType::SINE, 440.0f);
+#endif
     }
 
     VoiceConfig(VoiceSource source): source(source)
     {
+    }
+
+    VoiceConfig(float frequency)
+    {
+        source = VoiceSource::OSCILLATOR;
+#if FEATURE_OSC
+        oscillator = Oscillator(frequency);
+#endif
     }
 
     VoiceConfig(WavetableType wavetableType, float frequency)
@@ -61,12 +73,14 @@ public:
 #endif
     }
 
+#if FEATURE_SAMPLE
     VoiceConfig(Samples::SampleType newSample)
     {
         source = VoiceSource::SAMPLE;
         sample = globalSamples_getSample(newSample);
         // sample = Samples::Sample(GlobalData::hi_hat_0_wavetable, SYNTH_SAMPLE_FREQUENCY, NUM_ELEMENTS_IN_ARRAY(GlobalData::hi_hat_0_wavetable));
     }
+#endif
 };
 
 class Voice
@@ -79,15 +93,22 @@ public:
         config = VoiceConfig();
     }
 
+    Voice(float frequency)
+    {
+        config = VoiceConfig(frequency);
+    }
+
     Voice(WavetableType wavetableType, float frequency)
     {
         config = VoiceConfig(wavetableType, frequency);
     }
 
+#if FEATURE_SAMPLE
     Voice(Samples::SampleType sample)
     {
         config = VoiceConfig(sample);
     }
+#endif
 
     void setConfig(const VoiceConfig voiceConfig)
     {
@@ -106,7 +127,9 @@ public:
                 break;
 
             case VoiceSource::SAMPLE:
+#if FEATURE_SAMPLE
                 ret = config.sample.getSample(restart);
+#endif
                 break;
 
             default:

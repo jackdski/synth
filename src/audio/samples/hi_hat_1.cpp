@@ -5,7 +5,7 @@ namespace GlobalData
 
 // ClickyHiHat_01_534.wav
 
-float hi_hat_1_wavetable[5545U] = {
+float  hi_hat_1_wavetable[5545U] = {
 	0.6875f,
 	0.3984375f,
 	0.5703125f,

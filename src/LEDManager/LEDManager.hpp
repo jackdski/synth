@@ -1,9 +1,10 @@
-#ifndef LED_MANAGER_HPP
-#define LED_MANAGER_HPP
+#ifndef LED_MANAGER_HPP_
+#define LED_MANAGER_HPP_
 
 #include "features.h"
 
 #if (FEATURE_LED_MANAGER)
+
 #include "LEDs.h"
 
 namespace LED
@@ -17,25 +18,31 @@ enum class LEDManagerState
     SEQUENCER,
 };
 
-class LEDManager
-{
+class LEDManager {
 private:
-    LEDManagerState state = LEDManagerState::INITIALIZING;
-
+    static LEDManager* instance;
+    LEDManager() {}
 public:
-    LEDManager(void);
+    LEDManager(const LEDManager& other) = delete;
+    LEDManager& operator=(const LEDManager& other) = delete;
+    static LEDManager* getInstance() {
+        if (instance == nullptr) {
+            instance = new LEDManager();
+        }
+        return instance;
+    }
 
-    void Init(void);
-    void Update(void);
-    void UpdateOnPress(void);
-    void UpdateSequencer(void);
+    LEDManagerState state = LEDManagerState::ON_PRESS;
+
+    void init(void);
+    void setState(LEDManagerState newState);
+
+    void update(void);
+    void updateOnPress(void);
+    void updateSequencer(void);
 };
-
-LEDManager::LEDManager(void)
-{
-}
 
 }
 
 #endif // FEATURE_LED_MANAGER
-#endif // LED_MANAGER_HPP
+#endif // LED_MANAGER_HPP_

@@ -75,8 +75,9 @@ set(SRCS
     ${PROJ_PATH}/display/screens/waveformScreen.cpp
     ${PROJ_PATH}/display/screens/settingsSelection.cpp
     ${PROJ_PATH}/display/screens/sequencerScreen.cpp
-    ${PROJ_PATH}/misc/misc.c
+    ${PROJ_PATH}/misc/misc.cpp
     ${PROJ_PATH}/misc/knobControls.c
+    ${PROJ_PATH}/LEDManager/LEDManager.cpp
     ${PROJ_PATH}/audio/samples/hi_hat_0.cpp
     ${PROJ_PATH}/audio/samples/hi_hat_1.cpp
     ${PROJ_PATH}/audio/samples/hi_hat_2.cpp
@@ -185,6 +186,7 @@ set(INCLUDE_DIRS
     ${PROJ_PATH}/display/sub_screens/
     ${PROJ_PATH}/display/
     ${PROJ_PATH}/wavetables/
+    ${PROJ_PATH}/LEDManager/
     ${PROJ_PATH}/audio/
     ${PROJ_PATH}/audio/effects/
     ${PROJ_PATH}/audio/samples/
@@ -246,8 +248,13 @@ if(SEGGER_SYSTEMVIEW)
     include(${PROJ_PATH}/lib/SystemView/SystemView.cmake)
 endif(SEGGER_SYSTEMVIEW)
 
+# LVGL lib
 include(${PROJ_PATH}/lvgl/CMakeLists.txt)
 target_link_libraries(synth_G4RevA PRIVATE lvgl::lvgl)
+
+# ARM DSP lib
+target_link_libraries(synth_G4RevA PRIVATE "${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/CMSIS/DSP/Lib/GCC/libarm_cortexM4lf_math.a")
+
 target_include_directories(synth_G4RevA PRIVATE ${include_path_G4_RevA_DIRS})
 
 target_compile_options(lvgl PRIVATE

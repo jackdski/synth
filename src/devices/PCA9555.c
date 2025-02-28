@@ -1,4 +1,8 @@
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* I N C L U D E S */
 
 #include "PCA9555.h"
@@ -194,3 +198,7 @@ bool PCA9555_getState(const PCA9555_channel_E channel)
 }
 
 #endif  // FEATURE_PCA9555
+
+#ifdef __cplusplus
+}
+#endif

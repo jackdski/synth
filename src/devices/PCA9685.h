@@ -14,6 +14,10 @@
 
 #if FEATURE_PCA9685
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* D E F I N E S */
 
 #define PCA9685_ADDRESS(A5, A4, A3, A2, A1, A0) ((0x40U | (A5 << 5U) | (A4 << 4U) | (A3 << 3U) | (A2 << 2U) | (A1 << 1U) | A0))
@@ -233,6 +237,10 @@ bool PCA9685_getState(const PCA9685_channel_E channel);
 void PCA9685_setBrightness(const PCA9685_channel_E channel, float brightness);
 float PCA9685_getBrightness(const PCA9685_channel_E channel);
 void PCA9685_toggle(const PCA9685_channel_E channel);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // FEATURE_PCA9685
 #endif  /* PCA9685_H_ */

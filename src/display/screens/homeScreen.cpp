@@ -1,10 +1,12 @@
 #include "features.h"
 
-// #include "DisplayManager.hpp"
-#include "homeScreen.hpp"
-// #include "AudioManager.hpp"
+#include "DisplayManager.hpp"
+#include "AudioManager.hpp"
+#include "LEDManager.hpp"
+
 #include "lvgl.h"
 
+#include "homeScreen.hpp"
 #include "volume_bar.hpp"
 
 #include "sgtl5000.h"
@@ -27,8 +29,9 @@ constexpr uint32_t display_width  =  ST7789_LCD_HEIGHT;
 constexpr uint32_t display_height = ST7789_LCD_WIDTH;
 
 // Data Definitions
-// extern DisplayManager displayManager;
-// extern Audio::AudioManager audioManager;
+extern DisplayManager displayManager;
+extern Audio::AudioManager audioManager;
+static LED::LEDManager* LEDManager = LED::LEDManager::getInstance();
 
 static lv_group_t * g;
 static lv_indev_t * encoderIndev;
@@ -52,18 +55,18 @@ static void mode_selection_cb(lv_event_t *e)
 
         if (strcmp(btn_text, sequencer_str) == 0)
         {
-            // displayManager.SetScreen(DisplayScreen::SEQUENCER);
-            // audioManager.setMode(Audio::AudioMode::Sequencer);
+            displayManager.SetScreen(DisplayScreen::SEQUENCER);
+            audioManager.setMode(Audio::AudioMode::Sequencer);
         }
         else if (strcmp(btn_text, keyboard_str) == 0)
         {
             // show key on keyboard screen and change key with encoder
-            // audioManager.setMode(Audio::AudioMode::Keyboard);
+            audioManager.setMode(Audio::AudioMode::Keyboard);
         }
         else if (strcmp(btn_text, arpeggiator_str)  == 0)
         {
             // show key on keyboard screen and change key with encoder
-            // audioManager.setMode(Audio::AudioMode::Arpeggiator);
+            audioManager.setMode(Audio::AudioMode::Arpeggiator);
         }
         else
         {
@@ -76,14 +79,14 @@ static void encoder_read(lv_indev_t * indev, lv_indev_data_t * data)
 {
     data->enc_diff = drv_encoder_updateAndGetDiff(DRV_ENCODER_CHANNEL_0);
 
-    // if (Button_isPressed(BUTTON_CHANNEL_A))
-    // {
-    //     data->state = LV_INDEV_STATE_PRESSED;
-    // }
-    // else
-    // {
-    //     data->state = LV_INDEV_STATE_RELEASED;
-    // }
+    if (Button_isPressed(BUTTON_CHANNEL_A))
+    {
+        data->state = LV_INDEV_STATE_PRESSED;
+    }
+    else
+    {
+        data->state = LV_INDEV_STATE_RELEASED;
+    }
 }
 
 static void mode_selection(void)

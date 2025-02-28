@@ -117,10 +117,6 @@ static void initTask(void *pvParameters)
 {
     (void)xTaskCreate(misc10HzTask, "misc10Hz", configMINIMAL_STACK_SIZE, (void *)NULL, 3U, NULL);
 
-#if (FEATURE_MIXER)
-    (void)xTaskCreate(Audio::mixerControl, "mixerControl", configMINIMAL_STACK_SIZE, (void *)NULL, 1U, NULL);
-#endif
-
 #if (FEATURE_DISPLAY)
     (void)xTaskCreate(Display::displayControl, "displayControl", 512, (void *)NULL, 2U, NULL);
 #endif

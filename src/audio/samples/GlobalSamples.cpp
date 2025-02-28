@@ -1,6 +1,8 @@
 
 #include "GlobalSamples.hpp"
 
+#if FEATURE_SAMPLE
+
 // namespace Samples
 // {
 
@@ -33,3 +35,5 @@ Samples::Sample globalSamples_getSample(Samples::SampleType sample)
 }
 
 // }
+
+#endif

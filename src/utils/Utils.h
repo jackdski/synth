@@ -3,6 +3,7 @@
 
 #include <float.h>
 #include <stdint.h>
+#include <math.h>
 
 #define MIN(X, Y)                         (((X) < (Y)) ? (X) : (Y))
 #define MAX(X, Y)                         (((X) > (Y)) ? (X) : (Y))
@@ -26,5 +27,8 @@
 #define CONVERT_BPM_TO_TICKS(CLK_FREQ, BPM)     (CLK_FREQ * (60U / BPM))
 
 #define NUM_ELEMENTS_IN_ARRAY(array)              (sizeof(array) / array[0U])
+
+#define CONVERT_MIDI_TO_FREQUENCY_POWER(MIDI_NUMBER)    (((float)midiNumber - 69.0F) / 12.0F)
+#define CONVERT_MIDI_TO_FREQUENCY(MIDI_NUMBER)          (440.0F * pow(2.0F, CONVERT_MIDI_TO_FREQUENCY_POWER(MIDI_NUMBER)))
 
 #endif  // UTILS_H_

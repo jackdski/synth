@@ -7,7 +7,7 @@
 
 #include <stdint.h>
 
-#define WAVETABLE_NUM_SAMPLES 2048U
+#define WAVETABLE_NUM_SAMPLES 4096U
 
 namespace Audio
 {

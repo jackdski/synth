@@ -9,6 +9,8 @@
 #include <stdint.h>
 #include <stdio.h>
 
+#include "LEDManager.hpp"
+
 #include "LEDs.h"
 #include "PCA9555.h"
 #include "button.h"
@@ -23,18 +25,15 @@
 #include "cpu_utils.h"
 #include "hardwareSpecific.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+// #ifdef __cplusplus
+// extern "C" {
+// #endif
 
 /* D E F I N E S */
 
 #define PRINT_HIGHWATER_MARKS 0
 
 /* T Y P E D E F S */
-
-#define BRIGHTNESS_STEP            0.01F
-
 
 #if PRINT_HIGHWATER_MARKS
 extern TaskHandle_t misc100HzTaskHandle;
@@ -49,6 +48,8 @@ static TickType_t misc10HzTaskLastWakeTime;
 static TickType_t misc100HzTaskLastWakeTime;
 
 static char buffer[40U * 8U];
+
+static LED::LEDManager* LEDManager = LED::LEDManager::getInstance();
 
 /* P U B L I C   F U N C T I O N S */
 
@@ -111,15 +112,9 @@ void misc10HzTask(void *pvParameters)
         LED_toggle(LED_CHANNEL_BLINKY);
 #endif
 
-// #if FEATURE_ENCODER
-        // knobControls_update();
-        // const KnobControls_value_U volumeValue = knobControls_getValue(KNOB_CONTROLS_CHANNEL_VOLUME);
-        // printf("Volume: %f\n", volumeValue.f32);
-// #endif
-
-// #if FEATURE_SGTL5000
-        // SGTL5000_updateVolume(volumeValue.f32);
-// #endif
+#if (FEATURE_LED_MANAGER)
+    LEDManager->update();
+#endif
 
         xTaskDelayUntil(&misc10HzTaskLastWakeTime, pdMS_TO_TICKS(100U));
     }
@@ -133,15 +128,12 @@ void misc100HzTask(void *pvParameters)
 
     while (1)
     {
-// #if FEATURE_PCA9555
-//         PCA9555_updateInputs();
-// #endif
         xTaskDelayUntil(&misc100HzTaskLastWakeTime, pdMS_TO_TICKS(10U));
     }
 }
 
-#ifdef __cplusplus
-}
-#endif
+// #ifdef __cplusplus
+// }
+// #endif
 
 #endif  // FEATURE_MISC

@@ -5,15 +5,16 @@
 
 #if FEATURE_KEYBOARD
 
-#include "button.h"
-
 #include "Voice.hpp"
 #include "GlobalSamples.hpp"
 
-#include <cmath>
+#include "button.h"
+
 #include <float.h>
 #include <stdbool.h>
 #include <stdint.h>
+
+#include "Utils.h"
 
 namespace Audio
 {
@@ -37,22 +38,33 @@ public:
         assignNote(midiNumber);
     }
 
-    KeyboardKey(Samples::SampleType sampleType)
+    KeyboardKey(Button_channel_E button, const uint32_t midiNumber, WavetableType wavetableType)
     {
+        buttonChannel = button;
+        assignNote(midiNumber, wavetableType);
+    }
+
+#if FEATURE_SAMPLE
+    KeyboardKey(Button_channel_E button, Samples::SampleType sampleType)
+    {
+        buttonChannel = button;
         voice = Voice(sampleType);
     }
+#endif
 
-    void assignNote(const uint32_t midiNumber)
+    void assignNote(const uint32_t midiNumber, const WavetableType wavetableType = WavetableType::SINE)
     {
-        const float midiConversionPower = ((float)midiNumber - 69.0F) / 12.0F;
-        const float oscFrequency = 440.0F * pow(2.0F, midiConversionPower);
-        voice = Voice(WavetableType::SINE, oscFrequency);
+        const float oscFrequency = CONVERT_MIDI_TO_FREQUENCY(midiNumber);
+        // voice = Voice(wavetableType, oscFrequency);
+        voice = Voice(oscFrequency);
     }
 
+#if FEATURE_SAMPLE
     void assignSample(const Samples::SampleType sample)
     {
         voice = Voice(sample);
     }
+#endif
 
     void update(void)
     {
@@ -80,8 +92,8 @@ private:
         KeyboardKey(BUTTON_CHANNEL_1, KEYBOARD_DEFAULT_STARTING_MIDI_NOTE),
         KeyboardKey(BUTTON_CHANNEL_2, KEYBOARD_DEFAULT_STARTING_MIDI_NOTE + 1U),
         KeyboardKey(BUTTON_CHANNEL_3, KEYBOARD_DEFAULT_STARTING_MIDI_NOTE + 2U),
-        // KeyboardKey(BUTTON_CHANNEL_4, KEYBOARD_DEFAULT_STARTING_MIDI_NOTE + 3U),
-        KeyboardKey(Samples::SampleType::HI_HAT_0),
+        KeyboardKey(BUTTON_CHANNEL_4, KEYBOARD_DEFAULT_STARTING_MIDI_NOTE + 3U),
+        // KeyboardKey(BUTTON_CHANNEL_4, Samples::SampleType::HI_HAT_0),
         KeyboardKey(BUTTON_CHANNEL_5, KEYBOARD_DEFAULT_STARTING_MIDI_NOTE + 4U),
         KeyboardKey(BUTTON_CHANNEL_6, KEYBOARD_DEFAULT_STARTING_MIDI_NOTE + 5U),
         KeyboardKey(BUTTON_CHANNEL_7, KEYBOARD_DEFAULT_STARTING_MIDI_NOTE + 6U),

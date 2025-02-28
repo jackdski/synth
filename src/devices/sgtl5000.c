@@ -12,6 +12,7 @@ extern "C" {
 #include "drv_I2C.h"
 
 #include <string.h>
+#include <stdio.h>
 
 #if FEATURE_SGTL5000
 
@@ -81,7 +82,8 @@ typedef struct
 
 /* D A T A   D E F I N I T I O N S */
 
-SGTL5000_config_S config = {
+SGTL5000_config_S config =
+{
     .i2cDevice      = DRV_I2C_DEVICE_SGTL5000,
     .rateMode       = SGTL5000_RATE_MODE_SYS_FS,
     .sysFs          = SGTL5000_DIG_POWER_SYS_FS_44_1_KHZ,
@@ -263,6 +265,11 @@ bool SGTL5000_pollRegisters(void)
     // ret &= SGTL5000_readI2C(SGTL5000_CHIP_ID_REG, &registerData->anaTest2Register);
     // ret &= SGTL5000_readI2C(SGTL5000_SHORT, &registerData->shortCtrlRegister);
 
+    printf("i2sCtrlRegister: %d\n", registerData->i2sCtrlRegister);
+    printf("anaHpCtrlRegister: %d\n", registerData->anaHpCtrlRegister);
+    printf("anaCtrlRegister: %d\n", registerData->anaCtrlRegister);
+    printf("anaStatusRegister: %d\n", registerData->anaStatusRegister);
+
     return ret;
 }
 
@@ -290,7 +297,7 @@ bool SGTL5000_readI2C(const uint16_t reg, uint16_t *rxData)
 
     if (rxData != NULL)
     {
-        *rxData = ((privateRXData[1U] << 8U) | (privateRXData[0U]));
+        *rxData = ((privateRXData[0U] << 8U) | (privateRXData[1U]));
     }
 
     return ret;

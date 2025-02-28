@@ -75,9 +75,7 @@ void AudioManager::updateSampleBlock(const bool firstHalf)
 // #endif
 
         // sample as a 16bit value
-        // uint16_t value = (uint16_t)((int16_t)(sample * I2S_DATA_FORMAT_MAX_VALUE));
         const uint16_t value = static_cast<uint16_t>(static_cast<int16_t>(sample * I2S_DATA_FORMAT_MAX_VALUE));
-        // value *= volume;
 
         sampleBlock[i]       = value;  // left
         sampleBlock[i + 1U]  = value; // right

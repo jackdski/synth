@@ -13,6 +13,10 @@
 
 #if FEATURE_PCA9555
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* D E F I N E S */
 
 #define PCA9555_ADDRESS(A0, A1)   ((0x74U | (A1 << 1U) | A0) << 1U)
@@ -68,6 +72,10 @@ void PCA9555_updateInputs(void);
 
 void PCA9555_setState(const PCA9555_channel_E channel, bool state);
 bool PCA9555_getState(const PCA9555_channel_E channel);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // FEATURE_PCA9555
 #endif  /* PCA9555_H_ */

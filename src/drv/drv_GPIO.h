@@ -1,6 +1,7 @@
 #ifndef DRV_GPIO_BASE_HPP_
 #define DRV_GPIO_BASE_HPP_
 
+
 /* I N C L U D E S */
 
 #include "features.h"
@@ -10,6 +11,10 @@
 #include "main.h"
 
 #if FEATURE_GPIO
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /* D E F I N E S */
 
@@ -49,6 +54,10 @@ void drv_GPIO_update(void);
 void drv_GPIO_setOutput(drv_GPIO_channel_E channel, drv_GPIO_state_E state);
 void drv_GPIO_toggleOutput(drv_GPIO_channel_E channel);
 drv_GPIO_state_E drv_GPIO_getInput(drv_GPIO_channel_E channel);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // FEATURE_GPIO
 #endif  // DRV_GPIO_BASE_HPP_

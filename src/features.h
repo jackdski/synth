@@ -32,8 +32,6 @@
 
 // AUDIO
 #define FEATURE_AUDIO           1
-#define FEATURE_MIXER           0
-#define FEATURE_NOTE            0
 #define FEATURE_VOICE           1
 #define FEATURE_SAMPLE          1
 #define FEATURE_KEYBOARD        1

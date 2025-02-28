@@ -11,47 +11,103 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#define WAVETABLE_NUM_SAMPLES 2048U
+extern "C"
+{
+#include "arm_math.h"
+}
 
 namespace Audio {
+
+enum class OscillatorType
+{
+    WAVETABLE,
+    CALCULATED,
+};
 
 class Oscillator
 {
 private:
+    OscillatorType  type = OscillatorType::WAVETABLE;
     WavetableType   wavetableType;
     uint32_t        currentSampleIndex = 0U;
     uint32_t        wavetableStep = 0U;
 
+    float           currentCalculatedStep = 0.0F;
+    float           calculatedStep = 0.0F;
+
     float frequency;
     float phase;
+
+    float getWavetableSample()
+    {
+        float sample = Audio::wavetable_getSample(wavetableType, currentSampleIndex);
+
+        currentSampleIndex += wavetableStep;
+        if (currentSampleIndex >= WAVETABLE_NUM_SAMPLES)
+        {
+            currentSampleIndex -= WAVETABLE_NUM_SAMPLES;
+        }
+        return sample;
+    }
+
+    float getCalculatedSample()
+    {
+        float sample = arm_sin_f32(currentCalculatedStep);
+
+        currentCalculatedStep += calculatedStep;
+        if (currentCalculatedStep >= TWO_PI)
+        {
+            currentCalculatedStep -= TWO_PI;
+        }
+        return sample;
+    }
 
 public:
     Oscillator(float frequency, float phase, WavetableType wavetableType) : wavetableType(wavetableType), frequency(frequency), phase(phase)
     {
-        updateWavetableSteps();
+        updateStepSize();
     }
 
     Oscillator(void)
     {
+        type = OscillatorType::CALCULATED;
         wavetableType = WavetableType::SINE;
         frequency = 0.0f;
     }
 
+    Oscillator(float frequency)
+    {
+        type = OscillatorType::CALCULATED;
+        wavetableType = WavetableType::SINE;
+        setFrequency(frequency);
+    }
+
     Oscillator(WavetableType wavetableType, float frequency): wavetableType(wavetableType), frequency(frequency)
     {
+        type = OscillatorType::WAVETABLE;
         setFrequency(frequency);
+
     }
 
     void setFrequency(float freq)
     {
         frequency = freq;
-        updateWavetableSteps();
+        updateStepSize();
     }
 
-    void updateWavetableSteps(void)
+    void updateStepSize(void)
     {
-        const uint32_t wavelengthsPerSecond = (uint32_t)(SYNTH_SAMPLE_FREQUENCY / frequency);
-        wavetableStep = (Audio::wavetable_getNumberOfSamples(wavetableType) * wavelengthsPerSecond) / SYNTH_SAMPLE_FREQUENCY;
+        switch (type)
+        {
+            case OscillatorType::CALCULATED:
+                calculatedStep = TWO_PI / (SYNTH_SAMPLE_FREQUENCY / frequency);
+                break;
+
+            case OscillatorType::WAVETABLE:
+            default:
+                wavetableStep = (uint32_t)((float)(Audio::wavetable_getNumberOfSamples(wavetableType) * frequency) / SYNTH_SAMPLE_FREQUENCY);
+                break;
+        }
     }
 
     float getSample(void)
@@ -59,12 +115,16 @@ public:
         float sample = 0.0F;
         if (frequency > 0.0F)
         {
-            sample = Audio::wavetable_getSample(wavetableType, currentSampleIndex);
-
-            currentSampleIndex += wavetableStep;
-            if (currentSampleIndex > WAVETABLE_NUM_SAMPLES)
+            switch (type)
             {
-                currentSampleIndex -= WAVETABLE_NUM_SAMPLES;
+                case OscillatorType::CALCULATED:
+                    sample = getCalculatedSample();
+                    break;
+
+                case OscillatorType::WAVETABLE:
+                default:
+                    sample = getWavetableSample();
+                    break;
             }
         }
         return sample;
