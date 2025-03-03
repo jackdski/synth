@@ -7,6 +7,7 @@
 
 #include "constants.h"
 #include "wavetables.hpp"
+#include "waveforms.hpp"
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -15,6 +16,10 @@ extern "C"
 {
 #include "arm_math.h"
 }
+
+#define WAVEFORM_MIN_AMPLITUDE      (-1.0F)
+#define WAVEFORM_MAX_AMPLITUDE      (1.0F)
+#define WAVEFORM_AMPLITUDE_RANGE    (2.0F)
 
 namespace Audio {
 
@@ -27,8 +32,8 @@ enum class OscillatorType
 class Oscillator
 {
 private:
-    OscillatorType  type = OscillatorType::WAVETABLE;
-    WavetableType   wavetableType;
+    OscillatorType  type = OscillatorType::CALCULATED;
+    WaveformType    waveformType;
     uint32_t        currentSampleIndex = 0U;
     uint32_t        wavetableStep = 0U;
 
@@ -38,9 +43,10 @@ private:
     float frequency;
     float phase;
 
+#if FEATURE_WAVETABLE
     float getWavetableSample()
     {
-        float sample = Audio::wavetable_getSample(wavetableType, currentSampleIndex);
+        float sample = Audio::wavetable_getSample(waveformType, currentSampleIndex);
 
         currentSampleIndex += wavetableStep;
         if (currentSampleIndex >= WAVETABLE_NUM_SAMPLES)
@@ -49,65 +55,131 @@ private:
         }
         return sample;
     }
+#endif
 
     float getCalculatedSample()
     {
-        float sample = arm_sin_f32(currentCalculatedStep);
+        float sample = 0.0f;
 
-        currentCalculatedStep += calculatedStep;
-        if (currentCalculatedStep >= TWO_PI)
+        switch (waveformType)
         {
-            currentCalculatedStep -= TWO_PI;
+            case WaveformType::SAW:
+            {
+                sample = currentCalculatedStep;
+                currentCalculatedStep += calculatedStep;
+
+                if (currentCalculatedStep >= WAVEFORM_AMPLITUDE_RANGE)
+                {
+                    currentCalculatedStep = WAVEFORM_MIN_AMPLITUDE;
+                }
+                break;
+            }
+
+            case WaveformType::SQUARE:
+            {
+                const float sine = arm_sin_f32(currentCalculatedStep);
+                if (sine > 0.0f)
+                {
+                    sample = 1.0F;
+                }
+                else
+                {
+                    sample = -1.0F;
+                }
+
+                currentCalculatedStep += calculatedStep;
+                if (currentCalculatedStep >= TWO_PI)
+                {
+                    currentCalculatedStep -= TWO_PI;
+                }
+                break;
+            }
+
+            case WaveformType::SINE:
+            default:
+            {
+                sample = arm_sin_f32(currentCalculatedStep);
+
+                currentCalculatedStep += calculatedStep;
+                if (currentCalculatedStep >= TWO_PI)
+                {
+                    currentCalculatedStep -= TWO_PI;
+                }
+                break;
+            }
         }
         return sample;
     }
 
-public:
-    Oscillator(float frequency, float phase, WavetableType wavetableType) : wavetableType(wavetableType), frequency(frequency), phase(phase)
+    void updateStepSizeCalculatedWaveform(void)
     {
-        updateStepSize();
-    }
+        switch (waveformType)
+        {
+            case WaveformType::SAW:
+            {
+                calculatedStep = 2.0f / frequency;
+                break;
+            }
 
-    Oscillator(void)
-    {
-        type = OscillatorType::CALCULATED;
-        wavetableType = WavetableType::SINE;
-        frequency = 0.0f;
-    }
+            case WaveformType::SQUARE:
+                calculatedStep = TWO_PI / (SYNTH_SAMPLE_FREQUENCY / frequency);
+                break;
 
-    Oscillator(float frequency)
-    {
-        type = OscillatorType::CALCULATED;
-        wavetableType = WavetableType::SINE;
-        setFrequency(frequency);
-    }
-
-    Oscillator(WavetableType wavetableType, float frequency): wavetableType(wavetableType), frequency(frequency)
-    {
-        type = OscillatorType::WAVETABLE;
-        setFrequency(frequency);
-
-    }
-
-    void setFrequency(float freq)
-    {
-        frequency = freq;
-        updateStepSize();
+            case WaveformType::SINE:
+            default:
+                calculatedStep = TWO_PI / (SYNTH_SAMPLE_FREQUENCY / frequency);
+                break;
+        }
     }
 
     void updateStepSize(void)
     {
         switch (type)
         {
-            case OscillatorType::CALCULATED:
-                calculatedStep = TWO_PI / (SYNTH_SAMPLE_FREQUENCY / frequency);
-                break;
-
+#if FEATURE_WAVETABLE
             case OscillatorType::WAVETABLE:
+                wavetableStep = (uint32_t)((float)(Audio::wavetable_getNumberOfSamples(waveformType) * frequency) / SYNTH_SAMPLE_FREQUENCY);
+                break;
+#endif
+
+            case OscillatorType::CALCULATED:
             default:
-                wavetableStep = (uint32_t)((float)(Audio::wavetable_getNumberOfSamples(wavetableType) * frequency) / SYNTH_SAMPLE_FREQUENCY);
+                updateStepSizeCalculatedWaveform();
                 break;
         }
+    }
+
+public:
+    Oscillator(float frequency, float phase, WaveformType waveformType) : waveformType(waveformType), frequency(frequency), phase(phase)
+    {
+        type = OscillatorType::CALCULATED;
+        updateStepSize();
+    }
+
+    Oscillator(void)
+    {
+        type = OscillatorType::CALCULATED;
+        waveformType = WaveformType::SINE;
+        frequency = 0.0f;
+    }
+
+    Oscillator(float frequency)
+    {
+        type = OscillatorType::CALCULATED;
+        waveformType = WaveformType::SINE;
+        setFrequency(frequency);
+    }
+
+    Oscillator(WaveformType waveformType, float frequency): waveformType(waveformType), frequency(frequency)
+    {
+        type = OscillatorType::WAVETABLE;
+        setFrequency(frequency);
+    }
+
+    void setFrequency(float freq)
+    {
+        frequency = freq;
+        updateStepSize();
     }
 
     float getSample(void)
@@ -117,14 +189,17 @@ public:
         {
             switch (type)
             {
+#if FEATURE_WAVETABLE
+                case OscillatorType::WAVETABLE:
+                    sample = getWavetableSample();
+                    break;
+#endif
+
                 case OscillatorType::CALCULATED:
+                default:
                     sample = getCalculatedSample();
                     break;
 
-                case OscillatorType::WAVETABLE:
-                default:
-                    sample = getWavetableSample();
-                    break;
             }
         }
         return sample;

@@ -24,7 +24,7 @@ typedef struct
 
 typedef struct
 {
-    WavetableChannelData_S channelData[(int)WavetableType::COUNT];
+    WavetableChannelData_S channelData[(int)WaveformType::COUNT];
 } WavetableData_S;
 
 
@@ -46,21 +46,21 @@ static WavetableConfig_S wavetableChannels[] =
 
 /* P U B L I C   F U N C T I O N S */
 
-float Audio::wavetable_getSample(const WavetableType type, const uint32_t index)
+float Audio::wavetable_getSample(const WaveformType type, const uint32_t index)
 {
     return wavetableChannels[(int)type].wavetableData[index];
 }
 
-uint32_t Audio::wavetable_getNumberOfSamples(const WavetableType type)
+uint32_t Audio::wavetable_getNumberOfSamples(const WaveformType type)
 {
     const WavetableConfig_S * const channelConfig = &wavetableChannels[(int)type];
     return channelConfig->numSamples;
 }
 
-WavetableConfig_S * Audio::wavetable_getWavetableConfig(const WavetableType type)
+WavetableConfig_S * Audio::wavetable_getWavetableConfig(const WaveformType type)
 {
     WavetableConfig_S * ret = NULL;
-    if (type < WavetableType::COUNT)
+    if (type < WaveformType::COUNT)
     {
         ret = &wavetableChannels[(int)type];
     }

@@ -85,7 +85,6 @@ set(SRCS
     ${PROJ_PATH}/audio/samples/GlobalSamples.cpp
     ${PROJ_PATH}/wavetables/wavetables.cpp
     ${PROJ_PATH}/audio/effects/lpf.c
-    ${PROJ_PATH}/audio/note_info.c
     ${PROJ_PATH}/audio/keyboard.cpp
     ${PROJ_PATH}/audio/adsr.c
     ${PROJ_PATH}/audio/audio.cpp

@@ -7,13 +7,7 @@
 
 #include <stdbool.h>
 
-// #ifdef __cplusplus
-// extern "C" {
-// #endif
 void audioTask(void *pvParameters);
-// #ifdef __cplusplus
-// }
-// #endif
 
 void audio_incrementBpmTick(void);
 void audio_updateSampleBlock(const bool firstHalf);

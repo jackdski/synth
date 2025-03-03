@@ -15,6 +15,7 @@
 #include "Sample.hpp"
 #include "osc.hpp"
 #include "wavetables.hpp"
+#include "waveforms.hpp"
 
 namespace Audio
 {
@@ -49,7 +50,7 @@ public:
 #if FEATURE_SAMPLE
         sample = Samples::Sample();
 #elif FEATURE_OSC
-        oscillator = Oscillator(WavetableType::SINE, 440.0f);
+        oscillator = Oscillator(WaveformType::SINE, 440.0f);
 #endif
     }
 
@@ -65,11 +66,11 @@ public:
 #endif
     }
 
-    VoiceConfig(WavetableType wavetableType, float frequency)
+    VoiceConfig(WaveformType waveformType, float frequency)
     {
         source = VoiceSource::OSCILLATOR;
 #if FEATURE_OSC
-        oscillator = Oscillator(wavetableType, frequency);
+        oscillator = Oscillator(waveformType, frequency);
 #endif
     }
 
@@ -98,9 +99,9 @@ public:
         config = VoiceConfig(frequency);
     }
 
-    Voice(WavetableType wavetableType, float frequency)
+    Voice(WaveformType waveformType, float frequency)
     {
-        config = VoiceConfig(wavetableType, frequency);
+        config = VoiceConfig(waveformType, frequency);
     }
 
 #if FEATURE_SAMPLE

@@ -6,6 +6,7 @@
 #include "keyboard.hpp"
 #include "sequencer.hpp"
 #include "osc.hpp"
+#include "waveforms.hpp"
 
 #include "AudioI2SInterface_hardwareSpecific.hpp"
 
@@ -57,8 +58,7 @@ public:
 #endif
 
 #if FEATURE_OSC
-    Oscillator lfo = Oscillator(20.0F, 0.0F, WavetableType::SINE);
-    float lfoVolume = 0.3f;
+    Oscillator lfo = Oscillator(20.0F, 0.0F, WaveformType::SINE);
 #endif
 
     bool active = false;

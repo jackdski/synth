@@ -12,7 +12,7 @@ fn main() {
     const MIN_AMPLITUDE: f32 = -1.0;
 
     const WAVETABLE_START_VALUE: f32 = -PI;
-    const WAVETABLE_NUM_SAMPLES: usize = 4096;
+    const WAVETABLE_NUM_SAMPLES: usize = 2048;
     const WAVETABLE_STEP_VALUE: f32 = (2.0 * PI) / WAVETABLE_NUM_SAMPLES as f32;
 
     const VALUES_PER_LINE: usize = 16;

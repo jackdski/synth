@@ -5,21 +5,14 @@
 
 #if FEATURE_WAVETABLE
 
+#include "waveforms.hpp"
+
 #include <stdint.h>
 
 #define WAVETABLE_NUM_SAMPLES 4096U
 
 namespace Audio
 {
-
-enum class WavetableType
-{
-    SINE,
-    SAW,
-    SQUARE,
-
-    COUNT,
-};
 
 struct WavetableConfig_S
 {
@@ -36,9 +29,9 @@ struct WavetableConfig_S
 };
 
 
-WavetableConfig_S * wavetable_getWavetableConfig(const WavetableType type);
-float wavetable_getSample(const WavetableType type, const uint32_t index);
-uint32_t wavetable_getNumberOfSamples(const WavetableType type);
+WavetableConfig_S * wavetable_getWavetableConfig(const WaveformType type);
+float wavetable_getSample(const WaveformType type, const uint32_t index);
+uint32_t wavetable_getNumberOfSamples(const WaveformType type);
 
 }
 

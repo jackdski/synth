@@ -69,10 +69,10 @@ void AudioManager::updateSampleBlock(const bool firstHalf)
         }
 
         // apply LFO
-// #if FEATURE_OSC
-//         const float lfoSample = lfo.getSample() * lfoVolume;
-//         sample = (lfoSample + sample) / 2.0f;
-// #endif
+#if FEATURE_OSC
+        const float lfoSample = lfo.getSample();
+        sample = (lfoSample + sample) / 2.0f;
+#endif
 
         // sample as a 16bit value
         const uint16_t value = static_cast<uint16_t>(static_cast<int16_t>(sample * I2S_DATA_FORMAT_MAX_VALUE));

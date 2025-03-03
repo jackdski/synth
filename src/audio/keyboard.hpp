@@ -7,6 +7,7 @@
 
 #include "Voice.hpp"
 #include "GlobalSamples.hpp"
+#include "waveforms.hpp"
 
 #include "button.h"
 
@@ -38,10 +39,10 @@ public:
         assignNote(midiNumber);
     }
 
-    KeyboardKey(Button_channel_E button, const uint32_t midiNumber, WavetableType wavetableType)
+    KeyboardKey(Button_channel_E button, const uint32_t midiNumber, WaveformType waveformType)
     {
         buttonChannel = button;
-        assignNote(midiNumber, wavetableType);
+        assignNote(midiNumber, waveformType);
     }
 
 #if FEATURE_SAMPLE
@@ -52,11 +53,10 @@ public:
     }
 #endif
 
-    void assignNote(const uint32_t midiNumber, const WavetableType wavetableType = WavetableType::SINE)
+    void assignNote(const uint32_t midiNumber, const WaveformType waveformType = WaveformType::SINE)
     {
         const float oscFrequency = CONVERT_MIDI_TO_FREQUENCY(midiNumber);
-        // voice = Voice(wavetableType, oscFrequency);
-        voice = Voice(oscFrequency);
+        voice = Voice(waveformType, oscFrequency);
     }
 
 #if FEATURE_SAMPLE
@@ -91,14 +91,14 @@ private:
     {
         KeyboardKey(BUTTON_CHANNEL_1, KEYBOARD_DEFAULT_STARTING_MIDI_NOTE),
         KeyboardKey(BUTTON_CHANNEL_2, KEYBOARD_DEFAULT_STARTING_MIDI_NOTE + 1U),
-        KeyboardKey(BUTTON_CHANNEL_3, KEYBOARD_DEFAULT_STARTING_MIDI_NOTE + 2U),
-        KeyboardKey(BUTTON_CHANNEL_4, KEYBOARD_DEFAULT_STARTING_MIDI_NOTE + 3U),
+        KeyboardKey(BUTTON_CHANNEL_3, KEYBOARD_DEFAULT_STARTING_MIDI_NOTE + 2U, WaveformType::SAW),
+        KeyboardKey(BUTTON_CHANNEL_4, KEYBOARD_DEFAULT_STARTING_MIDI_NOTE + 3U, WaveformType::SAW),
         // KeyboardKey(BUTTON_CHANNEL_4, Samples::SampleType::HI_HAT_0),
-        KeyboardKey(BUTTON_CHANNEL_5, KEYBOARD_DEFAULT_STARTING_MIDI_NOTE + 4U),
-        KeyboardKey(BUTTON_CHANNEL_6, KEYBOARD_DEFAULT_STARTING_MIDI_NOTE + 5U),
-        KeyboardKey(BUTTON_CHANNEL_7, KEYBOARD_DEFAULT_STARTING_MIDI_NOTE + 6U),
-        KeyboardKey(BUTTON_CHANNEL_8, KEYBOARD_DEFAULT_STARTING_MIDI_NOTE + 7U),
-        KeyboardKey(BUTTON_CHANNEL_9, KEYBOARD_DEFAULT_STARTING_MIDI_NOTE + 8U),
+        KeyboardKey(BUTTON_CHANNEL_5, KEYBOARD_DEFAULT_STARTING_MIDI_NOTE + 4U, WaveformType::SAW),
+        KeyboardKey(BUTTON_CHANNEL_6, KEYBOARD_DEFAULT_STARTING_MIDI_NOTE + 5U, WaveformType::SQUARE),
+        KeyboardKey(BUTTON_CHANNEL_7, KEYBOARD_DEFAULT_STARTING_MIDI_NOTE + 6U, WaveformType::SQUARE),
+        KeyboardKey(BUTTON_CHANNEL_8, KEYBOARD_DEFAULT_STARTING_MIDI_NOTE + 7U, WaveformType::SQUARE),
+        KeyboardKey(BUTTON_CHANNEL_9, KEYBOARD_DEFAULT_STARTING_MIDI_NOTE + 8U, WaveformType::SQUARE),
         KeyboardKey(BUTTON_CHANNEL_10, KEYBOARD_DEFAULT_STARTING_MIDI_NOTE + 9U),
         KeyboardKey(BUTTON_CHANNEL_11, KEYBOARD_DEFAULT_STARTING_MIDI_NOTE + 10U),
         KeyboardKey(BUTTON_CHANNEL_12, KEYBOARD_DEFAULT_STARTING_MIDI_NOTE + 11U),

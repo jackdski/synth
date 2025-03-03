@@ -13,8 +13,9 @@
                 // "${workspaceFolder}/src/hardwareSpecific/F429Discovery/lvgl",
                 "${workspaceFolder}/src/hardwareSpecific/G4_RevA/**",
                 "${workspaceFolder}/src/hardwareSpecific/G4_RevA/stm32/",
-                "${workspaceFolder}/src/hardwareSpecific/G4_RevA/stm32/Drivers/CMSIS/DSP/**",
-                "${workspaceFolder}/src/hardwareSpecific/G4_RevA/lvgl/"
+                "${workspaceFolder}/src/hardwareSpecific/G4_RevA/stm32/Drivers/CMSIS/DSP/Source/",
+                "${workspaceFolder}/src/hardwareSpecific/G4_RevA/stm32/Drivers/CMSIS/DSP/Include/",
+                "${workspaceFolder}/src/hardwareSpecific/G4_RevA/lvgl/",
             ],
             "defines": [
                 "STM32F429xx",
