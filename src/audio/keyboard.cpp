@@ -26,12 +26,39 @@ float Keyboard::getSample(void)
     float sample = 0.0F;
     float activeSamples = 0.0F;
 
-    for (uint32_t i = 0; i < KEYBOARD_NUM_KEYS; i++)
+    switch (mode)
     {
-        if (keys[i].active)
+        case KeyboardMode::CHORD:
         {
-            sample += keys[i].getSample();
-            activeSamples += 1.0F;
+            // TODO support more than just major triad chords
+            const uint32_t notes[3U] =
+            {
+                baseNote,
+                baseNote + 4U, // 3rd is 4 half steps from base
+                baseNote + 7U, // 5th is 5 half steps from base
+            };
+
+            // TODO: initialize new Oscillators for chord on rising edge of
+            //       button press. Support just one button press at a time
+            // for (uint32_t i = 0U; i < 3U; i++)
+            // {
+            // }
+
+            break;
+        }
+
+        case KeyboardMode::NOTE:
+        default:
+        {
+            for (uint32_t i = 0; i < KEYBOARD_NUM_KEYS; i++)
+            {
+                if (keys[i].active)
+                {
+                    sample += keys[i].getSample();
+                    activeSamples += 1.0F;
+                }
+            }
+            break;
         }
     }
 
@@ -40,6 +67,11 @@ float Keyboard::getSample(void)
         sample /= activeSamples;
     }
     return sample;
+}
+
+void Keyboard::setMode(KeyboardMode newMode)
+{
+    mode = newMode;
 }
 
 #endif  // FEATURE_KEYBOARD

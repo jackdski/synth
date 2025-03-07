@@ -46,19 +46,21 @@ void AudioManager::updateSampleBlock(const bool firstHalf)
 
         switch (mode)
         {
+#if (FEATURE_KEYBOARD)
             case AudioMode::Keyboard:
             {
-#if (FEATURE_KEYBOARD)
                 sample = keyboard.getSample();
-#endif
                 break;
             }
+#endif
 
+#if (FEATURE_SEQUENCER)
             case AudioMode::Sequencer:
             {
                 sample = sequencerManager.getSample();
                 break;
             }
+#endif
 
             case AudioMode::Arpeggiator:
             default:

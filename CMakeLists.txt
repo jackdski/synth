@@ -75,6 +75,7 @@ set(SRCS
     ${PROJ_PATH}/display/screens/waveformScreen.cpp
     ${PROJ_PATH}/display/screens/settingsSelection.cpp
     ${PROJ_PATH}/display/screens/sequencerScreen.cpp
+    ${PROJ_PATH}/display/screens/keyboardScreen.cpp
     ${PROJ_PATH}/misc/misc.cpp
     ${PROJ_PATH}/misc/knobControls.c
     ${PROJ_PATH}/LEDManager/LEDManager.cpp
@@ -90,6 +91,7 @@ set(SRCS
     ${PROJ_PATH}/audio/audio.cpp
     ${PROJ_PATH}/audio/AudioManager.cpp
     ${PROJ_PATH}/audio/sequencer.cpp
+    ${PROJ_PATH}/audio/MIDI.cpp
     ${PROJ_PATH}/utils/cpu_utils.c
     ${PROJ_PATH}/lvgl/src/themes/mono/lv_theme_mono.c
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/startup_stm32g491xx.s
@@ -122,10 +124,10 @@ set(SRCS
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Core/Src/stm32g4xx_hal_timebase_tim.c
     # ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/FATFS/App/app_fatfs.c
     # ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/FATFS/Target/user_diskio.c
-    # ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/USB_Device/App/usb_device.c
-    # ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/USB_Device/App/usbd_desc.c
-    # ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/USB_Device/App/usbd_custom_hid_if.c
-    # ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/USB_Device/Target/usbd_conf.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/USB_Device/App/usb_device.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/USB_Device/App/usbd_desc.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/USB_Device/App/usbd_dfu_flash.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/USB_Device/Target/usbd_conf.c
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pcd.c
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pcd_ex.c
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_usb.c
@@ -165,7 +167,8 @@ set(SRCS
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c
-    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Src/usbd_customhid.c
+    # ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Src/usbd_customhid.c
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Middlewares/ST/STM32_USB_Device_Library/Class/DFU/Src/usbd_dfu.c
     ${FREERTOS_PATH}/croutine.c
     ${FREERTOS_PATH}/event_groups.c
     ${FREERTOS_PATH}/list.c
@@ -210,7 +213,8 @@ set(INCLUDE_DIRS
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Inc
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/STM32G4xx_HAL_Driver/Inc/Legacy
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
-    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc
+    # ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc
+    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Middlewares/ST/STM32_USB_Device_Library/Class/DFU/Inc/
     # ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Middlewares/Third_Party/FatFs/
     # ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Middlewares/Third_Party/FatFs/src/
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/CMSIS/Device/ST/STM32G4xx/Include

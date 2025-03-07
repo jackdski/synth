@@ -15,7 +15,7 @@
 
 #include <cstdio>
 
-#if (FEATURE_DISPLAY)
+#if (FEATURE_DISPLAY && FEATURE_SEQUENCER)
 
 using namespace Display;
 
@@ -188,4 +188,4 @@ void Display::display_sequencer(void)
     // - step count
 }
 
-#endif // FEATURE_DISPLAY
+#endif // FEATURE_DISPLAY && FEATURE_SEQUENCER

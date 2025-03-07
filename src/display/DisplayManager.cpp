@@ -23,6 +23,7 @@
 // Screens
 #include "homeScreen.hpp"
 #include "sequencerScreen.hpp"
+#include "keyboardScreen.hpp"
 #include "settingsSelection.hpp"
 #include "waveformScreen.hpp"
 
@@ -30,7 +31,6 @@
 #include "volume_bar.hpp"
 
 #include <stdint.h>
-
 
 
 using namespace Display;
@@ -89,9 +89,17 @@ void DisplayManager::SetScreen(const DisplayScreen screen)
             display_settingsSelection();
             break;
 
+#if (FEATURE_SEQUENCER)
         case DisplayScreen::SEQUENCER:
             display_sequencer();
             break;
+#endif
+
+#if (FEATURE_KEYBOARD)
+        case DisplayScreen::KEYBOARD:
+            display_keyboard();
+            break;
+#endif
 
         case DisplayScreen::WAVEFORM:
             display_waveformScreen();
@@ -107,10 +115,17 @@ void DisplayManager::update20Hz(void)
             volume_bar_update();
             break;
 
+#if (FEATURE_KEYBOARD)
+        case DisplayScreen::KEYBOARD:
+            break;
+#endif
+
+#if (FEATURE_SEQUENCER)
         case DisplayScreen::SEQUENCER:
             volume_bar_update();
             audioManager.setMode(Audio::AudioMode::Sequencer);
             break;
+#endif
 
         case DisplayScreen::SETTINGS:
         case DisplayScreen::WAVEFORM:

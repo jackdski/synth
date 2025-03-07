@@ -63,10 +63,12 @@ void audioTask(void *pvParameters)
 
 void audio_incrementBpmTick(void)
 {
+#if (FEATURE_SEQUENCER)
     if (audioManager.mode == AudioMode::Sequencer)
     {
         audioManager.sequencerManager.incrementStep();
     }
+#endif
 }
 
 void audio_updateSampleBlock(const bool firstHalf)

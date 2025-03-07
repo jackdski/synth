@@ -32,10 +32,11 @@
 
 // AUDIO
 #define FEATURE_AUDIO           1
+#define FEATURE_MIDI            1
 #define FEATURE_VOICE           1
 #define FEATURE_SAMPLE          0
 #define FEATURE_KEYBOARD        1
-#define FEATURE_SEQUENCER       1
+#define FEATURE_SEQUENCER       0
 #define FEATURE_OSC             1
 #define FEATURE_WAVETABLE       0
 #define FEATURE_ADSR            0

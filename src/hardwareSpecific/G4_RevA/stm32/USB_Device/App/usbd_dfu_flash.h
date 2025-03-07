@@ -1,13 +1,12 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file           : usbd_custom_hid_if.h
-  * @version        : v3.0_Cube
-  * @brief          : Header for usbd_custom_hid_if.c file.
+  * @file           : usbd_dfu_flash.h
+  * @brief          : Header for usbd_dfu_flash.h file.
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2024 STMicroelectronics.
+  * Copyright (c) 2025 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -19,31 +18,31 @@
 /* USER CODE END Header */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __USBD_CUSTOM_HID_IF_H__
-#define __USBD_CUSTOM_HID_IF_H__
+#ifndef __USBD_DFU_FLASH_H__
+#define __USBD_DFU_FLASH_H__
 
 #ifdef __cplusplus
  extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "usbd_customhid.h"
+#include "usbd_dfu.h"
 
 /* USER CODE BEGIN INCLUDE */
 
 /* USER CODE END INCLUDE */
 
-/** @addtogroup STM32_USB_OTG_DEVICE_LIBRARY
+/** @addtogroup STM32_USB_DEVICE_LIBRARY
   * @brief For Usb device.
   * @{
   */
 
-/** @defgroup USBD_CUSTOM_HID USBD_CUSTOM_HID
-  * @brief Usb custom human interface device module.
+/** @defgroup USBD_MEDIA USBD_MEDIA
+  * @brief Header file for the usbd_dfu_flash.h file.
   * @{
   */
 
-/** @defgroup USBD_CUSTOM_HID_Exported_Defines USBD_CUSTOM_HID_Exported_Defines
+/** @defgroup USBD_MEDIA_Exported_Defines USBD_MEDIA_Exported_Defines
   * @brief Defines.
   * @{
   */
@@ -56,7 +55,7 @@
   * @}
   */
 
-/** @defgroup USBD_CUSTOM_HID_Exported_Types USBD_CUSTOM_HID_Exported_Types
+/** @defgroup USBD_MEDIA_Exported_Types USBD_MEDIA_Exported_Types
   * @brief Types.
   * @{
   */
@@ -69,7 +68,7 @@
   * @}
   */
 
-/** @defgroup USBD_CUSTOM_HID_Exported_Macros USBD_CUSTOM_HID_Exported_Macros
+/** @defgroup USBD_MEDIA_Exported_Macros USBD_MEDIA_Exported_Macros
   * @brief Aliases.
   * @{
   */
@@ -82,13 +81,13 @@
   * @}
   */
 
-/** @defgroup USBD_CUSTOM_HID_Exported_Variables USBD_CUSTOM_HID_Exported_Variables
+/** @defgroup USBD_MEDIA_Exported_Variables USBD_MEDIA_Exported_Variables
   * @brief Public variables.
   * @{
   */
 
-/** CUSTOMHID Interface callback. */
-extern USBD_CUSTOM_HID_ItfTypeDef USBD_CustomHID_fops_FS;
+/** MEDIA Interface callback. */
+extern USBD_DFU_MediaTypeDef USBD_DFU_Flash_fops;
 
 /* USER CODE BEGIN EXPORTED_VARIABLES */
 
@@ -98,7 +97,7 @@ extern USBD_CUSTOM_HID_ItfTypeDef USBD_CustomHID_fops_FS;
   * @}
   */
 
-/** @defgroup USBD_CUSTOM_HID_Exported_FunctionsPrototype USBD_CUSTOM_HID_Exported_FunctionsPrototype
+/** @defgroup USBD_MEDIA_Exported_FunctionsPrototype USBD_MEDIA_Exported_FunctionsPrototype
   * @brief Public functions declaration.
   * @{
   */
@@ -123,5 +122,5 @@ extern USBD_CUSTOM_HID_ItfTypeDef USBD_CustomHID_fops_FS;
 }
 #endif
 
-#endif /* __USBD_CUSTOM_HID_IF_H__ */
+#endif /* __USBD_DFU_FLASH_H__ */
 

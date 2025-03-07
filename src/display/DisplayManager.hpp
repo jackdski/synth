@@ -26,7 +26,14 @@ enum class DisplayScreen
     SETTINGS,
     WAVEFORM,
     AUDIO_SELECTION,
+
+#if (FEATURE_KEYBOARD)
+    KEYBOARD,
+#endif
+
+#if (FEATURE_SEQUENCER)
     SEQUENCER,
+#endif
 
     COUNT,
     NONE
@@ -54,7 +61,11 @@ public:
 class DisplayManager
 {
 private:
+#if (FEATURE_KEYBOARD)
+    DisplayScreen screen = DisplayScreen::KEYBOARD;
+#else
     DisplayScreen screen = DisplayScreen::HOME;
+#endif
 
     int32_t volume = 0;
 

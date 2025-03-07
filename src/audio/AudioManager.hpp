@@ -28,8 +28,12 @@ constexpr uint32_t I2S_BUFFER_HALFWAY_INDEX = I2S_SAMPLES_PER_BLOCK;
 
 enum class AudioMode
 {
+#if (FEATURE_KEYBOARD)
     Keyboard,
+#endif
+#if (FEATURE_SEQUENCER)
     Sequencer,
+#endif
     Arpeggiator,
 };
 
@@ -51,7 +55,9 @@ public:
 
     AudioMode mode = AudioMode::Keyboard;
 
+#if (FEATURE_SEQUENCER)
     SequencerManager sequencerManager;
+#endif
 
 #if FEATURE_KEYBOARD
     Keyboard         keyboard;

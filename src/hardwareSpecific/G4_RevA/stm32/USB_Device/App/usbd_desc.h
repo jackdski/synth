@@ -104,7 +104,7 @@
   * @{
   */
 
-extern USBD_DescriptorsTypeDef     CUSTOM_HID_Desc;
+extern USBD_DescriptorsTypeDef     DFU_Desc;
 
 /* USER CODE BEGIN EXPORTED_VARIABLES */
 

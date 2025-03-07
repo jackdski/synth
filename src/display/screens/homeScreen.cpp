@@ -21,7 +21,9 @@
 using namespace Display;
 
 // Defines
+#if (FEATURE_SEQUENCER)
 constexpr char sequencer_str[]   = "Sequencer";
+#endif
 constexpr char keyboard_str[]    = "Keyboard";
 constexpr char arpeggiator_str[] = "Arpeggiator";
 
@@ -53,12 +55,15 @@ static void mode_selection_cb(lv_event_t *e)
     {
         const char * btn_text = lv_list_get_button_text(modeList, obj);
 
+#if (FEATURE_SEQUENCER)
         if (strcmp(btn_text, sequencer_str) == 0)
         {
             displayManager.SetScreen(DisplayScreen::SEQUENCER);
             audioManager.setMode(Audio::AudioMode::Sequencer);
         }
-        else if (strcmp(btn_text, keyboard_str) == 0)
+        else
+#endif // FEATURE_SEQUENCER
+        if (strcmp(btn_text, keyboard_str) == 0)
         {
             // show key on keyboard screen and change key with encoder
             audioManager.setMode(Audio::AudioMode::Keyboard);
@@ -110,8 +115,10 @@ static void mode_selection(void)
     lv_list_add_text(modeList, "Modes");
 
     /* SCREENS */
+#if (FEATURE_SEQUENCER)
     btn = lv_list_add_button(modeList, LV_SYMBOL_AUDIO, sequencer_str);
     lv_obj_add_event_cb(btn, mode_selection_cb, LV_EVENT_CLICKED, NULL);
+#endif
 
     btn = lv_list_add_button(modeList, LV_SYMBOL_AUDIO, keyboard_str);
     lv_obj_add_event_cb(btn, mode_selection_cb, LV_EVENT_CLICKED, NULL);

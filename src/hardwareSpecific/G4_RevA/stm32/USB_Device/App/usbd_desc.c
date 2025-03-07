@@ -65,10 +65,10 @@
 #define USBD_VID     1155
 #define USBD_LANGID_STRING     1033
 #define USBD_MANUFACTURER_STRING     "STMicroelectronics"
-#define USBD_PID     22352
-#define USBD_PRODUCT_STRING     "STM32 Custom Human interface"
-#define USBD_CONFIGURATION_STRING     "Custom HID Config"
-#define USBD_INTERFACE_STRING     "Custom HID Interface"
+#define USBD_PID     57105
+#define USBD_PRODUCT_STRING     "STM32 DownLoad Firmware Update"
+#define USBD_CONFIGURATION_STRING     "DFU Config"
+#define USBD_INTERFACE_STRING     "DFU Interface"
 
 /* USER CODE BEGIN PRIVATE_DEFINES */
 
@@ -112,13 +112,13 @@ static void IntToUnicode(uint32_t value, uint8_t * pbuf, uint8_t len);
   * @{
   */
 
-uint8_t * USBD_CUSTOM_HID_DeviceDescriptor(USBD_SpeedTypeDef speed, uint16_t *length);
-uint8_t * USBD_CUSTOM_HID_LangIDStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length);
-uint8_t * USBD_CUSTOM_HID_ManufacturerStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length);
-uint8_t * USBD_CUSTOM_HID_ProductStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length);
-uint8_t * USBD_CUSTOM_HID_SerialStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length);
-uint8_t * USBD_CUSTOM_HID_ConfigStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length);
-uint8_t * USBD_CUSTOM_HID_InterfaceStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length);
+uint8_t * USBD_DFU_DeviceDescriptor(USBD_SpeedTypeDef speed, uint16_t *length);
+uint8_t * USBD_DFU_LangIDStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length);
+uint8_t * USBD_DFU_ManufacturerStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length);
+uint8_t * USBD_DFU_ProductStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length);
+uint8_t * USBD_DFU_SerialStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length);
+uint8_t * USBD_DFU_ConfigStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length);
+uint8_t * USBD_DFU_InterfaceStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length);
 
 /**
   * @}
@@ -129,22 +129,22 @@ uint8_t * USBD_CUSTOM_HID_InterfaceStrDescriptor(USBD_SpeedTypeDef speed, uint16
   * @{
   */
 
-USBD_DescriptorsTypeDef CUSTOM_HID_Desc =
+USBD_DescriptorsTypeDef DFU_Desc =
 {
-  USBD_CUSTOM_HID_DeviceDescriptor,
-  USBD_CUSTOM_HID_LangIDStrDescriptor,
-  USBD_CUSTOM_HID_ManufacturerStrDescriptor,
-  USBD_CUSTOM_HID_ProductStrDescriptor,
-  USBD_CUSTOM_HID_SerialStrDescriptor,
-  USBD_CUSTOM_HID_ConfigStrDescriptor,
-  USBD_CUSTOM_HID_InterfaceStrDescriptor
+  USBD_DFU_DeviceDescriptor,
+  USBD_DFU_LangIDStrDescriptor,
+  USBD_DFU_ManufacturerStrDescriptor,
+  USBD_DFU_ProductStrDescriptor,
+  USBD_DFU_SerialStrDescriptor,
+  USBD_DFU_ConfigStrDescriptor,
+  USBD_DFU_InterfaceStrDescriptor
 };
 
 #if defined ( __ICCARM__ ) /* IAR Compiler */
   #pragma data_alignment=4
 #endif /* defined ( __ICCARM__ ) */
 /** USB standard device descriptor. */
-__ALIGN_BEGIN uint8_t USBD_CUSTOM_HID_DeviceDesc[USB_LEN_DEV_DESC] __ALIGN_END =
+__ALIGN_BEGIN uint8_t USBD_DFU_DeviceDesc[USB_LEN_DEV_DESC] __ALIGN_END =
 {
   0x12,                       /*bLength */
   USB_DESC_TYPE_DEVICE,       /*bDescriptorType*/
@@ -219,11 +219,11 @@ __ALIGN_BEGIN uint8_t USBD_StringSerial[USB_SIZ_STRING_SERIAL] __ALIGN_END = {
   * @param  length : Pointer to data length variable
   * @retval Pointer to descriptor buffer
   */
-uint8_t * USBD_CUSTOM_HID_DeviceDescriptor(USBD_SpeedTypeDef speed, uint16_t *length)
+uint8_t * USBD_DFU_DeviceDescriptor(USBD_SpeedTypeDef speed, uint16_t *length)
 {
   UNUSED(speed);
-  *length = sizeof(USBD_CUSTOM_HID_DeviceDesc);
-  return USBD_CUSTOM_HID_DeviceDesc;
+  *length = sizeof(USBD_DFU_DeviceDesc);
+  return USBD_DFU_DeviceDesc;
 }
 
 /**
@@ -232,7 +232,7 @@ uint8_t * USBD_CUSTOM_HID_DeviceDescriptor(USBD_SpeedTypeDef speed, uint16_t *le
   * @param  length : Pointer to data length variable
   * @retval Pointer to descriptor buffer
   */
-uint8_t * USBD_CUSTOM_HID_LangIDStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length)
+uint8_t * USBD_DFU_LangIDStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length)
 {
   UNUSED(speed);
   *length = sizeof(USBD_LangIDDesc);
@@ -245,7 +245,7 @@ uint8_t * USBD_CUSTOM_HID_LangIDStrDescriptor(USBD_SpeedTypeDef speed, uint16_t 
   * @param  length : Pointer to data length variable
   * @retval Pointer to descriptor buffer
   */
-uint8_t * USBD_CUSTOM_HID_ProductStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length)
+uint8_t * USBD_DFU_ProductStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length)
 {
   if(speed == 0)
   {
@@ -264,7 +264,7 @@ uint8_t * USBD_CUSTOM_HID_ProductStrDescriptor(USBD_SpeedTypeDef speed, uint16_t
   * @param  length : Pointer to data length variable
   * @retval Pointer to descriptor buffer
   */
-uint8_t * USBD_CUSTOM_HID_ManufacturerStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length)
+uint8_t * USBD_DFU_ManufacturerStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length)
 {
   UNUSED(speed);
   USBD_GetString((uint8_t *)USBD_MANUFACTURER_STRING, USBD_StrDesc, length);
@@ -277,7 +277,7 @@ uint8_t * USBD_CUSTOM_HID_ManufacturerStrDescriptor(USBD_SpeedTypeDef speed, uin
   * @param  length : Pointer to data length variable
   * @retval Pointer to descriptor buffer
   */
-uint8_t * USBD_CUSTOM_HID_SerialStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length)
+uint8_t * USBD_DFU_SerialStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length)
 {
   UNUSED(speed);
   *length = USB_SIZ_STRING_SERIAL;
@@ -286,9 +286,9 @@ uint8_t * USBD_CUSTOM_HID_SerialStrDescriptor(USBD_SpeedTypeDef speed, uint16_t 
    * ID */
   Get_SerialNum();
 
-  /* USER CODE BEGIN USBD_CUSTOM_HID_SerialStrDescriptor */
+  /* USER CODE BEGIN USBD_DFU_SerialStrDescriptor */
 
-  /* USER CODE END USBD_CUSTOM_HID_SerialStrDescriptor */
+  /* USER CODE END USBD_DFU_SerialStrDescriptor */
 
   return (uint8_t *) USBD_StringSerial;
 }
@@ -299,7 +299,7 @@ uint8_t * USBD_CUSTOM_HID_SerialStrDescriptor(USBD_SpeedTypeDef speed, uint16_t 
   * @param  length : Pointer to data length variable
   * @retval Pointer to descriptor buffer
   */
-uint8_t * USBD_CUSTOM_HID_ConfigStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length)
+uint8_t * USBD_DFU_ConfigStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length)
 {
   if(speed == USBD_SPEED_HIGH)
   {
@@ -318,7 +318,7 @@ uint8_t * USBD_CUSTOM_HID_ConfigStrDescriptor(USBD_SpeedTypeDef speed, uint16_t 
   * @param  length : Pointer to data length variable
   * @retval Pointer to descriptor buffer
   */
-uint8_t * USBD_CUSTOM_HID_InterfaceStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length)
+uint8_t * USBD_DFU_InterfaceStrDescriptor(USBD_SpeedTypeDef speed, uint16_t *length)
 {
   if(speed == 0)
   {

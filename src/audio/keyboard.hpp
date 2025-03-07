@@ -5,8 +5,7 @@
 
 #if FEATURE_KEYBOARD
 
-#include "Voice.hpp"
-#include "GlobalSamples.hpp"
+#include "keyboardKey.hpp"
 #include "waveforms.hpp"
 
 #include "button.h"
@@ -23,66 +22,18 @@ namespace Audio
 constexpr uint32_t KEYBOARD_NUM_KEYS = 16U;
 constexpr uint32_t KEYBOARD_DEFAULT_STARTING_MIDI_NOTE = 60U; // C4 - middle C
 
-class KeyboardKey
+enum class KeyboardScaleType
 {
-private:
-    Button_channel_E buttonChannel = BUTTON_CHANNEL_UNDEFINED;
-    Voice            voice;
-
-public:
-    bool active = false;
-    bool buttonRisingEdge = false;
-
-    KeyboardKey(Button_channel_E button, const uint32_t midiNumber)
-    {
-        buttonChannel = button;
-        assignNote(midiNumber);
-    }
-
-    KeyboardKey(Button_channel_E button, const uint32_t midiNumber, WaveformType waveformType)
-    {
-        buttonChannel = button;
-        assignNote(midiNumber, waveformType);
-    }
-
-#if FEATURE_SAMPLE
-    KeyboardKey(Button_channel_E button, Samples::SampleType sampleType)
-    {
-        buttonChannel = button;
-        voice = Voice(sampleType);
-    }
-#endif
-
-    void assignNote(const uint32_t midiNumber, const WaveformType waveformType = WaveformType::SINE)
-    {
-        const float oscFrequency = CONVERT_MIDI_TO_FREQUENCY(midiNumber);
-        voice = Voice(waveformType, oscFrequency);
-    }
-
-#if FEATURE_SAMPLE
-    void assignSample(const Samples::SampleType sample)
-    {
-        voice = Voice(sample);
-    }
-#endif
-
-    void update(void)
-    {
-        const bool isPressed = Button_isPressed(buttonChannel);
-        buttonRisingEdge = isPressed && (active == false);
-        active = isPressed;
-    }
-
-    float getSample(void)
-    {
-        float sample = 0.0F;
-        if (active)
-        {
-            sample = voice.getSample(buttonRisingEdge);
-        }
-        return sample;
-    }
+    MAJOR,
+    MINOR,
 };
+
+enum class KeyboardMode
+{
+    NOTE,
+    CHORD,
+};
+
 
 class Keyboard
 {
@@ -108,9 +59,19 @@ private:
         KeyboardKey(BUTTON_CHANNEL_16, KEYBOARD_DEFAULT_STARTING_MIDI_NOTE + 15U),
     };
 
+    KeyboardMode mode = KeyboardMode::NOTE;
+    uint32_t     baseNote = KEYBOARD_DEFAULT_STARTING_MIDI_NOTE;
+
 public:
     void updateInputs(void);
     float getSample(void);
+
+    void setMode(KeyboardMode newMode);
+
+    uint32_t getNoteMidiNumber(void)
+    {
+        return baseNote;
+    }
 };
 
 }

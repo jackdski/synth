@@ -3,7 +3,6 @@
 
 #include "features.h"
 
-// #include "DisplayManager.hpp"
 #include "lvgl.h"
 
 #if (FEATURE_DISPLAY)
