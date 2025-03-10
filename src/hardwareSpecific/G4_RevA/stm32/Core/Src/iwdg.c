@@ -29,26 +29,16 @@ IWDG_HandleTypeDef hiwdg;
 /* IWDG init function */
 void MX_IWDG_Init(void)
 {
-
-  /* USER CODE BEGIN IWDG_Init 0 */
-
-  /* USER CODE END IWDG_Init 0 */
-
-  /* USER CODE BEGIN IWDG_Init 1 */
-
-  /* USER CODE END IWDG_Init 1 */
+  // LSI is 32KHz. After prescalar (16), clock is 2KHz.
+  // 2s timeout = 2KHz * 2 = 4000 ticks
   hiwdg.Instance = IWDG;
-  hiwdg.Init.Prescaler = IWDG_PRESCALER_4;
+  hiwdg.Init.Prescaler = IWDG_PRESCALER_16;
   hiwdg.Init.Window = 4095;
-  hiwdg.Init.Reload = 4095;
+  hiwdg.Init.Reload = 4000;
   if (HAL_IWDG_Init(&hiwdg) != HAL_OK)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN IWDG_Init 2 */
-
-  /* USER CODE END IWDG_Init 2 */
-
 }
 
 /* USER CODE BEGIN 1 */

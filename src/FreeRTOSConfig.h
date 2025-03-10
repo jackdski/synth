@@ -9,7 +9,6 @@
 #endif
 
 #include "main.h"
-// #include "SEGGER_SYSVIEW_FreeRTOS.h"
 
 #define configENABLE_FPU                        1
 #define configENABLE_MPU                        0

@@ -196,6 +196,8 @@ set(INCLUDE_DIRS
     ${PROJ_PATH}/drv/
     ${PROJ_PATH}/utils/
     ${PROJ_PATH}/lib/
+    ${PROJ_PATH}/lvgl/src/themes
+    ${PROJ_PATH}/lvgl/src/themes/mono
     ${FREERTOS_PATH}/portable/MemMag
     ${FREERTOS_PATH}/portable/GCC/ARM_CM4F
     ${FREERTOS_PATH}/include
@@ -221,8 +223,6 @@ set(INCLUDE_DIRS
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/CMSIS/Include
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/CMSIS/Core/Include
     ${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/CMSIS/DSP/Include
-    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/lvgl/src/themes
-    ${HARDWARE_SPECIFIC_PATH}/G4_RevA/lvgl/src/themes/mono
 )
 
 set(TARGET synth_G4RevA)
@@ -232,24 +232,19 @@ set(DEVICE STM32G491CE)
 add_executable(synth_G4RevA ${SRCS})
 
 set(include_path_G4_RevA_DIRS ${INCLUDE_DIRS})
+target_include_directories(synth_G4RevA PRIVATE ${include_path_G4_RevA_DIRS})
 
 set(LV_CONF_PATH
     ${CMAKE_CURRENT_SOURCE_DIR}/src/lv_conf.h
     CACHE STRING "" FORCE
 )
 set(LV_CONF_INCLUDE_SIMPLE 1)
-# set(BUILD_SHARED_LIBS ON)
+set(BUILD_SHARED_LIBS OFF)
 
 set_target_properties(synth_G4RevA
     PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${BUILD_DIRECTORY}/G4_RevA"
 )
-
-
-option(SEGGER_SYSTEMVIEW "Segger SystemView" OFF)
-if(SEGGER_SYSTEMVIEW)
-    include(${PROJ_PATH}/lib/SystemView/SystemView.cmake)
-endif(SEGGER_SYSTEMVIEW)
 
 # LVGL lib
 include(${PROJ_PATH}/lvgl/CMakeLists.txt)
@@ -258,7 +253,7 @@ target_link_libraries(synth_G4RevA PRIVATE lvgl::lvgl)
 # ARM DSP lib
 target_link_libraries(synth_G4RevA PRIVATE "${HARDWARE_SPECIFIC_PATH}/G4_RevA/stm32/Drivers/CMSIS/DSP/Lib/GCC/libarm_cortexM4lf_math.a")
 
-target_include_directories(synth_G4RevA PRIVATE ${include_path_G4_RevA_DIRS})
+# target_include_directories(synth_G4RevA PRIVATE ${include_path_G4_RevA_DIRS})
 
 target_compile_options(lvgl PRIVATE
     -mthumb
