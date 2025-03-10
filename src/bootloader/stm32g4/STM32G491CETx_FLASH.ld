@@ -83,9 +83,9 @@ SECTIONS
     . = ALIGN(4);
     KEEP(*(.isr_vector)) /* Startup code */
     . = ALIGN(4);
-  } >APP_FLASH
+  } >BL_FLASH
 
-  /* The program code and other data goes into APP_FLASH */
+  /* The program code and other data goes into FLASH */
   .text :
   {
     . = ALIGN(4);
@@ -100,47 +100,54 @@ SECTIONS
 
     . = ALIGN(4);
     _etext = .;        /* define a global symbols at end of code */
-  } >APP_FLASH
+  } >BL_FLASH
 
-  /* Constant data goes into APP_FLASH */
+  /* Constant data goes into FLASH */
   .rodata :
   {
     . = ALIGN(4);
     *(.rodata)         /* .rodata sections (constants, strings, etc.) */
     *(.rodata*)        /* .rodata* sections (constants, strings, etc.) */
     . = ALIGN(4);
-  } >APP_FLASH
+  } >BL_FLASH
 
-  .ARM.extab   : { *(.ARM.extab* .gnu.linkonce.armextab.*) } >APP_FLASH
+  .ARM.extab :
+  {
+    *(.ARM.extab* .gnu.linkonce.armextab.*)
+  } >BL_FLASH
+
   .ARM : {
     __exidx_start = .;
     *(.ARM.exidx*)
     __exidx_end = .;
-  } >APP_FLASH
+  } >BL_FLASH
 
-  .preinit_array     :
+  .preinit_array :
   {
     PROVIDE_HIDDEN (__preinit_array_start = .);
     KEEP (*(.preinit_array*))
     PROVIDE_HIDDEN (__preinit_array_end = .);
-  } >APP_FLASH
+  } >BL_FLASH
+
   .init_array :
   {
     PROVIDE_HIDDEN (__init_array_start = .);
     KEEP (*(SORT(.init_array.*)))
     KEEP (*(.init_array*))
     PROVIDE_HIDDEN (__init_array_end = .);
-  } >APP_FLASH
+  } >BL_FLASH
+
   .fini_array :
   {
     PROVIDE_HIDDEN (__fini_array_start = .);
     KEEP (*(SORT(.fini_array.*)))
     KEEP (*(.fini_array*))
     PROVIDE_HIDDEN (__fini_array_end = .);
-  } >APP_FLASH
+  } >BL_FLASH
 
   /* used by the startup to initialize data */
   _sidata = LOADADDR(.data);
+
 
   /* Initialized data sections goes into RAM, load LMA copy after code */
   .data : 
@@ -152,9 +159,9 @@ SECTIONS
 
     . = ALIGN(4);
     _edata = .;        /* define a global symbol at data end */
-  } >RAM AT> APP_FLASH
+  } >RAM AT> BL_FLASH
 
-  
+
   /* Uninitialized data section */
   . = ALIGN(4);
   .bss :
@@ -182,7 +189,6 @@ SECTIONS
     . = ALIGN(8);
   } >RAM
 
-  
 
   /* Remove information from the standard libraries */
   /DISCARD/ :
