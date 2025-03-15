@@ -5,7 +5,8 @@ set(CMAKE_SYSTEM_PROCESSOR          arm)
 
 # Some default GCC settings
 # arm-none-eabi- must be part of path environment
-set(TOOLCHAIN_PREFIX                /opt/homebrew/bin/arm-none-eabi-)
+# set(TOOLCHAIN_PREFIX                /opt/homebrew/bin/arm-none-eabi-)
+set(TOOLCHAIN_PREFIX                arm-none-eabi-)
 set(triple arm-linux-gnueabihf)
 set(FLAGS                           "-fdata-sections -ffunction-sections -Wl,--gc-sections")
 set(CPP_FLAGS                       "${FLAGS} -fno-rtti -fno-exceptions -fno-threadsafe-statics")

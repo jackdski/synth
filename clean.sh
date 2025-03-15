@@ -1,2 +1,2 @@
-rm build/*
-rm -rf src/CMakeFiles/*
+#!/bin/bash
+cmake --build /synth/build  --config Debug --target clean -j 12 --

@@ -8,3 +8,4 @@ notes.md
 src/audio/audio.md
 .DS_Store
 synth.drawio
+cmake_install.cmake
