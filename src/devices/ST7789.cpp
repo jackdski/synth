@@ -4,10 +4,6 @@
 
 #include "features.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #if (FEATURE_ST7789)
 
 /* D E F I N E S */
@@ -245,9 +241,5 @@ void ST7789_setRotation(ST7789_rotation_E rotation)
     ST7789_private_writeCommand(ST7789_REG_MEM_DATA_ACCESS_CTL);
     ST7789_private_writeByte(madctl);
 }
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif  // FEATURE_ST7789

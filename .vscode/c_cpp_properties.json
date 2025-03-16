@@ -4,6 +4,7 @@
             "name": "Mac",
             "includePath": [
                 "${workspaceFolder}/**",
+                "${workspaceFolder}/src/*",
                 "${workspaceFolder}/src/**",
                 "${workspaceFolder}/src/FreeRTOS/portable/GCC/ARM_CM4F",
                 "${workspaceFolder}/src/hardwareSpecific/",

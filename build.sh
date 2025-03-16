@@ -1,5 +1,7 @@
 #!/bin/bash
 
+CORES=16
+
 cmake -DCMAKE_BUILD_TYPE:STRING=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE --no-warn-unused-cli -S/synth -B/synth/build
 
 if [ -z "$1" ]; then
@@ -15,7 +17,7 @@ fi
 for target in $targets
 do
     echo "Building ${target}..."
-    cmake --build /synth/build --target ${target} --config Debug -j12
+    cmake --build /synth/build --target ${target} --config Debug -j${CORES}
     if [ ! -d /synth/build/${target} ]; then
         mkdir /synth/build/${target}
     fi

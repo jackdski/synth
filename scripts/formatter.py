@@ -10,11 +10,10 @@ exclude_directories = [
     "build",
     "venv",
     "src/hardwareSpecific/F429Discovery/stm32",
-    "src/hardwareSpecific/F429Discovery/lvgl",
     "src/hardwareSpecific/G4_RevA/stm32",
-    "src/hardwareSpecific/G4_RevA/lvgl",
     "src/CMakeFiles",
     "src/FreeRTOS",
+    "src/lvgl",
     "src/wavetables",
     "src/CMakeFiles",
 ]
@@ -52,23 +51,15 @@ def format(path: pathlib.PosixPath):
                     print(f"Formating:\t{item}")
                     os.system(f"clang-format -i {item.as_posix()}")
 
-format(cwd)
+# format(cwd)
 
 # run cppcheck linter
-def lint(path: pathlib.PosixPath):
-    for item in list(path.iterdir()):
-        if item.is_dir():
-            if item.as_posix() in excluded_directory_paths:
-                pass
-            else:
-                lint(item)
-        elif item.is_file():
-            if item.as_posix() in excluded_file_paths:
-                pass
-            else:
-                if item.suffix in file_types_to_format:
-                    print(f"Linting:\t{item}")
-                    # os.system(f"cppcheck {item.as_posix()} --addon=misra.py --check-level=exhaustive -j16")
-                    os.system(f"cppcheck {item.as_posix()} --check-level=exhaustive -j16")
+cpp_check_sources = ["src/"]
+for dir in excluded_directory_paths:
+        cpp_check_sources.append(f"-i{dir}")
+for file in exclude_files:
+        cpp_check_sources.append(f"-i{file}")
 
-lint(cwd)
+print(f"Linting...")
+# --addon=misra.py
+os.system(f"cppcheck {" ".join(cpp_check_sources)} --check-level=exhaustive -j16")
