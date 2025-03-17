@@ -2,18 +2,43 @@
 
 CORES=16
 
-cmake -DCMAKE_BUILD_TYPE:STRING=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE --no-warn-unused-cli -S/synth -B/synth/build
+declare -a build_targets=("miniSynthG4"
+                          "synth_G4Bootloader"
+                         )
+
+quiet_output=0
+
+usage() {
+    echo "Usage: $0 [OPTIONS] [TARGET]"
+    echo "Options:"
+    echo " -h,       Display this help message"
+}
+
+while test $# != 0
+do
+    case "$1" in
+    -h) echo "Possible targets:"
+        printf '\t%s\n' "${build_targets[@]}"
+        exit
+    ;;
+
+    *)  usage
+        exit
+    ;;
+    esac
+    shift
+done
 
 if [ -z "$1" ]; then
     # if no target specified, build everything
-    declare -a targets=("miniSynthG4"
-                        "synth_G4Bootloader"
-                       )
+    declare -a targets=${build_targets[@]}
 else
     targets="$@"
 fi
 
 # build all specified targets
+cmake -DCMAKE_BUILD_TYPE:STRING=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE --no-warn-unused-cli -S/synth -B/synth/build
+
 for target in $targets
 do
     echo "Building ${target}..."
