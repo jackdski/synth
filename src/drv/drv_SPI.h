@@ -10,11 +10,11 @@
 #include "FreeRTOS.h"
 #include "queue.h"
 
-#include "drv_SPI_hardwareSpecific.h"
-
 #include "drv_GPIO.h"
 
 #if (FEATURE_SPI)
+
+#include "drv_SPI_hardwareSpecific.h"
 
 /* D E F I N E S */
 

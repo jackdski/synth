@@ -5,15 +5,16 @@
 
 #include "features.h"
 
+#include "Utils.h"
+#include "main.h"
+
+#if FEATURE_ENCODER
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include "Utils.h"
 #include "drv_encoder_hardwareSpecific.h"
-#include "main.h"
-
-#if FEATURE_ENCODER
 
 /* D E F I N E S */
 

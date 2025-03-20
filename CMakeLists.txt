@@ -155,5 +155,7 @@ target_compile_options(lvgl PRIVATE
 
 # stm32g4 - miniSynth + bootloader
 add_subdirectory(${HARDWARE_SPECIFIC_PATH}/G4_RevA)
+add_subdirectory(${HARDWARE_SPECIFIC_PATH}/F429Discovery)
 add_subdirectory(${BOOTLOADER_PATH}/stm32g4)
+add_subdirectory(${BOOTLOADER_PATH}/stm32f4)
 

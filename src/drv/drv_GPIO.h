@@ -7,10 +7,11 @@
 #include "features.h"
 
 #include "Utils.h"
-#include "drv_GPIO_hardwareSpecific.h"
 #include "main.h"
 
 #if FEATURE_GPIO
+
+#include "drv_GPIO_hardwareSpecific.h"
 
 #ifdef __cplusplus
 extern "C" {

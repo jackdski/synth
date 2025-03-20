@@ -3,6 +3,8 @@
 #include "drv_GPIO.h"
 #include "gpio.h"
 
+#if (FEATURE_GPIO)
+
 /* D E F I N E S */
 
 /* T Y P E D E F S */
@@ -33,3 +35,5 @@ void drv_GPIO_init(void)
         drv_GPIO_setOutput(channel, drv_GPIO_config.channelConfig[channel].initState);
     }
 }
+
+#endif // FEATURE_GPIO

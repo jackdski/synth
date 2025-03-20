@@ -1,7 +1,10 @@
 #ifndef AUDIO_I2S_INTERFACE_HPP_
 #define AUDIO_I2S_INTERFACE_HPP_
 
+#include "features.h"
 #include <stdint.h>
+
+#if FEATURE_AUDIO
 
 namespace Audio
 {
@@ -22,4 +25,5 @@ public:
 
 }
 
+#endif // FEATURE_AUDIO
 #endif // AUDIO_I2S_INTERFACE_HPP_

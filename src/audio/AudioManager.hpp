@@ -8,11 +8,11 @@
 #include "osc.hpp"
 #include "waveforms.hpp"
 
-#include "AudioI2SInterface_hardwareSpecific.hpp"
-
 #include "sgtl5000.h"
 
 #if (FEATURE_AUDIO)
+
+#include "AudioI2SInterface_hardwareSpecific.hpp"
 
 namespace Audio
 {

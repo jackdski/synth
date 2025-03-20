@@ -67,8 +67,8 @@ MEMORY
   /* NVM_STORE  (rx)     : ORIGIN = 0x807F000,  LENGTH = 2K */
 }
 
-__bl_start__    = ORIGIN(BL_FLASH);
-__bl_end__      = ORIGIN(BL_FLASH) + LENGTH(BL_FLASH);
+__bl_start__     = ORIGIN(BL_FLASH);
+__bl_end__       = ORIGIN(BL_FLASH) + LENGTH(BL_FLASH);
 __app_start__    = ORIGIN(APP_FLASH);
 __app_end__      = ORIGIN(APP_FLASH) + LENGTH(APP_FLASH);
 /* __nvm_start__    = ORIGIN(NVM_STORE);

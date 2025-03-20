@@ -50,7 +50,8 @@ extern "C" {
 /* P R I V A T E    F U N C T I O N   D E C L A R A T I O N S */
 
 static void SystemClock_Config(void);
-// static void hardwareSpecific_deviceInit(void);
+static void hardwareSpecific_deviceInit(void);
+static void hardwareSpecific_deviceDeinit(void);
 static void hardwareSpecific_debugInit(void);
 
 /* P R I V A T E    F U N C T I O N S */
@@ -132,6 +133,12 @@ void hardwareSpecific_deviceInit(void)
 #endif
 }
 
+static void hardwareSpecific_deviceDeinit(void)
+{
+    // set LEDs to off
+    // clear screen
+}
+
 static void hardwareSpecific_debugInit(void)
 {
     CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
@@ -147,7 +154,7 @@ static void hardwareSpecific_debugInit(void)
 
 /* P U B L I C   F U N C T I O N S */
 
-void hardwareSpecificInit(void)
+void hardwareSpecific_init(void)
 {
     HAL_Init();
     SystemClock_Config();
@@ -203,6 +210,14 @@ void hardwareSpecificInit(void)
 #endif
 
     NVIC_SetPriority(SVCall_IRQ_NBR, 0U);
+}
+
+void hardwareSpecific_deinit(void)
+{
+    hardwareSpecific_deviceDeinit();
+    // TODO: set up interrupts on buttons to wake up again
+    HAL_DeInit();
+    HAL_DBGMCU_EnableDBGSleepMode();
 }
 
 int _write(int file, char *ptr, int len)

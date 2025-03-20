@@ -9,9 +9,9 @@
 
 #include <stdint.h>
 
-#include "PCA9555_hardwareSpecific.h"
-
 #if FEATURE_PCA9555
+
+#include "PCA9555_hardwareSpecific.h"
 
 #ifdef __cplusplus
 extern "C" {

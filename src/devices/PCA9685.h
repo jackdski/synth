@@ -10,9 +10,9 @@
 
 #include <stdint.h>
 
-#include "PCA9685_hardwareSpecific.h"
-
 #if FEATURE_PCA9685
+
+#include "PCA9685_hardwareSpecific.h"
 
 #ifdef __cplusplus
 extern "C" {

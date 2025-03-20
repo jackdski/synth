@@ -2,8 +2,10 @@
 case "$1" in
     "G4")
         echo "Flashing G4_RevA"
-        st-flash write ./build/build/G4_RevA/synth_G4RevA.bin 0x08000000
-        st-flash --format ihex write ./build/build/G4_RevA/synth_G4RevA.bin
+        # st-flash write ./build/build/G4_RevA/synth_G4RevA.bin 0x08000000
+        # st-flash --format ihex write ./build/build/G4_RevA/synth_G4RevA.bin
+        # Work with a device in DFU mode with vendor ID 0x0951 and product ID 0x0026
+        dfu-util -a 0 -s 0x08004000:leave -D ./build/miniSynthG4/miniSynthG4.bin # --device ,951:26
     ;;
     "F4")
         echo "Flashing F429Discovery"

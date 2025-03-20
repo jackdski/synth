@@ -29,13 +29,15 @@ TaskHandle_t displayTaskHandle;
 /* M A I N */
 int main(void)
 {
-     hardwareSpecificInit();
+     hardwareSpecific_init();
 
     // traceSTART();
 
+#if (FEATURE_MISC)
     (void)xTaskCreate(misc100HzTask, "misc100Hz", configMINIMAL_STACK_SIZE, (void *)NULL, 2U, &misc100HzTaskHandle);
     (void)xTaskCreate(misc10HzTask,  "misc10Hz", configMINIMAL_STACK_SIZE, (void *)NULL, 3U, &misc10HzTaskHandle);
     (void)xTaskCreate(misc1HzTask,   "misc1Hz", configMINIMAL_STACK_SIZE * 4, (void *)NULL, 3U, NULL);
+#endif
 
 #if (FEATURE_AUDIO)
     (void)xTaskCreate(audioTask, "audioTask", configMINIMAL_STACK_SIZE, (void *)NULL, 1U, &audioTaskHandle);

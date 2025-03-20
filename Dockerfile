@@ -19,6 +19,7 @@ RUN apt-get update && \
     vim
 
 RUN apt-get install cpio libncurses6 -y
+RUN git clone git://git.code.sf.net/p/dfu-util/dfu-util
 
 # get the toolchain
 RUN wget https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-aarch64-arm-none-eabi.tar.xz -O gcc-arm-none-eabi.tar.xz --no-check-certificate

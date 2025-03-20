@@ -9,8 +9,6 @@
 #include "FreeRTOS.h"
 #include "task.h"
 
-#include "i2s.h"
-
 #if FEATURE_AUDIO
 
 using namespace Audio;

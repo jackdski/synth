@@ -6,12 +6,9 @@ extern "C" {
 #endif
 
 #include "FreeRTOS.h"
-#include "tim.h"
 
-void hardwareSpecificInit(void);
-void hardwareSpecific_deviceInit(void);
-
-// int _write_debug(char *ptr, int len);
+void hardwareSpecific_init(void);
+void hardwareSpecific_deinit(void);
 
 // profiling
 void hardwareSpecific_configureTimerForRunTimeStats(void);

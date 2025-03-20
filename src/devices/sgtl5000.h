@@ -8,11 +8,11 @@
 
 #include <stdint.h>
 
+#if FEATURE_SGTL5000
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#if FEATURE_SGTL5000
 
 /* D E F I N E S */
 

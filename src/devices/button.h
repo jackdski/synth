@@ -3,11 +3,11 @@
 
 #include "features.h"
 
+#if (FEATURE_BUTTON)
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#if (FEATURE_BUTTON)
 
 /* I N C L U D E S */
 
