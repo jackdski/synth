@@ -58,7 +58,9 @@ set(STM32_HARDWARE_SPECIFIC_SOURCES
     ${HARDWARE_SPECIFIC_PATH}/stm32/Core/Src/stm32f4xx_it.c
     ${HARDWARE_SPECIFIC_PATH}/stm32/Core/Src/stm32f4xx_hal_msp.c
     ${HARDWARE_SPECIFIC_PATH}/stm32/Core/Src/stm32f4xx_hal_timebase_tim.c
-)
+    ${HARDWARE_SPECIFIC_PATH}/drv/drv_GPIO_hardwareSpecific.c
+    ${HARDWARE_SPECIFIC_PATH}/devices/LEDs_hardwareSpecific.c
+    )
 
 set(STM32F4_DRIVER_SOURCES_X
 #    ${HARDWARE_SPECIFIC_PATH}/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c
@@ -70,15 +72,10 @@ set(STM32F4_DRIVER_SOURCES_X
 set(F4_REV_A_INCLUDE_DIRS
     ${CMAKE_CURRENT_SOURCE_DIR}/
     ${HARDWARE_SPECIFIC_PATH}/
-    # ${HARDWARE_SPECIFIC_PATH}/audio
-    # ${HARDWARE_SPECIFIC_PATH}/devices
-    # ${HARDWARE_SPECIFIC_PATH}/drv
+    ${HARDWARE_SPECIFIC_PATH}/devices
+    ${HARDWARE_SPECIFIC_PATH}/drv
     ${HARDWARE_SPECIFIC_PATH}/stm32
     ${HARDWARE_SPECIFIC_PATH}/stm32/Core/Inc
-    # ${HARDWARE_SPECIFIC_PATH}/stm32/USB_Device/App
-    # ${HARDWARE_SPECIFIC_PATH}/stm32/USB_Device/Target
-    # ${HARDWARE_SPECIFIC_PATH}/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
-    # ${HARDWARE_SPECIFIC_PATH}/stm32/Middlewares/ST/STM32_USB_Device_Library/Class/DFU/Inc/
 )
 
 set(TARGET F429Discovery)

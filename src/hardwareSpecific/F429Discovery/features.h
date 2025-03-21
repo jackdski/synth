@@ -1,12 +1,13 @@
 #ifndef FEATURES_H_
 #define FEATURES_H_
 
-#define FEATURE_MISC          0
+#define FEATURE_MISC          1
+#define FEATURE_CPU_STATS     0
 
 // DRIVERS
 #define FEATURE_I2C           0
 #define FEATURE_SPI           0
-#define FEATURE_GPIO          0
+#define FEATURE_GPIO          1
 #define FEATURE_ENCODER       0
 #define FEATURE_TIMER         0
 
@@ -14,7 +15,7 @@
 #define FEATURE_LIB_TIMER     0
 
 // SIMPLE DEVICES
-#define FEATURE_LEDS          0
+#define FEATURE_LEDS          1
 #define FEATURE_BUTTON        0
 #define FEATURE_KNOB          0
 #define FEATURE_KNOB_CONTROLS 0

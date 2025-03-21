@@ -49,7 +49,9 @@ static TickType_t misc100HzTaskLastWakeTime;
 
 static char buffer[40U * 8U];
 
+#if (FEATURE_LED_MANAGER)
 static LED::LEDManager* LEDManager = LED::LEDManager::getInstance();
+#endif
 
 /* P U B L I C   F U N C T I O N S */
 
@@ -70,8 +72,10 @@ void misc1HzTask(void *pvParameters)
         SGTL5000_pollRegisters();
 #endif
 
+#if (FEATURE_CPU_STATS)
         vTaskGetRunTimeStats(buffer);
         printf(buffer, 40U * 6U);
+#endif
 
 #if PRINT_HIGHWATER_MARKS
         displayTaskHighWaterMark   = uxTaskGetStackHighWaterMark( displayTaskHandle );

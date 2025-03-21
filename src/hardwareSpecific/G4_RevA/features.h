@@ -2,6 +2,7 @@
 #define FEATURES_H_
 
 #define FEATURE_MISC          1
+#define FEATURE_CPU_STATS     0
 
 // DRIVERS
 #define FEATURE_I2C           1
