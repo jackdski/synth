@@ -116,9 +116,9 @@ set(symbols_SYMB_F4_RevA
 target_compile_definitions(${TARGET} PUBLIC ${symbols_SYMB_F4_RevA})
 
 # Linker options
-set(F4_RevA_linker_script_SRC    ${CMAKE_CURRENT_SOURCE_DIR}/STM32F429ZITx_FLASH.ld)
+set(F4_REVA_LINKER_SCRIPT_SRC    ${CMAKE_CURRENT_SOURCE_DIR}/STM32F429ZITx_FLASH.ld)
 target_link_options(${TARGET} PRIVATE
-    -T${F4_RevA_linker_script_SRC}
+    -T${F4_REVA_LINKER_SCRIPT_SRC}
     -mthumb
     -mcpu=cortex-m4
     -mfpu=fpv4-sp-d16

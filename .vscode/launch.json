@@ -6,7 +6,7 @@
     "configurations": [
         {
             "cwd": "${workspaceFolder}",
-            "executable": "./build/build/G4_RevA/synth_G4RevA.elf",
+            "executable": "./build/src/hardwareSpecific/G4_RevA/miniSynthG4.elf",
             "name": "Debug G4 with ST-Link",
             "request": "launch",
             "type": "cortex-debug",
@@ -21,7 +21,7 @@
         },
         {
             "cwd": "${workspaceFolder}",
-            "executable": "./build/build/G4_RevA/synth_G4RevA.elf",
+            "executable": "./build/src/hardwareSpecific/G4_RevA/miniSynthG4.elf",
             "name": "Debug G4 with J-Link",
             "request": "launch",
             "type": "cortex-debug",

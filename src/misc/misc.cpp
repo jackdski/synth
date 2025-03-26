@@ -72,10 +72,10 @@ void misc1HzTask(void *pvParameters)
         SGTL5000_pollRegisters();
 #endif
 
-#if (FEATURE_CPU_STATS)
-        vTaskGetRunTimeStats(buffer);
-        printf(buffer, 40U * 6U);
-#endif
+// #if (FEATURE_CPU_STATS)
+//         vTaskGetRunTimeStats(buffer);
+//         printf(buffer, 40U * 6U);
+// #endif
 
 #if PRINT_HIGHWATER_MARKS
         displayTaskHighWaterMark   = uxTaskGetStackHighWaterMark( displayTaskHandle );
@@ -119,6 +119,14 @@ void misc10HzTask(void *pvParameters)
 #if (FEATURE_LED_MANAGER)
     LEDManager->update();
 #endif
+
+    // if (Button_isPressed(BUTTON_CHANNEL_B))
+    // {
+    //     printf("Reseting...\n");
+    //     // FLASH->OPTR &= ~FLASH_OPTR_NRST_MODE_Msk;
+    //     // FLASH->OPTR |= (FLASH_OPTR_NRST_MODE_1);
+    //     NVIC_SystemReset();
+    // }
 
         xTaskDelayUntil(&misc10HzTaskLastWakeTime, pdMS_TO_TICKS(100U));
     }

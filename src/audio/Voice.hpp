@@ -22,12 +22,15 @@ namespace Audio
 
 /* D E F I N E S */
 
+#define MAX_CONCURRENT_OSCILLATORS  4U
+
 
 /* T Y P E D E F S */
 
 enum class VoiceSource
 {
     OSCILLATOR,
+    OSCILLATOR_CHORD,
     SAMPLE,
 };
 
@@ -37,7 +40,8 @@ public:
     VoiceSource source;
 
 #if FEATURE_OSC
-    Oscillator oscillator = Oscillator();
+    Oscillator oscillator[MAX_CONCURRENT_OSCILLATORS]; // = Oscillator();
+    uint8_t    activeOscillatorCount = 0U;
 #endif
 #if FEATURE_SAMPLE
     Samples::Sample     sample;
@@ -50,7 +54,8 @@ public:
 #if FEATURE_SAMPLE
         sample = Samples::Sample();
 #elif FEATURE_OSC
-        oscillator = Oscillator(WaveformType::SINE, 440.0f);
+        oscillator[0U] = Oscillator(WaveformType::SINE, 440.0f);
+        activeOscillatorCount = 1U;
 #endif
     }
 
@@ -62,7 +67,8 @@ public:
     {
         source = VoiceSource::OSCILLATOR;
 #if FEATURE_OSC
-        oscillator = Oscillator(frequency);
+        oscillator[0U] = Oscillator(frequency);
+        activeOscillatorCount = 1U;
 #endif
     }
 
@@ -70,7 +76,8 @@ public:
     {
         source = VoiceSource::OSCILLATOR;
 #if FEATURE_OSC
-        oscillator = Oscillator(waveformType, frequency);
+        oscillator[0U] = Oscillator(waveformType, frequency);
+        activeOscillatorCount = 1U;
 #endif
     }
 
@@ -123,8 +130,20 @@ public:
         {
             case VoiceSource::OSCILLATOR:
 #if FEATURE_OSC
-                ret = config.oscillator.getSample();
+                ret = config.oscillator[0U].getSample();
 #endif
+                break;
+
+            case VoiceSource::OSCILLATOR_CHORD:
+            {
+#if FEATURE_OSC
+                for (uint8_t i = 0U; i < config.activeOscillatorCount; i++)
+                {
+                    ret += config.oscillator[i].getSample();
+                }
+                return (ret / (float)config.activeOscillatorCount);
+#endif
+            }
                 break;
 
             case VoiceSource::SAMPLE:

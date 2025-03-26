@@ -30,14 +30,6 @@ float Keyboard::getSample(void)
     {
         case KeyboardMode::CHORD:
         {
-            // TODO support more than just major triad chords
-            const uint32_t notes[3U] =
-            {
-                baseNote,
-                baseNote + 4U, // 3rd is 4 half steps from base
-                baseNote + 7U, // 5th is 5 half steps from base
-            };
-
             // TODO: initialize new Oscillators for chord on rising edge of
             //       button press. Support just one button press at a time
             // for (uint32_t i = 0U; i < 3U; i++)

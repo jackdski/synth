@@ -58,9 +58,8 @@ public:
     }
 };
 
-class DisplayManager
+struct DisplayManagerData_S
 {
-private:
 #if (FEATURE_KEYBOARD)
     DisplayScreen screen = DisplayScreen::KEYBOARD;
 #else
@@ -68,21 +67,15 @@ private:
 #endif
 
     int32_t volume = 0;
-
-public:
-    DisplayManager()
-    {
-    }
-
-    void Init(void);
-    void update20Hz(void);
-
-    void SetScreen(const DisplayScreen screen);
 };
+
+void displayManager_init(void);
+void displayManager_setScreen(void);
+void displayManager_update20Hz(void);
 
 }
 
-void displayControl(void *pvParameters);
+void displayTask(void *pvParameters);
 
 #endif // FEATURE_DISPLAY
 #endif // DISPLAY_MANGER_HPP_

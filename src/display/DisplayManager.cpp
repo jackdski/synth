@@ -33,8 +33,6 @@
 #include <stdint.h>
 
 
-using namespace Display;
-
 extern Audio::AudioManager audioManager;
 
 /* D E F I N E S */
@@ -59,12 +57,15 @@ static lv_display_t * lv_display;
 
 static SemaphoreHandle_t lvglMutex = NULL;
 
-
 /* D I S P L A Y   M A N A G E R */
 
-DisplayManager displayManager;
+namespace Display
+{
 
-void DisplayManager::Init(void)
+static DisplayManagerData_S displayManagerData;
+
+
+void displayManager_init(void)
 {
     ST7789_init();
     lvglMutex = xSemaphoreCreateMutex();
@@ -74,7 +75,7 @@ void DisplayManager::Init(void)
     lv_display_set_flush_cb(lv_display, display_flush);
 }
 
-void DisplayManager::SetScreen(const DisplayScreen screen)
+void displayManager_setScreen(const DisplayScreen screen)
 {
     lv_obj_clean(lv_scr_act());
 
@@ -107,9 +108,9 @@ void DisplayManager::SetScreen(const DisplayScreen screen)
     }
 }
 
-void DisplayManager::update20Hz(void)
+void displayManager_update20Hz(void)
 {
-    switch (screen)
+    switch (displayManagerData.screen)
     {
         case DisplayScreen::HOME:
             volume_bar_update();
@@ -135,6 +136,8 @@ void DisplayManager::update20Hz(void)
     }
 }
 
+} // namespace Display
+
 /* P R I V A T E   F U N C T I O N S */
 
 static void display_flush(lv_display_t * display, const lv_area_t * area, uint8_t * px_map)
@@ -150,15 +153,15 @@ static void display_flush(lv_display_t * display, const lv_area_t * area, uint8_
 
 /* P U B L I C   F U N C T I O N S */
 
-void displayControl(void *pvParameters)
+void displayTask(void *pvParameters)
 {
-    displayManager.Init();
+    Display::displayManager_init();
 
     if (xSemaphoreTake(lvglMutex, portMAX_DELAY) == pdTRUE)
     {
         lv_theme_t *th = lv_theme_mono_init(lv_display, true, &lv_font_montserrat_14);
         lv_display_set_theme(lv_display, th);
-        displayManager.SetScreen(DisplayScreen::HOME);
+        Display::displayManager_setScreen(Display::DisplayScreen::HOME);
         xSemaphoreGive(lvglMutex);
     }
     vTaskDelay(pdMS_TO_TICKS(50U));
@@ -167,7 +170,7 @@ void displayControl(void *pvParameters)
     {
         if (ST7789_isInitialized())
         {
-            displayManager.update20Hz();
+            Display::displayManager_update20Hz();
 
             if (xSemaphoreTake(lvglMutex, portMAX_DELAY) == pdTRUE)
             {

@@ -7,6 +7,7 @@
 
 #include "keyboardKey.hpp"
 #include "waveforms.hpp"
+#include "ChordInfo.hpp"
 
 #include "button.h"
 
@@ -62,11 +63,19 @@ private:
     KeyboardMode mode = KeyboardMode::NOTE;
     uint32_t     baseNote = KEYBOARD_DEFAULT_STARTING_MIDI_NOTE;
 
+    ChordType    chordType = ChordType::MAJOR;
+    ChordData_S  chordData;
+
 public:
     void updateInputs(void);
     float getSample(void);
 
     void setMode(KeyboardMode newMode);
+    void setChordType(ChordType type)
+    {
+        chordType = type;
+        chordData = chordInfo_getInfo(chordType);
+    }
 
     uint32_t getNoteMidiNumber(void)
     {

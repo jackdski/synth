@@ -31,7 +31,6 @@ constexpr uint32_t display_width  =  ST7789_LCD_HEIGHT;
 constexpr uint32_t display_height = ST7789_LCD_WIDTH;
 
 // Data Definitions
-extern DisplayManager displayManager;
 extern Audio::AudioManager audioManager;
 static LED::LEDManager* LEDManager = LED::LEDManager::getInstance();
 
@@ -58,7 +57,7 @@ static void mode_selection_cb(lv_event_t *e)
 #if (FEATURE_SEQUENCER)
         if (strcmp(btn_text, sequencer_str) == 0)
         {
-            displayManager.SetScreen(DisplayScreen::SEQUENCER);
+            displayManager_setScreen(DisplayScreen::SEQUENCER);
             audioManager.setMode(Audio::AudioMode::Sequencer);
         }
         else

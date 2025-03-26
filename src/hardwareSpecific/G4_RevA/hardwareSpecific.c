@@ -145,6 +145,9 @@ static void hardwareSpecific_debugInit(void)
     CoreDebug->DHCSR = CoreDebug_DHCSR_C_DEBUGEN_Msk;
     DBGMCU->CR       = DBGMCU_CR_TRACE_IOEN;
 
+    // const uint32_t baudrate = 4000000U; // 4MHz baud
+    // TPI->ACPR = (SystemCoreClock / baudrate) - 1U;
+
     // from ref man pg. 2104
     ITM->LAR = 0xC5ACCE55;
     ITM->TCR = 0x00010005;  // (ITM_TCR_SWOENA_Msk | ITM_TCR_ITMENA_Msk);
@@ -217,7 +220,7 @@ void hardwareSpecific_deinit(void)
     hardwareSpecific_deviceDeinit();
     // TODO: set up interrupts on buttons to wake up again
     HAL_DeInit();
-    HAL_DBGMCU_EnableDBGSleepMode();
+    // HAL_DBGMCU_EnableDBGSleepMode();
 }
 
 int _write(int file, char *ptr, int len)
@@ -241,6 +244,12 @@ configRUN_TIME_COUNTER_TYPE hardwareSpecific_getRunTimeCounterValue(void)
 {
     return (configRUN_TIME_COUNTER_TYPE)TIM16->CNT;
 }
+
+
+// void Reset_Handler(void)
+// {
+//     __START();
+// }
 
 #ifdef __cplusplus
 }

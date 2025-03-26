@@ -265,10 +265,10 @@ bool SGTL5000_pollRegisters(void)
     // ret &= SGTL5000_readI2C(SGTL5000_CHIP_ID_REG, &registerData->anaTest2Register);
     // ret &= SGTL5000_readI2C(SGTL5000_SHORT, &registerData->shortCtrlRegister);
 
-    printf("i2sCtrlRegister: %d\n", registerData->i2sCtrlRegister);
-    printf("anaHpCtrlRegister: %d\n", registerData->anaHpCtrlRegister);
-    printf("anaCtrlRegister: %d\n", registerData->anaCtrlRegister);
-    printf("anaStatusRegister: %d\n", registerData->anaStatusRegister);
+    // printf("i2sCtrlRegister: %d\n", registerData->i2sCtrlRegister);
+    // printf("anaHpCtrlRegister: %d\n", registerData->anaHpCtrlRegister);
+    // printf("anaCtrlRegister: %d\n", registerData->anaCtrlRegister);
+    // printf("anaStatusRegister: %d\n", registerData->anaStatusRegister);
 
     return ret;
 }

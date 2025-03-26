@@ -5,8 +5,8 @@ set(CMAKE_SYSTEM_PROCESSOR          arm)
 
 # Some default GCC settings
 # arm-none-eabi- must be part of path environment
-# set(TOOLCHAIN_PREFIX                /opt/homebrew/bin/arm-none-eabi-)
-set(TOOLCHAIN_PREFIX                arm-none-eabi-)
+set(TOOLCHAIN_PREFIX                /opt/homebrew/bin/arm-none-eabi-)
+# set(TOOLCHAIN_PREFIX                arm-none-eabi-)
 set(triple arm-linux-gnueabihf)
 set(FLAGS                           "-fdata-sections -ffunction-sections -Wl,--gc-sections")
 set(CPP_FLAGS                       "${FLAGS} -fno-rtti -fno-exceptions -fno-threadsafe-statics")
@@ -87,6 +87,7 @@ set(COMMON_SOURCES
     ${PROJ_PATH}/wavetables/wavetables.cpp
     ${PROJ_PATH}/audio/effects/lpf.c
     ${PROJ_PATH}/audio/keyboard.cpp
+    ${PROJ_PATH}/audio/ChordInfo.cpp
     ${PROJ_PATH}/audio/adsr.c
     ${PROJ_PATH}/audio/audio.cpp
     ${PROJ_PATH}/audio/AudioManager.cpp
@@ -137,6 +138,9 @@ set(BUILD_SHARED_LIBS OFF)
 
 # LVGL lib
 include(${PROJ_PATH}/lvgl/CMakeLists.txt)
+set(LV_CONF_BUILD_DISABLE_THORVG_INTERNAL ON)
+set(LV_CONF_BUILD_DISABLE_DEMOS           ON)
+set(LV_CONF_BUILD_DISABLE_EXAMPLES        ON)
 
 target_compile_options(lvgl PRIVATE
     -mthumb

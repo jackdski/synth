@@ -5,10 +5,10 @@ build_type=Debug
 declare -a targets=()
 
 declare -a possible_targets=("miniSynthG4"
-                          "synth_G4Bootloader"
-                          "F429Discovery"
-                          "synth_F4Bootloader"
-                         )
+                             "synth_G4Bootloader"
+                             "F429Discovery"
+                             "synth_F4Bootloader"
+                            )
 
 
 usage() {

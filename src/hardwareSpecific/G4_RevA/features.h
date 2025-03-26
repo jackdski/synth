@@ -41,5 +41,6 @@
 #define FEATURE_OSC             1
 #define FEATURE_WAVETABLE       0
 #define FEATURE_ADSR            0
+#define FEATURE_CHORD_INFO      1
 
 #endif

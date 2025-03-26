@@ -44,7 +44,7 @@ int main(void)
 #endif
 
 #if (FEATURE_DISPLAY)
-    (void)xTaskCreate(displayControl, "displayControl", 1024U, (void *)NULL, 4U, &displayTaskHandle);
+    (void)xTaskCreate(displayTask, "displayTask", 1024U, (void *)NULL, 4U, &displayTaskHandle);
 #endif
 
     vTaskStartScheduler();
