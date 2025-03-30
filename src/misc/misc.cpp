@@ -120,13 +120,13 @@ void misc10HzTask(void *pvParameters)
     LEDManager->update();
 #endif
 
-    // if (Button_isPressed(BUTTON_CHANNEL_B))
-    // {
-    //     printf("Reseting...\n");
-    //     // FLASH->OPTR &= ~FLASH_OPTR_NRST_MODE_Msk;
-    //     // FLASH->OPTR |= (FLASH_OPTR_NRST_MODE_1);
-    //     NVIC_SystemReset();
-    // }
+    if (Button_isPressed(BUTTON_CHANNEL_B))
+    {
+        printf("Reseting...\n");
+        // FLASH->OPTR &= ~FLASH_OPTR_NRST_MODE_Msk;
+        // FLASH->OPTR |= (FLASH_OPTR_NRST_MODE_1);
+        NVIC_SystemReset();
+    }
 
         xTaskDelayUntil(&misc10HzTaskLastWakeTime, pdMS_TO_TICKS(100U));
     }

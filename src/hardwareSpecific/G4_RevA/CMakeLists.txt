@@ -80,10 +80,10 @@ set(STM32_HARDWARE_SPECIFIC_SOURCES
     ${HARDWARE_SPECIFIC_PATH}/stm32/Core/Src/stm32g4xx_hal_timebase_tim.c
     # ${HARDWARE_SPECIFIC_PATH}/stm32/FATFS/App/app_fatfs.c
     # ${HARDWARE_SPECIFIC_PATH}/stm32/FATFS/Target/user_diskio.c
-    ${HARDWARE_SPECIFIC_PATH}/stm32/USB_Device/App/usb_device.c
-    ${HARDWARE_SPECIFIC_PATH}/stm32/USB_Device/App/usbd_desc.c
-    ${HARDWARE_SPECIFIC_PATH}/stm32/USB_Device/App/usbd_dfu_flash.c
-    ${HARDWARE_SPECIFIC_PATH}/stm32/USB_Device/Target/usbd_conf.c
+    # ${HARDWARE_SPECIFIC_PATH}/stm32/USB_Device/App/usb_device.c
+    # ${HARDWARE_SPECIFIC_PATH}/stm32/USB_Device/App/usbd_desc.c
+    # ${HARDWARE_SPECIFIC_PATH}/stm32/USB_Device/App/usbd_dfu_flash.c
+    # ${HARDWARE_SPECIFIC_PATH}/stm32/USB_Device/Target/usbd_conf.c
 )
 
 set(STM32G4_DRIVER_SOURCES_X
@@ -91,11 +91,11 @@ set(STM32G4_DRIVER_SOURCES_X
    # ${HARDWARE_SPECIFIC_PATH}/stm32/Middlewares/Third_Party/FatFs/src/ff.c
    # ${HARDWARE_SPECIFIC_PATH}/stm32/Middlewares/Third_Party/FatFs/src/ff_gen_drv.c
    # ${HARDWARE_SPECIFIC_PATH}/stm32/Middlewares/Third_Party/FatFs/src/option/syscall.c
-   ${HARDWARE_SPECIFIC_PATH}/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c
-   ${HARDWARE_SPECIFIC_PATH}/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c
-   ${HARDWARE_SPECIFIC_PATH}/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c
+#    ${HARDWARE_SPECIFIC_PATH}/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c
+#    ${HARDWARE_SPECIFIC_PATH}/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c
+#    ${HARDWARE_SPECIFIC_PATH}/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c
    # ${HARDWARE_SPECIFIC_PATH}/stm32/Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Src/usbd_customhid.c
-   ${HARDWARE_SPECIFIC_PATH}/stm32/Middlewares/ST/STM32_USB_Device_Library/Class/DFU/Src/usbd_dfu.c
+#    ${HARDWARE_SPECIFIC_PATH}/stm32/Middlewares/ST/STM32_USB_Device_Library/Class/DFU/Src/usbd_dfu.c
 )
 
 set(G4_REV_A_INCLUDE_DIRS
@@ -109,11 +109,11 @@ set(G4_REV_A_INCLUDE_DIRS
     # ${HARDWARE_SPECIFIC_PATH}/stm32/FATFS/Target
     # ${HARDWARE_SPECIFIC_PATH}/stm32/FATFS/App
     # ${HARDWARE_SPECIFIC_PATH}/stm32/FATFS/
-    ${HARDWARE_SPECIFIC_PATH}/stm32/USB_Device/App
-    ${HARDWARE_SPECIFIC_PATH}/stm32/USB_Device/Target
-    ${HARDWARE_SPECIFIC_PATH}/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
+    # ${HARDWARE_SPECIFIC_PATH}/stm32/USB_Device/App
+    # ${HARDWARE_SPECIFIC_PATH}/stm32/USB_Device/Target
+    # ${HARDWARE_SPECIFIC_PATH}/stm32/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
     # ${HARDWARE_SPECIFIC_PATH}/stm32/Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Inc
-    ${HARDWARE_SPECIFIC_PATH}/stm32/Middlewares/ST/STM32_USB_Device_Library/Class/DFU/Inc/
+    # ${HARDWARE_SPECIFIC_PATH}/stm32/Middlewares/ST/STM32_USB_Device_Library/Class/DFU/Inc/
     # ${HARDWARE_SPECIFIC_PATH}/stm32/Middlewares/Third_Party/FatFs/
     # ${HARDWARE_SPECIFIC_PATH}/stm32/Middlewares/Third_Party/FatFs/src/
 )

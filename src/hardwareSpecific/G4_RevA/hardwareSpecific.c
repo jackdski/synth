@@ -35,7 +35,7 @@
 #include "rng.h"
 #include "spi.h"
 #include "tim.h"
-#include "usb_device.h"
+// #include "usb_device.h"
 #include "wwdg.h"
 
 #ifdef __cplusplus
@@ -206,6 +206,7 @@ void hardwareSpecific_init(void)
     // MX_RNG_Init();
     // MX_WWDG_Init();
 
+    __enable_irq();
     hardwareSpecific_deviceInit();
 
 #if FEATURE_DISPLAY
@@ -245,11 +246,6 @@ configRUN_TIME_COUNTER_TYPE hardwareSpecific_getRunTimeCounterValue(void)
     return (configRUN_TIME_COUNTER_TYPE)TIM16->CNT;
 }
 
-
-// void Reset_Handler(void)
-// {
-//     __START();
-// }
 
 #ifdef __cplusplus
 }

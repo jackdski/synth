@@ -62,8 +62,8 @@ _Min_Stack_Size = 0x400; /* required amount of stack */
 MEMORY
 {
   RAM       (xrw)     : ORIGIN = 0x20000000, LENGTH = 112K
-  BL_FLASH  (rx)      : ORIGIN = 0x8000000,  LENGTH = 28K
-  APP_FLASH (rx)      : ORIGIN = 0x8007000,  LENGTH = 484K
+  BL_FLASH  (rx)      : ORIGIN = 0x8000000,  LENGTH = 58K
+  APP_FLASH (rx)      : ORIGIN = 0x800E800,  LENGTH = 454K
   /* NVM_STORE  (rx)     : ORIGIN = 0x807F000,  LENGTH = 2K */
 }
 

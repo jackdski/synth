@@ -21,6 +21,21 @@
         },
         {
             "cwd": "${workspaceFolder}",
+            "executable": "./build/src/bootloader/stm32g4/synth_G4Bootloader.elf",
+            "name": "Debug G4Boot with ST-Link",
+            "request": "launch",
+            "type": "cortex-debug",
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "none",
+            "liveWatch": {
+                "enabled": true,
+                "samplesPerSecond": 4
+            },
+            "servertype": "stlink",
+            "svdFile": "${workspaceRoot}/src/hardwareSpecific/G4_RevA/STM32G491.svd"
+        },
+        {
+            "cwd": "${workspaceFolder}",
             "executable": "./build/src/hardwareSpecific/G4_RevA/miniSynthG4.elf",
             "name": "Debug G4 with J-Link",
             "request": "launch",

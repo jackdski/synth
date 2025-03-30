@@ -14,10 +14,17 @@
 #include "usbd_core.h"
 
 #include <string.h>
+#include <stdio.h>
+#include <inttypes.h>
 
 /* D E F I N E S */
 
-#define BOOTLOADER_BLINK_DELAY_MS       1000U
+extern uint32_t __app_start__;
+#define APP_START_ADDRESS   (uint32_t *)(&__app_start__)
+
+
+#define BOOTLOADER_JUMP_TO_APP_TIME_MS  3000U
+#define BOOTLOADER_BLINK_DELAY_MS       500U
 
 /* T Y P E D E F S */
 
@@ -41,8 +48,6 @@ void SystemClock_Config(void);
 
 /* P R I V A T E   D A T A   D E F I N I T I O N S */
 
-extern uint32_t __app_start__;
-
 extern IWDG_HandleTypeDef hiwdg;
 extern USBD_HandleTypeDef hUsbDeviceFS;
 
@@ -59,24 +64,26 @@ int main(void)
     SystemClock_Config();
 
     debugInit();
-    char * dbgMsg = "Bootloader init";
-    debugWrite(dbgMsg, strlen(dbgMsg));
+    printf("Bootloader init\n");
+    // debugWrite(dbgMsg, strlen(dbgMsg));
 
     MX_GPIO_Init();
-    MX_IWDG_Init();
+    HAL_GPIO_WritePin(LED_BLINKY_GPIO_Port, LED_BLINKY_Pin, GPIO_PIN_SET);
+
+    // MX_IWDG_Init();
     MX_USB_Device_Init();
 
-    __HAL_DBGMCU_FREEZE_IWDG();
-    __HAL_IWDG_START(&hiwdg);
+    // __HAL_DBGMCU_FREEZE_IWDG();
+    // __HAL_IWDG_START(&hiwdg);
 
     __enable_irq();
 
     while (1)
     {
-        HAL_IWDG_Refresh(&hiwdg);
+        // HAL_IWDG_Refresh(&hiwdg);
         updateBlinkLED();
 
-        if (uwTick > 2000U)
+        if (uwTick > BOOTLOADER_JUMP_TO_APP_TIME_MS)
         {
             goToApp();
         }
@@ -91,6 +98,9 @@ static void updateBlinkLED(void)
     {
         HAL_GPIO_TogglePin(LED_BLINKY_GPIO_Port, LED_BLINKY_Pin);
         data.previousTick = uwTick;
+
+        // char * dbgMsg = "Blink...\n";
+        // debugWrite(dbgMsg, strlen(dbgMsg));
     }
 }
 
@@ -99,6 +109,7 @@ static void deinit(void)
     // de-initialize HW resources used by bootloader to their reset value
     USBD_DeInit(&hUsbDeviceFS);
     HAL_RCC_DeInit();
+    HAL_GPIO_DeInit(LED_BLINKY_GPIO_Port, LED_BLINKY_Pin);
 
     SysTick->CTRL &= ~(SysTick_CTRL_ENABLE_Msk | SysTick_CTRL_TICKINT_Msk); // stop SysTick
 
@@ -108,15 +119,27 @@ static void deinit(void)
 
 static void goToApp(void)
 {
+    FunctionPointer jumpToAddress;
+
+    printf("Jumping to app");
+    // printf("Addr: %08lx \n" PRIX32, jumpAddr);
     deinit();
 
-    FunctionPointer jumpToAddress;
-    jumpToAddress = (FunctionPointer)(*(__IO uint32_t *)(__app_start__ + 4U));
+#if 0
+    const uint32_t jumpAddr = 0x0800E800UL;
 
-    // jump_to_address = (Function_Pointer)(*(__IO uint32_t *)(Address + 4U));
+    jumpToAddress = (FunctionPointer)(*(__IO uint32_t *)(jumpAddr + 4U));
 
     /* Initialize user application's stack pointer */
-    __set_MSP(*(__IO uint32_t*)__app_start__);
+    __set_MSP(*(__IO uint32_t*)jumpAddr);
+#else
+    // const uint32_t jumpAddr = 0x08000000U;
+
+    volatile uint32_t * addr = (volatile uint32_t *)&__app_start__;
+    jumpToAddress = (FunctionPointer)((*addr + 4U));
+    __set_MSP((*addr));
+#endif
+
     jumpToAddress();
 }
 
@@ -141,6 +164,15 @@ static void debugWrite(char * ptr, int length)
 	{
         ITM_SendChar(*ptr++);
     }
+}
+
+int _write(int fd, char *ptr, int len)
+{
+    if (fd == 1 || fd == 2)
+    {
+        debugWrite(ptr, len);
+    }
+    return -1;
 }
 
 

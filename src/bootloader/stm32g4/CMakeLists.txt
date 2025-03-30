@@ -39,8 +39,8 @@ set(CMAKE_CROSSCOMPILING            1)
 if(NOT DEFINED CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Debug")
 endif()
-message("Build type: " ${CMAKE_BUILD_TYPE})
 
+message("Build type: " ${CMAKE_BUILD_TYPE})
 #
 # Core project settings
 #
