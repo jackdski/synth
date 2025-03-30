@@ -28,6 +28,10 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32g4xx_hal.h"
+#include "usbd_core.h"
+#include "usbd_desc.h"
+#include "usbd_dfu.h"
+#include "usbd_dfu_flash.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -59,6 +63,10 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define LED_BLINKY_Pin            GPIO_PIN_14
 #define LED_BLINKY_GPIO_Port      GPIOB
+#define BUTTON_A_Pin              GPIO_PIN_2
+#define BUTTON_A_GPIO_Port        GPIOB
+#define BUTTON_B_Pin              GPIO_PIN_11
+#define BUTTON_B_GPIO_Port        GPIOB
 
 /* USER CODE BEGIN Private defines */
 

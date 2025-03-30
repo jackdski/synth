@@ -1,13 +1,13 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file           : usbd_desc.c
-  * @version        : v3.0_Cube
-  * @brief          : Header for usbd_conf.c file.
+  * @file           USB_Device/DFU_Standalone/USB_Device/App/usbd_desc.h
+  * @author         MCD Application Team
+  * @brief          Header for usbd_desc.c file.
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2025 STMicroelectronics.
+  * Copyright (c) 2019 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -140,4 +140,3 @@ extern USBD_DescriptorsTypeDef     DFU_Desc;
 #endif
 
 #endif /* __USBD_DESC__C__ */
-

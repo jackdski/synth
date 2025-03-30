@@ -1,13 +1,13 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file           : usb_device.h
-  * @version        : v3.0_Cube
-  * @brief          : Header for usb_device.c file.
+  * @file           USB_Device/DFU_Standalone/USB_Device/App/usb_device.h
+  * @author         MCD Application Team
+  * @brief          Header for usb_device.c file.
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2025 STMicroelectronics.
+  * Copyright (c) 2019 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -100,4 +100,3 @@ void MX_USB_Device_Init(void);
 #endif
 
 #endif /* __USB_DEVICE__H__ */
-

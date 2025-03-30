@@ -1,13 +1,13 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file           : App/usbd_desc.c
-  * @version        : v3.0_Cube
-  * @brief          : This file implements the USB device descriptors.
+  * @file           USB_Device/DFU_Standalone/USB_Device/App/usbd_desc.c
+  * @author         MCD Application Team
+  * @brief          This file implements the USB device descriptors.
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2025 STMicroelectronics.
+  * Copyright (c) 2019-2021 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -62,11 +62,11 @@
   * @{
   */
 
-#define USBD_VID     1155
+#define USBD_VID     0x483
 #define USBD_LANGID_STRING     1033
-#define USBD_MANUFACTURER_STRING     "JDSynths"
-#define USBD_PID     42055
-#define USBD_PRODUCT_STRING     "miniSynth DownLoad Firmware Update"
+#define USBD_MANUFACTURER_STRING     "STMicroelectronics"
+#define USBD_PID     0xdf11
+#define USBD_PRODUCT_STRING     "DFU in FS Mode"
 #define USBD_CONFIGURATION_STRING     "DFU Config"
 #define USBD_INTERFACE_STRING     "DFU Interface"
 
@@ -79,7 +79,9 @@
   */
 
 /* USER CODE BEGIN 0 */
-
+static void IntToUnicode(uint32_t value, uint8_t * pbuf, uint8_t len);
+static void Get_SerialNum(void);
+uint8_t USBD_StrDesc[USBD_MAX_STR_DESC_SIZ];
 /* USER CODE END 0 */
 
 /** @defgroup USBD_DESC_Private_Macros USBD_DESC_Private_Macros
@@ -393,4 +395,3 @@ static void IntToUnicode(uint32_t value, uint8_t * pbuf, uint8_t len)
 /**
   * @}
   */
-

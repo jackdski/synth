@@ -15,6 +15,7 @@
 
 #include <string.h>
 #include <stdio.h>
+#include <stdbool.h>
 #include <inttypes.h>
 
 /* D E F I N E S */
@@ -30,6 +31,7 @@ extern uint32_t __app_start__;
 
 typedef struct
 {
+    bool     buttonPressed;
     uint32_t previousTick;
 } main_data_S;
 
@@ -53,6 +55,7 @@ extern USBD_HandleTypeDef hUsbDeviceFS;
 
 static main_data_S data =
 {
+    .buttonPressed = false,
     .previousTick = 0U,
 };
 
@@ -82,8 +85,10 @@ int main(void)
     {
         // HAL_IWDG_Refresh(&hiwdg);
         updateBlinkLED();
-
-        if (uwTick > BOOTLOADER_JUMP_TO_APP_TIME_MS)
+        data.buttonPressed = false;
+        data.buttonPressed |= (bool)(HAL_GPIO_ReadPin(BUTTON_A_GPIO_Port, BUTTON_A_Pin) != GPIO_PIN_SET);
+        data.buttonPressed |= (bool)(HAL_GPIO_ReadPin(BUTTON_B_GPIO_Port, BUTTON_B_Pin) != GPIO_PIN_SET);
+        if (data.buttonPressed)
         {
             goToApp();
         }
@@ -125,7 +130,7 @@ static void goToApp(void)
     // printf("Addr: %08lx \n" PRIX32, jumpAddr);
     deinit();
 
-#if 0
+#if 1
     const uint32_t jumpAddr = 0x0800E800UL;
 
     jumpToAddress = (FunctionPointer)(*(__IO uint32_t *)(jumpAddr + 4U));

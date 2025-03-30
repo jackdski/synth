@@ -1,13 +1,13 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file           : usbd_conf.h
-  * @version        : v3.0_Cube
-  * @brief          : Header for usbd_conf.c file.
+  * @file           USB_Device/DFU_Standalone/USB_Device/Target/usbd_conf.h
+  * @author         MCD Application Team
+  * @brief          Header for usbd_conf.c file.
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2025 STMicroelectronics.
+  * Copyright (c) 2019 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -69,11 +69,11 @@
 /*---------- -----------*/
 #define USBD_MAX_NUM_CONFIGURATION     1U
 /*---------- -----------*/
-#define USBD_MAX_STR_DESC_SIZ     512U
+#define USBD_MAX_STR_DESC_SIZ     48U
 /*---------- -----------*/
 #define USBD_SUPPORT_USER_STRING_DESC     1U
 /*---------- -----------*/
-#define USBD_DEBUG_LEVEL     3U
+#define USBD_DEBUG_LEVEL     0U
 /*---------- -----------*/
 #define USBD_LPM_ENABLED     0U
 /*---------- -----------*/
@@ -83,7 +83,7 @@
 /*---------- -----------*/
 #define USBD_DFU_XFER_SIZE     1024U
 /*---------- -----------*/
-#define USBD_DFU_APP_DEFAULT_ADD     0x08000000U
+#define USBD_DFU_APP_DEFAULT_ADD     0x0800C000U
 
 /****************************************/
 /* #define for FS and HS identification */
@@ -180,4 +180,3 @@ void USBD_static_free(void *p);
 #endif
 
 #endif /* __USBD_CONF__H__ */
-

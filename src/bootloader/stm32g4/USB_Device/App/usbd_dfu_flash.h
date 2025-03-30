@@ -1,12 +1,13 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file           : usbd_dfu_flash.h
-  * @brief          : Header for usbd_dfu_flash.h file.
+  * @file           USB_Device/DFU_Standalone/USB_Device/App/usbd_dfu_flash.h
+  * @author         MCD Application Team
+  * @brief          Header for usbd_dfu_flash.c file.
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2025 STMicroelectronics.
+  * Copyright (c) 2019 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -123,4 +124,3 @@ extern USBD_DFU_MediaTypeDef USBD_DFU_Flash_fops;
 #endif
 
 #endif /* __USBD_DFU_FLASH_H__ */
-
